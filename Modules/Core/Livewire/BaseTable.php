@@ -25,6 +25,7 @@ abstract class BaseTable extends Component
     use WithFileUploads;
     protected string $view = 'core::livewire.base-table';
     private $actions;
+    protected array $select = [];
     protected string $model;
     public string $urlCreate = '';
 
@@ -111,8 +112,11 @@ abstract class BaseTable extends Component
         if (is_null($this->model)) {
             throw new \Exception("Model must be set for the query.");
         }
-
-        return $this->model::query(); // Sử dụng Eloquent query builder
+        if (empty($this->select)) {
+            $this->select = ['*'];
+        }
+        $this->model::select($this->select);
+        return $this->model::query();
     }
 
     protected function affterQuery($query) : \Illuminate\Database\Eloquent\Builder

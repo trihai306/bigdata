@@ -4,5 +4,5 @@
     "Menu": true,
     "Modules": true,
     "Permission": true,
-    "Role": true
+    "User": true
 }

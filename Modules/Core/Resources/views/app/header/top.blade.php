@@ -3,9 +3,9 @@
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+        <h1 class="navbar-brand  d-none-navbar-horizontal pe-0 pe-md-3">
             <a href="">
-                <img src="{{asset('admin/assets/media/email/logo-1.svg')}}" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+                <img src="{{asset('dist/img/logo.png')}}" width="200" height="32" alt="Tabler" class="navbar-brand-image">
             </a>
         </h1>
         <div class="navbar-nav flex-row order-md-last mt-2">
