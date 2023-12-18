@@ -1,0 +1,317 @@
+<div>
+    <div class="card">
+        <!--begin::Card header-->
+        <div class="card-header border-0 pt-6 d-flex justify-content-between">
+            <!--begin::Card title-->
+            <div class="card-title">
+                <!--begin::Search-->
+                <div class="d-flex align-items-center position-relative my-1">
+                    <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                    </i>
+                    <label>
+                        <input type="text" class="form-control form-control-solid w-250px ps-13"
+                               wire:model.live="search"
+                               placeholder="Tìm kiếm"/>
+                    </label>
+                </div>
+                <!--end::Search-->
+            </div>
+            <!--begin::Card title-->
+            <!--begin::Card toolbar-->
+            <div class="card-toolbar">
+                <!--begin::Toolbar-->
+                @if($selectedRows == [])
+                    <div class="d-flex flex-column flex-md-row justify-content-end btn-group">
+                        <button wire:click="resetTable" class="btn  btn-primary">
+                            <i class="fa fa-redo-alt"></i> <span class="ms-2">Reset</span>
+                        </button>
+                        <button class="btn  btn-light-primary" data-bs-toggle="modal" data-bs-target="#modal_import">
+                            <span class="ms-2">Import file</span>
+                        </button>
+                        <!--begin::Export-->
+                        <button type="button" class="btn  btn-light-primary" data-bs-toggle="modal"
+                                data-bs-target="#modal_export">
+                            Export dữ liệu
+                        </button>
+                        <!--end::Export-->
+                        <!--begin::Add user-->
+                        @if($urlCreate)
+                            <a class="btn  btn-light-primary" href="{{route($urlCreate) }}">
+                                <i class="ki-duotone ki-plus fs-2"></i>Thêm dữ liệu
+                            </a>
+                        @endif
+                        <div class="dropdown">
+                            <button class="btn  btn-light-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="ki-duotone ki-filter fs-2">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i> Lọc
+                            </button>
+                            <div class="dropdown-menu w-300px w-md-325px" aria-labelledby="dropdownMenuButton1">
+                                <h6 class="dropdown-header">Lọc</h6>
+                                <div class="dropdown-divider"></div>
+                                <form class="px-4 py-3" wire:submit.prevent="applyFilters">
+                                    <div class="mb-3">
+                                        @foreach($Input_filters as $filter)
+                                            <div class="dropdown-item">
+                                                {!! $filter->render() !!}
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <button type="button" wire:click="resetFilters"
+                                                class="btn btn-light btn-active-light-primary me-2 px-6">Reset
+                                        </button>
+                                        <button type="submit" class="btn btn-primary px-6">Tìm</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                            <i class="ki-duotone ki-abstract-30 fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                        </button>
+                        <div class="dropdown-menu">
+                            @foreach($this->defineColumns() as $column)
+                                <div class="form-check mb-2">
+                                    <input class="form-check-input" type="checkbox"
+                                           wire:model.live="columnVisibility.{{ $column->name }}"
+                                           id="{{ $column->name }}" {{ $column->visible ? 'checked' : '' }}>
+                                    <label class="form-check-label" for="{{ $column->name }}">
+                                        {{ $column->label }}
+                                    </label>
+                                </div>
+                            @endforeach
+                        </div>
+                        <!--end::Add user-->
+                    </div>
+                @else
+                    <div class="d-flex flex-column flex-md-row justify-content-end btn-group">
+                        <button wire:click.prevent="$dispatch('swalConfirm', {
+                    message: 'Are you sure you want to delete all this permission?',
+                    nameMethod: 'deleteSelect'
+                })" class="btn btn-danger">
+                            <i class="fa fa-trash"></i>
+                           <span class="ms-2">Xóa tất cả</span>
+                        </button>
+                    </div>
+                @endif
+                <!--end::Toolbar-->
+                <!--begin::Modal - Adjust Balance-->
+
+                <!--end::Modal - New Card-->
+            </div>
+
+            <!--end::Card toolbar-->
+        </div>
+        <!--end::Card header-->
+        <!--begin::Card body-->
+        <div class="card-body table-responsive table-loading py-4">
+
+            <!--begin::Table-->
+            <table class="table align-middle table-row-dashed gy-5">
+                <div class="table-loading-message bg-light text-dark" wire:loading>
+                    <i class="fa fa-spinner fa-spin"></i> Đang tải...
+                </div>
+                <thead>
+                <tr class="text-start text-muted fw-bold gs-0">
+                    <th>
+                        <label>
+                            <input type="checkbox" class="form-check-input" wire:model.live="selectAll" wire:change="selectAllData">
+                        </label>
+                    </th>
+                    @foreach($this->defineColumns() as $column)
+                        @if($column->visible)
+                            <th style="width: {{ $column->width }}; text-align: {{ $column->textAlign }};"
+                                wire:click="sortBy('{{ $column->name }}')" style="cursor: pointer;">
+                                {{ $column->label }}
+                                @if($column->sortable)
+                                    @if($sortColumn == $column->name)
+                                        {!! $sortDirection == 'asc' ? '&#9650;' : '&#9660;' !!}
+                                    @endif
+                                @endif
+                            </th>
+                        @endif
+                    @endforeach
+                    <th class="text-end min-w-100px">
+                        Hành động
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="text-gray-600">
+                @foreach($data as $item)
+                    <tr>
+                        <td>
+                            <label>
+                                <input type="checkbox" class="form-check-input" value="{{ $item->id }}"
+                                       wire:model="selectedRows" wire:change="SelectedRows">
+                            </label>
+                        </td>
+                        @foreach($this->defineColumns() as $column)
+                            @if($column->visible)
+                                <td>{!! $column->render($item) !!}</td>
+                            @endif
+                        @endforeach
+                        @if($this->defineActions($item))
+                            <td class="text-end">
+                                {{ $this->defineActions($item) }}
+                            </td>
+                        @endif
+                    </tr>
+
+                @endforeach
+
+                </tbody>
+            </table>
+            <div class="row mt-2">
+                <div
+                    class="col-sm-12 col-md-4 d-flex align-items-center justify-content-center justify-content-md-start">
+                    Đang hiển thị từ {{ $data->firstItem() }} đến {{ $data->lastItem() }} trong tổng
+                    số {{ $data->total() }} bản ghi
+                </div>
+
+                <div
+                    class="col-sm-12 col-md-4 d-flex align-items-center justify-content-center justify-content-md-center">
+                    <div class="dataTables_length" wire:model.live="perPage">
+                        <label>
+                            <select class="form-select form-select-solid">
+                                @foreach($this->pages as $page)
+                                    @if($page == $perPage)
+                                        <option value="{{ $page }}" selected>{{ $page }}</option>
+                                    @else
+                                        <option value="{{ $page }}">{{ $page }}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-4 d-flex align-items-center justify-content-center justify-content-md-end">
+                    {{
+                       $data->links(data: ['scrollTo' => false])
+                    }}
+                </div>
+            </div>
+
+            <!--end::Table-->
+        </div>
+        <!--end::Card body-->
+    </div>
+    <!--end::Card-->
+    <div class="modal fade" id="modal_export" wire:ignore tabindex="-1" aria-hidden="true">
+        <!--begin::Modal dialog-->
+        <div class="modal-dialog modal-dialog-centered mw-650px">
+            <!--begin::Modal content-->
+            <div class="modal-content">
+                <!--begin::Modal header-->
+                <div class="modal-header">
+                    <!--begin::Modal title-->
+                    <h2 class="fw-bold modal-title">Export</h2>
+                    <!--end::Modal title-->
+                    <!--begin::Close-->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <!--end::Close-->
+                </div>
+                <!--end::Modal header-->
+                <!--begin::Modal body-->
+                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                    <!--begin::Form-->
+
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-10">
+                            <!--begin::Label-->
+                            <label class="required form-label mb-2">Select Export
+                                Format:</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <select name="format"
+                                    wire:model="type" class="form-select form-select-solid fw-bold">
+                                <option value="excel">Excel</option>
+                                <option value="pdf">PDF</option>
+                                <option value="csv">CSV</option>
+                            </select>
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Actions-->
+
+                        <!--end::Actions-->
+
+                    <!--end::Form-->
+                </div>
+                <!--end::Modal body-->
+                    <div class="modal-footer ">
+                        <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">
+                            Discard
+                        </button>
+                        <button type="submit" class="btn btn-primary" wire:click="export">
+                            <span class="indicator-label" wire:loading.class="hidden">Submit</span>
+                            <span class="indicator-progress" wire:loading>Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+            </div>
+
+            <!--end::Modal content-->
+        </div>
+        <!--end::Modal dialog-->
+    </div>
+
+    <div class="modal fade" wire:ignore id="modal_import" tabindex="-1" aria-hidden="true">
+        <!--begin::Modal dialog-->
+        <div class="modal-dialog modal-dialog-centered mw-650px">
+            <!--begin::Modal content-->
+            <div class="modal-content">
+                <!--begin::Modal header-->
+                <div class="modal-header">
+                    <!--begin::Modal title-->
+                    <h2 class="fw-bold modal-title">Import</h2>
+                    <!--end::Modal title-->
+                    <!--begin::Close-->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <!--end::Close-->
+                </div>
+                <!--end::Modal header-->
+                <!--begin::Modal body-->
+                <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
+                    <!--begin::Form-->
+                    <form wire:submit.prevent="importExcel">
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-10">
+                            <!--begin::Label-->
+                            <label class="required form-label mb-2">Select Import File:</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="file" wire:model="importFile" class="form-control form-control-solid fw-bold">
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Actions-->
+                        <div class="modal-footer">
+                            <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">
+                                Discard
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <span class="indicator-label" wire:loading.class="hidden">Submit</span>
+                                <span class="indicator-progress" wire:loading>Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                            </button>
+                        </div>
+                        <!--end::Actions-->
+                    </form>
+                    <!--end::Form-->
+                </div>
+                <!--end::Modal body-->
+            </div>
+            <!--end::Modal content-->
+        </div>
+        <!--end::Modal dialog-->
+    </div>
+</div>

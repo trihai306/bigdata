@@ -1,0 +1,8 @@
+{
+    "Core": true,
+    "Dashboard": true,
+    "Menu": true,
+    "Modules": true,
+    "Permission": true,
+    "Role": true
+}

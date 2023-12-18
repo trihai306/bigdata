@@ -1,0 +1,13 @@
+.table-loading-message {
+    position: absolute;
+    top: 42%;
+    left: 44%;
+    z-index: 999;
+    border: 1px solid #6b6b6b;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.table-loading-message .fa-spinner {
+    margin-right: 10px;
+}
