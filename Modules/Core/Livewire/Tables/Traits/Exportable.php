@@ -9,7 +9,7 @@ use Modules\Core\Http\Exports\DataExport;
 
 trait Exportable
 {
-    public $type;
+    public $type = 'excel';
     /**
      * Export data to Excel.
      *

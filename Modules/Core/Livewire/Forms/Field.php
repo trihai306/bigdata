@@ -12,6 +12,8 @@ class Field
     protected $defaultValue = null;
     protected $label = '';
     protected $helpText = '';
+    protected $canHide = false;
+
 
     public static function make(string $name)
     {
@@ -69,6 +71,22 @@ class Field
             $StyleAttributes .= " {$name}=\"{$value}\"";
         }
         return $StyleAttributes;
+    }
+
+    public function hide(callable $callback)
+    {
+        if ($callback()) {
+            $this->canHide = true;
+        }
+        return $this;
+    }
+
+    public function canEdit(callable $callback)
+    {
+        if ($callback()) {
+            $this->canHide = false;
+        }
+        return $this;
     }
 
     public function getRules()

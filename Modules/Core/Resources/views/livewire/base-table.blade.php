@@ -6,14 +6,21 @@
             <div class="card-title">
                 <!--begin::Search-->
                 <div class="d-flex align-items-center position-relative my-1">
-                    <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-5">
-                        <span class="path1"></span>
-                        <span class="path2"></span>
-                    </i>
+
                     <label>
                         <input type="text" class="form-control form-control-solid w-250px ps-13"
                                wire:model.live="search"
                                placeholder="Tìm kiếm"/>
+                        <span class="input-icon-addon" >
+                              <div class="spinner-border spinner-border-sm text-secondary" wire:loading wire:target="search" role="status"></div>
+                                  <svg xmlns="http://www.w3.org/2000/svg" wire:loading.class="d-none" wire:target="search" class="icon" width="24" height="24"
+                                       viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                       stroke-linecap="round" stroke-linejoin="round"><path stroke="none"
+                                                                                            d="M0 0h24v24H0z"
+                                                                                            fill="none"></path><path
+                                          d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path
+                                          d="M21 21l-6 -6"></path></svg>
+                                </span>
                     </label>
                 </div>
                 <!--end::Search-->
@@ -24,17 +31,17 @@
                 <!--begin::Toolbar-->
                 @if($selectedRows == [])
                     <div class="d-flex flex-column flex-md-row justify-content-end btn-group">
-                        <button wire:click="resetTable" class="btn  btn-primary">
+                        <a wire:click.prevent="resetTable" class="btn btn-primary">
                             <i class="fa fa-redo-alt"></i> <span class="ms-2">Reset</span>
-                        </button>
-                        <button class="btn  btn-light-primary" data-bs-toggle="modal" data-bs-target="#modal_import">
+                        </a>
+                        <a class="btn btn-light-primary" data-bs-toggle="modal" data-bs-target="#modal_import">
                             <span class="ms-2">Import file</span>
-                        </button>
+                        </a>
                         <!--begin::Export-->
-                        <button type="button" class="btn  btn-light-primary" data-bs-toggle="modal"
-                                data-bs-target="#modal_export">
+                        <a class="btn btn-light-primary" data-bs-toggle="modal"
+                           data-bs-target="#modal_export">
                             Export dữ liệu
-                        </button>
+                        </a>
                         <!--end::Export-->
                         <!--begin::Add user-->
                         @if($urlCreate)
@@ -43,7 +50,8 @@
                             </a>
                         @endif
                         <div class="dropdown">
-                            <button class="btn  btn-light-primary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            <button class="btn  btn-light-primary dropdown-toggle" type="button"
+                                    id="dropdownMenuButton1"
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="ki-duotone ki-filter fs-2">
                                     <span class="path1"></span>
@@ -97,7 +105,7 @@
                     nameMethod: 'deleteSelect'
                 })" class="btn btn-danger">
                             <i class="fa fa-trash"></i>
-                           <span class="ms-2">Xóa tất cả</span>
+                            <span class="ms-2">Xóa tất cả</span>
                         </button>
                     </div>
                 @endif
@@ -122,7 +130,8 @@
                 <tr class="text-start text-muted fw-bold gs-0">
                     <th>
                         <label>
-                            <input type="checkbox" class="form-check-input" wire:model.live="selectAll" wire:change="selectAllData">
+                            <input type="checkbox" class="form-check-input" wire:model.live="selectAll"
+                                   wire:change="selectAllData">
                         </label>
                     </th>
                     @foreach($this->defineColumns() as $column)
@@ -223,40 +232,40 @@
                 <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                     <!--begin::Form-->
 
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="fv-row mb-10">
-                            <!--begin::Label-->
-                            <label class="required form-label mb-2">Select Export
-                                Format:</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <select name="format"
-                                    wire:model="type" class="form-select form-select-solid fw-bold">
-                                <option value="excel">Excel</option>
-                                <option value="pdf">PDF</option>
-                                <option value="csv">CSV</option>
-                            </select>
-                            <!--end::Input-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Actions-->
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-10">
+                        <!--begin::Label-->
+                        <label class="required form-label mb-2">Select Export
+                            Format:</label>
+                        <!--end::Label-->
+                        <!--begin::Input-->
+                        <select name="format"
+                                wire:model="type" class="form-select form-select-solid fw-bold">
+                            <option value="excel">Excel</option>
+                            <option value="pdf">PDF</option>
+                            <option value="csv">CSV</option>
+                        </select>
+                        <!--end::Input-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Actions-->
 
-                        <!--end::Actions-->
+                    <!--end::Actions-->
 
                     <!--end::Form-->
                 </div>
                 <!--end::Modal body-->
-                    <div class="modal-footer ">
-                        <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">
-                            Discard
-                        </button>
-                        <button type="submit" class="btn btn-primary" wire:click="export">
-                            <span class="indicator-label" wire:loading.class="hidden">Submit</span>
-                            <span class="indicator-progress" wire:loading>Please wait...
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">
+                        Discard
+                    </button>
+                    <button type="submit" class="btn btn-primary" wire:click="export">
+                        <span class="indicator-label" wire:loading.class="hidden">Submit</span>
+                        <span class="indicator-progress" wire:loading>Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                        </button>
-                    </div>
+                    </button>
+                </div>
             </div>
 
             <!--end::Modal content-->

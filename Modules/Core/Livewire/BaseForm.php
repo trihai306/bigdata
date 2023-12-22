@@ -2,6 +2,7 @@
 
 namespace Modules\Core\Livewire;
 
+use Illuminate\Database\Eloquent\Model;
 use Livewire\Component;
 use Modules\Core\Livewire\Forms\Form;
 use Modules\Core\Livewire\Forms\Fields\TextInput;
@@ -12,9 +13,9 @@ abstract class BaseForm extends Component
 
     public $id;
     protected $model;
-    public $data = [];
+    public array $data = [];
 
-    public function mount($id = null)
+    public function mount(string $id = null)
     {
         $this->id = $id;
         if ($this->id) {

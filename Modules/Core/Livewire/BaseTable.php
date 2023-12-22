@@ -75,6 +75,11 @@ abstract class BaseTable extends Component
     }
 
 
+    protected function headerAction()
+    {
+        return [];
+    }
+
     abstract protected function filters() : array;
 
     /**

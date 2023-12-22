@@ -2,45 +2,63 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Carbon;
+use Modules\Post\app\Models\Comment;
+use Modules\Post\app\Models\Post;
+use Modules\Post\app\Models\PostImage;
+use Modules\Post\app\Models\TrafficPost;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens,HasRoles;
     use HasRoles;
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'name', 'email', 'phone', 'avatar', 'address', 'birthday', 'gender', 'password', 'last_activity', 'status', 'field', 'type'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
-     */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password', 'remember_token',
     ];
+    protected $dates = ['last_login_at', 'updated_at', 'created_at','birthday'];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-        'password' => 'hashed',
-    ];
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
+    public function trafficPosts()
+    {
+        return $this->hasMany(TrafficPost::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(TrafficPost::class)->where('type', 'like');
+    }
+
+    public function shares()
+    {
+        return $this->hasMany(TrafficPost::class)->where('type', 'share');
+    }
+
+    public function views()
+    {
+        return $this->hasMany(TrafficPost::class)->where('type', 'view');
+    }
+
+    public function postsImages()
+    {
+        return $this->hasMany(PostImage::class);
+    }
 }

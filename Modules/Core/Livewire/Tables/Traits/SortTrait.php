@@ -20,7 +20,7 @@ trait SortTrait {
      *
      * @var string
      */
-    public $sortDirection = 'asc';
+    public $sortDirection = 'desc';
 
     /**
      * Set the sort column and direction.

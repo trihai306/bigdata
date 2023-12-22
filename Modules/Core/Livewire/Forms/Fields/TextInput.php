@@ -102,7 +102,9 @@ class TextInput extends Field
         $size = $this->size;
         $step = $this->step;
         $label = $this->label;
+        $canHide = $this->canHide;
 
-        return view('core::base.form.textInput', compact('type', 'name','required', 'classes', 'attributes', 'defaultValue', 'placeholder', 'maxLength', 'pattern', 'autocomplete', 'readOnly', 'disabled', 'size', 'step', 'label'));
+        return view('core::base.form.textInput',
+            compact('canHide','type', 'name','required', 'classes', 'attributes', 'defaultValue', 'placeholder', 'maxLength', 'pattern', 'autocomplete', 'readOnly', 'disabled', 'size', 'step', 'label'));
     }
 }

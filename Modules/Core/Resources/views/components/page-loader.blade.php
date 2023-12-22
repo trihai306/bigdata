@@ -1,4 +1,4 @@
-<div class="page page-center position-absolute w-100 bg-dark" id="page-loading" style="z-index: 1000">
+<div class="page page-center position-fixed w-100 h-100 bg-dark" id="page-loading" style="z-index: 10000">
     <div class="container container-slim py-4">
         <div class="text-center">
             <div class="mb-3">
@@ -13,7 +13,6 @@
 </div>
 <script>
     window.onload = function() {
-        console.log('Page loaded');
         var loadingDiv = document.getElementById('page-loading');
         if (loadingDiv) {
             loadingDiv.style.display = 'none';

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\User\app\Http\Controllers\UserController;
-
+use Modules\User\app\Http\Controllers\UserResource;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,5 +19,6 @@ Route::group([
     'prefix' => 'admin',
     'as' => 'admin.'
 ], function () {
-    Route::resource('users', UserController::class)->names('user');
+//    Route::resource('users', UserController::class)->names('user');
+    Route::resource('users', UserResource::class)->names('user');
 });

@@ -1,10 +1,10 @@
 @php
     $required = $isRequired ? 'required' : '';
-    $classes = !empty($classes) ? 'form-control text-gray-800 fw-bold '.$classes : 'form-control text-gray-800 fw-bold';
+    $classes = !empty($classes) ? 'form-control  form-select'.$classes : 'form-control form-select';
 @endphp
 
 @if($label)
-    <label for="{{ $name }}">{{ $label }}</label>
+    <div class="form-label">{{$label}}</div>
 @endif
 
 <select name="{{ $name }}" wire:model="data.{{ $name }}" {{ $required }} class="{{ $classes }}" {{ $attributes }}>

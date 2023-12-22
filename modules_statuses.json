@@ -4,5 +4,7 @@
     "Menu": true,
     "Modules": true,
     "Permission": true,
-    "User": true
+    "User": true,
+    "Field": true,
+    "Post": true
 }

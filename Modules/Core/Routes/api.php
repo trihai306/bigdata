@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use Modules\Core\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,3 +14,5 @@ use Illuminate\Http\Request;
 |
 */
 
+Route::post('request-otp', [AuthController::class, 'requestOTP']);
+Route::post('verify-otp', [AuthController::class, 'verifyOTP']);

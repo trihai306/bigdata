@@ -14,9 +14,18 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
+            $table->string('phone')->unique()->nullable();
+            $table->timestamp('phone_verified_at')->nullable();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('avatar')->nullable();
+            $table->string('address')->nullable();
+            $table->dateTime('birthday')->nullable();
+            $table->enum('gender',['male', 'female', 'non-binary', 'genderqueer', 'transgender', 'genderfluid', 'agender'])->nullable();
             $table->string('password');
+            $table->enum('status', ['active', 'inactive', 'blocked'])->default('active');
+            $table->enum('type', ['buyer','seller'])->default('buyer');
+            $table->enum('field', ['leather_goods', 'clothing'])->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

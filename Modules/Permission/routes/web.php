@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Permission\app\Http\Controllers\PermissionController;
+use Modules\Permission\app\Http\Controllers\PermissionResource;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +19,7 @@ Route::group([
     'middleware' => [ 'auth'],
     'as' => 'admin.'
 ], function () {
-    Route::resource('permissions', PermissionController::class);
-    Route::get('roles', [PermissionController::class, 'role'])->name('roles');
-    Route::get('roles/{id}', [PermissionController::class, 'showRole'])->name('roles.show');
+    Route::resource('permissions', \Modules\Permission\app\Http\Controllers\PermissionResource::class);
+    Route::get('roles', [PermissionResource::class, 'role'])->name('roles');
+    Route::get('roles/{id}', [PermissionResource::class, 'showRole'])->name('roles.show');
 });

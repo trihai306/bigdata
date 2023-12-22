@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\RestifyServiceProvider;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -160,6 +161,7 @@ return [
          * Package Service Providers...
          */
         Spatie\Permission\PermissionServiceProvider::class,
+        RestifyServiceProvider::class,
         /*
          * Application Service Providers...
          */
