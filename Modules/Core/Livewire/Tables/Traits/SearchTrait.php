@@ -17,7 +17,6 @@ trait SearchTrait {
      */
     #[Url]
     public $search = '';
-
     /**
      * Apply the search query to the given query.
      *
@@ -36,6 +35,7 @@ trait SearchTrait {
                 }
             });
         }
+
 
         return $query;
     }

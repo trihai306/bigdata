@@ -51,7 +51,7 @@ class Column
         return $this;
     }
 
-    public function renderImage( callable $urlCallback,$width = 50, $height = 50)
+    public function renderImage( callable $urlCallback,int $width = 50,int $height = 50)
     {
         $this->renderCallback = function($model) use ($width, $height, $urlCallback) {
             $imageUrl = call_user_func($urlCallback, $model);

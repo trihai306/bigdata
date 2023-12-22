@@ -18,25 +18,35 @@ class Table extends BaseTable
     {
         return [
             TextColumn::make('id', __('ID'))->searchable()->sortable(),
-            TextColumn::make('name', __('user_name'))->searchable()->sortable()
-                ->renderHtml(function (User $user) {
-                    return "<a href='" . route('admin.user.edit', $user->id) . "' class='text-decoration-none'>{$user->name}</a>";
-                })->copy(),
-            TextColumn::make('email', __('user_email'))->searchable()->sortable()->hideMiddle()->copy(),
+            TextColumn::make('avatar', __('user_avatar'))->renderImage(function (User $user) {
+                return $user->avatar;
+            }),
+            TextColumn::make('name', __('user_name'))->searchable()->sortable()->description(function (User $user){
+               return $user->phone;
+            })->width('200px'),
+            TextColumn::make('address', __('user_address'))->searchable()->sortable(),
+            TextColumn::make('birthday')->dateTime(),
             TextColumn::make('roles', __('user_roles'))->renderHtml(function (User $user) {
                 return $user->roles->map(function ($role) {
                     return "<span class='badge bg-primary'>{$role->name}</span>";
                 })->implode(' ');
             }),
-            TextColumn::make('created_at', __('Created At'))->sortable(),
-            TextColumn::make('updated_at', __('Updated At'))->sortable(),
+            TextColumn::make('status', __('user_status'))->renderHtml(function (User $user) {
+                return $user->status == 'active' ? "<span class='badge bg-success'>{$user->status}</span>" : "<span class='badge bg-danger'>{$user->status}</span>";
+            }),
+            TextColumn::make('gender',__('gender'))->renderHtml(function (User $user){
+                //gender giới tính cho user modal
+            }),
+            TextColumn::make('created_at', __('Created At'))->dateTime()->sortable(),
+            TextColumn::make('updated_at', __('Updated At'))->dateTime()->sortable(),
         ];
     }
 
     protected function filters(): array
     {
         return [
-            FilterInput::make('name')
+            FilterInput::make('name'),
+            FilterInput::make('phone'),
         ];
     }
 
