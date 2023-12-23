@@ -14,6 +14,10 @@ class IconColumn extends Column
     public $ariaHiddenCallback;
     public $roleCallback;
 
+    public static function make(string $name, string $label = null)
+    {
+        return new static($name, $label);
+    }
     public function icon(callable $callback)
     {
         $this->iconCallback = $callback;

@@ -17,6 +17,10 @@ class TextColumn extends Column
     public $copy=false;
     public $tooltip;
 
+    public static function make(string $name,string $label = null,bool $sortable = false)
+    {
+        return new static($name, $label, $sortable);
+    }
     public function default($value)
     {
         $this->default = $value;

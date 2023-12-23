@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Modules\Core\Livewire\BaseTable;
 use Modules\Core\Livewire\Tables\Actions\Action;
 use Modules\Core\Livewire\Tables\Actions\Actions;
+use Modules\Core\Livewire\Tables\Columns\ImageColumn;
 use Modules\Core\Livewire\Tables\Columns\TextColumn;
 use Modules\Core\Livewire\Tables\FilterInput;
 
@@ -18,9 +19,7 @@ class Table extends BaseTable
     {
         return [
             TextColumn::make('id', __('ID'))->searchable()->sortable(),
-            TextColumn::make('avatar', __('user_avatar'))->renderImage(function (User $user) {
-                return $user->avatar;
-            }),
+            ImageColumn::make('avatar', __('user_avatar')),
             TextColumn::make('name', __('user_name'))->searchable()->sortable()->description(function (User $user){
                return $user->phone;
             })->width('200px'),
@@ -34,9 +33,13 @@ class Table extends BaseTable
             TextColumn::make('status', __('user_status'))->renderHtml(function (User $user) {
                 return $user->status == 'active' ? "<span class='badge bg-success'>{$user->status}</span>" : "<span class='badge bg-danger'>{$user->status}</span>";
             }),
-            TextColumn::make('gender',__('gender'))->renderHtml(function (User $user){
-                //gender giới tính cho user modal
-            }),
+            TextColumn::make('gender',__('gender'))->badge([
+                'male'=>'primary',
+                'female'=>'danger',
+            ],[
+                'male'=>'Nam',
+                'female'=>'Nữ',
+            ]),
             TextColumn::make('created_at', __('Created At'))->dateTime()->sortable(),
             TextColumn::make('updated_at', __('Updated At'))->dateTime()->sortable(),
         ];
