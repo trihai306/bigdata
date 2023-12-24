@@ -44,40 +44,21 @@
                         </a>
                         <!--end::Export-->
                         <!--begin::Add user-->
-                        @if($urlCreate)
-                            <a class="btn  btn-light-primary" href="{{route($urlCreate) }}">
-                                <i class="ki-duotone ki-plus fs-2"></i>Thêm dữ liệu
-                            </a>
+                        @if($this->canCreate())
+                            @if($urlCreate)
+                                <a class="btn  btn-light-primary" href="{{route($urlCreate) }}">
+                                    <i class="ki-duotone ki-plus fs-2"></i>Thêm dữ liệu
+                                </a>
+                            @endif
                         @endif
-                        <div class="dropdown">
-                            <button class="btn  btn-light-primary dropdown-toggle" type="button"
-                                    id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="ki-duotone ki-filter fs-2">
-                                    <span class="path1"></span>
-                                    <span class="path2"></span>
-                                </i> Lọc
-                            </button>
-                            <div class="dropdown-menu w-300px w-md-325px" aria-labelledby="dropdownMenuButton1">
-                                <h6 class="dropdown-header">Lọc</h6>
-                                <div class="dropdown-divider"></div>
-                                <form class="px-4 py-3" wire:submit.prevent="applyFilters">
-                                    <div class="mb-3">
-                                        @foreach($Input_filters as $filter)
-                                            <div class="dropdown-item">
-                                                {!! $filter->render() !!}
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                    <div class="d-flex justify-content-end">
-                                        <button type="button" wire:click="resetFilters"
-                                                class="btn btn-light btn-active-light-primary me-2 px-6">Reset
-                                        </button>
-                                        <button type="submit" class="btn btn-primary px-6">Tìm</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+
+                        <button class="btn  btn-light-primary " data-bs-toggle="modal"
+                                data-bs-target="#filter">
+                            <i class="ki-duotone ki-filter fs-2">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i> Lọc
+                        </button>
                         <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="ki-duotone ki-abstract-30 fs-2">
                                 <span class="path1"></span>
@@ -128,12 +109,14 @@
                 </div>
                 <thead>
                 <tr class="text-start text-muted fw-bold gs-0">
-                    <th>
-                        <label>
-                            <input type="checkbox" class="form-check-input" wire:model.live="selectAll"
-                                   wire:change="selectAllData">
-                        </label>
-                    </th>
+                    @if($this->canSelect())
+                        <th>
+                            <label>
+                                <input type="checkbox" class="form-check-input" wire:model.live="selectAll"
+                                       wire:change="selectAllData">
+                            </label>
+                        </th>
+                    @endif
                     @foreach($this->defineColumns() as $column)
                         @if($column->visible)
                             <th style="width: {{ $column->width }}; text-align: {{ $column->textAlign }};"
@@ -155,12 +138,14 @@
                 <tbody class="text-gray-600">
                 @foreach($data as $item)
                     <tr>
+                        @if($this->canSelect())
                         <td>
                             <label>
                                 <input type="checkbox" class="form-check-input" value="{{ $item->id }}"
                                        wire:model="selectedRows" wire:change="SelectedRows">
                             </label>
                         </td>
+                        @endif
                         @foreach($this->defineColumns() as $column)
                             @if($column->visible)
                                 <td>{!! $column->render($item) !!}</td>
@@ -319,6 +304,64 @@
                 </div>
                 <!--end::Modal body-->
             </div>
+            <!--end::Modal content-->
+        </div>
+        <!--end::Modal dialog-->
+    </div>
+
+
+    <div class="modal fade " id="filter" wire:ignore tabindex="-1" aria-hidden="true">
+        <!--begin::Modal dialog-->
+        <div class="modal-dialog modal-lg  modal-dialog-centered">
+            <!--begin::Modal content-->
+            <div class="modal-content">
+                <!--begin::Modal header-->
+                <div class="modal-header">
+                    <!--begin::Modal title-->
+                    <h2 class="fw-bold modal-title">Filter</h2>
+                    <!--end::Modal title-->
+                    <!--begin::Close-->
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <!--end::Close-->
+                </div>
+                <!--end::Modal header-->
+                <!--begin::Modal body-->
+                <form  wire:submit.prevent="applyFilters">
+                <div class="modal-body scroll-y ">
+                    <!--begin::Form-->
+
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-10">
+
+                            <div class="mb-3">
+                                @foreach($Input_filters as $filter)
+                                    <br>
+                                    {!! $filter->render() !!}
+                                @endforeach
+                            </div>
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Actions-->
+
+                    <!--end::Actions-->
+
+                    <!--end::Form-->
+                </div>
+                <!--end::Modal body-->
+                <div class="modal-footer">
+                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">
+                        Discard
+                    </button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+                        <span class="indicator-label" wire:loading.class="hidden">Tìm kiếm</span>
+                        <span class="indicator-progress" wire:loading>Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                    </button>
+                </div>
+                </form>
+            </div>
+
             <!--end::Modal content-->
         </div>
         <!--end::Modal dialog-->

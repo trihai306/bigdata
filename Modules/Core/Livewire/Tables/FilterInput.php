@@ -7,6 +7,7 @@ use Illuminate\Support\HtmlString;
 class FilterInput
 {
     protected $name;
+    protected $label;
     protected $type;
     protected $options;
 
@@ -46,7 +47,7 @@ class FilterInput
 
     protected function renderTextInput()
     {
-        return new HtmlString("<label class='form-label fw-semibold'>{$this->name}</label> <input type='text' class='form-control' wire:model='filters.{$this->name}' />");
+        return new HtmlString("<label class='form-label'>{$this->name}</label> <input type='text' class='form-control' wire:model='filters.{$this->name}' />");
     }
 
     protected function renderSelectInput()

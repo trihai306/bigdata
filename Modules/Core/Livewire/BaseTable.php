@@ -7,6 +7,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
 use Modules\Core\Livewire\Tables\Actions\Actions;
+use Modules\Core\Livewire\Tables\Traits\Can;
 use Modules\Core\Livewire\Tables\Traits\ColumnVisibilityTrait;
 use Modules\Core\Livewire\Tables\Traits\Exportable;
 use Modules\Core\Livewire\Tables\Traits\FilterColumnsTrait;
@@ -21,7 +22,7 @@ use Modules\Core\Livewire\Tables\Traits\SortTrait;
 abstract class BaseTable extends Component
 {
     use WithPagination, FilterColumnsTrait, PaginationTrait, ColumnVisibilityTrait, SortTrait, SearchTrait, SelectTrait, Exportable;
-    use Functions,Importable;
+    use Functions,Importable,Can;
     use WithFileUploads;
     protected string $view = 'core::livewire.base-table';
     private $actions;

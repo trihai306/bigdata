@@ -15,6 +15,7 @@ class Table extends BaseTable
 {
     protected string $model = User::class;
     public string $urlCreate = 'admin.user.create';
+
     protected function columns(): array
     {
         return [
