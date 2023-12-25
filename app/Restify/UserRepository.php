@@ -8,25 +8,25 @@ use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
 class UserRepository extends Repository
 {
     public static string $model = User::class;
-	
-	public static array $search = ['name','email','phone','address'];
-	public static int $globalSearchResults = 10;
-	public static array $match = [
-		'name'=>'string',
-		'email'=>'string',
-		'phone'=>'string',
-		'address'=>'string',
-		'birthday'=>'date',
-		'gender'=>'string',
-		'status'=>'string',
-		'created_at'=>'between',
-	];
-	
-	public static function indexQuery(RestifyRequest $request, \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query)
-	{
-		$query->where('status', 'active');
-		return parent::indexQuery($request, $query);
-	}
+
+    public static array $search = ['name','email','phone','address'];
+    public static int $globalSearchResults = 10;
+    public static array $match = [
+        'name'=>'string',
+        'email'=>'string',
+        'phone'=>'string',
+        'address'=>'string',
+        'birthday'=>'date',
+        'gender'=>'string',
+        'status'=>'string',
+        'created_at'=>'between',
+    ];
+
+    public static function indexQuery(RestifyRequest $request, \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query)
+    {
+        $query->where('status', 'active');
+        return parent::indexQuery($request, $query);
+    }
 
     public function fields(RestifyRequest $request): array
     {
@@ -34,44 +34,36 @@ class UserRepository extends Repository
             field('name')->rules('required'),
 
             field('email')->storingRules('required', 'unique:users')->messages([
-                'required' => 'This field is required.',
+                'required' => 'Trường này là bắt buộc.',
             ]),
 
-//            field('password')->storingRules('required')->messages([
-//                'required' => 'This field is required.',
-//            ]),
-//
-//            field('password_confirmation')->storingRules('required', 'same:password')->messages([
-//                'required' => 'This field is required.',
-//            ]),
-
             field('avatar')->image()->disk('public')->storingRules('required')->messages([
-                'required' => 'This field is required.',
+                'required' => 'Trường này là bắt buộc.',
             ]),
 
             field('phone')->rules('required', 'unique:users', 'phone')->messages([
-                'required' => 'This field is required.',
-                'unique' => 'This field is unique.',
-                'phone' => 'This field is phone.',
+                'required' => 'Trường này là bắt buộc.',
+                'unique' => 'Trường này phải là duy nhất.',
+                'phone' => 'Trường này là số điện thoại.',
             ]),
 
             field('address')->rules('required')->messages([
-                'required' => 'This field is required.',
+                'required' => 'Trường này là bắt buộc.',
             ]),
 
             field('birthday')->rules('required', 'date')->messages([
-                'required' => 'This field is required.',
-                'date' => 'This field is date.',
+                'required' => 'Trường này là bắt buộc.',
+                'date' => 'Trường này là ngày tháng.',
             ]),
 
             field('gender')->rules('required', 'in:male,female,non-binary,genderqueer,transgender,genderfluid,agender')->messages([
-                'required' => 'This field is required.',
-                'in' => 'This field is in.',
+                'required' => 'Trường này là bắt buộc.',
+                'in' => 'Trường này phải nằm trong danh sách cho trước.',
             ]),
 
             field('status')->rules('required', 'in:active,inactive,blocked')->messages([
-                'required' => 'This field is required.',
-                'in' => 'This field is in.',
+                'required' => 'Trường này là bắt buộc.',
+                'in' => 'Trường này phải nằm trong danh sách cho trước.',
             ]),
         ];
     }

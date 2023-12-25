@@ -3,7 +3,7 @@
 namespace App\Restify;
 
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
-use Modules\Conversation\Models\Message;
+use Modules\Conversation\app\Models\Message;
 
 class MessageRepository extends Repository
 {
