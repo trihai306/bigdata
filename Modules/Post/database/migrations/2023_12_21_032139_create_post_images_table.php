@@ -13,7 +13,17 @@ return new class extends Migration
     {
         Schema::create('post_images', function (Blueprint $table) {
             $table->id();
-            
+            $table->unsignedBigInteger('post_id');
+            $table->string('image');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('post_id')
+                ->references('id')
+                ->on('posts')
+                ->onDelete('cascade');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on(config('auth.providers.users.table', 'users'))
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
