@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Policies;
+namespace Modules\Field\app\Policies;
 
-use App\Models\Field;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Modules\Field\app\Models\Field;
 
 class FieldPolicy
 {

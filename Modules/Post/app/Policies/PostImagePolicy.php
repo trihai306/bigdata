@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Policies;
+namespace Modules\Post\app\Policies;
 
-use App\Models\TrafficPost;
+
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Modules\Post\app\Models\PostImage;
 
-class TrafficPostPolicy
+class PostImagePolicy
 {
     use HandlesAuthorization;
 
@@ -15,7 +16,7 @@ class TrafficPostPolicy
         return true;
     }
 
-    public function show(User $user = null, TrafficPost $model): bool
+    public function show(User $user = null, PostImage $model): bool
     {
         return true;
     }
@@ -30,22 +31,22 @@ class TrafficPostPolicy
         return true;
     }
 
-    public function update(User $user, TrafficPost $model): bool
+    public function update(User $user, PostImage $model): bool
     {
         return true;
     }
 
-    public function updateBulk(User $user, TrafficPost $model): bool
+    public function updateBulk(User $user, PostImage $model): bool
     {
         return true;
     }
 
-    public function deleteBulk(User $user, TrafficPost $model): bool
+    public function deleteBulk(User $user, PostImage $model): bool
     {
         return true;
     }
 
-    public function delete(User $user, TrafficPost $model): bool
+    public function delete(User $user, PostImage $model): bool
     {
         return true;
     }

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Policies;
+namespace Modules\Conversation\app\Policies;
 
-use App\Models\PostImage;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Modules\Conversation\app\Models\Conversation;
 
-class PostImagePolicy
+class ConversationPolicy
 {
     use HandlesAuthorization;
 
@@ -15,7 +15,7 @@ class PostImagePolicy
         return true;
     }
 
-    public function show(User $user = null, PostImage $model): bool
+    public function show(User $user = null, Conversation $model): bool
     {
         return true;
     }
@@ -30,22 +30,22 @@ class PostImagePolicy
         return true;
     }
 
-    public function update(User $user, PostImage $model): bool
+    public function update(User $user, Conversation $model): bool
     {
         return true;
     }
 
-    public function updateBulk(User $user, PostImage $model): bool
+    public function updateBulk(User $user, Conversation $model): bool
     {
         return true;
     }
 
-    public function deleteBulk(User $user, PostImage $model): bool
+    public function deleteBulk(User $user, Conversation $model): bool
     {
         return true;
     }
 
-    public function delete(User $user, PostImage $model): bool
+    public function delete(User $user, Conversation $model): bool
     {
         return true;
     }

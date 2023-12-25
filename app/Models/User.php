@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Illuminate\Support\Carbon;
+use Modules\Conversation\Models\Conversation;
+use Modules\Conversation\Models\Message;
+use Modules\Conversation\Models\MessageReaction;
+use Modules\Conversation\Models\UserConversation;
 use Modules\Post\app\Models\Comment;
 use Modules\Post\app\Models\Post;
 use Modules\Post\app\Models\PostImage;
@@ -60,5 +63,24 @@ class User extends Authenticatable
     public function postsImages()
     {
         return $this->hasMany(PostImage::class);
+    }
+    public function sentMessages()
+    {
+        return $this->hasMany(Message::class, 'sender_id');
+    }
+
+    public function messageReactions()
+    {
+        return $this->hasMany(MessageReaction::class);
+    }
+
+    public function userConversations()
+    {
+        return $this->hasMany(UserConversation::class);
+    }
+
+    public function conversations()
+    {
+        return $this->belongsToMany(Conversation::class, 'user_conversations');
     }
 }

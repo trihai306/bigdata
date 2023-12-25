@@ -155,7 +155,7 @@ return [
         | When enabled, methods from the policy will be cached for the active user.
         */
         'policies' => [
-            'enabled' => false,
+            'enabled' => true,
 
             'ttl' => 5 * 60, // seconds
         ],

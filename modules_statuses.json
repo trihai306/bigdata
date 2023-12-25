@@ -6,5 +6,6 @@
     "Permission": true,
     "User": true,
     "Field": true,
-    "Post": true
+    "Post": true,
+    "Conversation": true
 }

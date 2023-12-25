@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Policies;
+namespace Modules\Post\app\Policies;
 
-use App\Models\Post;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Modules\Post\app\Models\Post;
 
 class PostPolicy
 {
