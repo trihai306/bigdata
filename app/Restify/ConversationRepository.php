@@ -13,6 +13,8 @@ class ConversationRepository extends Repository
     {
         return [
             id(),
+            field('type'),
+            field('name'),
         ];
     }
 }
