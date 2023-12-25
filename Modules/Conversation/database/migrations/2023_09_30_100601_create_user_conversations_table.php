@@ -19,7 +19,6 @@ return new class extends Migration
             $table->foreign('last_seen_message_id')->references('id')->on('messages')->onDelete('set null');
             $table->primary(['user_id', 'conversation_id']); // Kết hợp khóa chính
             $table->timestamps();
-            $table->softDeletes();
         });
 
     }
