@@ -3,12 +3,13 @@
 namespace App\Restify;
 
 use App\Models\User;
+use Binaryk\LaravelRestify\Fields\BelongsToMany;
+use Binaryk\LaravelRestify\Fields\HasMany;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
 
 class UserRepository extends Repository
 {
     public static string $model = User::class;
-
     public static array $search = ['name','email','phone','address'];
     public static int $globalSearchResults = 10;
     public static array $match = [
@@ -65,6 +66,16 @@ class UserRepository extends Repository
                 'required' => 'Trường này là bắt buộc.',
                 'in' => 'Trường này phải nằm trong danh sách cho trước.',
             ]),
+        ];
+    }
+
+    public static function related(): array
+    {
+        return [
+            HasMany::make('posts'),
+            HasMany::make('comments'),
+            BelongsToMany::make('conversations'),
+            HasMany::make('messages'),
         ];
     }
 }

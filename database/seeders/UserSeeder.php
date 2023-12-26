@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
+
 class UserSeeder extends Seeder
 {
     public function run()
@@ -22,6 +23,9 @@ class UserSeeder extends Seeder
                 'remember_token' => Str::random(10),
             ]);
         }
-        User::factory()->count(50)->create();
+        for ($i = 0; $i < 1; $i++) {
+            User::factory()->count(10)->create();
+//            Artisan::info('Seeding operation run ' . ($i + 1) . ' times.');
+        }
     }
 }
