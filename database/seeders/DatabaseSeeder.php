@@ -20,9 +20,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             FieldSeeder::class,
             PostAndPostImageSeeder::class,
-            ConversationSeeder::class,
-            MessageSeeder::class,
             UserConversationSeeder::class,
+            MessageSeeder::class,
         ]);
     }
 }

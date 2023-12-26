@@ -9,6 +9,24 @@ class MessageRepository extends Repository
 {
     public static string $model = Message::class;
 
+    public static array $search = [
+        'id',
+        'content',
+    ];
+
+    public static array $sort = [
+        'id',
+        'content',
+        'created_at',
+        'updated_at',
+    ];
+
+    public static array $match = [
+        'id' => 'integer',
+        'content'=>'string',
+    ];
+
+    public static int $globalSearchResults = 10;
     public function fields(RestifyRequest $request): array
     {
         return [

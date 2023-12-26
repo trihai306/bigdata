@@ -13,16 +13,27 @@ class UserConversationSeeder extends Seeder
     public function run()
     {
         $users = User::all();
-        $conversations = Conversation::all();
         $messages = Message::all();
 
-        foreach ($conversations as $conversation) {
-            foreach ($users as $user) {
+        for ($i = 0; $i < $users->count(); $i += 2) {
+            if (isset($users[$i+1])) {
+                $conversation = Conversation::create([
+                    'type' => 'private',
+                    'name' => 'Private Conversation between ' . $users[$i]->name . ' and ' . $users[$i+1]->name,
+                ]);
+
                 UserConversation::create([
-                    'user_id' => $user->id,
+                    'user_id' => $users[$i]->id,
                     'conversation_id' => $conversation->id,
                     'date_joined' => now(),
-                    'last_seen_message_id' => $messages->random()->id,
+//                    'last_seen_message_id' => $messages->random()->id,
+                ]);
+
+                UserConversation::create([
+                    'user_id' => $users[$i+1]->id,
+                    'conversation_id' => $conversation->id,
+                    'date_joined' => now(),
+//                    'last_seen_message_id' => $messages->random()->id,
                 ]);
             }
         }
