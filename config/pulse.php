@@ -227,5 +227,61 @@ return [
                 '#^/pulse$#', // Pulse dashboard...
             ],
         ],
+        \Maantje\Pulse\Database\Recorders\DatabaseRecorder::class => [
+            'connections' => [
+                'mysql_another' => [
+                    'values' => [
+                        'Connections',
+                        'Threads_connected',
+                        'Threads_running',
+                        'Innodb_buffer_pool_reads',
+                        'Innodb_buffer_pool_read_requests',
+                        'Innodb_buffer_pool_pages_total',
+                        'Max_used_connections'
+                    ],
+                    'aggregates' => [
+                        'avg' => [
+                            'Threads_connected',
+                            'Threads_running',
+                            'Innodb_buffer_pool_reads',
+                            'Innodb_buffer_pool_read_requests',
+                            'Innodb_buffer_pool_pages_total',
+                        ],
+                        'max' => [
+                            //
+                        ],
+                        'count' => [
+                            //
+                        ],
+                    ],
+                ],
+                'mysql' => [
+                    'values' => [
+                        'Connections',
+                        'Threads_connected',
+                        'Threads_running',
+                        'Innodb_buffer_pool_reads',
+                        'Innodb_buffer_pool_read_requests',
+                        'Innodb_buffer_pool_pages_total',
+                        'Max_used_connections'
+                    ],
+                    'aggregates' => [
+                        'avg' => [
+                            'Threads_connected',
+                            'Threads_running',
+                            'Innodb_buffer_pool_reads',
+                            'Innodb_buffer_pool_read_requests',
+                            'Innodb_buffer_pool_pages_total',
+                        ],
+                        'max' => [
+                            //
+                        ],
+                        'count' => [
+                            //
+                        ],
+                    ],
+                ]
+            ]
+        ],
     ],
 ];
