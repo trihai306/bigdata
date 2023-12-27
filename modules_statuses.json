@@ -5,7 +5,5 @@
     "Modules": true,
     "Permission": true,
     "User": true,
-    "Field": true,
-    "Post": true,
     "Conversation": true
 }

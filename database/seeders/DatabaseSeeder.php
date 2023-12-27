@@ -6,8 +6,6 @@ use Illuminate\Database\Seeder;
 use Modules\Conversation\database\seeders\ConversationSeeder;
 use Modules\Conversation\database\seeders\MessageSeeder;
 use Modules\Conversation\database\seeders\UserConversationSeeder;
-use Modules\Field\database\seeders\FieldSeeder;
-use Modules\Post\database\seeders\PostAndPostImageSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,8 +16,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            FieldSeeder::class,
-            PostAndPostImageSeeder::class,
             UserConversationSeeder::class,
             MessageSeeder::class,
         ]);

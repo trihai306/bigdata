@@ -5,6 +5,8 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Route;
 use Modules\Menu\App\Models\Menu;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UpdateMenu extends Command
 {
@@ -37,41 +39,47 @@ class UpdateMenu extends Command
                 continue;
             }
             if (str_starts_with($route->uri, 'admin')) {
-                Menu::updateOrCreate(
+                // Get the route name
+                $routeName = $route->getName();
+
+                // Skip routes with specific names
+                if (str_contains($routeName, 'create') || str_contains($routeName, 'show') || str_contains($routeName, 'store') || str_contains($routeName, 'update') || str_contains($routeName, 'destroy') || str_contains($routeName, 'edit')) {
+                    $this->info('Skipping route: ' . $routeName);
+                    continue;
+                }
+
+                // Update or create menu item
+                $menuItem = Menu::updateOrCreate(
                     [
                         'url' => $route->uri,
                         'title' => $route->uri === 'admin' ? 'Dashboard' : ucfirst(str_replace('admin/', '', $route->uri)),
-                        'permission' => 'viewAny ' . ucfirst(str_replace('admin/', '', $route->uri)),
+                        'permission' => $routeName,
+                    ],
+                    [
                         'parent_id' => null,
                         'order' => 0,
                         'icon' => 'fas fa-tachometer-alt',
                         'badge' => null
                     ]
                 );
-            }
-            // Update or create menu item
-        }
 
-        // Get all menu items
-        $menuItems = Menu::all();
+                // Update or create permission
+                $permission = Permission::firstOrCreate(['name' => $routeName]);
 
-        foreach ($menuItems as $menuItem) {
-            // Check if the menu item's URL exists in the routes
-            $exists = false;
-            foreach ($routes as $route) {
-                if ($route->uri === $menuItem->url) {
-                    $exists = true;
-                    break;
+                // Assign permission to admin role
+                $admin = Role::where('name', 'admin')->first();
+                if ($admin) {
+                    $admin->givePermissionTo($routeName);
+                } else {
+                    $admin = Role::create(['name' => 'admin']);
+                    $admin->givePermissionTo($routeName);
                 }
-            }
 
-            // If the menu item's URL does not exist in the routes, delete the menu item
-            if (!$exists) {
-                $menuItem->delete();
+                $this->info('Added to menu: ' . $routeName);
             }
         }
 
-        $this->info('Menu updated successfully.');
+        $this->info('Menu and permissions updated successfully.');
 
         return 0;
     }
