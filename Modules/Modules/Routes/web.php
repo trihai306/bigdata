@@ -18,6 +18,6 @@ Route::group([
     'prefix' => 'admin',
     'as' => 'admin.'
 ], function () {
-    Route::get('modules', 'ModulesController@index');
+    Route::get('modules', 'ModulesController@index')->name('modules.index');
     Route::post('modules/{name}/toggle', 'ModulesController@toggleModule')->name('modules.toggle');
 });

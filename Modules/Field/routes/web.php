@@ -14,6 +14,10 @@ use Modules\Field\app\Http\Controllers\FieldController;
 |
 */
 
-Route::group([], function () {
+Route::group([
+    'middleware' => ['auth'],
+    'prefix' => 'admin',
+    'as' => 'admin.'
+], function () {
     Route::resource('field', FieldController::class)->names('field');
 });

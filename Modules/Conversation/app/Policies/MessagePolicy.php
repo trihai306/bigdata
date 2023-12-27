@@ -14,7 +14,7 @@ class MessagePolicy
 
     public function allowRestify(User $user = null): bool
     {
-        return true;
+        return $user->HasRole('admin');
     }
 
     public function show(User $user = null, Message $model): bool

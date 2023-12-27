@@ -19,5 +19,5 @@ Route::group([
     'prefix' => 'admin',
     'as' => 'admin.',
 ], function () {
-    Route::resource('dashboard', DashboardController::class)->names('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 });
