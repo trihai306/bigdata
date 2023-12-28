@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Permission\Livewire\Roles;
+namespace Modules\User\Livewire\Permission\Roles;
 
 use Livewire\Component;
 use Spatie\Permission\Models\Permission;
@@ -26,7 +26,7 @@ class Edit extends Component
     public function render()
     {
         $permissionsGroupedByModule = $this->getGroupedPermissions();
-        return view('permission::livewire.roles.edit', compact('permissionsGroupedByModule'));
+        return view('user::livewire.roles.edit', compact('permissionsGroupedByModule'));
     }
 
     private function getGroupedPermissions()

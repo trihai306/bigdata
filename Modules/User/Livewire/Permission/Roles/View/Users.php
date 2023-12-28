@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Permission\Livewire\Roles\View;
+namespace Modules\User\Livewire\Permission\Roles\View;
 
 use App\Models\User;
 use Livewire\Component;
@@ -79,6 +79,6 @@ class Users extends Component
             ->where('name', 'like', '%'.$this->search.'%')
             ->paginate(10);
 
-        return view('permission::livewire.roles.view.users', compact('users'));
+        return view('user::livewire.roles.view.users', compact('users'));
     }
 }

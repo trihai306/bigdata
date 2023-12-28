@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Permission\Livewire;
+namespace Modules\User\Livewire\Permission;
 
 
 use Modules\Core\Livewire\BaseForm;

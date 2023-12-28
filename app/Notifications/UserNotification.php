@@ -31,7 +31,7 @@ class UserNotification extends Notification
      */
     public function via(object $notifiable): array
     {
-        return ['broadcast']; // Removed 'mail'
+        return ['broadcast', 'database']; // Added 'database'
     }
 
     /**

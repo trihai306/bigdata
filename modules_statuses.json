@@ -3,7 +3,6 @@
     "Dashboard": true,
     "Menu": true,
     "Modules": true,
-    "Permission": true,
     "User": true,
     "Conversation": true
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Permission\Livewire\Roles;
+namespace Modules\User\Livewire\Permission\Roles;
 
 use DB;
 use Livewire\Component;
@@ -27,7 +27,7 @@ class Index extends Component
 
     public function render()
     {
-        return view('permission::livewire.roles.index', [
+        return view('user::livewire.roles.index', [
             'roles' => $this->roles
         ]);
     }

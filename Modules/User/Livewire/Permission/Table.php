@@ -1,9 +1,8 @@
 <?php
 
-namespace Modules\Permission\Livewire;
+namespace Modules\User\Livewire\Permission;
 
 use Illuminate\Database\Eloquent\Model;
-use Livewire\Component;
 use Modules\Core\Livewire\BaseTable;
 use Modules\Core\Livewire\Tables\Actions\Action;
 use Modules\Core\Livewire\Tables\Actions\Actions;

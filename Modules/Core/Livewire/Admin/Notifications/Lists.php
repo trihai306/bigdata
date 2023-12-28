@@ -14,7 +14,7 @@ class Lists extends Component
    public function getListeners()
    {
        return[
-           'echo-private:App.Models.User.'.auth()->id().',.NotificationsDatabaseNotification' => 'reload',
+           'echo-private:App.Models.User.'.auth()->id().',.UserNotification' => 'reload',
        ];
    }
 

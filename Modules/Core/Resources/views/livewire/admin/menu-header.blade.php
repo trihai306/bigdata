@@ -6,7 +6,7 @@
                     @if(Auth::user()->can($menu->permission))
                         @if($menu->children->isEmpty())
                             <li class="nav-item @if(request()->is($menu->url)) active @endif">
-                                <a class="nav-link" href="{{route($menu->permission)}}">
+                                <a class="nav-link"  href="{{route($menu->permission)}}">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                                         <i class="{{$menu->icon}}"></i>
                                     </span>

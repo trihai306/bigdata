@@ -4,7 +4,7 @@
     <!--begin::Content-->
     <div  class="app-content flex-row-fluid">
         <!--begin::Row-->
-        <livewire:permission::roles />
+        <livewire:user::permission.roles />
         <!--end::Row-->
         <!--begin::Modals-->
         <!--begin::Modal - Add role-->
@@ -24,7 +24,7 @@
                         <!--end::Close-->
                     </div>
                     <!--end::Modal header-->
-                    <livewire:permission::roles.create />
+                    <livewire:user::permission.roles.create />
 
                 </div>
                 <!--end::Modal content-->
@@ -54,7 +54,7 @@
                     </div>
                     <!--end::Modal header-->
                     <!--begin::Modal body-->
-                    <livewire:permission::roles.edit />
+                    <livewire:user::permission.roles.edit />
                     <!--end::Modal body-->
                 </div>
                 <!--end::Modal content-->

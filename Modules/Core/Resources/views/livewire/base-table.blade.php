@@ -11,9 +11,11 @@
                         <input type="text" class="form-control form-control-solid w-250px ps-13"
                                wire:model.live="search"
                                placeholder="Tìm kiếm"/>
-                        <span class="input-icon-addon" >
-                              <div class="spinner-border spinner-border-sm text-secondary" wire:loading wire:target="search" role="status"></div>
-                                  <svg xmlns="http://www.w3.org/2000/svg" wire:loading.class="d-none" wire:target="search" class="icon" width="24" height="24"
+                        <span class="input-icon-addon">
+                              <div class="spinner-border spinner-border-sm text-secondary" wire:loading
+                                   wire:target="search" role="status"></div>
+                                  <svg xmlns="http://www.w3.org/2000/svg" wire:loading.class="d-none"
+                                       wire:target="search" class="icon" width="24" height="24"
                                        viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
                                        stroke-linecap="round" stroke-linejoin="round"><path stroke="none"
                                                                                             d="M0 0h24v24H0z"
@@ -101,7 +103,6 @@
         <!--end::Card header-->
         <!--begin::Card body-->
         <div class="card-body table-responsive table-loading py-4">
-
             <!--begin::Table-->
             <table class="table align-middle table-row-dashed gy-5">
                 <div class="table-loading-message bg-light text-dark" wire:loading>
@@ -136,30 +137,30 @@
                 </tr>
                 </thead>
                 <tbody class="text-gray-600">
-                @foreach($data as $item)
-                    <tr>
-                        @if($this->canSelect())
-                        <td>
-                            <label>
-                                <input type="checkbox" class="form-check-input" value="{{ $item->id }}"
-                                       wire:model="selectedRows" wire:change="SelectedRows">
-                            </label>
-                        </td>
-                        @endif
-                        @foreach($this->defineColumns() as $column)
-                            @if($column->visible)
-                                <td>{!! $column->render($item) !!}</td>
+                @if($data)
+                    @foreach($data as $item)
+                        <tr>
+                            @if($this->canSelect())
+                                <td>
+                                    <label>
+                                        <input type="checkbox" class="form-check-input" value="{{ $item->id }}"
+                                               wire:model="selectedRows" wire:change="SelectedRows">
+                                    </label>
+                                </td>
                             @endif
-                        @endforeach
-                        @if($this->defineActions($item))
-                            <td class="text-end">
-                                {{ $this->defineActions($item) }}
-                            </td>
-                        @endif
-                    </tr>
-
-                @endforeach
-
+                            @foreach($this->defineColumns() as $column)
+                                @if($column->visible)
+                                    <td>{!! $column->render($item) !!}</td>
+                                @endif
+                            @endforeach
+                            @if($this->defineActions($item))
+                                <td class="text-end">
+                                    {{ $this->defineActions($item) }}
+                                </td>
+                            @endif
+                        </tr>
+                    @endforeach
+                @endif
                 </tbody>
             </table>
             <div class="row mt-2">
@@ -326,13 +327,13 @@
                 </div>
                 <!--end::Modal header-->
                 <!--begin::Modal body-->
-                <form  wire:submit.prevent="applyFilters">
-                <div class="modal-body scroll-y ">
-                    <!--begin::Form-->
+                <form wire:submit.prevent="applyFilters">
+                    <div class="modal-body scroll-y ">
+                        <!--begin::Form-->
 
-                    <!--end::Input group-->
-                    <!--begin::Input group-->
-                    <div class="fv-row mb-10">
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-10">
 
                             <div class="mb-3">
                                 @foreach($Input_filters as $filter)
@@ -340,25 +341,25 @@
                                     {!! $filter->render() !!}
                                 @endforeach
                             </div>
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Actions-->
+
+                        <!--end::Actions-->
+
+                        <!--end::Form-->
                     </div>
-                    <!--end::Input group-->
-                    <!--begin::Actions-->
-
-                    <!--end::Actions-->
-
-                    <!--end::Form-->
-                </div>
-                <!--end::Modal body-->
-                <div class="modal-footer">
-                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">
-                        Discard
-                    </button>
-                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
-                        <span class="indicator-label" wire:loading.class="hidden">Tìm kiếm</span>
-                        <span class="indicator-progress" wire:loading>Please wait...
+                    <!--end::Modal body-->
+                    <div class="modal-footer">
+                        <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal">
+                            Discard
+                        </button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">
+                            <span class="indicator-label" wire:loading.class="hidden">Tìm kiếm</span>
+                            <span class="indicator-progress" wire:loading>Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                    </button>
-                </div>
+                        </button>
+                    </div>
                 </form>
             </div>
 

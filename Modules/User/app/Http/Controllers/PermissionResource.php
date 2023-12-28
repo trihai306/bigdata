@@ -1,11 +1,10 @@
 <?php
-namespace Modules\Permission\app\Http\Controllers;
+namespace Modules\User\app\Http\Controllers;
 
 
 use Modules\Core\Http\Resource\BaseResource;
-
-use Modules\Permission\Livewire\Form;
-use Modules\Permission\Livewire\Table;
+use Modules\User\Livewire\Permission\Form;
+use Modules\User\Livewire\Permission\Table;
 use Spatie\Permission\Models\Role;
 
 
@@ -22,7 +21,7 @@ class PermissionResource extends BaseResource
     public function role()
     {
 
-        return view('permission::role');
+        return view('user::role');
     }
 
     public function showRole($id)
@@ -30,7 +29,7 @@ class PermissionResource extends BaseResource
         try {
             $role = Role::with('permissions')->findOrFail($id);
 
-            return view('permission::showRole', compact('role'));
+            return view('user::showRole', compact('role'));
         } catch (\Exception $e) {
             return redirect()->route('roles.index')->with('error', 'Role not found');
         }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Permission\Livewire\Roles;
+namespace Modules\User\Livewire\Permission\Roles;
 
 use DB;
 use Livewire\Component;
@@ -25,7 +25,7 @@ class Create extends Component
             return $moduleName;
         });
 
-        return view('permission::livewire.roles.create', [
+        return view('user::livewire.roles.create', [
             'permissionsGroupedByModule' => $permissionsGroupedByModule
         ]);
     }
