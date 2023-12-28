@@ -3,7 +3,7 @@
 namespace Modules\Core\Livewire\Admin;
 
 use Livewire\Component;
-use Modules\Menu\App\Models\Menu;
+use Modules\Core\Http\Models\Menu;
 
 class MenuHeader extends Component
 {
