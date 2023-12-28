@@ -15,7 +15,7 @@ trait SearchTrait {
      *
      * @var string
      */
-    #[Url]
+    #[Url(as: 's')]
     public $search = '';
     /**
      * Apply the search query to the given query.
@@ -34,6 +34,7 @@ trait SearchTrait {
                     $subQuery->orWhere($column, 'like', '%' . $this->search . '%');
                 }
             });
+
         }
 
 

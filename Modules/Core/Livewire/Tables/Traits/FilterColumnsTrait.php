@@ -5,7 +5,7 @@ namespace Modules\Core\Livewire\Tables\Traits;
 use Livewire\Attributes\Url;
 
 trait FilterColumnsTrait {
-//    #[Url]
+    #[Url(as:"f")]
     public $filters = [];
 
     public function canFilter($can=true)

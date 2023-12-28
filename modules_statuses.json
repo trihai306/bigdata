@@ -1,7 +1,6 @@
 {
     "Core": true,
     "Dashboard": true,
-    "Menu": true,
     "Modules": true,
     "User": true,
     "Conversation": true
