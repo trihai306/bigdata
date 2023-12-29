@@ -3,5 +3,7 @@
     "Dashboard": true,
     "Modules": true,
     "User": true,
-    "Conversation": true
+    "Conversation": true,
+    "Location": true,
+    "DataSystem": true
 }

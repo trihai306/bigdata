@@ -67,7 +67,7 @@
                             </div>
                             <!--end::Modal header-->
                             <!--begin::Modal body-->
-                            <livewire:permission::roles.edit />
+                            <livewire:user::permission.roles.edit />
                             <!--end::Modal body-->
                         </div>
                         <!--end::Modal content-->
@@ -80,7 +80,7 @@
             <!--end::Sidebar-->
             <!--begin::Content-->
             <div class="col-lg-8 col-xl-9">
-                <livewire:permission::roles.view.users :role="$role" />
+                <livewire:user::permission.roles.view.users :role="$role" />
             </div>
             <!--end::Content-->
         </div>
@@ -89,18 +89,16 @@
     <!--end::Content-->
 @endsection
 @section('script')
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script>
+   <script>
 
-        var modal_update_role = new bootstrap.Modal(document.getElementById('modal_update_role'), {
-            keyboard: true
-        });
+       var  modal_update_role = document.getElementById('modal_update_role')
         function hiddenUpdateModal() {
-            modal_update_role.hide();
+            modal_update_role.style.display = 'none';
         }
 
         function showUpdateModal() {
-            modal_update_role.show();
+           console.log('showUpdateModal')
+            modal_update_role.style.display = 'block';
         }
 
         function showUpdateModalByLive(id) {

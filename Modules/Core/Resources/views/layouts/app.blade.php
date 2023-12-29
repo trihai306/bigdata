@@ -56,6 +56,7 @@
 <script src="{{ asset('dist/js/demo.min.js') }}" defer></script>
 <script src="{{ asset('dist/js/custom.js') }}" defer></script>
 @include('core::components.scripts.swal')
+@include('core::components.scripts.toast')
 
 @yield('script')
 </body>

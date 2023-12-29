@@ -67,30 +67,26 @@
     <!--end::Content-->
 @endsection
 @section('script')
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+{{--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>--}}
     <script >
-        var modal_add_role = new bootstrap.Modal(document.getElementById('modal_add_role'), {
-            keyboard: true
-        });
+        var modal_add_role = document.getElementById('modal_add_role');
 
-        var modal_update_role = new bootstrap.Modal(document.getElementById('modal_update_role'), {
-            keyboard: true
-        });
+        var modal_update_role = document.getElementById('modal_update_role')
 
         function hiddenUpdateModal() {
-            modal_update_role.hide();
+            modal_update_role.style.display = 'none';
         }
 
         function showUpdateModal() {
-            modal_update_role.show();
+            modal_update_role.style.display = 'block';
         }
 
         function hiddenModal(){
-            modal_add_role.hide();
+            modal_add_role.style.display = 'none';
         }
 
         function showModal(){
-            modal_add_role.show();
+            modal_add_role.style.display = 'block';
         }
 
         window.addEventListener('show-create-role-modal', event => {

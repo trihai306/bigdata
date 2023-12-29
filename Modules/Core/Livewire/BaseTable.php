@@ -140,7 +140,6 @@ abstract class BaseTable extends Component
         $query = $this->query();
         // Implement search logic
         if (!empty(array_filter($this->filters))) {
-
             $query = $this->applyFilters();
         }
         if ($this->search !== '') {
