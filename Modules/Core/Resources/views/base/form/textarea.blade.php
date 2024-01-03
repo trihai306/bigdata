@@ -8,7 +8,7 @@
     <label for="{{ $name }}">{{ $label }}</label>
 @endif
 
-<textarea name="{{ $name }}" wire:model="data.{{ $name }}" {{ $required }} class="{{ $classes }}" {{ $attributes }} {{ $placeholder }}></textarea>
+<textarea name="{{ $name }}" wire:model="data.{{ $name }}" {{ $required }} class="{{ $classes }} @error('data.'.$name) is-invalid @enderror" {{ $attributes }} {{ $placeholder }}></textarea>
 @error('data.'.$name)
 <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
     <div data-field="{{$name}}" data-validator="notEmpty">{{$message}}</div>

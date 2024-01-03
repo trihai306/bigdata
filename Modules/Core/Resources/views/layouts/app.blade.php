@@ -52,9 +52,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @vite('resources/js/app.js')
-<script src="{{ asset('dist/js/tabler.min.js') }}" defer></script>
-<script src="{{ asset('dist/js/demo.min.js') }}" defer></script>
-<script src="{{ asset('dist/js/custom.js') }}" defer></script>
+<script src="{{ asset('dist/js/tabler.min.js') }}" data-navigate-once defer></script>
+<script src="{{ asset('dist/js/demo.min.js') }}" data-navigate-once defer></script>
+<script src="{{ asset('dist/js/custom.js') }}" data-navigate-once defer></script>
 @include('core::components.scripts.swal')
 @include('core::components.scripts.toast')
 

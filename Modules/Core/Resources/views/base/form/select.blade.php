@@ -7,7 +7,7 @@
     <div class="form-label">{{$label}}</div>
 @endif
 
-<select name="{{ $name }}" wire:model="data.{{ $name }}" {{ $required }} class="{{ $classes }}" {{ $attributes }}>
+<select name="{{ $name }}" id="testselect" wire:model="data.{{ $name }}" {{ $required }} class="{{ $classes }}" {{ $attributes }}>
     @foreach($options as $value => $labelOption)
         <option value="{{ $value }}" {{ $value == $defaultValue ? 'selected' : '' }}>{{ $labelOption }}</option>
     @endforeach
@@ -18,3 +18,4 @@
     <div data-field="{{$name}}" data-validator="notEmpty">{{$message}}</div>
 </div>
 @enderror
+

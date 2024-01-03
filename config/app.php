@@ -164,6 +164,7 @@ return [
         RestifyServiceProvider::class,
         UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        JeroenG\Packager\PackagerServiceProvider::class,
         /*
          * Application Service Providers...
          */

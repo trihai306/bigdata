@@ -23,15 +23,14 @@ class Radio extends Field
 
     public function render()
     {
-        $required = $this->isRequired ? 'required' : '';
-        $classes = !empty($this->classes) ? 'class="form-check-input '.$this->classes.'"' : 'class="form-check-input"';
-        $attributes = $this->getAttributes();
-        $optionsHtml = '';
-        foreach ($this->options as $value => $label) {
-            $checked = $value == $this->defaultValue ? 'checked' : '';
-            $optionsHtml .= "<div class=\"form-check\"><input type=\"radio\" name=\"{$this->name}\" value=\"{$value}\" wire:model=\"data.{$this->name}\" {$required} {$classes} {$attributes} {$checked}><label class=\"form-check-label\" for=\"{$this->name}\">{$label}</label></div>";
-        }
-        $labelHtml = $this->label ? "<label>{$this->label}</label>" : '';
-        return "{$labelHtml}{$optionsHtml}";
+        return view('core::base.form.radio', [
+            'isRequired' => $this->isRequired,
+            'classes' => $this->classes,
+            'attributes' => $this->getAttributes(),
+            'options' => $this->options,
+            'defaultValue' => $this->defaultValue,
+            'name' => $this->name,
+            'label' => $this->label,
+        ]);
     }
 }
