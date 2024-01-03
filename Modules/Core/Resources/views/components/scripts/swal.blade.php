@@ -1,4 +1,4 @@
-<script defer>
+<script>
     function swalAlert({
                            icon = 'info',
                            title = 'Information',

@@ -7,7 +7,7 @@
     <div class="form-label">{{$label}}</div>
 @endif
 
-<select name="{{ $name }}" id="testselect" wire:model="data.{{ $name }}" {{ $required }} class="{{ $classes }}" {{ $attributes }}>
+<select name="{{ $name }}" id="{{$name}}"  wire:model="data.{{ $name }}" {{ $required }} class="{{ $classes }}" {{ $attributes }}>
     @foreach($options as $value => $labelOption)
         <option value="{{ $value }}" {{ $value == $defaultValue ? 'selected' : '' }}>{{ $labelOption }}</option>
     @endforeach
@@ -19,3 +19,27 @@
 </div>
 @enderror
 
+@script
+<script>
+    let el;
+    window.TomSelect && (new TomSelect(el = document.getElementById('{{$name}}'), {
+        copyClassesToDropdown: false,
+        dropdownParent: 'body',
+        controlInput: '<input>',
+        render:{
+            item: function(data,escape) {
+                if( data.customProperties ){
+                    return '<div><span class="dropdown-item-indicator">' + data.customProperties + '</span>' + escape(data.text) + '</div>';
+                }
+                return '<div>' + escape(data.text) + '</div>';
+            },
+            option: function(data,escape){
+                if( data.customProperties ){
+                    return '<div><span class="dropdown-item-indicator">' + data.customProperties + '</span>' + escape(data.text) + '</div>';
+                }
+                return '<div>' + escape(data.text) + '</div>';
+            },
+        },
+    }));
+</script>
+@endscript

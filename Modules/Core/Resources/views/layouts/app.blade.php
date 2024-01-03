@@ -15,6 +15,7 @@
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <link href="{{ asset('dist/css/demo.min.css') }}" rel="stylesheet"/>
     <link href="{{ asset('dist/css/app.css') }}" rel="stylesheet"/>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <style>
         @import url('https://rsms.me/inter/inter.css');
 
@@ -52,9 +53,12 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @vite('resources/js/app.js')
-<script src="{{ asset('dist/js/tabler.min.js') }}" data-navigate-once defer></script>
-<script src="{{ asset('dist/js/demo.min.js') }}" data-navigate-once defer></script>
-<script src="{{ asset('dist/js/custom.js') }}" data-navigate-once defer></script>
+<script src="{{ asset('dist/js/tabler.min.js') }}"></script>
+<script src="{{ asset('dist/js/demo.min.js') }}"></script>
+<script src="{{ asset('dist/js/custom.js') }}"></script>
+<script src="{{ asset('dist/libs/nouislider/dist/nouislider.min.js') }}" defer></script>
+<script src="{{ asset('dist/libs/litepicker/dist/litepicker.js') }}" defer></script>
+<script src="{{ asset('dist/libs/tom-select/dist/js/tom-select.base.min.js') }}" defer></script>
 @include('core::components.scripts.swal')
 @include('core::components.scripts.toast')
 
