@@ -11,7 +11,7 @@
         </div>
     </div>
 </div>
-<script>
+<script data-navigate-once>
     window.onload = function() {
         var loadingDiv = document.getElementById('page-loading');
         if (loadingDiv) {

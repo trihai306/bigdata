@@ -1,5 +1,5 @@
 <div>
-    <form wire:submit.prevent="save">
+    <form wire:submit.prevent="save" wire:ignore>
         <div class="card mb-3">
             <div class="card-body d-flex justify-content-end">
                 <button type="button" class="btn btn-light me-2" onclick="history.back()">
@@ -22,4 +22,3 @@
 
     </form>
 </div>
-

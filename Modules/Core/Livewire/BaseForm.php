@@ -20,6 +20,7 @@ abstract class BaseForm extends Component
         $this->id = $id;
         if ($this->id) {
             $this->model = $this->model::find($this->id);
+//            dd($this->form(new Form())->render());
             $this->data = $this->model->toArray();
         }
     }
@@ -46,11 +47,13 @@ abstract class BaseForm extends Component
         try {
             $this->data = $this->beforeSave();
             if ($this->id) {
-                $model = $this->model->update($this->data);
+                $model = $this->model::updateOrCreate([
+                    'id' => $this->id
+                ],$this->data);
+                $this->data = $model->toArray();
             } else {
                 $model = $this->model::create($this->data);
             }
-//            $this->data = $this->afterSave($model);
             if (!$this->id) {
                 $this->data = [];
             }

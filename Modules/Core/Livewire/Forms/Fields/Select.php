@@ -8,7 +8,6 @@ class Select extends Field
 {
     protected $options = [];
     protected $label = null;
-    protected $searchable = false;
 
     public function options(array $options)
     {
@@ -20,6 +19,12 @@ class Select extends Field
     {
         $models = $modelClass::all();
         $this->options = $models->mapWithKeys($transform)->toArray();
+        return $this;
+    }
+
+    public function relation(callable $callback)
+    {
+        $callback($this);
         return $this;
     }
 
