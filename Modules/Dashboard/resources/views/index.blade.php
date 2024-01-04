@@ -1,4 +1,4 @@
-@extends('core::layouts.app')
+@extends('future::layouts.app')
 
 @section('content')
     <h1>Hello World</h1>

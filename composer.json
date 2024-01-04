@@ -22,7 +22,10 @@
         "propaganistas/laravel-phone": "^5.0",
         "pusher/pusher-php-server": "^7.2",
         "spatie/laravel-permission": "^5.11",
-        "unisharp/laravel-filemanager": "^2.6"
+        "unisharp/laravel-filemanager": "^2.6",
+        "future/core": "*@dev",
+        "future/form": "*@dev",
+        "future/table": "*@dev"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",
@@ -77,5 +80,11 @@
         }
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./packages/future/*"
+        }
+    ]
 }

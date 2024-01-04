@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b98c6efe5bff0c2b2468b9458244c1b1",
+    "content-hash": "a1298435deedf8b6d9df0252621b22a3",
     "packages": [
         {
             "name": "amphp/amp",
@@ -1581,6 +1581,177 @@
                 }
             ],
             "time": "2023-10-12T05:21:21+00:00"
+        },
+        {
+            "name": "future/core",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./packages/future/core",
+                "reference": "7dbed7ecaa92314d03a148f2c0386e7c256cf0ca"
+            },
+            "require": {
+                "livewire/livewire": "^v3.3.5",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~7",
+                "phpunit/phpunit": "~9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Future\\Core\\CoreServiceProvider"
+                    ],
+                    "aliases": {
+                        "Core": "Future\\Core\\Facades\\Core"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Future\\Core\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Future\\Core\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Author Name",
+                    "email": "author@email.com",
+                    "homepage": "http://author.com"
+                }
+            ],
+            "description": ":package_description",
+            "homepage": "https://github.com/future/core",
+            "keywords": [
+                "Core",
+                "Laravel"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "future/form",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./packages/future/form",
+                "reference": "f9c37e148797d9f3963a16df57a3da90efc84535"
+            },
+            "require": {
+                "livewire/livewire": "^v3.3.5",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~7",
+                "phpunit/phpunit": "~9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Future\\Form\\FormServiceProvider"
+                    ],
+                    "aliases": {
+                        "Form": "Future\\Form\\Facades\\Form"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Future\\Form\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Future\\Form\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hai Nguyen",
+                    "email": "haidev306@gmail.com",
+                    "homepage": "haidemo.online"
+                }
+            ],
+            "description": "Build Form",
+            "homepage": "https://github.com/future/form",
+            "keywords": [
+                "Form",
+                "Laravel"
+            ],
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "future/table",
+            "version": "dev-master",
+            "dist": {
+                "type": "path",
+                "url": "./packages/future/table",
+                "reference": "cec05b18bdf3cf4d24fe800b3da0922436ad7809"
+            },
+            "require": {
+                "livewire/livewire": "^v3.3.5",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "~7",
+                "phpunit/phpunit": "~9.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Future\\Table\\TableServiceProvider"
+                    ],
+                    "aliases": {
+                        "Table": "Future\\Table\\Facades\\Table"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Future\\Table\\": "src/"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Future\\Table\\Tests\\": "tests"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hai Nguyen",
+                    "email": "haidev306@gmail.com",
+                    "homepage": "haidemo.online"
+                }
+            ],
+            "description": "Table",
+            "homepage": "https://github.com/future/table",
+            "keywords": [
+                "Laravel",
+                "table"
+            ],
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "giggsey/libphonenumber-for-php",
@@ -3270,35 +3441,35 @@
         },
         {
             "name": "livewire/livewire",
-            "version": "v3.3.4",
+            "version": "v3.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/livewire/livewire.git",
-                "reference": "470290c99b001d61751b4fe7e56327db4370cb87"
+                "reference": "1ef880fbcdc7b6e5e405cc9135a62cd5fdbcd06a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/livewire/livewire/zipball/470290c99b001d61751b4fe7e56327db4370cb87",
-                "reference": "470290c99b001d61751b4fe7e56327db4370cb87",
+                "url": "https://api.github.com/repos/livewire/livewire/zipball/1ef880fbcdc7b6e5e405cc9135a62cd5fdbcd06a",
+                "reference": "1ef880fbcdc7b6e5e405cc9135a62cd5fdbcd06a",
                 "shasum": ""
             },
             "require": {
-                "illuminate/database": "^10.0",
-                "illuminate/support": "^10.0",
-                "illuminate/validation": "^10.0",
+                "illuminate/database": "^10.0|^11.0",
+                "illuminate/support": "^10.0|^11.0",
+                "illuminate/validation": "^10.0|^11.0",
                 "league/mime-type-detection": "^1.9",
                 "php": "^8.1",
-                "symfony/http-kernel": "^6.2"
+                "symfony/http-kernel": "^6.2|^7.0"
             },
             "require-dev": {
                 "calebporzio/sushi": "^2.1",
-                "laravel/framework": "^10.0",
+                "laravel/framework": "^10.0|^11.0",
                 "laravel/prompts": "^0.1.6",
                 "mockery/mockery": "^1.3.1",
-                "orchestra/testbench": "^8.0",
-                "orchestra/testbench-dusk": "^8.0",
-                "phpunit/phpunit": "^9.0",
-                "psy/psysh": "@stable"
+                "orchestra/testbench": "^8.0|^9.0",
+                "orchestra/testbench-dusk": "^8.0|^9.0",
+                "phpunit/phpunit": "^10.4",
+                "psy/psysh": "^0.11.22|^0.12"
             },
             "type": "library",
             "extra": {
@@ -3332,7 +3503,7 @@
             "description": "A front-end framework for Laravel.",
             "support": {
                 "issues": "https://github.com/livewire/livewire/issues",
-                "source": "https://github.com/livewire/livewire/tree/v3.3.4"
+                "source": "https://github.com/livewire/livewire/tree/v3.3.5"
             },
             "funding": [
                 {
@@ -3340,7 +3511,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-01T17:22:47+00:00"
+            "time": "2024-01-02T14:29:17+00:00"
         },
         {
             "name": "maantje/pulse-database",
@@ -8886,16 +9057,16 @@
     "packages-dev": [
         {
             "name": "fakerphp/faker",
-            "version": "v1.23.0",
+            "version": "v1.23.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FakerPHP/Faker.git",
-                "reference": "e3daa170d00fde61ea7719ef47bb09bb8f1d9b01"
+                "reference": "bfb4fe148adbf78eff521199619b93a52ae3554b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/e3daa170d00fde61ea7719ef47bb09bb8f1d9b01",
-                "reference": "e3daa170d00fde61ea7719ef47bb09bb8f1d9b01",
+                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/bfb4fe148adbf78eff521199619b93a52ae3554b",
+                "reference": "bfb4fe148adbf78eff521199619b93a52ae3554b",
                 "shasum": ""
             },
             "require": {
@@ -8921,11 +9092,6 @@
                 "ext-mbstring": "Required for multibyte Unicode string functionality."
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "v1.21-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Faker\\": "src/Faker/"
@@ -8948,9 +9114,9 @@
             ],
             "support": {
                 "issues": "https://github.com/FakerPHP/Faker/issues",
-                "source": "https://github.com/FakerPHP/Faker/tree/v1.23.0"
+                "source": "https://github.com/FakerPHP/Faker/tree/v1.23.1"
             },
-            "time": "2023-06-12T08:44:38+00:00"
+            "time": "2024-01-02T13:46:09+00:00"
         },
         {
             "name": "filp/whoops",
@@ -11025,16 +11191,16 @@
         },
         {
             "name": "spatie/ignition",
-            "version": "1.11.3",
+            "version": "1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/ignition.git",
-                "reference": "3d886de644ff7a5b42e4d27c1e1f67c8b5f00044"
+                "reference": "5b6f801c605a593106b623e45ca41496a6e7d56d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/ignition/zipball/3d886de644ff7a5b42e4d27c1e1f67c8b5f00044",
-                "reference": "3d886de644ff7a5b42e4d27c1e1f67c8b5f00044",
+                "url": "https://api.github.com/repos/spatie/ignition/zipball/5b6f801c605a593106b623e45ca41496a6e7d56d",
+                "reference": "5b6f801c605a593106b623e45ca41496a6e7d56d",
                 "shasum": ""
             },
             "require": {
@@ -11104,7 +11270,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-18T14:09:40+00:00"
+            "time": "2024-01-03T15:49:39+00:00"
         },
         {
             "name": "spatie/laravel-ignition",
@@ -11324,7 +11490,9 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "laravel/pulse": 10
+        "future/core": 20,
+        "future/form": 20,
+        "future/table": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
