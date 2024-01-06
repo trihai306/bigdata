@@ -36,6 +36,16 @@
 @livewireScripts
 <script src="{{ asset('dist/js/tabler.min.js') }}" defer></script>
 <script src="{{ asset('dist/js/demo.min.js') }}" defer></script>
+<script >
+
+    window.onload = function() {
+
+        var loadingDiv = document.getElementById('page-loading');
+        if (loadingDiv) {
+            loadingDiv.style.display = 'none';
+        }
+    };
+</script>
 @include('future::components.scripts.swal')
 @yield('script')
 </body>

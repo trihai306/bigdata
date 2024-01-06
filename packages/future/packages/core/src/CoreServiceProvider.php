@@ -82,9 +82,9 @@ class CoreServiceProvider extends ServiceProvider
         ], 'core.assets');*/
 
         // Publishing the translation files.
-        /*$this->publishes([
+        $this->publishes([
             __DIR__.'/../resources/lang' => resource_path('lang/vendor/future'),
-        ], 'core.lang');*/
+        ], 'core.lang');
 
         // Registering package commands.
         // $this->commands([]);

@@ -8,9 +8,7 @@
         "php": "^8.1",
         "barryvdh/laravel-dompdf": "^2.0.1",
         "binaryk/laravel-restify": "^8.3.2",
-        "future/core": "*@dev",
-        "future/form": "*@dev",
-        "future/table": "*@dev",
+        "future/cms": "dev-master",
         "guzzlehttp/guzzle": "^7.8.1",
         "laravel/framework": "^v10.39.0",
         "laravel/pulse": "^v1.0.0-beta8",
@@ -26,6 +24,7 @@
         "pusher/pusher-php-server": "^7.2",
         "rennokki/laravel-eloquent-query-cache": "^3.4",
         "spatie/laravel-permission": "^5.11",
+        "trihai306/future": "dev-main",
         "unisharp/laravel-filemanager": "^2.6"
     },
     "require-dev": {
@@ -85,7 +84,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "./packages/future/*"
+            "url": "./packages/*"
         }
     ]
 }
