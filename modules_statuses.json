@@ -1,8 +1,7 @@
 {
-    "Core": true,
     "Dashboard": true,
     "Modules": true,
-    "User": false,
+    "User": true,
     "Conversation": true,
     "Location": true,
     "DataSystem": true

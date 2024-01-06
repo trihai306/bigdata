@@ -28,10 +28,10 @@ route::get('/', function () {
     $user = User::findOrFail($userId);
 
 // Tạo một thông báo mới
-    $notification = new UserNotification($userId, 'Tiêu đề thông báo', 'Nội dung thông báo');
+//    $notification = new UserNotification($userId, 'Tiêu đề thông báo', 'Nội dung thông báo');
 
 // Gửi thông báo
-    $user->notify($notification);
+//    $user->notify($notification);
     return view('welcome');
 });
 
