@@ -1,5 +1,5 @@
 <div>
-    <div class="card" wire:ignore>
+    <div class="card" wire:ignore.self>
         <!--begin::Card header-->
         <div class="card-header border-0 pt-6 d-flex justify-content-between">
             <!--begin::Card title-->

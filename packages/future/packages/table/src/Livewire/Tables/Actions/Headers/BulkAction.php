@@ -1,4 +1,5 @@
 <?php
+
 namespace Future\Table\Livewire\Tables\Actions\Headers;
 
 class BulkAction
@@ -6,8 +7,8 @@ class BulkAction
     public string $name;
     public string $label;
     public string $icon;
-    public string $color;
-    public string $class;
+    public string $color = 'primary';
+    public string $class = 'btn';
 
     public function __construct(string $name, string $label, string $icon, string $color)
     {
@@ -17,7 +18,7 @@ class BulkAction
         $this->color = $color;
     }
 
-    public function make(string $name, string $label=null, string $icon = null, string $color='secondary')
+    public function make(string $name, string $label = null, string $icon = null, string $color = 'secondary')
     {
         return new static($name, $label, $icon, $color);
     }
@@ -30,7 +31,9 @@ class BulkAction
 
     public function render()
     {
-        $class= $this->class ?? 'btn btn-primary';
-        return view('future::livewire.table.actions.bulk-action', compact('class'));
+        $icon = $this->icon;
+        $class = $this->class . ' btn-' . $this->color;
+        $label = $this->label;
+        return view('future::livewire.table.actions.bulk-action', compact('class', 'icon', 'label'));
     }
 }

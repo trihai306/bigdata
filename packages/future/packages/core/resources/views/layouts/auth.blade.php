@@ -25,7 +25,6 @@
 <body  class=" d-flex flex-column">
 <script src="{{asset('dist/js/demo-theme.min.js')}}"></script>
 <div class="page page-center">
-
     @yield('content')
 </div>
 @include('future::components.page-loader')

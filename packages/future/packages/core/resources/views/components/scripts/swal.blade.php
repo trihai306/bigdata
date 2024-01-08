@@ -94,7 +94,7 @@
                 Livewire.dispatch(event['nameMethod'], params);
             }
             function onNo() {
-                // swalBasic('Bạn đã hủy thao tác');
+
             }
             swalConfirm('Are you sure?', event['message'], onYes,onNo);
         });

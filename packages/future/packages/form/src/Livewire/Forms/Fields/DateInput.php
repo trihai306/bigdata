@@ -2,8 +2,7 @@
 
 namespace Future\Form\Livewire\Forms\Fields;
 
-
-
+use Illuminate\Support\Facades\View;
 use Future\Form\Livewire\Forms\Field;
 
 class DateInput extends Field
@@ -25,11 +24,13 @@ class DateInput extends Field
 
     public function render()
     {
-        $required = $this->isRequired ? 'required' : '';
-        $classes = !empty($this->classes) ? 'class="form-control '.$this->classes.'"' : 'class="form-control"';
-        $attributes = $this->getAttributes();
-        $placeholder = isset($this->placeholder) ? 'placeholder="'.$this->placeholder.'"' : '';
-        $label = isset($this->label) ? "<label for=\"{$this->name}\">{$this->label}</label>" : '';
-        return "{$label}<input type=\"date\" name=\"{$this->name}\" wire:model=\"data.{$this->name}\" {$required} {$classes} {$attributes} {$placeholder}>";
+        return View::make('future::base.form.dateinput', [
+            'name' => $this->name,
+            'isRequired' => $this->isRequired,
+            'classes' => $this->classes,
+            'attributes' => $this->getAttributes(),
+            'placeholder' => $this->placeholder,
+            'label' => $this->label,
+        ])->render();
     }
 }

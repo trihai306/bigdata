@@ -78,7 +78,7 @@ abstract class BaseTable extends Component
     }
 
 
-    protected function headerAction()
+    protected function headerActions() : array
     {
         return [];
     }

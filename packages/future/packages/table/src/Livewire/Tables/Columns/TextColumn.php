@@ -94,7 +94,6 @@ class TextColumn extends Column
         return $this;
     }
 
-
     public function render(Model $model)
     {
         $path = explode('.', $this->name);
