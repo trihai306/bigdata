@@ -41,8 +41,9 @@
                     @endforeach
                     <div x-data="{}" x-intersect="$wire.loadMore()" class="w-100 h-10px d-block">
                         <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">Loading...</span>
+
                         </div>
+                        <span class="visually-hidden">Loading...</span>
                     </div>
                 </div>
 
@@ -52,7 +53,7 @@
         </div>
         <!--end::Body-->
         <!--begin::Footer-->
-        <div class="card-footer py-5 text-center" id="rv_activities_footer">
+        <div class="card-footer text-center" id="rv_activities_footer">
             <button wire:click="readAll"  class="btn btn-bg-body text-primary"> Đánh dấu tất cả đã đọc</button>
         </div>
         <!--end::Footer-->

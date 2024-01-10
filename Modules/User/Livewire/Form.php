@@ -3,17 +3,18 @@
 namespace Modules\User\Livewire;
 
 use App\Models\User;
-use Future\Form\Livewire\BaseForm;
-use Future\Form\Livewire\Forms\Fields\Select;
-use Future\Form\Livewire\Forms\Fields\TextInput;
-use Future\Form\Livewire\Forms\Layouts\Card;
-use Future\Form\Livewire\Forms\Layouts\Row;
+use Future\Form\Future\BaseForm;
+use Future\Form\Future\Forms\Fields\DateInput;
+use Future\Form\Future\Forms\Fields\Select;
+use Future\Form\Future\Forms\Fields\TextInput;
+use Future\Form\Future\Forms\Layouts\Card;
+use Future\Form\Future\Forms\Layouts\Row;
 
 
 class Form extends BaseForm
 {
     protected $model = User::class;
-    public function form(\Future\Form\Livewire\Forms\Form $form)
+    public function form(\Future\Form\Future\Forms\Form $form)
     {
         return $form->schema([
             Card::make()->schema([
@@ -29,7 +30,8 @@ class Form extends BaseForm
                         'transgender' => 'chuyển giới',
                         'genderfluid' => 'giới tính linh hoạt',
                         'agender' => 'không giới tính'
-                    ])
+                    ]),
+                    DateInput::make('birthday')->label('Ngày sinh'),
                 ])
             ])
         ]);

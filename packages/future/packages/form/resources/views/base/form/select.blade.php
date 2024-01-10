@@ -42,7 +42,6 @@
             },
             onInitialize: function() {
                 var defaultValue = select.value;
-                console.log('Default value:', defaultValue);
             }
         });
     });

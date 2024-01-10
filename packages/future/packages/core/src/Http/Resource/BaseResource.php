@@ -3,8 +3,8 @@
 namespace Future\Core\Http\Resource;
 
 use App\Http\Controllers\Controller;
-use Future\Form\Livewire\BaseForm;
-use Future\Table\Livewire\BaseTable;
+use Future\Form\Future\BaseForm;
+use Future\Table\Future\BaseTable;
 use Illuminate\Http\Request;
 
 

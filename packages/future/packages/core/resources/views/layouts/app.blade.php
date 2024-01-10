@@ -10,6 +10,7 @@
     <link href="{{ asset('dist/css/tabler-flags.min.css') }}"   rel="stylesheet"/>
     <link href="{{ asset('dist/css/tabler-payments.min.css') }}"   rel="stylesheet"/>
     <link href="{{ asset('dist/css/tabler-vendors.min.css') }}"   rel="stylesheet"/>
+    <link href="{{ asset('dist/libs/star-rating.js/dist/star-rating.min.css') }}"   rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
           integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
           crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -33,30 +34,30 @@
 @include('future::components.page-loader')
 <script src="{{ asset('dist/js/demo-theme.min.js') }}" ></script>
 <div class="page">
-
     @include('future::app.header')
     <div class="page-wrapper">
-        @include('future::app.page_header')
-
         <div class="page-body">
             <div class="container-xl">
                 @yield('content')
             </div>
         </div>
         @include('future::app.footer')
+        @livewire('future::livewire.admin.notifications')
+
     </div>
 </div>
 <!-- Libs JS -->
 <!-- Tabler Core -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" ></script>
 @vite('resources/js/app.js')
-@livewire('future::livewire.admin.notifications')
 <script src="{{ asset('dist/js/tabler.min.js') }}" ></script>
 <script src="{{ asset('dist/js/demo.min.js') }}" ></script>
 <script src="{{ asset('dist/js/custom.js') }}" ></script>
 <script src="{{ asset('dist/libs/nouislider/dist/nouislider.min.js') }}" ></script>
 <script src="{{ asset('dist/libs/litepicker/dist/litepicker.js') }}" ></script>
 <script src="{{ asset('dist/libs/tom-select/dist/js/tom-select.base.min.js') }}" ></script>
+<script src="{{ asset('dist/libs/tinymce/tinymce.min.js') }}" ></script>
+<script src="{{ asset('dist/libs/star-rating.js/dist/star-rating.min.js') }}" ></script>
 @include('future::components.scripts.swal')
 @include('future::components.scripts.toast')
 <script >

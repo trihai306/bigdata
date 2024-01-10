@@ -4,16 +4,16 @@ namespace Modules\User\Livewire\Permission;
 
 
 
-use Future\Form\Livewire\BaseForm;
-use Future\Form\Livewire\Forms\Fields\TextInput;
-use Future\Form\Livewire\Forms\Layouts\Card;
-use Future\Form\Livewire\Forms\Layouts\Row;
+use Future\Form\Future\BaseForm;
+use Future\Form\Future\Forms\Fields\TextInput;
+use Future\Form\Future\Forms\Layouts\Card;
+use Future\Form\Future\Forms\Layouts\Row;
 use Spatie\Permission\Models\Permission;
 
 class Form extends BaseForm
 {
     public $model = Permission::class;
-    public function form(\Future\Form\Livewire\Forms\Form $form)
+    public function form(\Future\Form\Future\Forms\Form $form)
     {
         return $form->schema([
            Card::make()->schema([

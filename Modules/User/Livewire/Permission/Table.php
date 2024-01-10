@@ -2,11 +2,11 @@
 
 namespace Modules\User\Livewire\Permission;
 
-use Future\Table\Livewire\BaseTable;
-use Future\Table\Livewire\Tables\Actions\Action;
-use Future\Table\Livewire\Tables\Actions\Actions;
-use Future\Table\Livewire\Tables\Columns\TextColumn;
-use Future\Table\Livewire\Tables\FilterInput;
+use Future\Table\Future\BaseTable;
+use Future\Table\Future\Tables\Actions\Action;
+use Future\Table\Future\Tables\Actions\Actions;
+use Future\Table\Future\Tables\Columns\TextColumn;
+use Future\Table\Future\Tables\FilterInput;
 use Illuminate\Database\Eloquent\Model;
 
 use Spatie\Permission\Models\Permission;
