@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
+use Future\Core\Http\Models\Menu;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Route;
-use Modules\Core\Http\Models\Menu;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -45,6 +45,12 @@ class UpdateMenu extends Command
                 // Skip routes with specific names
                 if (str_contains($routeName, 'create') || str_contains($routeName, 'show') || str_contains($routeName, 'store') || str_contains($routeName, 'update') || str_contains($routeName, 'destroy') || str_contains($routeName, 'edit')) {
                     $this->info('Skipping route: ' . $routeName);
+                    continue;
+                }
+
+                // Skip routes with slug
+                if (str_contains($route->uri, '{')) {
+                    $this->info('Skipping route with slug: ' . $routeName);
                     continue;
                 }
 

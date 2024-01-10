@@ -1,5 +1,6 @@
 <div class='dropdown'>
-    <button class='btn btn-secondary dropdown-toggle' type='button' data-bs-toggle='dropdown'>Actions</button>
+    <button class='btn btn-secondary dropdown-toggle' type='button' data-bs-toggle='dropdown'>{{
+        __('future::messages.actions')}}</button>
     <div class='dropdown-menu'>
         @foreach($actions as $action)
             <a class='dropdown-item'
@@ -10,8 +11,6 @@
                     id: {{$action->sweetAlert['options']['id']}},
                     nameMethod: '{{$action->sweetAlert['options']['nameMethod']}}'
                 })" @endif
-
-
                data-action='{{ $action->name }}'>
                 <i class='{{ $action->icon }}'></i> <span class="ms-2">{{ $action->label }}</span>
             </a>

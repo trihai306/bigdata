@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('slug_des_product', function (Blueprint $table) {
+        Schema::create('slug_des_products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_slug')->constrained('slug_categories');
-            $table->foreignId('id_product')->constrained('suggest_product');
+            $table->foreignId('id_product')->constrained('suggest_products');
             $table->text('value');
             $table->timestamps();
         });

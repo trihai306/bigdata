@@ -14,6 +14,10 @@ use Modules\DataSystem\app\Http\Controllers\DataSystemController;
 |
 */
 
-Route::group([], function () {
-    Route::resource('datasystem', DataSystemController::class)->names('datasystem');
+Route::group([
+    'middleware' => ['auth'],
+    'prefix' => 'admin',
+    'as' => 'admin.'
+], function () {
+    Route::resource('datasystem', \Modules\DataSystem\app\Http\Controllers\DataSystemResource::class)->names('datasystem');
 });

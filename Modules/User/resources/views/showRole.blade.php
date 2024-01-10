@@ -67,7 +67,7 @@
                             </div>
                             <!--end::Modal header-->
                             <!--begin::Modal body-->
-                            <livewire:permission::roles.edit />
+                            <livewire:user::permission.roles.edit />
                             <!--end::Modal body-->
                         </div>
                         <!--end::Modal content-->
@@ -80,7 +80,7 @@
             <!--end::Sidebar-->
             <!--begin::Content-->
             <div class="col-lg-8 col-xl-9">
-                <livewire:permission::roles.view.users :role="$role" />
+                <livewire:user::permission.roles.view.users :role="$role" />
             </div>
             <!--end::Content-->
         </div>

@@ -31,7 +31,7 @@
 
 </head>
 <body class="position-relative">
-@include('future::components.page-loader')
+
 <script src="{{ asset('dist/js/demo-theme.min.js') }}" ></script>
 <div class="page">
     @include('future::app.header')
@@ -60,6 +60,7 @@
 <script src="{{ asset('dist/libs/star-rating.js/dist/star-rating.min.js') }}" ></script>
 @include('future::components.scripts.swal')
 @include('future::components.scripts.toast')
+@include('future::components.page-loader')
 <script >
 
     window.onload = function() {

@@ -71,6 +71,10 @@ class CoreServiceProvider extends ServiceProvider
             __DIR__.'/../config/core.php' => config_path('core.php'),
         ], 'core.config');
 
+        // Publishing the migration files.
+        $this->publishes([
+            __DIR__.'/../database/migrations' => database_path('migrations'),
+        ], 'core.migrations');
         // Publishing the views.
         /*$this->publishes([
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/future'),

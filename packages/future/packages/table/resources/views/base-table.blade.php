@@ -6,23 +6,7 @@
             <div class="card-title">
                 <!--begin::Search-->
                 <div class="d-flex align-items-center position-relative my-1">
-                    <label>
-                        <input type="text" class="form-control form-control-solid w-250px ps-13"
-                               wire:model.live="search"
-                               placeholder="{{ __('future::messages.search') }}"/>
-                        <span class="input-icon-addon">
-                              <div class="spinner-border spinner-border-sm text-secondary" wire:loading
-                                   wire:target="search" role="status"></div>
-                                  <svg xmlns="http://www.w3.org/2000/svg" wire:loading.class="d-none"
-                                       wire:target="search" class="icon" width="24" height="24"
-                                       viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                       stroke-linecap="round" stroke-linejoin="round"><path stroke="none"
-                                                                                            d="M0 0h24v24H0z"
-                                                                                            fill="none"></path><path
-                                          d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0"></path><path
-                                          d="M21 21l-6 -6"></path></svg>
-                                </span>
-                    </label>
+                   @include('future::components.search')
                 </div>
                 <!--end::Search-->
             </div>
@@ -32,9 +16,10 @@
                 <!--begin::Toolbar-->
                 @if($selectedRows == [])
                     <div class="d-flex flex-column flex-md-row justify-content-end btn-group">
-                        <a wire:click.prevent="resetTable" class="btn btn-primary">
-                            <i class="fa fa-redo-alt"></i> <span class="ms-2">{{ __('future::messages.reset') }}</span>
-                        </a>
+                        @foreach($headerActions as $headerAction)
+                            {{ $headerAction->render()}}
+                        @endforeach
+                        <!--begin::Import-->
                         <a class="btn btn-light-primary" data-bs-toggle="modal" data-bs-target="#modal_import">
                             <span class="ms-2">{{ __('future::messages.import_file') }}</span>
                         </a>

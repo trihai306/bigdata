@@ -7,13 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class DataSystem extends Model
 {
     protected $fillable = [
-        'date', 'import_id', 'exporter_id', 'hs_code_id', 'quantity', 'unit',
+       'id', 'date', 'import_id', 'exporter_id', 'hs_code_id', 'quantity', 'unit',
         'weight', 'weight_unit', 'package_quantity', 'unit_pkg', 'country', 'company_transport_id'
     ];
 
     public function importer()
     {
         return $this->belongsTo(Importer::class, 'import_id');
+    }
+
+    public function hsCode()
+    {
+        return $this->belongsTo(HsCode::class, 'hs_code_id');
     }
 
     public function exporter()

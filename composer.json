@@ -10,6 +10,7 @@
         "binaryk/laravel-restify": "^8.3.2",
         "future/cms": "dev-master",
         "guzzlehttp/guzzle": "^7.8.1",
+        "kjmtrue/vietnam-zone": "^1.0",
         "laravel/framework": "^v10.39.0",
         "laravel/pulse": "^v1.0.0-beta8",
         "laravel/sanctum": "^v3.3.3",

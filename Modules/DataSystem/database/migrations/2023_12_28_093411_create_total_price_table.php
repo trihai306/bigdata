@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->decimal('value', 15, 2);
             $table->string('unit');
-            $table->foreignId('data_system_id')->constrained('data_system');
+            $table->foreignId('data_system_id')->constrained('data_systems');
             $table->timestamps();
         });
 

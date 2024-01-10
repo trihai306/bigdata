@@ -2,8 +2,8 @@
 
 namespace Future\Table\Future;
 
-
 use Future\Table\Future\Tables\Actions\Actions;
+use Future\Table\Future\Tables\Headers\Actions\ResetAction;
 use Future\Table\Future\Tables\Traits\Can;
 use Future\Table\Future\Tables\Traits\ColumnVisibilityTrait;
 use Future\Table\Future\Tables\Traits\Exportable;
@@ -78,12 +78,17 @@ abstract class BaseTable extends Component
         return $columns;
     }
 
-
     protected function headerActions() : array
     {
-        return [];
+        return [
+            ResetAction::make(),
+        ];
     }
-
+    /**
+     * Define the filters for the table.
+     *
+     * @return array
+     */
     abstract protected function filters() : array;
 
     /**
@@ -182,10 +187,9 @@ abstract class BaseTable extends Component
         return view($this->view, [
             'columns' => $this->defineColumns(),
             'actions' => $this->actions,
+            'headerActions' => $this->headerActions(),
             'Input_filters' => $this->defineFilters(),
             'data' => $data,
         ]);
     }
-
-
 }
