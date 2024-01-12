@@ -6,14 +6,14 @@ use Future\Form\Future\Forms\Field;
 
 class TextInput extends Field
 {
-    protected $isEmail = false;
-    protected $isPassword = false;
-    protected $placeholder = '';
+    protected bool $isEmail = false;
+    protected bool $isPassword = false;
+    protected string $placeholder = '';
     protected $maxLength = null;
     protected $pattern = null;
     protected $autocomplete = 'on';
-    protected $readOnly = false;
-    protected $disabled = false;
+    protected bool $readOnly = false;
+    protected bool $disabled = false;
     protected $size = null;
     protected $step = null;
     protected $label = null;

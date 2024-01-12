@@ -3,7 +3,7 @@
         <label class="mb-2" for="{{ $name }}">{{ $label }}</label>
     @endif
     <input  type="{{ $type }}" name="{{ $name }}"  id="{{$name}}" {{ $required ? 'required' : '' }}
-    wire:model="data.{{$name}}" class="form-control text-gray-800 fw-bold @error('data.'.$name) is-invalid @enderror {{ $classes }}"
+    wire:model="data.{{$name}}" class="form-control form-control-rounded text-gray-800 fw-bold @error('data.'.$name) is-invalid @enderror {{ $classes }}"
             {{ $attributes }} {{ !is_null($defaultValue) ? 'value='.$defaultValue : '' }}
             {{ !empty($placeholder) ? 'placeholder='.$placeholder : '' }}
             {{ !is_null($maxLength) ? 'maxlength='.$maxLength : '' }}

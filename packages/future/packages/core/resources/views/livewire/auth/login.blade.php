@@ -3,7 +3,7 @@
     <form wire:submit="login">
         <div class="mb-3">
             <label class="form-label">{{ __('auth.email_address') }}</label>
-            <input type="email" wire:model="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{__('auth.your_email_address') }}">
+            <input type="email" wire:model="email" class="form-control form-control-rounded @error('email') is-invalid @enderror" placeholder="{{__('auth.your_email_address') }}">
             @error('email')
             <div class="invalid-feedback">{{ $message }}</div>
             @enderror
@@ -16,7 +16,7 @@
                   </span>
             </label>
             <div class="mb-3">
-                <input type="password" wire:model="password" class="form-control @error('password') is-invalid @enderror" placeholder="{{__('auth.your_password') }}">
+                <input type="password" wire:model="password" class="form-control form-control-rounded @error('password') is-invalid @enderror" placeholder="{{__('auth.your_password') }}">
                 @error('password')
                 <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

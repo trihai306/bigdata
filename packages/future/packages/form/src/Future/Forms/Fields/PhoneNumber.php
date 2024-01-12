@@ -38,7 +38,7 @@ class PhoneNumber extends Field
     public function render()
     {
         $required = $this->isRequired ? 'required' : '';
-        $classes = !empty($this->classes) ? 'class="form-control '.$this->classes.'"' : 'class="form-control"';
+        $classes = !empty($this->classes) ? 'class="form-control form-control-rounded '.$this->classes.'"' : 'class="form-control form-control-rounded"';
         $attributes = $this->getAttributes();
         $placeholder = isset($this->placeholder) ? 'placeholder="'.$this->placeholder.'"' : '';
         $maxLength = isset($this->maxLength) ? 'maxlength="'.$this->maxLength.'"' : '';

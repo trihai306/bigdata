@@ -6,7 +6,7 @@
             <!--begin::Card title-->
             <div class="card-title">
                 <div class="d-flex align-items-center position-relative my-1">
-                    <input type="text" wire:model.live="search" class="form-control form-control-solid w-250px ps-15"
+                    <input type="text" wire:model.live="search" class="form-control form-control-rounded form-control-solid w-250px ps-15"
                            placeholder="Search Users"/>
                 </div>
             </div>
@@ -84,7 +84,7 @@
                 <div class="modal-body">
                     <form>
                         <div class="relative" x-data="{ open: false }">
-                            <input type="text" id="user-search" class="form-control" wire:model="selectedUserName"
+                            <input type="text" id="user-search" class="form-control form-control-rounded" wire:model="selectedUserName"
                                    placeholder="Search Users" @click="open = true">
                             <div class="absolute z-10 w-full mt-1 rounded-md shadow-lg" x-show="open"
                                  @click.away="open = false">

@@ -1,6 +1,6 @@
 @php
     $required = $isRequired ? 'required' : '';
-    $classes = !empty($classes) ? 'form-control '.$classes : 'form-control';
+    $classes = !empty($classes) ? 'form-control form-control-rounded '.$classes : 'form-control form-control-rounded';
     $placeholder = isset($placeholder) ? 'placeholder='.$placeholder : '';
 @endphp
 
@@ -8,7 +8,7 @@
     <label class="mt-2" for="{{ $name }}">{{ $label }}</label>
 @endif
 
-<input type="text" name="{{ $name }}" data-picker wire:model="data.{{ $name }}" {{ $required }} class="{{ $classes }}" {{ $attributes }} {{ $placeholder }}>
+<input type="text" name="{{ $name }}"  wire:model.defer="data.{{ $name }}" {{ $required }} class="{{ $classes }}" {{ $attributes }} {{ $placeholder }}>
 @error('data.'.$name)
 <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
     <div data-field="{{$name}}" data-validator="notEmpty">{{$message}}</div>
@@ -22,6 +22,11 @@
 
 @script
 <script>
-    new Pikaday({ field: $wire.$el.querySelector('[data-picker]') });
+    new Pikaday({
+        field: $wire.$el.querySelector('[data-picker]'),
+        onSelect: function(date) {
+            $wire.set('data.{{ $name }}', this.getMoment().format('YYYY-MM-DD'));
+        }
+    });
 </script>
 @endscript

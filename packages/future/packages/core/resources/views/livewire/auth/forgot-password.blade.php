@@ -5,7 +5,7 @@
             <p class="text-muted mb-4">Enter your email address and your password will be reset and emailed to you.</p>
             <div class="mb-3">
                 <label class="form-label">Email address</label>
-                <input type="email" wire:model="email" class="form-control" placeholder="Enter email">
+                <input type="email" wire:model="email" class="form-control form-control-rounded" placeholder="Enter email">
             </div>
             <div class="form-footer">
                 <button type="submit" class="btn btn-primary w-100">

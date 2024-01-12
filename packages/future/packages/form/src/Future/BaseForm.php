@@ -42,6 +42,7 @@ abstract class BaseForm extends Component
 
     public function save()
     {
+        dd($this->data);
         $this->validate();
         try {
             $this->data = $this->beforeSave();

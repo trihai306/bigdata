@@ -38,5 +38,3 @@ route::get('/', function () {
 //Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
 //    \UniSharp\LaravelFilemanager\Lfm::routes();
 //});
-
-Route::resource('users', UserResource::class);

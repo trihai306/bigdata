@@ -12,7 +12,7 @@
                     </label>
                     <!--end::Label-->
                     <!--begin::Input-->
-                    <input wire:model="roleName" type="text" class="form-control @error('roleName') is-invalid @enderror" id="roleName" placeholder="Enter role name">
+                    <input wire:model="roleName" type="text" class="form-control form-control-rounded @error('roleName') is-invalid @enderror" id="roleName" placeholder="Enter role name">
                     @error('roleName') <div class="invalid-feedback">{{ $message }}</div> @enderror
                     <!--end::Input-->
                 </div>

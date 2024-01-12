@@ -182,7 +182,7 @@ abstract class BaseTable extends Component
      */
     public function render() : \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
     {
-        $data = $this->applyTableQuery()->paginate($this->perPage, pageName: 'page')->onEachSide(1);
+        $data = $this->applyTableQuery()->fastPaginate($this->perPage, pageName: 'page')->onEachSide(1);
 
         return view($this->view, [
             'columns' => $this->defineColumns(),

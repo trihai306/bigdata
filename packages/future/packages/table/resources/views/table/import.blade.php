@@ -23,7 +23,7 @@
                         <label class="required form-label mb-2">Select Import File:</label>
                         <!--end::Label-->
                         <!--begin::Input-->
-                        <input type="file" wire:model="importFile" class="form-control form-control-solid fw-bold">
+                        <input type="file" wire:model="importFile" class="form-control form-control-rounded form-control-solid fw-bold">
                         <!--end::Input-->
                     </div>
                     <!--end::Input group-->

@@ -49,7 +49,7 @@
 <!-- Libs JS -->
 <!-- Tabler Core -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" ></script>
-@vite('resources/js/app.js')
+@vite(['resources/js/app.js','resources/css/app.css'])
 <script src="{{ asset('dist/js/tabler.min.js') }}" ></script>
 <script src="{{ asset('dist/js/demo.min.js') }}" ></script>
 <script src="{{ asset('dist/js/custom.js') }}" ></script>
