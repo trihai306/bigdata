@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "47099460e8331a3afc6c4b2428516e18",
+    "content-hash": "129cf77fea58b7e98201b43016615ae7",
     "packages": [
         {
             "name": "amphp/amp",
@@ -3131,16 +3131,16 @@
         },
         {
             "name": "laravel/pulse",
-            "version": "v1.0.0-beta8",
+            "version": "v1.0.0-beta9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/pulse.git",
-                "reference": "32fb030ebf9679a30c373cada2905568d3cf818e"
+                "reference": "005e38e74ec776a5ced3dfeef0d7e708fb487ee9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/pulse/zipball/32fb030ebf9679a30c373cada2905568d3cf818e",
-                "reference": "32fb030ebf9679a30c373cada2905568d3cf818e",
+                "url": "https://api.github.com/repos/laravel/pulse/zipball/005e38e74ec776a5ced3dfeef0d7e708fb487ee9",
+                "reference": "005e38e74ec776a5ced3dfeef0d7e708fb487ee9",
                 "shasum": ""
             },
             "require": {
@@ -3213,7 +3213,7 @@
                 "issues": "https://github.com/laravel/pulse/issues",
                 "source": "https://github.com/laravel/pulse"
             },
-            "time": "2023-12-27T14:15:20+00:00"
+            "time": "2024-01-12T09:43:14+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -5367,16 +5367,16 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "1.7.3",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "3219c6ee25c9ea71e3d9bbaf39c67c9ebd499419"
+                "reference": "fad452781b3d774e3337b0c0b245dd8e5a4455fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/3219c6ee25c9ea71e3d9bbaf39c67c9ebd499419",
-                "reference": "3219c6ee25c9ea71e3d9bbaf39c67c9ebd499419",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/fad452781b3d774e3337b0c0b245dd8e5a4455fc",
+                "reference": "fad452781b3d774e3337b0c0b245dd8e5a4455fc",
                 "shasum": ""
             },
             "require": {
@@ -5419,9 +5419,9 @@
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
             "support": {
                 "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
-                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.7.3"
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.8.0"
             },
-            "time": "2023-08-12T11:01:26+00:00"
+            "time": "2024-01-11T11:49:22+00:00"
         },
         {
             "name": "phpoffice/phpspreadsheet",
@@ -6757,12 +6757,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-data.git",
-                "reference": "bf20659c98b67e5e73bbe3388980e9f6fd72e064"
+                "reference": "d7d90c6a6f136c91edd0dc747b29c6068fdaabcb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-data/zipball/bf20659c98b67e5e73bbe3388980e9f6fd72e064",
-                "reference": "bf20659c98b67e5e73bbe3388980e9f6fd72e064",
+                "url": "https://api.github.com/repos/spatie/laravel-data/zipball/d7d90c6a6f136c91edd0dc747b29c6068fdaabcb",
+                "reference": "d7d90c6a6f136c91edd0dc747b29c6068fdaabcb",
                 "shasum": ""
             },
             "require": {
@@ -6835,24 +6835,24 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-21T12:32:20+00:00"
+            "time": "2024-01-12T12:00:58+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
-            "version": "1.16.1",
+            "version": "1.16.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-package-tools.git",
-                "reference": "cc7c991555a37f9fa6b814aa03af73f88026a83d"
+                "reference": "e62eeb1fe8a8a0b2e83227a6c279c8c59f7d3a15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/cc7c991555a37f9fa6b814aa03af73f88026a83d",
-                "reference": "cc7c991555a37f9fa6b814aa03af73f88026a83d",
+                "url": "https://api.github.com/repos/spatie/laravel-package-tools/zipball/e62eeb1fe8a8a0b2e83227a6c279c8c59f7d3a15",
+                "reference": "e62eeb1fe8a8a0b2e83227a6c279c8c59f7d3a15",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": "^9.28|^10.0",
+                "illuminate/contracts": "^9.28|^10.0|^11.0",
                 "php": "^8.0"
             },
             "require-dev": {
@@ -6887,7 +6887,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-package-tools/issues",
-                "source": "https://github.com/spatie/laravel-package-tools/tree/1.16.1"
+                "source": "https://github.com/spatie/laravel-package-tools/tree/1.16.2"
             },
             "funding": [
                 {
@@ -6895,7 +6895,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-08-23T09:04:39+00:00"
+            "time": "2024-01-11T08:43:00+00:00"
         },
         {
             "name": "spatie/laravel-permission",
@@ -9432,41 +9432,6 @@
             "time": "2023-12-08T13:03:43+00:00"
         },
         {
-            "name": "trihai306/future",
-            "version": "dev-main",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/trihai306/CMSfuture.git",
-                "reference": "0dfb8145a9c629903a064818543fd7f476ae6b1f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/trihai306/CMSfuture/zipball/0dfb8145a9c629903a064818543fd7f476ae6b1f",
-                "reference": "0dfb8145a9c629903a064818543fd7f476ae6b1f",
-                "shasum": ""
-            },
-            "require": {
-                "livewire/livewire": "^v3.3.5",
-                "php": "^8.1"
-            },
-            "default-branch": true,
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Future\\Core\\": "./packages/core/src/",
-                    "Future\\Form\\": "./packages/form/src/",
-                    "Future\\Table\\": "./packages/table/src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "description": "future base admin",
-            "support": {
-                "issues": "https://github.com/trihai306/CMSfuture/issues",
-                "source": "https://github.com/trihai306/CMSfuture/tree/main"
-            },
-            "time": "2024-01-11T01:44:29+00:00"
-        },
-        {
             "name": "unisharp/laravel-filemanager",
             "version": "v2.6.4",
             "source": {
@@ -11983,16 +11948,16 @@
         },
         {
             "name": "spatie/laravel-ignition",
-            "version": "2.4.0",
+            "version": "2.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-ignition.git",
-                "reference": "b9395ba48d3f30d42092cf6ceff75ed7256cd604"
+                "reference": "005e1e7b1232f3b22d7e7be3f602693efc7dba67"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/b9395ba48d3f30d42092cf6ceff75ed7256cd604",
-                "reference": "b9395ba48d3f30d42092cf6ceff75ed7256cd604",
+                "url": "https://api.github.com/repos/spatie/laravel-ignition/zipball/005e1e7b1232f3b22d7e7be3f602693efc7dba67",
+                "reference": "005e1e7b1232f3b22d7e7be3f602693efc7dba67",
                 "shasum": ""
             },
             "require": {
@@ -12071,7 +12036,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-04T14:51:24+00:00"
+            "time": "2024-01-12T13:14:58+00:00"
         },
         {
             "name": "symfony/yaml",
@@ -12199,8 +12164,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "future/cms": 20,
-        "trihai306/future": 20
+        "future/cms": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

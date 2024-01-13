@@ -19,6 +19,23 @@ window.Echo = new Echo({
     enabledTransports: ['ws', 'wss'],
 });
 
+let userId = '1'; // Replace with the actual user ID
+
+window.Echo.private(`App.Models.User.${userId}`)
+    .notification((notification) => {
+        if (notification.type === 'App\\Notifications\\UserNotification') {
+        console.log(notification.title);
+        console.log(notification.content);
+        }
+    });
+
+// window.Echo.private(`App.Models.User.${userId}`)
+//     .listen('UserMessageEvent', (e) => {
+//         console.log(e.message);
+//         console.log(e.user_id);
+//         console.log(e.sender);
+//     });
+
 // Instantiate clipboard
 var clipboard = new ClipboardJS('.btn-copy');
 

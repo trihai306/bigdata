@@ -16,21 +16,17 @@ use App\Future\UserResource\UserResource;
 */
 route::get('/', function () {
 //    $message = 'Hello, this is a test message!';
-//    $userId = 2; // Replace with the actual user ID
+//    $userId = 1; // Replace with the actual user ID
 //    $sender = Auth::user()->name;
 //
 //    event(new \App\Events\UserMessageEvent($userId, $message, $sender));
 
     // ID của người dùng nhận thông báo
-    $userId = 1;
-
-// Tạo một instance của User
-    $user = User::findOrFail($userId);
-
-// Tạo một thông báo mới
+//dd('abc');
+//    $userId = 1;
+//
+//    $user = User::findOrFail($userId);
 //    $notification = new UserNotification($userId, 'Tiêu đề thông báo', 'Nội dung thông báo');
-
-// Gửi thông báo
 //    $user->notify($notification);
     return view('welcome');
 });

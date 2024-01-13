@@ -13,7 +13,6 @@ class UserNotification extends Notification
     protected $title;
     protected $content;
     protected $userId;
-
     /**
      * Create a new notification instance.
      */
