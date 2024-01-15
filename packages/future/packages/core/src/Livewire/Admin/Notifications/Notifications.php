@@ -10,6 +10,13 @@ class Notifications extends Component
     public $notifications;
     public $page = 10;
 
+    public function getListeners()
+    {
+        return [
+           'showNotifications' => 'reload',
+        ];
+    }
+
     public function render()
     {
         $this->notifications = auth()->user()->notifications()->limit($this->page)->get();
@@ -26,6 +33,11 @@ class Notifications extends Component
         </div>
     </div>
 HTML;
+    }
+
+    public function reload()
+    {
+        $this->page = 10;
     }
 
     public function loadMore()
