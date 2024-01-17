@@ -1,5 +1,11 @@
 <?php
 
 return [
-    'name' => 'Core'
+    "core"=>[
+        'route' => [
+            'prefix' => 'admin',
+            'as' => 'admin.',
+            'middleware' => ['web', 'auth'],
+        ],
+    ]
 ];

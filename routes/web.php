@@ -1,9 +1,7 @@
 <?php
 
-use App\Models\User;
-use App\Notifications\UserNotification;
 use Illuminate\Support\Facades\Route;
-use App\Future\UserResource\UserResource;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,3 +32,5 @@ route::get('/', function () {
 //Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
 //    \UniSharp\LaravelFilemanager\Lfm::routes();
 //});
+
+//Route::resource('users', UserResource::class);

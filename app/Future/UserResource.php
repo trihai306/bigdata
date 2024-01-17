@@ -1,8 +1,9 @@
 <?php
-namespace App\Future\UserResource;
+namespace App\Future;
+use App\Future\UserResource\Resource\Form;
+use App\Future\UserResource\Resource\Table;
 use Future\Core\Http\Resource\BaseResource;
-use Modules\User\Livewire\Form;
-use Modules\User\Livewire\Table;
+
 
 class UserResource extends BaseResource
 {
