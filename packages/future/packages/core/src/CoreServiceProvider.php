@@ -23,8 +23,8 @@ class CoreServiceProvider extends ServiceProvider
         Livewire::component('future::livewire.admin.menu-header', MenuHeader::class);
         Livewire::component('future::livewire.admin.notifications', Notifications::class);
         Livewire::component('future::livewire.admin.notifications.icon', NotificationIcon::class);
-         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'future');
-         $this->loadViewsFrom(__DIR__.'/../resources/views', 'future');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'future');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'future');
          $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
          $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         // Publishing is only necessary when using the CLI.
