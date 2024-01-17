@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Future\UserResource\Resource;
+namespace App\Future\UserResource;
 
 use App\Models\User;
 use Future\Form\Future\BaseForm;

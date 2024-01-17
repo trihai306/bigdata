@@ -23,9 +23,9 @@ class UserSeeder extends Seeder
                 'remember_token' => Str::random(10),
             ]);
         }
-        for ($i = 0; $i < 10000; $i++) {
-            User::factory()->count(10)->create();
-//            Artisan::info('Seeding operation run ' . ($i + 1) . ' times.');
-        }
+//        for ($i = 0; $i < 10000; $i++) {
+//            User::factory()->count(10)->create();
+////            Artisan::info('Seeding operation run ' . ($i + 1) . ' times.');
+//        }
     }
 }

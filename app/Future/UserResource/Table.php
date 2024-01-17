@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Future\UserResource\Resource;
+namespace App\Future\UserResource;
 
 use App\Models\User;
 use Future\Table\Future\BaseTable;
@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 class Table extends BaseTable
 {
     protected string $model = User::class;
-    public string $urlCreate = 'admin.user.create';
+    public string $urlCreate = 'admin.users.create';
 
     protected function columns(): array
     {
@@ -57,7 +57,7 @@ class Table extends BaseTable
     protected function actions(Actions $actions, Model $data = null)
     {
         return $actions->create([
-            Action::make('edit', __('edit'), 'fas fa-edit')->setLink(route('admin.user.edit', $data->id)),
+            Action::make('edit', __('edit'), 'fas fa-edit')->setLink(route('admin.users.edit', $data->id)),
             Action::make('delete', __('delete'), 'fas fa-trash-alt')->setConfirm(function () use ($data) {
                 return [
                     'message' => __('Are you sure you want to delete this user?'),

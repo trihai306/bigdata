@@ -1,7 +1,7 @@
 <?php
 namespace App\Future;
-use App\Future\UserResource\Resource\Form;
-use App\Future\UserResource\Resource\Table;
+use App\Future\UserResource\Form;
+use App\Future\UserResource\Table;
 use Future\Core\Http\Resource\BaseResource;
 
 

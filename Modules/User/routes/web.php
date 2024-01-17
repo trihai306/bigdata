@@ -19,7 +19,7 @@ Route::group([
     'prefix' => 'admin',
     'as' => 'admin.'
 ], function () {
-    Route::resource('users', UserResource::class)->names('user');
+//    Route::resource('users', UserResource::class)->names('user');
     Route::resource('permissions', \Modules\User\app\Http\Controllers\PermissionResource::class);
     Route::get('roles', [PermissionResource::class, 'role'])->name('roles');
     Route::get('roles/{id}', [PermissionResource::class, 'showRole'])->name('roles.show');
