@@ -27,6 +27,7 @@ Route::group(config('core.core.route'), function () {
         $name = Str::lower($name) . 's';
         $className = 'App\\Future\\' . $classBasename;
         $resource = new $className();
-        Route::resource($name, $className)->only(['index', 'create', 'edit'])->names($name);
+        $routeName = $resource->getRouteName() ?? $name;
+        Route::resource($routeName, $className)->only(['index', 'create', 'edit'])->names($name);
     });
 });

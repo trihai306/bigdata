@@ -12,12 +12,19 @@ abstract class BaseResource extends Controller
 {
     protected BaseTable $table;
     protected BaseForm $form;
+    protected $routeName = null;
+
     public function __construct(
         BaseTable $table,
         BaseForm $form
     ) {
         $this->table = $table;
         $this->form = $form;
+    }
+
+    public function getRouteName()
+    {
+        return $this->routeName;
     }
 
     public function index(Request $request)
