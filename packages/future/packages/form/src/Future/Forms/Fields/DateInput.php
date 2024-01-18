@@ -7,22 +7,15 @@ use Future\Form\Future\Forms\Field;
 
 class DateInput extends Field
 {
-    protected $placeholder = '';
-    protected $label = null;
+    protected string $label;
 
-    public function placeholder(string $placeholder)
-    {
-        $this->placeholder = $placeholder;
-        return $this;
-    }
-
-    public function label(string $label)
+    public function label(string $label): Field
     {
         $this->label = $label;
         return $this;
     }
 
-    public function defaultValue($value)
+    public function defaultValue($value): Field
     {
         $this->defaultValue = $value;
         return $this;

@@ -6,16 +6,10 @@ use Future\Form\Future\Forms\Field;
 
 class PhoneNumber extends Field
 {
-    protected $placeholder = '';
     protected $maxLength = 10;
     protected $pattern = "/^[0-9]*$/"; // chỉ cho phép nhập số
-    protected $label = null;
+    protected string $label;
 
-    public function placeholder(string $placeholder)
-    {
-        $this->placeholder = $placeholder;
-        return $this;
-    }
 
     public function maxLength(int $maxLength)
     {
@@ -29,7 +23,7 @@ class PhoneNumber extends Field
         return $this;
     }
 
-    public function label(string $label)
+    public function label(string $label): Field
     {
         $this->label = $label;
         return $this;

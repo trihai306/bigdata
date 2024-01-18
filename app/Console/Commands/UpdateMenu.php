@@ -10,87 +10,96 @@ use Spatie\Permission\Models\Role;
 
 class UpdateMenu extends Command
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
     protected $signature = 'menu:update';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
     protected $description = 'Update the menu based on web routes';
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
+    protected $skipNames = ['create', 'show','unisharp.lfm','ignition','forgot-password','sanctum','livewire.upload-file', 'store', 'update', 'destroy', 'edit'];
+    protected $skipUris = ['login', 'register', 'logout', 'forgot-password', 'reset-password'];
+
     public function handle()
     {
         $routes = Route::getRoutes();
+        $admin = $this->getAdminRole();
 
         foreach ($routes as $route) {
-            // Skip API routes
-            if (str_starts_with($route->uri, 'api')) {
+            if ($this->shouldSkipRoute($route)) {
                 continue;
             }
-            if (str_starts_with($route->uri, 'admin')) {
-                // Get the route name
-                $routeName = $route->getName();
 
-                // Skip routes with specific names
-                if (str_contains($routeName, 'create') || str_contains($routeName, 'show') || str_contains($routeName, 'store') || str_contains($routeName, 'update') || str_contains($routeName, 'destroy') || str_contains($routeName, 'edit')) {
-                    $this->info('Skipping route: ' . $routeName);
-                    continue;
-                }
-
-                // Skip routes with slug
-                if (str_contains($route->uri, '{')) {
-                    $this->info('Skipping route with slug: ' . $routeName);
-                    continue;
-                }
-                //skip routes login, register, forgot password, reset password
-                if (str_contains($route->uri, 'login') || str_contains($route->uri, 'register') || str_contains($route->uri, 'forgot-password') || str_contains($route->uri, 'reset-password')) {
-                    $this->info('Skipping route with slug: ' . $routeName);
-                    continue;
-                }
-
-                // Update or create menu item
-                Menu::updateOrCreate(
-                    [
-                        'url' => $route->uri,
-                        'title' => $route->uri === 'admin' ? 'Dashboard' : ucfirst(str_replace('admin/', '', $route->uri)),
-                        'permission' => $routeName,
-                    ],
-                    [
-                        'parent_id' => null,
-                        'order' => 0,
-                        'icon' => 'fas fa-tachometer-alt',
-                        'badge' => null
-                    ]
-                );
-
-                // Update or create permission
-                Permission::firstOrCreate(['name' => $routeName]);
-                // Assign permission to admin role
-                $admin = Role::where('name', 'admin')->first();
-                if ($admin) {
-                    $admin->givePermissionTo($routeName);
-                } else {
-                    $admin = Role::create(['name' => 'admin']);
-                    $admin->givePermissionTo($routeName);
-                }
-
-                $this->info('Added to menu: ' . $routeName);
-            }
+            $this->updateMenuAndPermissions($route, $admin);
         }
 
         $this->info('Menu and permissions updated successfully.');
 
         return 0;
+    }
+
+    protected function shouldSkipRoute($route)
+    {
+        $routeName = $route->getName();
+
+        if (str_starts_with($route->uri, 'api')) {
+            return true;
+        }
+
+        $shouldSkipName = array_reduce($this->skipNames, function ($carry, $item) use ($routeName) {
+            return $carry || str_contains($routeName, $item);
+        }, false);
+
+        if ($shouldSkipName) {
+            $this->info('Skipping route: ' . $routeName);
+            return true;
+        }
+
+        $shouldSkipUri = array_reduce($this->skipUris, function ($carry, $item) use ($route) {
+            return $carry || str_contains($route->uri, $item);
+        }, false);
+
+        if (str_contains($route->uri, '{') || $shouldSkipUri) {
+            $this->info('Skipping route with slug: ' . $routeName);
+            return true;
+        }
+
+        return false;
+    }
+
+    protected function updateMenuAndPermissions($route, $admin)
+    {
+        $routeName = $route->getName();
+
+        if ($routeName === null) {
+            $this->info('Skipping route with no name');
+            return;
+        }
+
+        Menu::updateOrCreate(
+            [
+                'url' => $route->uri,
+                'title' => $route->uri === 'admin' ? 'Dashboard' : ucfirst(str_replace('admin/', '', $route->uri)),
+                'permission' => $routeName,
+            ],
+            [
+                'parent_id' => null,
+                'order' => 0,
+                'icon' => 'fas fa-tachometer-alt',
+                'badge' => null
+            ]
+        );
+
+        Permission::firstOrCreate(['name' => $routeName]);
+        $admin->givePermissionTo($routeName);
+
+        $this->info('Added to menu: ' . $routeName);
+    }
+
+    protected function getAdminRole()
+    {
+        $admin = Role::where('name', 'admin')->first();
+
+        if (!$admin) {
+            $admin = Role::create(['name' => 'admin']);
+        }
+
+        return $admin;
     }
 }

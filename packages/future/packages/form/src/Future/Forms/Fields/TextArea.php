@@ -6,20 +6,7 @@ use Future\Form\Future\Forms\Field;
 
 class TextArea extends Field
 {
-    protected $placeholder = '';
-    protected $label = null;
-
-    public function placeholder(string $placeholder)
-    {
-        $this->placeholder = $placeholder;
-        return $this;
-    }
-
-    public function label(string $label)
-    {
-        $this->label = $label;
-        return $this;
-    }
+    protected string $label;
 
     public function render()
     {

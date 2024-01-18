@@ -40,10 +40,6 @@
                                         <div class="d-flex">
                                             @if($permissions)
                                                 @foreach($permissions as $permission)
-                                                    {{--                                            @php--}}
-                                                    {{--                                                $parts = explode('.', $permission->name);--}}
-                                                    {{--                                                $action = $parts[1];--}}
-                                                    {{--                                            @endphp--}}
                                                     <!--begin::Checkbox-->
                                                     <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-17">
                                                         <input wire:model="selectedPermissions" class="form-check-input @error('selectedPermissions') is-invalid @enderror" type="checkbox" value="{{ $permission->name }}" id="permission-{{ $permission->id }}">

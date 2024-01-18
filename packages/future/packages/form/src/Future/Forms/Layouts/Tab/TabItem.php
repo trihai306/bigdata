@@ -1,7 +1,8 @@
 <?php
-namespace Future\Form\Future\Forms\Layouts;
+namespace Future\Form\Future\Forms\Layouts\Tab;
 
-class Col{
+class TabItem
+{
     protected $classes = '';
     protected $attributes = [];
     protected $content;
@@ -14,12 +15,6 @@ class Col{
     public function classes(string $classes)
     {
         $this->classes = $classes;
-        return $this;
-    }
-
-    public function addClasses(string $classes)
-    {
-        $this->classes .= " $classes";
         return $this;
     }
 
@@ -41,27 +36,9 @@ class Col{
         return $this;
     }
 
-    public function col(int $value)
-    {
-        $this->classes .= " col-$value";
-        return $this;
-    }
-
-    public function md(int $value)
-    {
-        $this->classes .= " col-md-$value";
-        return $this;
-    }
-
-    public function sm(int $value)
-    {
-        $this->classes .= " col-sm-$value";
-        return $this;
-    }
-
     public function render()
     {
-        $html = '<div class="'.$this->classes.'"';
+        $html = '<div class="tab-pane '.$this->classes.'"';
         foreach ($this->attributes as $name => $value) {
             $html .= ' '.$name.'="'.$value.'"';
         }

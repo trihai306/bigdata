@@ -3,8 +3,8 @@
     "description": "future base admin",
     "type": "library",
     "require": {
-        "php": "^8.1",
-        "livewire/livewire": "^v3.3.5"
+        "php": ">=8.1",
+        "livewire/livewire": ">=3.3.5"
     },
     "autoload": {
         "psr-4": {

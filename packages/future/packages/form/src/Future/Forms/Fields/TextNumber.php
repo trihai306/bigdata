@@ -9,8 +9,6 @@ class TextNumber extends Field
     protected $min = null;
     protected $max = null;
     protected $step = null;
-    protected $label = null;
-    protected $placeholder = null;
 
     public function min(int $min)
     {
@@ -27,18 +25,6 @@ class TextNumber extends Field
     public function step(int $step)
     {
         $this->step = $step;
-        return $this;
-    }
-
-    public function label(string $label)
-    {
-        $this->label = $label;
-        return $this;
-    }
-
-    public function placeholder(string $placeholder)
-    {
-        $this->placeholder = $placeholder;
         return $this;
     }
 

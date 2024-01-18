@@ -7,7 +7,7 @@ use Future\Form\Future\Forms\Field;
 class Select extends Field
 {
     protected $options = [];
-    protected $label = null;
+    protected string $label;
 
     public function options(array $options)
     {
@@ -25,12 +25,6 @@ class Select extends Field
     public function relation(callable $callback)
     {
         $callback($this);
-        return $this;
-    }
-
-    public function label(string $label)
-    {
-        $this->label = $label;
         return $this;
     }
 

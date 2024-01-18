@@ -7,7 +7,7 @@ use Future\Form\Future\Forms\Field;
 class Radio extends Field
 {
     protected $options = [];
-    protected $label = null;
+    protected string $label;
 
     public function options(array $options)
     {
@@ -15,7 +15,7 @@ class Radio extends Field
         return $this;
     }
 
-    public function label(string $label)
+    public function label(string $label): Field
     {
         $this->label = $label;
         return $this;
