@@ -63,24 +63,15 @@ class Card{
 
     public function render()
     {
-        $html = '<div class="card '.$this->classes.' shadow-sm"'; // Added shadow and max-width for styling
-        foreach ($this->attributes as $name => $value) {
-            $html .= ' '.$name.'="'.$value.'"';
-        }
-        $html .= '>';
-        if ($this->title) {
-            $html .= '<div class="card-header '.$this->headerClasses.' h4 mt-3">'.$this->title.'</div>'; // Use h4 for better SEO
-        }
-        $html .= '<div class="card-body '.$this->bodyClasses.'">';
-        foreach ($this->fields as $field) {
-            $html .= $field->render();
-        }
-        $html .= '</div>';
-        if ($this->footer) {
-            $html .= '<div class="card-footer text-muted">'.$this->footer.'</div>'; // Added text-muted for styling
-        }
-        $html .= '</div>';
-        return $html;
+        return view('future::layouts.card', [
+            'title' => $this->title,
+            'fields' => $this->fields,
+            'classes' => $this->classes,
+            'headerClasses' => $this->headerClasses,
+            'bodyClasses' => $this->bodyClasses,
+            'footer' => $this->footer,
+            'attributes' => $this->attributes,
+        ])->render();
     }
 
 }

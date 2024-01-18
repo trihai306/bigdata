@@ -22,6 +22,12 @@ class DateInput extends Field
         return $this;
     }
 
+    public function defaultValue($value)
+    {
+        $this->defaultValue = $value;
+        return $this;
+    }
+
     public function render()
     {
         return View::make('future::base.form.dateinput', [
@@ -31,6 +37,7 @@ class DateInput extends Field
             'attributes' => $this->getAttributes(),
             'placeholder' => $this->placeholder,
             'label' => $this->label,
+            'defaultValue' => $this->defaultValue,
         ])->render();
     }
 }

@@ -1,6 +1,6 @@
 <div>
     <form wire:submit.prevent="save" wire:ignore>
-        <div class="card mb-3 rounded rounded-5">
+        <div class="card mb-3 rounded rounded-5 shadow">
             <div class="card-body d-flex justify-content-end">
                 <button type="button" class="btn btn-light me-2" onclick="history.back()">
                     <i class="fas fa-arrow-left"></i> {{ __('future::forms.back') }}

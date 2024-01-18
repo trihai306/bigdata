@@ -53,9 +53,14 @@ class UpdateMenu extends Command
                     $this->info('Skipping route with slug: ' . $routeName);
                     continue;
                 }
+                //skip routes login, register, forgot password, reset password
+                if (str_contains($route->uri, 'login') || str_contains($route->uri, 'register') || str_contains($route->uri, 'forgot-password') || str_contains($route->uri, 'reset-password')) {
+                    $this->info('Skipping route with slug: ' . $routeName);
+                    continue;
+                }
 
                 // Update or create menu item
-                $menuItem = Menu::updateOrCreate(
+                Menu::updateOrCreate(
                     [
                         'url' => $route->uri,
                         'title' => $route->uri === 'admin' ? 'Dashboard' : ucfirst(str_replace('admin/', '', $route->uri)),
@@ -70,8 +75,7 @@ class UpdateMenu extends Command
                 );
 
                 // Update or create permission
-                $permission = Permission::firstOrCreate(['name' => $routeName]);
-
+                Permission::firstOrCreate(['name' => $routeName]);
                 // Assign permission to admin role
                 $admin = Role::where('name', 'admin')->first();
                 if ($admin) {
