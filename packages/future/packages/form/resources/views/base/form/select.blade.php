@@ -1,6 +1,6 @@
 @php
     $required = $isRequired ? 'required' : '';
-    $classes = !empty($classes) ? 'form-control  form-select'.$classes : 'form-control form-select';
+    $classes = !empty($classes) ? 'form-control form-control-rounded form-select'.$classes : 'form-control form-control-rounded form-select';
 @endphp
 
 @if($label)

@@ -31,6 +31,9 @@ class CoreServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
+        \Route::fallback(function () {
+            return view('future::404');
+        });
     }
 
     /**

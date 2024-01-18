@@ -1,4 +1,4 @@
-<div class="card {{ $classes }} rounded rounded-5 shadow"
+<div class="card {{ $classes }}  rounded rounded-4 shadow"
 @if($attributes)
     @foreach ($this->attributes as $name => $value)
         {{ $name }}="{{ $value }}"
