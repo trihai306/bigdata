@@ -10,7 +10,8 @@
         "psr-4": {
             "Future\\Core\\": "./packages/core/src/",
             "Future\\Form\\": "./packages/form/src/",
-            "Future\\Table\\": "./packages/table/src/"
+            "Future\\Table\\": "./packages/table/src/",
+            "Future\\Messages\\": "./packages/messages/src/"
         }
     },
     "minimum-stability": "dev",

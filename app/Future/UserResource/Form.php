@@ -6,6 +6,7 @@ use App\Models\User;
 use Future\Form\Future\BaseForm;
 use Future\Form\Future\Forms\Fields\DateInput;
 use Future\Form\Future\Forms\Fields\Select;
+use Future\Form\Future\Forms\Fields\TextArea;
 use Future\Form\Future\Forms\Fields\TextInput;
 use Future\Form\Future\Forms\Layouts\Card;
 use Future\Form\Future\Forms\Layouts\Row;
@@ -22,6 +23,7 @@ class Form extends BaseForm
                     TextInput::make('name')->required()->label('Tên')->placeholder('Name'),
                     TextInput::make('email')->required()->label('Email')->placeholder('Email'),
                     TextInput::make('password')->required()->password()->label('Mật khẩu')->placeholder('Password'),
+                    TextArea::make('address')->label('Địa chỉ')->placeholder('Address'),
                     Select::make('gender')->label('Giới tính')->options([
                         'male' => 'nam',
                         'female' => 'nữ',
