@@ -3,7 +3,6 @@
 namespace Future\Core;
 
 use Future\Core\Livewire\Admin\MenuHeader;
-use Future\Core\Livewire\Admin\Messages\MessageIcon;
 use Future\Core\Livewire\Admin\Notifications\NotificationIcon;
 use Future\Core\Livewire\Admin\Notifications\Notifications;
 use Future\Core\Livewire\Auth\Login;
@@ -22,7 +21,6 @@ class CoreServiceProvider extends ServiceProvider
     {
         Livewire::component('future::livewire.auth.login', Login::class);
         Livewire::component('future::livewire.admin.menu-header', MenuHeader::class);
-        Livewire::component('future::livewire.admin.messages.icon', MessageIcon::class);
         Livewire::component('future::livewire.admin.notifications', Notifications::class);
         Livewire::component('future::livewire.admin.notifications.icon', NotificationIcon::class);
 

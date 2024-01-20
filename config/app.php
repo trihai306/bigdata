@@ -169,6 +169,7 @@ return [
         \Future\Form\FormServiceProvider::class,
         \Future\Table\TableServiceProvider::class,
         \Future\Core\FutureServiceProvider::class,
+        \Future\Messages\MessagesServiceProvider::class,
         /*
          * Application Service Providers...
          */

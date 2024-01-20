@@ -29,7 +29,7 @@
             </label>
         </div>
         <div class="form-footer">
-            <button type="submit" class="btn btn-primary w-100">
+            <button type="submit" class="btn rounded rounded-5 btn-primary w-100">
                 <span >
                 {{ __('auth.sign_in') }}
                 </span>
