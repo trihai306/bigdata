@@ -6,12 +6,12 @@
             <rect x="3" y="5" width="18" height="14" rx="2"/>
             <polyline points="3 7 12 13 21 7"/>
         </svg>
-        <span class="badge bg-primary badge-notification badge-pill">2</span>
+        <span class="badge bg-primary badge-notification badge-pill">{{$count}}</span>
     </a>
     <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Danh sách tin nhắn <span class="badge bg-primary ms-2">2</span>
+                <h3 class="card-title">Danh sách tin nhắn <span class="badge bg-primary ms-2">{{$count}}</span>
                 </h3>
             </div>
             <div class="list-group list-group-flush list-group-hoverable">
