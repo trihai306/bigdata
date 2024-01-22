@@ -2,6 +2,8 @@
 
 namespace Future\Messages\Livewire\Admin\Messages;
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class MessageIcon extends Component
@@ -25,6 +27,19 @@ class MessageIcon extends Component
 
     public function render()
     {
-        return view('future::livewire.admin.messages.icon');
+        $conversations = $this->getConversation();
+        return view('future::livewire.admin.messages.icon',compact('conversations'));
+    }
+
+    //viết hàm lấy ra Conversation của user hiện tại phân trang
+    protected function getConversation()
+    {
+        $user = User::find($this->userId);
+        $conversation = $user->conversations()->with(['users' => function ($query) use ($user) {
+            $query->where('id', '!=', $user->id);
+        },'lastMessage' => function ($query) {
+            $query->latest('updated_at');
+        }])->limit(10)->get();
+        return $conversation;
     }
 }

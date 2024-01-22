@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Message extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;
 
     protected $fillable = ['conversation_id', 'sender_id', 'reply_to_id', 'content', 'type', 'attachment_url'];
 

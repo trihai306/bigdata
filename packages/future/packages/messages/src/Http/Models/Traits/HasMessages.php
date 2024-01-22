@@ -36,7 +36,7 @@ trait HasMessages
      */
     public function userConversations()
     {
-        return $this->hasMany(UserConversation::class);
+        return $this->hasMany(UserConversation::class, 'user_id');
     }
 
     /**
@@ -83,4 +83,5 @@ trait HasMessages
 
         return $unreadMessagesCount;
     }
+
 }

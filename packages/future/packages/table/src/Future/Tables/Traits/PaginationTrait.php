@@ -23,5 +23,5 @@ trait PaginationTrait
      *
      * @var array
      */
-    public $pages = [10, 25, 50, 100];
+    public $pages = [10, 25, 50, 100, 250, 500, 1000];
 }

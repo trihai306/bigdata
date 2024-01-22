@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class SeedUsersJob implements ShouldQueue
@@ -24,23 +25,6 @@ class SeedUsersJob implements ShouldQueue
 
     public function handle()
     {
-        $faker = Faker::create();
-
-//        for ($i = 0; $i < 10000; $i++) {
-//            User::create([
-//                'name' => $this->id . $faker->unique()->name,
-//                'email' => $this->id . $faker->unique()->safeEmail,
-//                'phone' => $this->id . $faker->unique()->phoneNumber,
-//                'avatar' => $faker->imageUrl(),
-//                'address' => $faker->address,
-//                'birthday' => $faker->date(),
-//                'gender' => $faker->randomElement(['male', 'female']),
-//                'password' => bcrypt('password'), // password
-//                'status' => $faker->randomElement(['active', 'inactive']),
-//                'field' => $faker->randomElement(['leather_goods', 'clothing']),
-//                'type' => $faker->randomElement(['buyer', 'seller']),
-//                'remember_token' => Str::random(10),
-//            ]);
-//        }
+        Log::info('Start seeding users' . $this->id);
     }
 }

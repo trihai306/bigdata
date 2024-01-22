@@ -1,6 +1,7 @@
-<div class="toast position-absolute  end-0" style="z-index: 9999999;top: 60px" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false" data-bs-toggle="toast">
+<div class="toast position-absolute  end-0" style="z-index: 9999999;top: 60px" role="alert" aria-live="assertive"
+     aria-atomic="true" data-bs-autohide="false" data-bs-toggle="toast">
     <div class="toast-header">
-        <span class="avatar avatar-xs me-2" >
+        <span class="avatar avatar-xs me-2">
             <i class="fa fa-info-circle"></i>
         </span>
         <strong class="me-auto">Mallory Hulme</strong>
@@ -11,7 +12,8 @@
         Hello, world! This is a toast message.
     </div>
     <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0"
+             aria-valuemax="100"></div>
     </div>
 </div>
 
@@ -21,7 +23,7 @@
     var toast = document.querySelector('.toast');
     var title = document.querySelector('.toast .me-auto');
     // Add a click event listener to the toast
-    toast.addEventListener('click', function() {
+    toast.addEventListener('click', function () {
         // Hide the toast when it is clicked
         hideToast();
     });
@@ -86,7 +88,7 @@
         progressBar.setAttribute('aria-valuenow', '0');
 
         // Start the progress bar
-        var intervalId = setInterval(function() {
+        var intervalId = setInterval(function () {
             var currentValue = parseInt(progressBar.getAttribute('aria-valuenow'));
             if (currentValue >= 100) {
                 // Stop the progress bar
@@ -108,11 +110,12 @@
         // Hide the toast
         toast.classList.remove('show');
     }
+
     // hideToast();
 </script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         window.Echo.private(`App.Models.User.{{ auth()->id() }}`)
             .notification((notification) => {
                 if (notification.type === 'App\\Notifications\\UserNotification') {
@@ -120,5 +123,11 @@
                     showToast(notification.title, notification.time, notification.content);
                 }
             });
+        window.Echo.private(`App.Models.User.{{auth()->id()}}`)
+            .listen('UserMessageEvent', (e) => {
+                var now = new Date();
+                showToast(e.sender, now, e.message);
+            });
+
     });
 </script>

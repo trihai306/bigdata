@@ -18,7 +18,7 @@ class MessagesServiceProvider extends ServiceProvider
         Livewire::component('future::livewire.admin.messages.icon', MessageIcon::class);
          $this->loadViewsFrom(__DIR__.'/../resources/views', 'future');
          $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-
+        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();

@@ -170,6 +170,7 @@ return [
         \Future\Table\TableServiceProvider::class,
         \Future\Core\FutureServiceProvider::class,
         \Future\Messages\MessagesServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
         /*
          * Application Service Providers...
          */

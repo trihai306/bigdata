@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Rennokki\QueryCache\Traits\QueryCacheable;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -15,6 +16,9 @@ class User extends Authenticatable
     use HasFactory, Notifiable, HasApiTokens,HasRoles;
     use HasRoles;
     use HasMessages;
+    use QueryCacheable;
+    public $cacheFor = 3600; 
+    public $cacheTags = ['books'];
     protected $fillable = [
         'name', 'email', 'phone', 'avatar', 'address', 'birthday', 'gender', 'password', 'status', 'field', 'type'
     ];
@@ -22,7 +26,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-    protected $dates = ['last_login_at', 'updated_at', 'created_at','birthday'];
+    protected $dates = ['updated_at', 'created_at','birthday'];
 
 
 }

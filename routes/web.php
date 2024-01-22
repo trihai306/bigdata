@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Redis;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,19 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 route::get('/', function () {
-//    $message = 'Hello, this is a test message!';
-//    $userId = 1; // Replace with the actual user ID
-//    $sender = Auth::user()->name;
-//
-//    event(new \App\Events\UserMessageEvent($userId, $message, $sender));
-
-    // ID của người dùng nhận thông báo
-//dd('abc');
-//    $userId = 1;
-//
-//    $user = User::findOrFail($userId);
-//    $notification = new UserNotification($userId, 'Tiêu đề thông báo', 'Nội dung thông báo');
-//    $user->notify($notification);
     return view('welcome');
 });
 
