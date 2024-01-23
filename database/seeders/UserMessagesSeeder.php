@@ -48,7 +48,11 @@ class UserMessagesSeeder extends Seeder
                     'content' => $faker->sentence,
                     'type' => 'text',
                 ]);
+                //thêm unread message theo message_id
+                DB::table('user_conversations')->where('user_id', $user->id)->update(['last_seen_message_id' => $j + 1]);
             }
+
+
         }
     }
 }

@@ -41,9 +41,8 @@
                     @endforeach
                     <div x-data="{}" x-intersect="$wire.loadMore()" class="w-100 h-10px d-block">
                         <div class="spinner-border text-primary" role="status">
-
+                            <span class="visually-hidden">Loading...</span>
                         </div>
-                        <span class="visually-hidden">Loading...</span>
                     </div>
                 </div>
 

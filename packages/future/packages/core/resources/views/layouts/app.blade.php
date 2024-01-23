@@ -61,17 +61,6 @@
 @include('future::components.scripts.swal')
 @include('future::components.scripts.toast')
 @include('future::components.page-loader')
-<script >
-
-    window.onload = function() {
-
-        var loadingDiv = document.getElementById('page-loading');
-        if (loadingDiv) {
-            console.log('Runs only on page one')
-            loadingDiv.style.display = 'none';
-        }
-    };
-</script>
 @livewireScripts
 @yield('script')
 </body>

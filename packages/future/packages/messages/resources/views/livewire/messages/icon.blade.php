@@ -11,7 +11,8 @@
     <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-end dropdown-menu-card">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Danh sách tin nhắn <span class="badge text-white bg-primary ms-2">{{$count}}</span>
+                <h3 class="card-title">Danh sách tin nhắn <span
+                        class="badge text-white bg-primary ms-2">{{$count}}</span>
                 </h3>
             </div>
             <div class="list-group list-group-flush list-group-hoverable">
@@ -20,33 +21,31 @@
                         <div class="row align-items-center">
                             <div class="col-auto">
                             <span class="avatar avatar-sm">
-                                <img src="{{ asset($conversation->users[0]->avatar ?? 'static/avatars/001f.jpg') }}" alt="..."
+                                <img src="{{ asset($conversation->users[0]->avatar ?? 'static/avatars/001f.jpg') }}"
+                                     alt="..."
                                      class="avatar-img rounded-circle">
                             </span>
                             </div>
-                            <div class="col text-truncate">
+                            <div class="col
+                                @if($conversation->userConversations[0]->last_seen_message_id == $conversation->lastMessage->id)
+                                font-weight-bold text-white
+                                @endif
+                            ">
                                 <a href="#" class="text-body d-block">{{$conversation->users[0]->name}}</a>
                                 <div class="d-block text-muted text-truncate mt-n1">
-                                     {{$conversation->lastMessage->content}}
+                                    {{$conversation->lastMessage->content}}
                                 </div>
                             </div>
-                            <div class="col-auto">
-                                <a href="#" class="list-group-item-actions">
-                                    <!-- Download SVG icon from http://tabler-icons.io/i/star -->
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon text-muted" width="24" height="24"
-                                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                                         stroke-linecap="round" stroke-linejoin="round">
-                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-                                        <path
-                                            d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086
-                                         -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"/>
-                                    </svg>
-                                </a>
+                            <div class="col-auto text-secondary
+                            @if($conversation->userConversations[0]->last_seen_message_id == $conversation->lastMessage->id)
+                                font-weight-bold text-white
+                                @endif
+                            ">
+                                <p>   {{$conversation->lastMessage->created_at->diffForHumans()}}</p>
                             </div>
                         </div>
                     </div>
                 @endforeach
-
                 <div class="list-group-item">
                     <div class="row align-items-center">
                         <div class="col text-center">
