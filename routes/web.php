@@ -15,9 +15,3 @@ use Illuminate\Support\Facades\Redis;
 route::get('/', function () {
     return view('welcome');
 });
-
-//Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
-//    \UniSharp\LaravelFilemanager\Lfm::routes();
-//});
-
-//Route::resource('users', UserResource::class);

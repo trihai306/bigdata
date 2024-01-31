@@ -2,7 +2,7 @@
 
 namespace Future\Messages;
 
-use Future\Messages\Livewire\Messages\MessageIcon;
+use Future\Messages\Future\Messages\MessageIcon;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 
@@ -15,9 +15,10 @@ class MessagesServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Livewire::component('future::livewire.admin.messages.icon', MessageIcon::class);
-        Livewire::component('future::livewire.messages.messages', \Future\Messages\Livewire\Messages\Messages::class);
-        Livewire::component('future::livewire.messages.list-conversation', \Future\Messages\Livewire\Messages\ListConversation::class);
+        Livewire::component('future::admin.messages.icon', MessageIcon::class);
+        Livewire::component('future::messages.messages', \Future\Messages\Future\Messages\Messages::class);
+        Livewire::component('future::messages.create-message', \Future\Messages\Future\Messages\CreateMessage::class);
+        Livewire::component('future::messages.list-conversation', \Future\Messages\Future\Messages\ListConversation::class);
          $this->loadViewsFrom(__DIR__.'/../resources/views', 'future');
          $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->loadRoutesFrom(__DIR__.'/../routes/web.php');

@@ -25,12 +25,12 @@ class UserSeeder extends Seeder
                 'remember_token' => Str::random(10),
             ]);
         }
-        for ($i = 0; $i < 10000; $i++) {
-            $userId = 1; // ID của người dùng mà bạn muốn gửi thông điệp
-            $message = 'Hello, this is a message'; // Thông điệp bạn muốn gửi
-            $sender = 'Sender Name'; // Tên của người gửi thông điệp
-
-            event(new \App\Events\UserMessageEvent($userId, $message, $sender));
-        }
+//        for ($i = 0; $i < 10000; $i++) {
+//            $userId = 1; // ID của người dùng mà bạn muốn gửi thông điệp
+//            $message = 'Hello, this is a message'; // Thông điệp bạn muốn gửi
+//            $sender = 'Sender Name'; // Tên của người gửi thông điệp
+//
+//            event(new \App\Events\UserMessageEvent($userId, $message, $sender));
+//        }
     }
 }

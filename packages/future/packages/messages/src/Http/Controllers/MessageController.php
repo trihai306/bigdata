@@ -2,11 +2,13 @@
 namespace Future\Messages\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('future::chat');
+        $conversationId = $request->get('conversationId') ?? null;
+        return view('future::chat', compact('conversationId'));
     }
 }

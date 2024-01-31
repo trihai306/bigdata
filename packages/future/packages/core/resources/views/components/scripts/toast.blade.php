@@ -126,7 +126,7 @@
         window.Echo.private(`App.Models.User.{{auth()->id()}}`)
             .listen('UserMessageEvent', (e) => {
                 var now = new Date();
-                showToast(e.sender, now, e.message);
+                showToast(e.sender.name, now, e.message.content);
             });
 
     });

@@ -48,20 +48,19 @@
 </div>
 <!-- Libs JS -->
 <!-- Tabler Core -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" ></script>
+<script data-navigate-once src="https://cdn.jsdelivr.net/npm/sweetalert2@11" ></script>
 @vite(['resources/js/app.js','resources/css/app.css'])
-<script src="{{ asset('dist/js/tabler.min.js') }}" ></script>
-<script src="{{ asset('dist/js/demo.min.js') }}" ></script>
-<script src="{{ asset('dist/js/custom.js') }}" ></script>
-<script src="{{ asset('dist/libs/nouislider/dist/nouislider.min.js') }}" ></script>
-<script src="{{ asset('dist/libs/litepicker/dist/litepicker.js') }}" ></script>
-<script src="{{ asset('dist/libs/tom-select/dist/js/tom-select.base.min.js') }}" ></script>
-<script src="{{ asset('dist/libs/tinymce/tinymce.min.js') }}" ></script>
-<script src="{{ asset('dist/libs/star-rating.js/dist/star-rating.min.js') }}" ></script>
+<script data-navigate-once src="{{ asset('dist/js/tabler.min.js') }}" ></script>
+<script data-navigate-once src="{{ asset('dist/js/demo.min.js') }}" ></script>
+<script data-navigate-once src="{{ asset('dist/js/custom.js') }}" ></script>
+<script data-navigate-once src="{{ asset('dist/libs/nouislider/dist/nouislider.min.js') }}" ></script>
+<script data-navigate-once src="{{ asset('dist/libs/litepicker/dist/litepicker.js') }}" ></script>
+<script data-navigate-once src="{{ asset('dist/libs/tom-select/dist/js/tom-select.base.min.js') }}" ></script>
+<script data-navigate-once src="{{ asset('dist/libs/tinymce/tinymce.min.js') }}" ></script>
+<script data-navigate-once src="{{ asset('dist/libs/star-rating.js/dist/star-rating.min.js') }}" ></script>
 @include('future::components.scripts.swal')
 @include('future::components.scripts.toast')
-@include('future::components.page-loader')
-@livewireScripts
 @yield('script')
+@livewireScripts
 </body>
 </html>
