@@ -3,7 +3,7 @@
 namespace Future\Table\Future\Tables\Traits;
 
 use Livewire\Attributes\Url;
-
+use Livewire\Attributes\Session;
 /**
  * Trait SearchTrait
  *

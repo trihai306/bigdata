@@ -56,7 +56,7 @@
 <script data-navigate-once src="{{ asset('dist/libs/nouislider/dist/nouislider.min.js') }}" ></script>
 <script data-navigate-once src="{{ asset('dist/libs/litepicker/dist/litepicker.js') }}" ></script>
 <script data-navigate-once src="{{ asset('dist/libs/tom-select/dist/js/tom-select.base.min.js') }}" ></script>
-<script data-navigate-once src="{{ asset('dist/libs/tinymce/tinymce.min.js') }}" ></script>
+<script data-navigate-once src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js" integrity="sha512-6JR4bbn8rCKvrkdoTJd/VFyXAN4CE9XMtgykPWgKiHjou56YDJxWsi90hAeMTYxNwUnKSQu9JPc3SQUg+aGCHw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script data-navigate-once src="{{ asset('dist/libs/star-rating.js/dist/star-rating.min.js') }}" ></script>
 @include('future::components.scripts.swal')
 @include('future::components.scripts.toast')

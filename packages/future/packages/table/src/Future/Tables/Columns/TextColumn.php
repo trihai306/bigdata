@@ -50,7 +50,7 @@ class TextColumn extends Column
         $this->renderCallback = function($model,$value) use ($colorMap,$labelMap) {
             $color = $colorMap[$value] ?? 'secondary'; // Mặc định là màu 'secondary' nếu không khớp
             $label = $labelMap[$value] ?? $value; // Mặc định là giá trị nếu không khớp
-            return "<span class='badge bg-{$color}'>{$label}</span>";
+            return "<span class='badge text-white bg-{$color}'>{$label}</span>";
         };
         return $this;
     }
@@ -123,7 +123,7 @@ class TextColumn extends Column
                 <button class='btn btn-sm btn-icon btn-soft-primary btn-copy' data-clipboard-text='{$value}' data-bs-toggle='tooltip' data-bs-placement='top' title='Copy'>
                     <i class='far fa-copy'></i>
                 </button>
-            "); // Copy giá trị
+            ");
         }
 
         $renderedValue = new HtmlString($this->renderCallback ? call_user_func($this->renderCallback, $model, $value) : $value);

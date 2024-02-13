@@ -30,15 +30,7 @@ class UserMessageEvent implements ShouldBroadcast
 
     public function broadcastWith()
     {
-        $message = [
-            'id' => $this->message['id'],
-            'conversation_id' => $this->message['conversation_id'],
-            'sender_id' => $this->message['sender_id'],
-            'content' => $this->message['content'],
-            'type' => $this->message['type'],
-            'created_at' => $this->message['created_at']->diffForHumans(),
-            'sender' => $this->sender,
-        ];
-        return ['message' => $message, 'sender' => $this->sender];
+        \Log::info($this->message);
+        return ['message' => $this->message, 'sender' => $this->sender];
     }
 }

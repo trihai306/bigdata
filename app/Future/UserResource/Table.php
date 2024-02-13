@@ -9,7 +9,8 @@ use Future\Table\Future\Tables\Actions\Actions;
 use Future\Table\Future\Tables\Columns\ImageColumn;
 use Future\Table\Future\Tables\Columns\TextColumn;
 use Future\Table\Future\Tables\FilterInput;
-use Illuminate\Database\Eloquent\Model;
+use Future\Table\Future\Tables\Headers\Actions\ResetAction;
+
 
 class Table extends BaseTable
 {
@@ -31,9 +32,16 @@ class Table extends BaseTable
                     return "<span class='badge bg-primary'>{$role->name}</span>";
                 })->implode(' ');
             }),
-            TextColumn::make('status', __('user_status'))->renderHtml(function (User $user) {
-                return $user->status == 'active' ? "<span class='badge bg-success'>{$user->status}</span>" : "<span class='badge bg-danger'>{$user->status}</span>";
-            }),
+            TextColumn::make('status', __('user_status'))->badge(
+                [
+                    'active' => 'success',
+                    'inactive' => 'danger',
+                ],
+                [
+                    'active' => __('active'),
+                    'inactive' => __('inactive'),
+                ]
+            ),
             TextColumn::make('gender',__('gender'))->badge([
                 'male'=>'primary',
                 'female'=>'danger',
@@ -54,24 +62,25 @@ class Table extends BaseTable
         ];
     }
 
-    protected function actions(Actions $actions, Model $data = null)
+    protected function actions(Actions $actions)
     {
         return $actions->create([
-            Action::make('edit', __('edit'), 'fas fa-edit')->setLink(route('admin.users.edit', $data->id)),
-            Action::make('delete', __('delete'), 'fas fa-trash-alt')->setConfirm(function () use ($data) {
-                return [
-                    'message' => __('Are you sure you want to delete this user?'),
-                    'id' => $data->id,
-                    'nameMethod' => 'delete'
-                ];
+            Action::make('edit', __('edit'), 'fas fa-edit')->setLink(function ($data) {
+                return route('admin.users.edit', $data->id);
+            }),
+            Action::make('delete', __('delete'), 'fas fa-trash-alt')->setConfirm(function ($data) {
+                return ['message' => __('Are you sure you want to delete this permission?'), 'id' => $data->id, 'nameMethod' => 'delete'];
             }),
         ]);
     }
 
-    protected function headerAction()
+    protected function headerActions(): array
     {
         return [
-
+            ResetAction::make(),
+            \Future\Table\Future\Tables\Headers\Actions\Action::make('create', __('future::messages.add_data'))->to(route($this->urlCreate)),
+            \Future\Table\Future\Tables\Headers\Actions\Action::make('export', __('future::messages.export'))
+                ->modal(__('future::messages.export'),\App\Future\UserResource\Modal\Form::class)
         ];
     }
 }

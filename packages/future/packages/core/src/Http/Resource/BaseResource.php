@@ -10,13 +10,13 @@ use Illuminate\Http\Request;
 
 abstract class BaseResource extends Controller
 {
-    protected BaseTable $table;
-    protected BaseForm $form;
+    public ?BaseTable $table = null;
+    public ?BaseForm $form = null;
     protected $routeName = null;
 
     public function __construct(
-        BaseTable $table,
-        BaseForm $form
+        BaseTable $table = null,
+        BaseForm $form = null
     ) {
         $this->table = $table;
         $this->form = $form;

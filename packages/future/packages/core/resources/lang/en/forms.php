@@ -4,4 +4,5 @@ return [
     'save' => 'Save',
     'please_wait' => 'Please wait...',
     'reset' => 'Reset',
+    'close' => 'Close',
 ];

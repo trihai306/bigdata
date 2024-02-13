@@ -2,6 +2,7 @@
 
 namespace Future\Table\Future\Tables\Actions;
 
+use Future\Form\Future\ModalForm;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Livewire;
 
@@ -17,21 +18,14 @@ class Action
     public string $label;
     public ?string $icon;
     public ?int $id;
-    public Model $data;
+    public $data;
     public ?string $link = null;
-    public ?string $modalId=null; // new property
-    public ?string $tooltip=null; // tooltip for the action
-    public bool $disabled = false; // disables the action if true
-    public array $SweetAlert = []; // new property
-
-    /**
-     * Constructor
-     *
-     * @param string $name
-     * @param string $label
-     * @param string|null $icon
-     * @param int|null $id
-     */
+    public ?string $form = null;
+    public ?string $tooltip=null;
+    public bool $disabled = false;
+    public array $SweetAlert = [];
+    public bool $modal = false;
+    private array $postSetDataQueue = [];
     public function __construct(string $name, string $label, ?string $icon = null)
     {
         $this->name = $name;
@@ -46,9 +40,9 @@ class Action
      * @param string $label
      * @param string|null $icon
      */
-    public static function make(string $name, string $label, ?string $icon = null): self
+    public static function make(string $name, string $label, ?string $icon = null,?Model $data = null): self
     {
-        return new self($name, $label, $icon);
+        return new self($name, $label, $icon,$data);
     }
 
 
@@ -57,32 +51,26 @@ class Action
         return $this;
     }
 
-    public function setData(Model $data): self {
+    public function setData(Model $data) {
         $this->data = $data;
+        $this->id = $data->id;
+        while (!empty($this->postSetDataQueue)) {
+            $function = array_shift($this->postSetDataQueue);
+            $function($this);
+        }
         return $this;
     }
 
 
-    /**
-     * Set modal ID
-     *
-     * This is a description for this method
-     *
-     * @param string $modalId
-     * @return $this
-     */
-    public function setModalId(string $modalId): self
+    public function modal(string $title,string $form): self
     {
-        $this->modalId = $modalId;
+        $this->form = $form;
+        $this->link = null;
+        $this->modal = true;
         return $this;
     }
 
 
-    /**
-     * Render action
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
-     */
 
     public function setLivewireMethod(string $livewireMethod, ?string $livewireParameter = null): self
     {
@@ -109,8 +97,16 @@ class Action
 
     public function setConfirm(array|callable $options): self
     {
+        if ($this->data === null) {
+           if (is_callable($options)) {
+               $this->postSetDataQueue[] = function($self) use ($options) {
+                   $self->setConfirm($options);
+               };
+               return $this;
+            }
+        }
         if (is_callable($options)) {
-            $options = $options();
+            $options = $options($this->data);
         }
 
         $this->sweetAlert = [
@@ -123,6 +119,13 @@ class Action
 
     public function setLabel(string|callable $label): self
     {
+        if ($this->data === null) {
+            $this->postSetDataQueue[] = function($self) use ($label) {
+                $self->setLabel($label);
+            };
+            return $this;
+        }
+
         if (is_callable($label)) {
             $label = $label();
         }
@@ -134,6 +137,13 @@ class Action
 
     public function setIcon(string|callable $icon): self
     {
+        if ($this->data === null) {
+            $this->postSetDataQueue[] = function($self) use ($icon) {
+                $self->setIcon($icon);
+            };
+            return $this;
+        }
+
         if (is_callable($icon)) {
             $icon = $icon();
         }
@@ -156,10 +166,16 @@ class Action
 
     public function setLink(string|callable $link): self
     {
-        if (is_callable($link)) {
-            $link = $link();
+        if ($this->data === null) {
+            $this->postSetDataQueue[] = function($self) use ($link) {
+                $self->setLink($link);
+            };
+            return $this;
         }
-
+        if (is_callable($link)) {
+            $link = $link($this->data);
+        }
+        $this->modal = false;
         $this->link = $link;
 
         return $this;
@@ -167,6 +183,13 @@ class Action
 
     public function setTooltip(string|callable $tooltip): self
     {
+        if ($this->data === null) {
+            $this->postSetDataQueue[] = function($self) use ($tooltip) {
+                $self->setTooltip($tooltip);
+            };
+            return $this;
+        }
+
         if (is_callable($tooltip)) {
             $tooltip = $tooltip();
         }
@@ -190,5 +213,10 @@ class Action
     {
         $renderFunction($this);
         return $this;
+    }
+
+    public function render()
+    {
+        return view('future::base.actions.action', ['action' => $this]);
     }
 }

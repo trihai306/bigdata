@@ -13,7 +13,6 @@ Route::group(['middleware' => ['web', 'guest']], function () {
 Route::group(config('core.core.route'), function () {
     $directory = app_path('Future');
     $files = File::allFiles($directory);
-
     $filesCollection = collect($files);
 
     $resourceFiles = $filesCollection->filter(function ($file) {
@@ -22,12 +21,32 @@ Route::group(config('core.core.route'), function () {
 
     $resourceFiles->each(function ($file) {
         $classBasename = str_replace(['/', '.php'], ['\\', ''], $file->getRelativePathName());
-        //xóa chuỗi classbasename thành 2 bỏ phần đuôi Resource.php và chữ không in hoa
         $name = str_replace('Resource', '', $classBasename);
         $name = Str::lower($name) . 's';
         $className = 'App\\Future\\' . $classBasename;
         $resource = new $className();
         $routeName = $resource->getRouteName() ?? $name;
-        Route::resource($routeName, $className)->only(['index', 'create', 'edit'])->names($name);
+        $only = [];
+        if($resource->form){
+            $only[] = 'create';
+            $only[] = 'edit';
+        }
+        if($resource->table){
+            $only[] = 'index';
+        }
+
+        Route::resource($routeName, $className)->only($only)->names($name);
+        $methods = get_class_methods($className);
+        $remove = ['__construct', 'getRouteName', 'index', 'create', 'store', 'show', 'edit', 'update', 'destroy',
+            'callAction','middleware','validate','validateWith','authorize','getMiddleware','__call','authorizeForUser','authorizeResource','validateWithBag'];
+        $methods = array_diff($methods, $remove);
+        foreach ($methods as $method) {
+            //lấy ra các phương thức của class public
+            if (strpos($method, '__') !== 0) {
+                $name = $routeName . '.' . $method;
+                route::get( $routeName . '/' . $method, $className . '@' . $method)->name($name);
+
+            }
+        }
     });
 });

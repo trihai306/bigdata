@@ -9,10 +9,10 @@ use Illuminate\Support\Facades\Storage;
 class ImageColumn extends Column
 {
     protected int $height=60;
-    protected string $disk = 'public'; // Default disk is 'public'
+    protected string $disk = 'public';
     protected bool $circular = false;
     protected  $stacked;
-    protected string $defaultImageUrl = ''; // Default image URL
+    protected string $defaultImageUrl = '';
 
     public static function make(string $name, string $label = null)
     {
@@ -59,7 +59,6 @@ class ImageColumn extends Column
 
     public function render(Model $model)
     {
-       //kiểm tra nếu $model->{$this->name} là một đường dẫn không phải là domain thì sẽ trả về đường dẫn đầy đủ
         if (!filter_var($model->{$this->name}, FILTER_VALIDATE_URL)) {
             $model->{$this->name} = Storage::disk($this->disk)->url($model->{$this->name});
         }

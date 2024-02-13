@@ -123,11 +123,10 @@
                     showToast(notification.title, notification.time, notification.content);
                 }
             });
-        window.Echo.private(`App.Models.User.{{auth()->id()}}`)
-            .listen('UserMessageEvent', (e) => {
-                var now = new Date();
-                showToast(e.sender.name, now, e.message.content);
-            });
-
+        // viết livewire để lắng nghe sự kiện
+        window.Livewire.on('notification', (e) => {
+            const {title, time, message} = e[0];
+            showToast(title, time, message);
+        });
     });
 </script>

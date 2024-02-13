@@ -3,7 +3,6 @@
 namespace Future\Table\Future;
 
 use Future\Table\Future\Tables\Actions\Actions;
-use Future\Table\Future\Tables\Headers\Actions\ResetAction;
 use Future\Table\Future\Tables\Traits\Can;
 use Future\Table\Future\Tables\Traits\ColumnVisibilityTrait;
 use Future\Table\Future\Tables\Traits\Exportable;
@@ -16,6 +15,7 @@ use Future\Table\Future\Tables\Traits\SelectTrait;
 use Future\Table\Future\Tables\Traits\SortTrait;
 use Illuminate\Database\Eloquent\Model;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 use Livewire\WithPagination;
@@ -24,49 +24,27 @@ use Livewire\WithPagination;
 
 abstract class BaseTable extends Component
 {
-    use WithPagination, FilterColumnsTrait, PaginationTrait, ColumnVisibilityTrait, SortTrait, SearchTrait, SelectTrait, Exportable;
-    use Functions,Importable,Can;
+    use WithPagination, FilterColumnsTrait, PaginationTrait, ColumnVisibilityTrait, SortTrait, SearchTrait, SelectTrait;
+    use Functions,Can;
     use WithFileUploads;
     protected string $view = 'future::base-table';
-    private $actions;
     protected array $select = [];
     protected string $model;
     public string $urlCreate = '';
+    public $forms = [];
 
-    /**
-     * Set the view for the component.
-     *
-     * @param string $view
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
-     */
     public function placeholder()
     {
         return view('future::livewire.placeholder');
     }
 
-    /**
-     * Set the model for the table.
-     *
-     * @param mixed $model
-     * @return void
-     */
     public function setModel(string $model) : void
     {
         $this->model = $model;
     }
 
-    /**
-     * Define the columns for the table.
-     *
-     * @return array
-     */
     abstract protected function columns() : array;
 
-    /**
-     * Define the visibility of the columns.
-     *
-     * @return array
-     */
     protected function defineColumns() : array
     {
         $columns = $this->columns();
@@ -80,47 +58,29 @@ abstract class BaseTable extends Component
 
     protected function headerActions() : array
     {
-        return [
-            ResetAction::make(),
-        ];
+        return [];
     }
-    /**
-     * Define the filters for the table.
-     *
-     * @return array
-     */
+
     abstract protected function filters() : array;
 
-    /**
-     * Define the filters for the table.
-     *
-     * @return array
-     */
+
     protected function defineFilters() : array
     {
         return $this->filters();
     }
 
-    abstract protected function actions(Actions $actions, Model $data = null);
+    abstract protected function actions(Actions $actions);
 
-    /**
-     * Define the actions for the table.
-     *
-     * @param $id
-     * @return array
-     */
     protected function defineActions(Model $data = null)
     {
-        return $this->actions(new Actions(), $data)->render();
+        return $this->actions(new Actions())->setData($data)->schema()->render();
     }
 
-    /**
-     * Get the query for the table.
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
-     *
-     * @throws \Exception
-     */
+    protected function getActions()
+    {
+        return $this->actions(new Actions());
+    }
+
     #[Computed]
     protected function query()  : \Illuminate\Database\Eloquent\Builder
     {
@@ -139,11 +99,6 @@ abstract class BaseTable extends Component
         return $query;
     }
 
-    /**
-     * Apply the table query, including search and sort.
-     *
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
     #[Computed]
     protected function applyTableQuery()    : \Illuminate\Database\Eloquent\Builder
     {
@@ -164,29 +119,27 @@ abstract class BaseTable extends Component
         return $query;
     }
 
-    /**
-     * Reset the table filters and page.
-     *
-     * @return void
-     */
     public function resetTable() : void
     {
         $this->resetFilters();
         $this->resetPage();
     }
 
-    /**
-     * Render the table.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
-     */
-    public function render() : \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+    public function perPage()
     {
-        $data = $this->applyTableQuery()->fastPaginate($this->perPage, pageName: 'page')->onEachSide(1);
+        return $this->perPage;
+    }
 
+    #[On('refreshTable')]
+    public function render()
+    {
+        $this->forms = $this->actions(new Actions())->forms();
+        $actions = $this->getActions();
+        $actions = $actions->actions;
+        $data = $this->applyTableQuery()->fastPaginate($this->perPage, pageName: 'page')->onEachSide(1);
         return view($this->view, [
             'columns' => $this->defineColumns(),
-            'actions' => $this->actions,
+            'actions' => $actions,
             'headerActions' => $this->headerActions(),
             'Input_filters' => $this->defineFilters(),
             'data' => $data,

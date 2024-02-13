@@ -14,7 +14,6 @@ class ResetAction
         self::$name = $name ?? self::$name;
         self::$icon = $icon;
         self::$color = $color;
-
         return new static;
     }
 

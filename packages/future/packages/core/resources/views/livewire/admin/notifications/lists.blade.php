@@ -1,4 +1,4 @@
-<div id="chat" class="bg-body offcanvas offcanvas-end" wire:ignore.self tabindex="-1" aria-labelledby="offcanvasRightLabel">
+<div id="notification" class="bg-body offcanvas offcanvas-end" wire:ignore.self tabindex="-1" aria-labelledby="offcanvasRightLabel">
     <div class="offcanvas-header">
         <h3 class="mt-2">Thông báo</h3>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>

@@ -124,4 +124,8 @@ class Field
         return $this;
     }
 
+    public function live()
+    {
+        return $this;
+    }
 }

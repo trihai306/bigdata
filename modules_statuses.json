@@ -1,8 +1,4 @@
 {
     "Dashboard": true,
-    "Modules": true,
-    "User": true,
-    "Conversation": true,
-    "Location": true,
-    "DataSystem": true
+    "Modules": true
 }

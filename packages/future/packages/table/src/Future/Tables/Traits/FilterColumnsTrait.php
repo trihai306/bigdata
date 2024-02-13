@@ -1,7 +1,6 @@
 <?php
 
 namespace Future\Table\Future\Tables\Traits;
-
 use Livewire\Attributes\Url;
 
 trait FilterColumnsTrait {

@@ -7,15 +7,15 @@ use Illuminate\Support\HtmlString;
 
 class Column
 {
-    public $name;
-    public $label;
-    public $sortable;
-    public $searchable;
-    public $visible;
-    public $fontWeightClass = '';
+    public string $name;
+    public string $label;
+    public bool $sortable;
+    public bool $searchable;
+    public bool $visible;
+    public string $fontWeightClass = '';
     public $renderCallback;
-    public $width;
-    public $textAlign;
+    public ?string $width = null;
+    public ?string $textAlign;
 
 
     public function __construct(string $name, string $label = null, bool $sortable = false,  bool $searchable = false, bool $visible = true, callable $renderCallback = null)

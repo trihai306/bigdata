@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Jobs\SeedUsersJob;
+use Database\Factories\UserFactory;
 use DB;
 use Illuminate\Database\Seeder;
 use App\Models\User;
@@ -25,12 +26,7 @@ class UserSeeder extends Seeder
                 'remember_token' => Str::random(10),
             ]);
         }
-//        for ($i = 0; $i < 10000; $i++) {
-//            $userId = 1; // ID của người dùng mà bạn muốn gửi thông điệp
-//            $message = 'Hello, this is a message'; // Thông điệp bạn muốn gửi
-//            $sender = 'Sender Name'; // Tên của người gửi thông điệp
-//
-//            event(new \App\Events\UserMessageEvent($userId, $message, $sender));
-//        }
+      //seed 100 users
+        UserFactory::new()->count(100)->create();
     }
 }

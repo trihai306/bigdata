@@ -17,9 +17,9 @@ return new class extends Migration
             $table->foreignId('sender_id')->constrained('users')->onDelete('cascade');
             $table->unsignedBigInteger('reply_to_id')->nullable(); // Trường mới
             $table->foreign('reply_to_id')->references('id')->on('messages')->onDelete('set null'); // Khóa ngoại mới
-            $table->text('content');
-            $table->enum('type', ['text', 'image', 'video', 'link']);
-            $table->string('attachment_url')->nullable();
+            $table->text('content')->nullable();
+            $table->enum('type', ['text', 'images', 'videos', 'links','files','audios']);
+            $table->json('attachment_url')->nullable();
             $table->timestamps(); // Tự động thêm cột created_at và updated_at
             $table->softDeletes(); // Cho phép Soft Deletes
         });

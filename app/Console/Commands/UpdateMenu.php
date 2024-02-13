@@ -13,14 +13,15 @@ class UpdateMenu extends Command
     protected $signature = 'menu:update';
     protected $description = 'Update the menu based on web routes';
 
-    protected $skipNames = ['create', 'show','unisharp.lfm','ignition','forgot-password','sanctum','livewire.upload-file', 'store', 'update', 'destroy', 'edit'];
+    protected $skipNames = ['create', 'show','showRole',
+        'unisharp.lfm','ignition','forgot-password','sanctum','livewire.upload-file', 'store', 'update', 'destroy', 'edit'];
     protected $skipUris = ['login', 'register', 'logout', 'forgot-password', 'reset-password'];
 
     public function handle()
     {
         $routes = Route::getRoutes();
         $admin = $this->getAdminRole();
-
+        Menu::truncate();
         foreach ($routes as $route) {
             if ($this->shouldSkipRoute($route)) {
                 continue;
@@ -71,8 +72,10 @@ class UpdateMenu extends Command
             $this->info('Skipping route with no name');
             return;
         }
+        //xóa toàn bộ menu
 
-        Menu::updateOrCreate(
+
+        Menu::Create(
             [
                 'url' => $route->uri,
                 'title' => $route->uri === 'admin' ? 'Dashboard' : ucfirst(str_replace('admin/', '', $route->uri)),

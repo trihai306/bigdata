@@ -1,6 +1,6 @@
 <label>
     <input type="text" class="form-control form-control-rounded form-control-solid  ps-13"
-           wire:model.live="search"
+           wire:model.live.300ms="search"
            placeholder="{{ __('future::messages.search') }}"/>
     <span class="input-icon-addon">
                               <div class="spinner-border spinner-border-sm text-secondary" wire:loading

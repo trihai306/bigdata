@@ -69,23 +69,31 @@ class ListConversation extends Component
 
     public function createConversation()
     {
-        $this->validate([
-            'user' => 'required|exists:users,id',
-        ]);
-        $user = auth()->user();
-        $newUser = User::find($this->user);
-        $conversation = $user->conversations()->whereHas('users', function ($query) use ($newUser) {
-            $query->where('id', $newUser->id);
-        })->first();
-        if (!$conversation) {
-            $conversation = conversation::create([
-                'type' => 'private',
+        try {
+            $this->validate([
+                'user' => 'required|exists:users,id',
             ]);
-            // Attach the users to the conversation
-            $conversation->users()->attach([$user->id, $newUser->id]);
+            $user = auth()->user();
+            $newUser = User::find($this->user);
+            $conversation = $user->conversations()->whereHas('users', function ($query) use ($newUser) {
+                $query->where('id', $newUser->id);
+            })->first();
+            if (!$conversation) {
+                $conversation = conversation::create([
+                    'type' => 'private',
+                ]);
+                // Attach the users to the conversation
+                $conversation->users()->attach([$user->id, $newUser->id]);
+            }
+            $this->conversationId = $conversation->id;
+            $this->dispatch('changeConversation', $this->conversationId);
+        }catch (\Exception $e){
+            $this->dispatch('notification', [
+                'title' => 'Error',
+                'message' => $e->getMessage(),
+                'time' => now()->timestamp,
+            ]);
         }
-        $this->conversationId = $conversation->id;
-        $this->dispatch('changeConversation', $this->conversationId);
     }
 
     #[On('messageSent')]

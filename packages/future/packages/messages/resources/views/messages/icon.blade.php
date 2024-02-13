@@ -53,21 +53,23 @@
                             </div>
                         </div>
                     @endforeach
-                    <li class="list-group-item" x-data="{}" x-intersect="$wire.loadMore()">
-                        <div class="row align-items-center">
-                            <div class="col-auto">
-                                <div class="avatar avatar-rounded placeholder"></div>
-                            </div>
-                            <div class="col-7">
-                                <div class="placeholder placeholder-xs col-9"></div>
-                                <div class="placeholder placeholder-xs col-7"></div>
-                            </div>
-                            <div class="col-2 ms-auto text-end">
-                                <div class="placeholder placeholder-xs col-8"></div>
-                                <div class="placeholder placeholder-xs col-10"></div>
-                            </div>
-                        </div>
-                    </li>
+                   @if($conversations->total() > 5 && $conversations->currentPage() < $conversations->lastPage())
+                            <li class="list-group-item" x-data="{}" x-intersect="$wire.loadMore()">
+                                <div class="row align-items-center">
+                                    <div class="col-auto">
+                                        <div class="avatar avatar-rounded placeholder"></div>
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="placeholder placeholder-xs col-9"></div>
+                                        <div class="placeholder placeholder-xs col-7"></div>
+                                    </div>
+                                    <div class="col-2 ms-auto text-end">
+                                        <div class="placeholder placeholder-xs col-8"></div>
+                                        <div class="placeholder placeholder-xs col-10"></div>
+                                    </div>
+                                </div>
+                            </li>
+                   @endif
                 @else
                     <div class="list-group-item">
                         <div class="row align-items-center">

@@ -2,90 +2,81 @@
 
 namespace Future\Table\Future\Tables\Actions;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\HtmlString;
 
-class Actions {
+use Illuminate\Database\Eloquent\Model;
+
+class Actions
+{
     /**
      * @var Action[]
      */
-    private array $actions = [];
-    protected ?Model $data = null;
+    public array $actions = [];
     private string $renderMethod = 'renderAsDropdown';
-    /**
-     * Add action to actions list
-     *
-     * @param Action $action
 
-     */
-    public function addAction(Action $action, Model $data = null): void {
+    public $forms = [];
+    public ?Model $data = null;
 
-        if ($data) {
-            $action->setId($data->id);
-            $action->setData($data);
-        }
-        $this->actions[] = $action;
-    }
-    /**
-     * Initialize list of actions
-     *
-     * @param Action[] $actions
-     */
-    public function schema(array $actions,Model $data = null): void {
-        foreach ($actions as $action) {
-            $this->addAction($action,$data);
-        }
-    }
 
-    /**
-     * Render actions as buttons
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
-     */
-    public function renderAsButtons(): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
+    public function schema()
     {
-        return view('future::base.buttons', ['actions' => $this->actions]);
+        $actions = $this->actions;
+        foreach ($actions as $action) {
+            $action->setData($this->data);
+            if ($action->form) {
+                $this->setForm($action->form, $action->name, $action->label);
+            }
+        }
+        return $this;
     }
 
-    /**
-     * Render actions as dropdown
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application
-     */
-    public function renderAsDropdown() {
-        return view('future::base.dropdown', ['actions' => $this->actions]);
+    public function forms()
+    {
+        $action = $this->actions;
+        foreach ($action as $act) {
+            if ($act->form) {
+                $this->setForm($act->form, $act->name, $act->label);
+            }
+        }
+        return $this->forms;
     }
 
-    public function render() {
+    protected function renderAsButtons()
+    {
+        return view('future::base.buttons', ['actions' => $this->actions, 'data' => $this->data]);
+    }
+
+    protected function renderAsDropdown()
+    {
+        return view('future::base.dropdown', ['actions' => $this->actions, 'data' => $this->data]);
+    }
+
+    public function render()
+    {
         return $this->{$this->renderMethod}();
     }
 
-    public function setData(Model $data=null)
+    public static function create(array $actions, string $renderMethod = 'renderAsDropdown'): self
     {
-        $this->data = $data;
-    }
-
-    /**
-     * Create and initialize Actions instance
-     *
-     * @param Action[] $actions
-     * @param string $renderMethod
-     * @return Actions
-     */
-    public static function create(array $actions,Model $data = null,string $renderMethod = 'renderAsDropdown'): self {
 
         $instance = new static();
-        $instance->schema($actions,$data);
-        $instance->setRenderMethod($renderMethod);
+        $instance->actions = $actions;
+        $instance->renderMethod = $renderMethod;
         return $instance;
     }
 
-    /**
-     * Set rendering method
-     *
-     * @param string $method
-     */
-    private function setRenderMethod(string $method = 'renderAsDropdown'): void {
+    public function setForm($form, $name, $label): void
+    {
+        $this->forms[] = ['form' => $form, 'name' => $name, 'label' => $label];
+    }
+
+    public function setData($data)
+    {
+        $this->data = $data;
+        return $this;
+    }
+
+    private function setRenderMethod(string $method = 'renderAsDropdown'): void
+    {
         if (method_exists($this, $method)) {
             $this->renderMethod = $method;
         }
