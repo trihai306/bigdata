@@ -23,8 +23,9 @@ class AuthController extends Controller
                 'password' => 'required|string|min:6',
                 'confirm_password' => 'required|string|same:password',
                 'address' => 'required|string',
+                'store_name' => 'required|string',
                 'type' => 'required|string|in:buyer,seller',
-                'field' => 'required_if:type,seller|string|in:leather_goods,clothing',
+                'field' => 'required_if:type,seller|string|in:leather_goods,clothing,all',
             ]);
 
             $data['password'] = Hash::make($data['password']);

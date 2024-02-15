@@ -7,7 +7,6 @@ use Livewire\WithPagination;
 
 class Notifications extends Component
 {
-    public $notifications;
     public $page = 10;
 
     public function getListeners()
@@ -19,20 +18,8 @@ class Notifications extends Component
 
     public function render()
     {
-        $this->notifications = auth()->user()->notifications()->limit($this->page)->get();
-
-        return view('future::livewire.admin.notifications.lists');
-    }
-
-    public function placeholder()
-    {
-        return <<<'HTML'
-    <div class="d-flex justify-content-center align-items-center" style="height: 100vh; width: 100%;">
-        <div class="spinner-border text-primary" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-    </div>
-HTML;
+        $notifications = auth()->user()->notifications()->paginate($this->page);
+        return view('future::livewire.admin.notifications.lists', compact('notifications'));
     }
 
     public function reload()

@@ -79,8 +79,6 @@ class Table extends BaseTable
         return [
             ResetAction::make(),
             \Future\Table\Future\Tables\Headers\Actions\Action::make('create', __('future::messages.add_data'))->to(route($this->urlCreate)),
-            \Future\Table\Future\Tables\Headers\Actions\Action::make('export', __('future::messages.export'))
-                ->modal(__('future::messages.export'),\App\Future\UserResource\Modal\Form::class)
         ];
     }
 }

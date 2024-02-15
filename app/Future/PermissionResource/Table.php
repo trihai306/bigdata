@@ -8,6 +8,7 @@ use Future\Table\Future\Tables\Actions\Action;
 use Future\Table\Future\Tables\Actions\Actions;
 use Future\Table\Future\Tables\Columns\TextColumn;
 use Future\Table\Future\Tables\FilterInput;
+use Future\Table\Future\Tables\Headers\Actions\ResetAction;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Models\Permission;
 
@@ -43,6 +44,8 @@ class Table extends BaseTable
 
     protected function headerActions(): array
     {
-        return [\Future\Table\Future\Tables\Headers\Actions\Action::make('create', __('Create Permission'))->modal('create', Form::class)];
+        return [
+            ResetAction::make(),
+            \Future\Table\Future\Tables\Headers\Actions\Action::make('create', __('Create Permission'))->modal('create', Form::class)];
     }
 }

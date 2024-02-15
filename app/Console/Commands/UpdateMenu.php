@@ -14,7 +14,9 @@ class UpdateMenu extends Command
     protected $description = 'Update the menu based on web routes';
 
     protected $skipNames = ['create', 'show','showRole',
-        'unisharp.lfm','ignition','forgot-password','sanctum','livewire.upload-file', 'store', 'update', 'destroy', 'edit'];
+        'unisharp.lfm','ignition','forgot-password','sanctum','livewire.upload-file', 'store', 'update', 'destroy', 'edit'
+    ,'debugbar'
+    ];
     protected $skipUris = ['login', 'register', 'logout', 'forgot-password', 'reset-password'];
 
     public function handle()

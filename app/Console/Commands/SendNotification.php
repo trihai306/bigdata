@@ -33,8 +33,9 @@ class SendNotification extends Command
 
         $user = User::findOrFail($userId);
         $notification = new UserNotification($userId, 'Tiêu đề thông báo', 'Nội dung thông báo');
-        $user->notify($notification);
-
+        for($i = 0; $i < 10; $i++) {
+            $user->notify($notification);
+        }
         $this->info('Notification sent successfully.');
 
         return 0;
