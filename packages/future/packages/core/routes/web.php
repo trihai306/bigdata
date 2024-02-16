@@ -41,11 +41,10 @@ Route::group(config('core.core.route'), function () {
             'callAction','middleware','validate','validateWith','authorize','getMiddleware','__call','authorizeForUser','authorizeResource','validateWithBag'];
         $methods = array_diff($methods, $remove);
         foreach ($methods as $method) {
-            //lấy ra các phương thức của class public
-            if (strpos($method, '__') !== 0) {
+            //lấy ra các phương thức của class public không có parameter và không phải là magic method
+            if ((new ReflectionMethod($className, $method))->isPublic() && (new ReflectionMethod($className, $method))->getNumberOfParameters() == 0 && !Str::startsWith($method, '__')){
                 $name = $routeName . '.' . $method;
                 route::get( $routeName . '/' . $method, $className . '@' . $method)->name($name);
-
             }
         }
     });

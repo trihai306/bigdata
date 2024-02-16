@@ -3,8 +3,9 @@
 namespace App\Restify;
 
 
+use App\Models\Comment;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
-use Modules\Post\app\Models\Comment;
+
 
 class CommentRepository extends Repository
 {

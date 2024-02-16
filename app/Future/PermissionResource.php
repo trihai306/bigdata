@@ -18,7 +18,7 @@ class PermissionResource extends BaseResource
         );
     }
 
-    public function role()
+    public function roles()
     {
 
         return view('role');
@@ -31,7 +31,7 @@ class PermissionResource extends BaseResource
 
             return view('showRole', compact('role'));
         } catch (\Exception $e) {
-            return redirect()->route('roles.index')->with('error', 'Role not found');
+            return redirect()->route('admin.dashboard.index')->with('error', 'Role not found');
         }
     }
 }

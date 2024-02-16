@@ -163,7 +163,6 @@ return [
         Spatie\Permission\PermissionServiceProvider::class,
         RestifyServiceProvider::class,
         UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
         JeroenG\Packager\PackagerServiceProvider::class,
         \Future\Core\CoreServiceProvider::class,
         \Future\Form\FormServiceProvider::class,

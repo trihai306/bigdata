@@ -3,14 +3,15 @@
 namespace App\Restify;
 
 use App\Events\UserPrivateMessageEvent;
+use App\Models\Conversation;
+use App\Models\Message;
 use Binaryk\LaravelRestify\Fields\BelongsTo;
 use Binaryk\LaravelRestify\Fields\HasMany;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Auth;
-use Modules\Conversation\app\Models\Conversation;
-use Modules\Conversation\app\Models\Message;
+
 
 class MessageRepository extends Repository
 {

@@ -2,10 +2,11 @@
 
 	namespace App\Restify;
 
-	use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
+	use App\Models\PostImage;
+    use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
 	use Illuminate\Database\Eloquent\Builder;
 	use Illuminate\Database\Eloquent\Relations\Relation;
-    use Modules\Post\app\Models\PostImage;
+
 
     class PostImagesRepository extends Repository
 	{

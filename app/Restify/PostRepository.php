@@ -2,6 +2,7 @@
 
 namespace App\Restify;
 
+use App\Models\Post;
 use App\Restify\Actions\UploadImagesPostAction;
 use Binaryk\LaravelRestify\Fields\BelongsTo;
 use Binaryk\LaravelRestify\Fields\HasMany;
@@ -9,7 +10,6 @@ use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Request;
-use Modules\Post\app\Models\Post;
 
 class PostRepository extends Repository
 {

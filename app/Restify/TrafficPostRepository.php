@@ -2,8 +2,8 @@
 
 namespace App\Restify;
 
+use App\Models\TrafficPost;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
-use Modules\Post\app\Models\TrafficPost;
 
 class TrafficPostRepository extends Repository
 {

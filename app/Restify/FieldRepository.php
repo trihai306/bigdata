@@ -5,7 +5,8 @@
 
 	use Binaryk\LaravelRestify\Fields\HasMany;
 	use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
-    use Modules\Field\app\Models\Field;
+    use Future\Form\Future\Forms\Field;
+
 
     class FieldRepository extends Repository
 	{

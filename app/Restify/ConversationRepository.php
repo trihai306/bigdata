@@ -2,11 +2,11 @@
 
 namespace App\Restify;
 
+use App\Models\Conversation;
 use Binaryk\LaravelRestify\Fields\HasMany;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Modules\Conversation\app\Models\Conversation;
 
 class ConversationRepository extends Repository
 {

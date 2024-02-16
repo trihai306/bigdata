@@ -5,7 +5,7 @@
         <h3 class="mt-2">Thông báo</h3>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
-    <div class="card h-100 shadow-none border-0 rounded-0 w-100">
+    <div class="card h-100 border-0 rounded-0 w-100">
         <div class="card-body position-relative">
             <div id="rv_activities_scroll" class="position-relative scroll-y me-n5">
                 <div class="timeline scroll-y" style="max-height: 76vh">

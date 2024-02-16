@@ -2,8 +2,9 @@
 
 namespace App\Restify;
 
+use App\Models\UserConversation;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
-use Modules\Conversation\app\Models\UserConversation;
+
 
 class UserConversationRepository extends Repository
 {
