@@ -79,6 +79,6 @@ class Users extends Component
             ->where('name', 'like', '%'.$this->search.'%')
             ->paginate(10);
 
-        return view('user::livewire.roles.view.users', compact('users'));
+        return view('livewire.roles.view.users', compact('users'));
     }
 }

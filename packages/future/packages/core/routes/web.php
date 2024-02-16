@@ -46,6 +46,11 @@ Route::group(config('core.core.route'), function () {
                 $name = $routeName . '.' . $method;
                 route::get( $routeName . '/' . $method, $className . '@' . $method)->name($name);
             }
+            //lấy ra các phương thức của class public có parameter và không phải là magic method
+            if ((new ReflectionMethod($className, $method))->isPublic() && (new ReflectionMethod($className, $method))->getNumberOfParameters() > 0 && !Str::startsWith($method, '__')){
+                $name = $routeName . '.' . $method;
+                route::get( $routeName . '/' . $method . '/{id}', $className . '@' . $method)->name($name);
+            }
         }
     });
 });

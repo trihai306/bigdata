@@ -16,7 +16,7 @@
                                 <div class="timeline-content mb-10 mt-n1">
                                     <div class="pe-3 mb-5">
                                         <div
-                                            class="{{ is_null($notification->read_at) ? 'text-danger' : 'text-success' }} fs-5 fw-semibold mb-2">
+                                            class="{{ is_null($notification->read_at) ? 'text-danger' : 'text-success' }} fs-5 mb-2">
                                             {{$notification->data['title']}} -
                                             {{
                                                 Carbon::parse($notification->created_at)->diffForHumans()
@@ -24,7 +24,7 @@
                                         </div>
                                         <div class="d-flex align-items-center mt-1 fs-6">
                                             <div
-                                                class="{{ is_null($notification->read_at) ? 'text-white' : 'text-secondary' }} me-2 fs-7">{{$notification->data['content']}}</div>
+                                                class="{{ is_null($notification->read_at) ? '' : 'text-secondary' }} me-2 fs-7">{{$notification->data['content']}}</div>
                                         </div>
                                     </div>
                                 </div>
