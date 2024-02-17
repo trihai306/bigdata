@@ -23,8 +23,9 @@ class Field
 
     public static function make(string $name): self
     {
-        return new static(name: $name);
+        return new static($name);
     }
+
 
     public function required(): self
     {

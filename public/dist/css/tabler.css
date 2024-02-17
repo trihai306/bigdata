@@ -16929,7 +16929,7 @@ Navbar vertical
   .navbar-vertical.navbar-expand-lg {
     width: 15rem;
     position: fixed;
-    top: 0;
+    top: 64px;
     left: 0;
     bottom: 0;
     z-index: 1030;
