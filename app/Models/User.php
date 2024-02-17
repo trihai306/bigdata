@@ -6,10 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
-use Modules\Conversation\app\Models\Conversation;
-use Modules\Conversation\app\Models\Message;
-use Modules\Conversation\app\Models\MessageReaction;
-use Modules\Conversation\app\Models\UserConversation;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
