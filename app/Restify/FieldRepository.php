@@ -6,9 +6,7 @@
 	use App\Models\Field;
     use Binaryk\LaravelRestify\Fields\HasMany;
 	use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
-
-
-
+    
     class FieldRepository extends Repository
 	{
 		public static string $model = Field::class;
