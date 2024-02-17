@@ -21,7 +21,7 @@ class Field
         $this->name = $name;
     }
 
-    public static function make(string $name): self
+    public static function make($name): self
     {
         return new static($name);
     }

@@ -3,9 +3,10 @@
 	namespace App\Restify;
 
 
-	use Binaryk\LaravelRestify\Fields\HasMany;
+	use App\Models\Field;
+    use Binaryk\LaravelRestify\Fields\HasMany;
 	use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
-    use Future\Form\Future\Forms\Field;
+
 
 
     class FieldRepository extends Repository
