@@ -89,7 +89,7 @@ class MessageRepository extends Repository
                 $request->request->remove('user_id');
             }
             if (Auth::user()->hasConversation($request->conversation_id)) {
-                if ($request->type == 'image') {
+                if ($request->type == 'images') {
                     $request->merge(['attachment_url' => $request->file('attachment_url')->store('messages')]);
                 }
                 $request->merge(['sender_id' => Auth::id()]);
