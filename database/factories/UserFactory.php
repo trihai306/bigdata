@@ -19,6 +19,7 @@ class UserFactory extends Factory
             'avatar' => $this->faker->imageUrl(),
             'address' => $this->faker->address,
             'birthday' => $this->faker->date(),
+            'store_name' => $this->faker->company,
             'gender' => $this->faker->randomElement(['male', 'female']),
             'password' => bcrypt('password'), // password
             'status' => $this->faker->randomElement(['active', 'inactive']),
