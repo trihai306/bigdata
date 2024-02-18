@@ -21,11 +21,12 @@ return new class extends Migration
             $table->string('avatar')->nullable();
             $table->string('address')->nullable();
             $table->dateTime('birthday')->nullable();
+            $table->string('store_name');
             $table->enum('gender',['male', 'female', 'non-binary', 'genderqueer', 'transgender', 'genderfluid', 'agender'])->nullable();
             $table->string('password');
             $table->enum('status', ['active', 'inactive', 'blocked'])->default('active');
             $table->enum('type', ['buyer','seller'])->default('buyer');
-            $table->enum('field', ['leather_goods', 'clothing'])->nullable();
+            $table->enum('field', ['leather_goods', 'clothing','all'])->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
