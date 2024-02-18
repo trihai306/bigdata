@@ -39,6 +39,6 @@ Route::post('/pusher/auth', function (Illuminate\Http\Request $request) {
         ]
     );
 
-    return $pusher->socket_auth($request->input('channel_name'), $request->input('socket_id'));
+    return response()->json($pusher->socket_auth($request->input('channel_name'), $request->input('socket_id')));
 });
 
