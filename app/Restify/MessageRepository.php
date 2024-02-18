@@ -65,13 +65,11 @@ class MessageRepository extends Repository
 
     public function store(RestifyRequest $request)
     {
-
         try {
             if ($request->conversation_id == null && $request->user_id != null) {
                 if ($request->user_id == Auth::id()) {
                     return response()->json(['message' => 'You cannot send message to yourself'], 403);
                 }
-                //kiểm tra xem đã có conversation giữa 2 người này chưa
                 $conversation = Conversation::whereHas('users', function (Builder $query) use ($request) {
                     $query->where('user_id', $request->user_id);
                 })->whereHas('users', function (Builder $query) {
@@ -80,17 +78,20 @@ class MessageRepository extends Repository
                 if ($conversation) {
                     $request->merge(['conversation_id' => $conversation->id]);
                     $request->request->remove('user_id');
-                    return parent::store($request);
                 }
-                $conversation = Conversation::create(['type' => 'private']);
-                $conversation->users()->attach(Auth::id());
-                $request->merge(['conversation_id' => $conversation->id]);
-                $conversation->users()->attach($request->user_id);
-                $request->request->remove('user_id');
+                else{
+                    $conversation = Conversation::create(['type' => 'private']);
+                    $conversation->users()->attach(Auth::id());
+                    $request->merge(['conversation_id' => $conversation->id]);
+                    $conversation->users()->attach($request->user_id);
+                    $request->request->remove('user_id');
+                }
             }
             if (Auth::user()->hasConversation($request->conversation_id)) {
+
                 if ($request->type == 'images') {
-                    $request->merge(['attachment_url' => $request->file('attachment_url')->store('messages')]);
+                    $request->file('attachment_url')->store('public/images/messages');
+                    $request->merge(['attachment_url' => json_encode(['public/images/messages/'.$request->file('attachment_url')->hashName()])]);
                 }
                 $request->merge(['sender_id' => Auth::id()]);
                 return parent::store($request);
