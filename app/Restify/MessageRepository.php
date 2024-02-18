@@ -42,22 +42,22 @@ class MessageRepository extends Repository
 
     public function index(RestifyRequest $request)
     {
-//        return parent::index($request);
-        if (Auth::user()->hasConversation($request->conversation_id)) {
-            if($request->user_id != null && $request->user_id != Auth::id() && $request->conversation_id == null)
+        if($request->user_id != null && $request->user_id != Auth::id() && $request->conversation_id == null)
+        {
+            $conversationId = Conversation::whereHas('users', function (Builder $query) use ($request) {
+                $query->where('user_id', $request->user_id);
+            })->whereHas('users', function (Builder $query) {
+                $query->where('user_id', Auth::id());
+            })->first();
+            if($conversationId)
             {
-               $conversationId = Conversation::whereHas('users', function (Builder $query) use ($request) {
-                    $query->where('user_id', $request->user_id);
-                })->whereHas('users', function (Builder $query) {
-                    $query->where('user_id', Auth::id());
-                })->first();
-                if($conversationId)
-                {
-                    $request->merge(['conversation_id' => $conversationId->id]);
-                    return parent::index($request);
-                }
-                return response()->json(['message' => 'You are not allowed to access this conversation'], 403);
+                $request->merge(['conversation_id' => $conversationId->id]);
+                return parent::index($request);
             }
+            return response()->json(['message' => 'You are not allowed to access this conversation'], 403);
+        }
+        if (Auth::user()->hasConversation($request->conversation_id)) {
+
             return parent::index($request);
         }
         return response()->json(['message' => 'You are not allowed to access this conversation'], 403);
