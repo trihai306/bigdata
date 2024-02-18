@@ -149,6 +149,7 @@
                                                             @elseif($message->type == 'images')
                                                                 <p>{{$message->content ?? ''}}</p>
                                                                 <div class="mt-3 row">
+                                                                    @dd(json_decode($message['attachment_url']))
                                                                     @foreach(json_decode($message['attachment_url']) as $file)
                                                                         <div class="col-auto">
                                                                             <a href="{{asset('storage/'.$file->url)}}"

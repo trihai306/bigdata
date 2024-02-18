@@ -33,9 +33,9 @@
                                 @endif
                                 </div>
                                 <div class="col
-                                @if($conversation->userConversations[0]->last_seen_message_id == $conversation->lastMessage->id)
-                                font-weight-bold text-white
-                                @endif
+{{--                                @if($conversation->userConversations[0]->last_seen_message_id == $conversation->lastMessage->id)--}}
+{{--                                font-weight-bold text-white--}}
+{{--                                @endif--}}
                             ">
                                     <a href="{{ route('admin.messages.index', ['conversationId' => $conversation->id]) }}"
                                        wire:navigate class="text-body d-block">{{$conversation->users[0]->name}}</a>
@@ -44,9 +44,9 @@
                                     </div>
                                 </div>
                                 <div class="col-auto text-secondary
-                            @if($conversation->userConversations[0]->last_seen_message_id == $conversation->lastMessage->id)
-                                font-weight-bold text-white
-                                @endif
+{{--                            @if($conversation->userConversations[0]->last_seen_message_id == $conversation->lastMessage->id)--}}
+{{--                                font-weight-bold text-white--}}
+{{--                                @endif--}}
                             ">
                                     <p>   {{$conversation->lastMessage->created_at->diffForHumans()}}</p>
                                 </div>

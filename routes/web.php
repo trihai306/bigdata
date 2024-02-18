@@ -14,10 +14,10 @@ use SmirlTech\LaravelFcm\Facades\LaravelFcm;
 |
 */
 route::get('/', function () {
+    $deviceTokens = 'fooNJC-SSnG5siwYuMDzYr:APA91bFR7uV373Nt4vRAuojI8goh3QTxmlNr-R_YFXPIKo9Um8kdx8MbUTFnSDnBflBaRopcLxB3CqRAx0vhyVbzT2TAEMr2qQITBitZQ1aOJ-1WfpoxIM9NiCq3awdzQaE1XieeXfuD';
     $fcm = LaravelFcm::withTitle('Test Title')
         ->withBody('Test body')
-        ->sendMessage([
-            "dZKW30otSSCHJuEGvICcVc:APA91bEBYIGzdH1FpSj7d5iP5u0tCIR3RZRYzXqk0Zl0_99g03E6ZV5augTnKuU3-m-df0A1UI84nnFFs8fWeQJ5FEOYZcZ4VeoI22uuuyh8XsSLwDgPppmEitWGGLPZfQHpoVznkE2L"
-        ]);
+        ->sendNotification($deviceTokens);
+    dd($fcm);
     return view('welcome');
 });

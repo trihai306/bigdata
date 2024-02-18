@@ -29,8 +29,6 @@ Route::middleware(['auth:sanctum'])->group(function () {
 });
 
 Route::post('/pusher/auth', function (Illuminate\Http\Request $request) {
-//    $user = Auth::user();
-
     $pusher = new Pusher\Pusher(
         'app-key',
         'app-secret',

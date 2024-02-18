@@ -91,7 +91,9 @@ class MessageRepository extends Repository
 
                 if ($request->type == 'images') {
                     $request->file('attachment_url')->store('public/images/messages');
-                    $request->merge(['attachment_url' => json_encode(['images/messages/'.$request->file('attachment_url')->hashName()])]);
+                    foreach ($request->file('attachment_url') as $file) {
+                        $request->merge(['attachment_url' => [json_encode(['images/messages/'.$file->hashName()])]]);
+                    }
                 }
                 $request->merge(['sender_id' => Auth::id()]);
                 return parent::store($request);
