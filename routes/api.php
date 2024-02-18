@@ -38,7 +38,8 @@ Route::post('/pusher/auth', function (Illuminate\Http\Request $request) {
             'useTLS' => true
         ]
     );
-
-    return $pusher->socket_auth($request->input('channel_name'), $request->input('socket_id'))['auth'];
+    $data = json_decode($pusher->socket_auth($request->channel_name, $request->socket_id));
+    $data = $data->auth;
+    return response()->json($data);
 });
 
