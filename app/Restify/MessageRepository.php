@@ -90,10 +90,14 @@ class MessageRepository extends Repository
             if (Auth::user()->hasConversation($request->conversation_id)) {
 
                 if ($request->type == 'images') {
-                    $request->file('attachment_url')->store('public/images/messages');
-                    foreach ($request->file('attachment_url') as $file) {
-                        $request->merge(['attachment_url' => [json_encode(['images/messages/'.$file->hashName()])]]);
+                     //lưu tất cả file vào storage
+                    $files = $request->file('attachment_url');
+                    $attachmentUrls = [];
+                    foreach ($files as $file) {
+                        $path = $file->store('public/messages');
+                        $attachmentUrls[] = str_replace('public/', 'storage/', $path);
                     }
+                    $request->merge(['attachment_url' => json_encode($attachmentUrls)]);
                 }
                 $request->merge(['sender_id' => Auth::id()]);
                 return parent::store($request);
