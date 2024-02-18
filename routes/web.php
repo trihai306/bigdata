@@ -18,6 +18,5 @@ route::get('/', function () {
     $fcm = LaravelFcm::withTitle('Test Title')
         ->withBody('Test body')
         ->sendNotification($deviceTokens);
-    dd($fcm);
     return view('welcome');
 });
