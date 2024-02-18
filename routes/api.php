@@ -39,7 +39,6 @@ Route::post('/pusher/auth', function (Illuminate\Http\Request $request) {
         ]
     );
     $data = json_decode($pusher->socket_auth($request->channel_name, $request->socket_id));
-    $data = $data->auth;
     return response()->json($data);
 });
 
