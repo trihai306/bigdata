@@ -70,8 +70,7 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <a href="#" class="dropdown-item">Status</a>
-                    <a href="./profile.html" class="dropdown-item">Profile</a>
+                    <a wire:navigate href="{{route('admin.profile')}}" class="dropdown-item">Profile</a>
                     <a href="#" class="dropdown-item">Feedback</a>
                     <div class="dropdown-divider"></div>
                     <a href="./settings.html" class="dropdown-item">Settings</a>
@@ -82,8 +81,8 @@
         @livewire('future::livewire.admin.menu-header')
     </div>
 </aside>
-<header class="navbar navbar-expand-md d-none d-lg-flex d-print-none">
-    <div class="container-xl">
+<header class="navbar navbar-expand-md d-none d-lg-flex d-print-none m-0">
+    <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu"
                 aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -138,7 +137,7 @@
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <a href="#" class="dropdown-item">Status</a>
-                    <a href="./profile.html" class="dropdown-item">Profile</a>
+                    <a wire:navigate href="{{route('admin.profile')}}" class="dropdown-item">Profile</a>
                     <div class="dropdown-divider"></div>
                     <a href="./settings.html" class="dropdown-item">Settings</a>
                     <a href="{{route('logout')}}" class="dropdown-item">Logout</a>

@@ -2,6 +2,7 @@
 
 namespace App\Future\UserResource;
 
+use App\Future\UserResource\Modal\ChangePassword;
 use App\Models\User;
 use Future\Table\Future\BaseTable;
 use Future\Table\Future\Tables\Actions\Action;
@@ -68,6 +69,7 @@ class Table extends BaseTable
             Action::make('edit', __('edit'), 'fas fa-edit')->setLink(function ($data) {
                 return route('admin.users.edit', $data->id);
             }),
+            Action::make('password', __('change password'), 'fa fa-key')->modal(__('Change Password'), ChangePassword::class),
             Action::make('delete', __('delete'), 'fas fa-trash-alt')->setConfirm(function ($data) {
                 return ['message' => __('Are you sure you want to delete this permission?'), 'id' => $data->id, 'nameMethod' => 'delete'];
             }),

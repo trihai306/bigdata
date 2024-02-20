@@ -11,6 +11,8 @@ Route::group(['middleware' => ['web', 'guest']], function () {
     Route::get('admin/forgot', [\Future\Core\Http\Controllers\AuthController::class, 'forgotPassword'])->name('forgot-password');
 });
 Route::group(config('core.core.route'), function () {
+
+    route::get('profile', [\Future\Core\Http\Controllers\AuthController::class, 'profile'])->name('profile');
     $directory = app_path('Future');
     $files = File::allFiles($directory);
     $filesCollection = collect($files);
