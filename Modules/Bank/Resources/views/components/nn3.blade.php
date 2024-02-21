@@ -1,102 +1,104 @@
-@extends('core::layouts.master')
+@extends('future::layouts.app')
 @section('content')
-    <div class="d-flex flex-column-fluid align-items-start container-xxl">
-        <div class="content flex-row-fluid">
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="mb-3 mt-3">
-                                <label for="nn3-country" class="form-label">Country:</label>
-                                <select id="nn3-country" class="form-control">
-                                    <option value="{{ asset('assets/banks/flags/16.png') }}">16</option>
-                                    <option value="{{ asset('assets/banks/flags/25.png') }}">25</option>
-                                    <option value="{{ asset('assets/banks/flags/30.png') }}">30</option>
-                                    <option value="{{ asset('assets/banks/flags/31.png') }}">31</option>
-                                    <option value="{{ asset('assets/banks/flags/32.png') }}">32</option>
-                                    <option value="{{ asset('assets/banks/flags/33.png') }}">33</option>
-                                    <option value="{{ asset('assets/banks/flags/34.png') }}">34</option>
-                                    <option value="{{ asset('assets/banks/flags/35.png') }}">35</option>
-                                    <option value="{{ asset('assets/banks/flags/36.png') }}">36</option>
-                                    <option value="{{ asset('assets/banks/flags/38.png') }}">38</option>
-                                    <option value="{{ asset('assets/banks/flags/39.png') }}">39</option>
-                                    <option value="{{ asset('assets/banks/flags/40.png') }}">40</option>
-                                    <option value="{{ asset('assets/banks/flags/41.png') }}">41</option>
-                                </select>
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn3-message" class="form-label">Message:</label>
-                                <input type="text" class="form-control"
-                                       value="You send 999.0 USD to Vu Dinh Truong" id="nn3-message"
-                                       placeholder="Message...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn3-bank-info" class="form-label">Bank Information:</label>
-                                <input type="text" class="form-control"
-                                       value="●●●8790: Vietcombank" id="nn3-bank-info"
-                                       placeholder="Bank Information...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn3-bank-confirm" class="form-label">Bank Confirm:</label>
-                                <input type="text" class="form-control"
-                                       value="Vietcombank Confirmation: BAN-230813-1W11B2" id="nn3-bank-confirm"
-                                       placeholder="Bank confirm...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn3-time" class="form-label">Time:</label>
-                                <input type="text" class="form-control"
-                                       value="{{ \Carbon\Carbon::now()->format('M d, Y \a\t H:i A') }}" id="nn3-time"
-                                       placeholder="Order Number...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn3-amount" class="form-label">Amount:</label>
-                                <input type="text" class="form-control" value="999.00 USD" id="nn3-amount"
-                                       placeholder="Amount...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn3-ex-rate" class="form-label">Exchange Rate:</label>
-                                <input type="text" class="form-control" value="1 USD = 23671.044320 VND"
-                                       id="nn3-ex-rate"
-                                       placeholder="Exchange Rate...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn3-fees" class="form-label">Fees:</label>
-                                <input type="text" class="form-control" value="0.00 USD" id="nn3-fees"
-                                       placeholder="Fees...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn3-total-paid" class="form-label">Total Paid:</label>
-                                <input type="text" class="form-control" value="999.00 USD" id="nn3-total-paid"
-                                       placeholder="Total Paid...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn3-receive-amount" class="form-label">Receive Amount:</label>
-                                <input type="text" class="form-control" value="23,647,374 VND" id="nn3-receive-amount"
-                                       placeholder="Receive Amount...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn3-time-estimate" class="form-label">Time Estimate:</label>
-                                <input type="text" class="form-control"
-                                       value="{{ \Carbon\Carbon::now()->addMinutes(30)->format('M d, Y \a\t H:i A') }}"
-                                       id="nn3-time-estimate"
-                                       placeholder="Time Estimate...">
-                            </div>
-                            <div class="mb-3">
-                                <livewire:bank::download-image />
+    <div class="card">
+        <div class="card-body">
+            <div class="content flex-row-fluid">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="mb-3 mt-3">
+                                    <label for="nn3-country" class="form-label">Country:</label>
+                                    <select id="nn3-country" class="form-control">
+                                        <option value="{{ asset('assets/banks/flags/16.png') }}">16</option>
+                                        <option value="{{ asset('assets/banks/flags/25.png') }}">25</option>
+                                        <option value="{{ asset('assets/banks/flags/30.png') }}">30</option>
+                                        <option value="{{ asset('assets/banks/flags/31.png') }}">31</option>
+                                        <option value="{{ asset('assets/banks/flags/32.png') }}">32</option>
+                                        <option value="{{ asset('assets/banks/flags/33.png') }}">33</option>
+                                        <option value="{{ asset('assets/banks/flags/34.png') }}">34</option>
+                                        <option value="{{ asset('assets/banks/flags/35.png') }}">35</option>
+                                        <option value="{{ asset('assets/banks/flags/36.png') }}">36</option>
+                                        <option value="{{ asset('assets/banks/flags/38.png') }}">38</option>
+                                        <option value="{{ asset('assets/banks/flags/39.png') }}">39</option>
+                                        <option value="{{ asset('assets/banks/flags/40.png') }}">40</option>
+                                        <option value="{{ asset('assets/banks/flags/41.png') }}">41</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="nn3-message" class="form-label">Message:</label>
+                                    <input type="text" class="form-control"
+                                           value="You send 999.0 USD to Vu Dinh Truong" id="nn3-message"
+                                           placeholder="Message...">
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="nn3-bank-info" class="form-label">Bank Information:</label>
+                                    <input type="text" class="form-control"
+                                           value="●●●8790: Vietcombank" id="nn3-bank-info"
+                                           placeholder="Bank Information...">
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="nn3-bank-confirm" class="form-label">Bank Confirm:</label>
+                                    <input type="text" class="form-control"
+                                           value="Vietcombank Confirmation: BAN-230813-1W11B2" id="nn3-bank-confirm"
+                                           placeholder="Bank confirm...">
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="nn3-time" class="form-label">Time:</label>
+                                    <input type="text" class="form-control"
+                                           value="{{ \Carbon\Carbon::now()->format('M d, Y \a\t H:i A') }}" id="nn3-time"
+                                           placeholder="Order Number...">
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="nn3-amount" class="form-label">Amount:</label>
+                                    <input type="text" class="form-control" value="999.00 USD" id="nn3-amount"
+                                           placeholder="Amount...">
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="nn3-ex-rate" class="form-label">Exchange Rate:</label>
+                                    <input type="text" class="form-control" value="1 USD = 23671.044320 VND"
+                                           id="nn3-ex-rate"
+                                           placeholder="Exchange Rate...">
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="nn3-fees" class="form-label">Fees:</label>
+                                    <input type="text" class="form-control" value="0.00 USD" id="nn3-fees"
+                                           placeholder="Fees...">
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="nn3-total-paid" class="form-label">Total Paid:</label>
+                                    <input type="text" class="form-control" value="999.00 USD" id="nn3-total-paid"
+                                           placeholder="Total Paid...">
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="nn3-receive-amount" class="form-label">Receive Amount:</label>
+                                    <input type="text" class="form-control" value="23,647,374 VND" id="nn3-receive-amount"
+                                           placeholder="Receive Amount...">
+                                </div>
+                                <div class="mb-3 mt-3">
+                                    <label for="nn3-time-estimate" class="form-label">Time Estimate:</label>
+                                    <input type="text" class="form-control"
+                                           value="{{ \Carbon\Carbon::now()->addMinutes(30)->format('M d, Y \a\t H:i A') }}"
+                                           id="nn3-time-estimate"
+                                           placeholder="Time Estimate...">
+                                </div>
+                                <div class="mb-3">
+                                    <livewire:bank::download-image />
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                </div>
-                <div class="col-md-6 col-sm-12 mt-sm-2">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <img src="{{ asset('assets/banks/demo-nn3.jpg') }}" style="width: 300px" alt="">
-                                <div class="col-md-6 d-none">
-                                    <canvas id="myCanvasNN3" style="width: 100%;height: 100%"></canvas>
-                                    <div class="d-none">
-                                        <canvas id="myCanvasNN3-real"></canvas>
+                    </div>
+                    <div class="col-md-6 col-sm-12 mt-sm-2">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="row">
+                                    <img src="{{ asset('assets/banks/demo-nn3.jpg') }}" style="width: 300px" alt="">
+                                    <div class="col-md-6 d-none">
+                                        <canvas id="myCanvasNN3" style="width: 100%;height: 100%"></canvas>
+                                        <div class="d-none">
+                                            <canvas id="myCanvasNN3-real"></canvas>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

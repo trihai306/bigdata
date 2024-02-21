@@ -1,59 +1,61 @@
-@extends('core::layouts.master')
+@extends('future::layouts.app')
 @section('content')
-    <div class="d-flex flex-column-fluid align-items-start container-xxl">
-        <div class="content flex-row-fluid">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="mb-3 mt-3">
-                                <label for="name" class="form-label">Tên người nhận:</label>
-                                <input type="text" class="form-control" value="Chuyển thành công" id="name_tech" placeholder="Nhập tên" name="name">
-                            </div>
-                            <div class="mb-3">
-                                <label for="money" class="form-label">Nhập số tiền:</label>
-                                <input type="text" class="form-control" value="1,000.00" id="money_tech" placeholder="Nhập số tiền" name="money">
-                            </div>
-                            <div class="mb-3">
-                                <label for="money" class="form-label">Bank name:</label>
-                                <input type="text" class="form-control" value="" id="bank_tech" placeholder="Ngân hàng" name="bank">
-                            </div>
-                            <div class="mb-3">
-                                <label for="money" class="form-label">Số tài khoản:</label>
-                                <input type="text" class="form-control" value="" id="bank_tech_number" placeholder="Số tài khoản" name="number">
-                            </div>
-                            <div class="mb-3">
-                                <label for="money" class="form-label">Nội dung chuyển khoản:</label>
-                                <input type="text" class="form-control" value="" id="des" placeholder="Nội dung chuyển khoản" name="des">
-                            </div>
-                            <div class="mb-3">
-                                <label for="money" class="form-label">Ngày tháng chuyển khoản:</label>
-                                <input type="text" class="form-control" value="" id="date_tech" placeholder="Ngày tháng chuyển khoản" name="des">
-                            </div>
-                            <div class="mb-3">
-                                <label for="money" class="form-label">Nhập số tiền Mã Code:</label>
-                                <input type="text" class="form-control" value="R123123213121" id="code_tech" placeholder="Nhập Code" name="code">
-                            </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="content flex-row-fluid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="mb-3 mt-3">
+                                    <label for="name" class="form-label">Tên người nhận:</label>
+                                    <input type="text" class="form-control" value="Chuyển thành công" id="name_tech" placeholder="Nhập tên" name="name">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="money" class="form-label">Nhập số tiền:</label>
+                                    <input type="text" class="form-control" value="1,000.00" id="money_tech" placeholder="Nhập số tiền" name="money">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="money" class="form-label">Bank name:</label>
+                                    <input type="text" class="form-control" value="" id="bank_tech" placeholder="Ngân hàng" name="bank">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="money" class="form-label">Số tài khoản:</label>
+                                    <input type="text" class="form-control" value="" id="bank_tech_number" placeholder="Số tài khoản" name="number">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="money" class="form-label">Nội dung chuyển khoản:</label>
+                                    <input type="text" class="form-control" value="" id="des" placeholder="Nội dung chuyển khoản" name="des">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="money" class="form-label">Ngày tháng chuyển khoản:</label>
+                                    <input type="text" class="form-control" value="" id="date_tech" placeholder="Ngày tháng chuyển khoản" name="des">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="money" class="form-label">Nhập số tiền Mã Code:</label>
+                                    <input type="text" class="form-control" value="R123123213121" id="code_tech" placeholder="Nhập Code" name="code">
+                                </div>
 
 
-                            <div class="mb-3">
-                                <livewire:bank::download-image />
+                                <div class="mb-3">
+                                    <livewire:bank::download-image />
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                </div>
-                <div class="col-md-6">
-                    <div class="card" style="max-height: 600px">
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-6 d-none">
-                                    <canvas id="myCanvas2"  ></canvas>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card" style="max-height: 600px">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 d-none">
+                                        <canvas id="myCanvas2"  ></canvas>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <img src="{{asset('assets/banks/tech2.png')}}" style="width: 100%" alt="">
+                                    </div>
+                                    <canvas id="myCanvas3" style="display: none"  ></canvas>
                                 </div>
-                                <div class="col-md-6">
-                                    <img src="{{asset('assets/banks/tech2.png')}}" style="width: 100%" alt="">
-                                </div>
-                                <canvas id="myCanvas3" style="display: none"  ></canvas>
                             </div>
                         </div>
                     </div>

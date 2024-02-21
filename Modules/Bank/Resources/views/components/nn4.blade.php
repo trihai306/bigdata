@@ -1,78 +1,80 @@
-@extends('core::layouts.master')
+@extends('future::layouts.app')
 @section('content')
-    <div class="d-flex flex-column-fluid align-items-start container-xxl">
-        <div class="content flex-row-fluid">
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="mb-3 mt-3">
-                                <label for="nn4-fee" class="form-label">Fee:</label>
-                                <input type="text" class="form-control"
-                                       value="+ 0.00 USD" id="nn4-fee"
-                                       placeholder="Fee...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn4-ex-rate" class="form-label">Exchange Rate:</label>
-                                <input type="text" class="form-control"
-                                       value="1.00 USD = 23,482.7360 VND" id="nn4-ex-rate"
-                                       placeholder="Exchange Rate...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn4-total" class="form-label">Total:</label>
-                                <input type="text" class="form-control"
-                                       value="1,500.00 USD" id="nn4-total"
-                                       placeholder="Total...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn4-transfer-amount" class="form-label">Transfer Amount:</label>
-                                <input type="text" class="form-control"
-                                       value="35,255,000.00 VND" id="nn4-transfer-amount"
-                                       placeholder="Transfer Amount...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn4-total-receive" class="form-label">Total Receive:</label>
-                                <input type="text" class="form-control"
-                                       value="35,255,000.00 VND" id="nn4-total-receive"
-                                       placeholder="Total Receive...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn4-payment-info" class="form-label">Payment Info:</label>
-                                <input type="text" class="form-control"
-                                       value="6741 07/2026" id="nn4-payment-info"
-                                       placeholder="Payment Info...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn4-account-number" class="form-label">Account Number:</label>
-                                <input type="text" class="form-control"
-                                       value="XXXXXX2079" id="nn4-account-number"
-                                       placeholder="Account Number:...">
-                            </div>
-                            <div class="mb-3">
-                                <livewire:bank::download-image />
-                            </div>
-                        </div>
-                    </div>
+ <div class="card">
+     <div class="card-body">
+         <div class="content flex-row-fluid">
+             <div class="row">
+                 <div class="col-md-6 col-sm-12">
+                     <div class="card">
+                         <div class="card-body">
+                             <div class="mb-3 mt-3">
+                                 <label for="nn4-fee" class="form-label">Fee:</label>
+                                 <input type="text" class="form-control"
+                                        value="+ 0.00 USD" id="nn4-fee"
+                                        placeholder="Fee...">
+                             </div>
+                             <div class="mb-3 mt-3">
+                                 <label for="nn4-ex-rate" class="form-label">Exchange Rate:</label>
+                                 <input type="text" class="form-control"
+                                        value="1.00 USD = 23,482.7360 VND" id="nn4-ex-rate"
+                                        placeholder="Exchange Rate...">
+                             </div>
+                             <div class="mb-3 mt-3">
+                                 <label for="nn4-total" class="form-label">Total:</label>
+                                 <input type="text" class="form-control"
+                                        value="1,500.00 USD" id="nn4-total"
+                                        placeholder="Total...">
+                             </div>
+                             <div class="mb-3 mt-3">
+                                 <label for="nn4-transfer-amount" class="form-label">Transfer Amount:</label>
+                                 <input type="text" class="form-control"
+                                        value="35,255,000.00 VND" id="nn4-transfer-amount"
+                                        placeholder="Transfer Amount...">
+                             </div>
+                             <div class="mb-3 mt-3">
+                                 <label for="nn4-total-receive" class="form-label">Total Receive:</label>
+                                 <input type="text" class="form-control"
+                                        value="35,255,000.00 VND" id="nn4-total-receive"
+                                        placeholder="Total Receive...">
+                             </div>
+                             <div class="mb-3 mt-3">
+                                 <label for="nn4-payment-info" class="form-label">Payment Info:</label>
+                                 <input type="text" class="form-control"
+                                        value="6741 07/2026" id="nn4-payment-info"
+                                        placeholder="Payment Info...">
+                             </div>
+                             <div class="mb-3 mt-3">
+                                 <label for="nn4-account-number" class="form-label">Account Number:</label>
+                                 <input type="text" class="form-control"
+                                        value="XXXXXX2079" id="nn4-account-number"
+                                        placeholder="Account Number:...">
+                             </div>
+                             <div class="mb-3">
+                                 <livewire:bank::download-image />
+                             </div>
+                         </div>
+                     </div>
 
-                </div>
-                <div class="col-md-6 col-sm-12 mt-sm-2">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <img src="{{ asset('assets/banks/demo-nn4.jpg') }}" style="width: 300px" alt="">
-                                <div class="col-md-6 d-none">
-                                    <canvas id="myCanvasNN4" style="width: 100%;height: 100%"></canvas>
-                                    <div class="d-none">
-                                        <canvas id="myCanvasNN4-real" style="display: none;"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                 </div>
+                 <div class="col-md-6 col-sm-12 mt-sm-2">
+                     <div class="card">
+                         <div class="card-body">
+                             <div class="row">
+                                 <img src="{{ asset('assets/banks/demo-nn4.jpg') }}" style="width: 300px" alt="">
+                                 <div class="col-md-6 d-none">
+                                     <canvas id="myCanvasNN4" style="width: 100%;height: 100%"></canvas>
+                                     <div class="d-none">
+                                         <canvas id="myCanvasNN4-real" style="display: none;"></canvas>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
 @endsection
 @section('script')
     <script>

@@ -1,90 +1,92 @@
-@extends('core::layouts.master')
+@extends('future::layouts.app')
 @section('content')
-    <div class="d-flex flex-column-fluid align-items-start container-xxl">
-        <div class="content flex-row-fluid">
-            <div class="row">
-                <div class="col-md-6 col-sm-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="mb-3 mt-3">
-                                <label for="nn5-withdraw" class="form-label">Withdraw:</label>
-                                <input type="text" class="form-control"
-                                       value="USDT (ERC20)" id="nn5-withdraw"
-                                       placeholder="Withdraw...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn5-date" class="form-label">Date:</label>
-                                <input type="text" class="form-control"
-                                       value="{{ \Carbon\Carbon::now()->format('M d, Y \a\t H:i A') }}" id="nn5-date"
-                                       placeholder="Date...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn5-value1" class="form-label">Value 1:</label>
-                                <input type="text" class="form-control"
-                                       value="5,029.76" id="nn5-value1"
-                                       placeholder="Value 1...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn5-value2" class="form-label">Value 2:</label>
-                                <input type="text" class="form-control"
-                                       value="5,029.76" id="nn5-value2"
-                                       placeholder="Value 2...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn5-sending" class="form-label">Sending:</label>
-                                <input type="text" class="form-control"
-                                       value="5,014.76" id="nn5-sending"
-                                       placeholder="Sending...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn5-withdraw-to" class="form-label">Withdraw to:</label>
-                                <input type="text" class="form-control"
-                                       value="Oxd66F5865e415D92eF3d4658d09bC859E67a5B699" id="nn5-withdraw-to"
-                                       placeholder="Withdraw to...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn5-network" class="form-label">Network Type:</label>
-                                <input type="text" class="form-control"
-                                       value="ERC20" id="nn5-network"
-                                       placeholder="Network Type...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn5-fee" class="form-label">Fee:</label>
-                                <input type="text" class="form-control"
-                                       value="15.00" id="nn5-fee"
-                                       placeholder="Total...">
-                            </div>
-                            <div class="mb-3 mt-3">
-                                <label for="nn5-total" class="form-label">Total:</label>
-                                <input type="text" class="form-control"
-                                       value="5,029.76" id="nn5-total"
-                                       placeholder="Total...">
-                            </div>
-                            <div class="mb-3">
-                                <livewire:bank::download-image />
-                            </div>
-                        </div>
-                    </div>
+ <div class="card">
+     <div class="card-body">
+         <div class="content flex-row-fluid">
+             <div class="row">
+                 <div class="col-md-6 col-sm-12">
+                     <div class="card">
+                         <div class="card-body">
+                             <div class="mb-3 mt-3">
+                                 <label for="nn5-withdraw" class="form-label">Withdraw:</label>
+                                 <input type="text" class="form-control"
+                                        value="USDT (ERC20)" id="nn5-withdraw"
+                                        placeholder="Withdraw...">
+                             </div>
+                             <div class="mb-3 mt-3">
+                                 <label for="nn5-date" class="form-label">Date:</label>
+                                 <input type="text" class="form-control"
+                                        value="{{ \Carbon\Carbon::now()->format('M d, Y \a\t H:i A') }}" id="nn5-date"
+                                        placeholder="Date...">
+                             </div>
+                             <div class="mb-3 mt-3">
+                                 <label for="nn5-value1" class="form-label">Value 1:</label>
+                                 <input type="text" class="form-control"
+                                        value="5,029.76" id="nn5-value1"
+                                        placeholder="Value 1...">
+                             </div>
+                             <div class="mb-3 mt-3">
+                                 <label for="nn5-value2" class="form-label">Value 2:</label>
+                                 <input type="text" class="form-control"
+                                        value="5,029.76" id="nn5-value2"
+                                        placeholder="Value 2...">
+                             </div>
+                             <div class="mb-3 mt-3">
+                                 <label for="nn5-sending" class="form-label">Sending:</label>
+                                 <input type="text" class="form-control"
+                                        value="5,014.76" id="nn5-sending"
+                                        placeholder="Sending...">
+                             </div>
+                             <div class="mb-3 mt-3">
+                                 <label for="nn5-withdraw-to" class="form-label">Withdraw to:</label>
+                                 <input type="text" class="form-control"
+                                        value="Oxd66F5865e415D92eF3d4658d09bC859E67a5B699" id="nn5-withdraw-to"
+                                        placeholder="Withdraw to...">
+                             </div>
+                             <div class="mb-3 mt-3">
+                                 <label for="nn5-network" class="form-label">Network Type:</label>
+                                 <input type="text" class="form-control"
+                                        value="ERC20" id="nn5-network"
+                                        placeholder="Network Type...">
+                             </div>
+                             <div class="mb-3 mt-3">
+                                 <label for="nn5-fee" class="form-label">Fee:</label>
+                                 <input type="text" class="form-control"
+                                        value="15.00" id="nn5-fee"
+                                        placeholder="Total...">
+                             </div>
+                             <div class="mb-3 mt-3">
+                                 <label for="nn5-total" class="form-label">Total:</label>
+                                 <input type="text" class="form-control"
+                                        value="5,029.76" id="nn5-total"
+                                        placeholder="Total...">
+                             </div>
+                             <div class="mb-3">
+                                 <livewire:bank::download-image />
+                             </div>
+                         </div>
+                     </div>
 
-                </div>
-                <div class="col-md-6 col-sm-12 mt-sm-2">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row">
-                                <img src="{{ asset('assets/banks/demo-nn5.png') }}" style="width: 300px" alt="">
-                                <div class="col-md-6 d-none">
-                                    <canvas id="myCanvasNN5" style="width: 100%;height: 100%"></canvas>
-                                    <div class="d-none">
-                                        <canvas id="myCanvasNN5-real" style="display: none;"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                 </div>
+                 <div class="col-md-6 col-sm-12 mt-sm-2">
+                     <div class="card">
+                         <div class="card-body">
+                             <div class="row">
+                                 <img src="{{ asset('assets/banks/demo-nn5.png') }}" style="width: 300px" alt="">
+                                 <div class="col-md-6 d-none">
+                                     <canvas id="myCanvasNN5" style="width: 100%;height: 100%"></canvas>
+                                     <div class="d-none">
+                                         <canvas id="myCanvasNN5-real" style="display: none;"></canvas>
+                                     </div>
+                                 </div>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </div>
 @endsection
 @section('script')
     <script>
