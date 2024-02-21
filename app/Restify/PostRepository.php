@@ -69,18 +69,14 @@ class PostRepository extends Repository
             field('shares', fn() => $this->model()->shares()->count())->canStore(fn() => false)->canUpdate(fn() => false),
             field('comments', fn() => $this->model()->comments()->count())->canStore(fn() => false)->canUpdate(fn() => false),
             field('comment_by_user', fn() => $this->model()->comments()->where('user_id',auth()->user()->id)->get())->canStore(fn() => false)->canUpdate(fn() => false),
-            field('images',fn()=> $this->model()->images()),
             field('created_at'),
         ];
     }
-//    public function store(RestifyRequest $request){
-//        dd($request->all());
-//    }
+
     public static function stored($resource, RestifyRequest $request)
     {
         if($request->hasFile('images')){
             foreach ($request->images as $file){
-
                 $resource->images()->create([
                     'image' => $file->store('images', 'public'),
                     'user_id' => auth()->user()->id,
