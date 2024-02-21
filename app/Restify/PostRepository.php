@@ -73,11 +73,12 @@ class PostRepository extends Repository
             field('created_at'),
         ];
     }
-    public function store(RestifyRequest $request){
-        dd($request->all());
-    }
+//    public function store(RestifyRequest $request){
+//        dd($request->all());
+//    }
     public static function stored($resource, RestifyRequest $request)
     {
+        dd($resource);
         if($request->hasFile('images')){
             foreach ($request->images as $file){
 
