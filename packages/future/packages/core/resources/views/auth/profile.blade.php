@@ -5,10 +5,15 @@
         <div class="card-header">
             <!-- User Image and Name -->
             <div class="d-flex align-items-center">
-                <img src="{{asset('static/avatars/001f.jpg')}}" class="rounded-circle" alt="User" style="width: 60px; height: 60px;">
+                <img src="{{asset(auth()->user()->avatar ?? 'static/avatars/001f.jpg')}}" class="rounded-circle" alt="User" style="width: 60px; height: 60px;">
                 <div class="ms-3">
-                    <h5>Max Smith <span class="badge bg-primary">Developer</span></h5>
-                    <p class="text-muted mb-0">SF, Bay Area</p>
+                    <h4>{{auth()->user()->name}}
+                        <span class="badge bg-primary">
+                            {{auth()->user()->role->name ?? 'không có role'}}
+                        </span></h4>
+                    <p class="text-muted mb-0">{{
+                        auth()->user()->email ?? 'không có email'
+}}</p>
                 </div>
             </div>
         </div>
@@ -30,11 +35,6 @@
             </div>
         </div>
         <div class="card-footer">
-            <!-- Progress Bar -->
-            <label for="profileCompletion">Profile Completion</label>
-            <div class="progress">
-                <div class="progress-bar" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
-            </div>
         </div>
     </div>
 

@@ -1,7 +1,7 @@
 <div class="col-12 col-lg-5 col-xl-3 border-end">
     <div class="card-header d-none d-md-block">
         <div class="input-group">
-            <input type="text" wire:model.live.200="search" value="" class="form-control" placeholder="Search…"
+            <input type="text" wire:model.live.debounce.400ms="search" value="" class="form-control" placeholder="Search…"
                    aria-label="Search">
             <a href="#" class="pt-2 ps-2" data-bs-toggle="modal" data-bs-target="#createConversation">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user-plus" width="24"
@@ -34,7 +34,7 @@
                                             class="form-control"
                                             placeholder="Search recipient..."
                                             @focus="open = true"
-                                            wire:model.live.300ms="searchUser"
+                                            wire:model.live.debounce.500ms="searchUser"
                                             autocomplete="off"
                                         >
                                         <span class="input-icon-addon" >

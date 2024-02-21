@@ -6,7 +6,7 @@
             <!--begin::Card title-->
             <div class="card-title">
                 <div class="d-flex align-items-center position-relative my-1">
-                    <input type="text" wire:model.live="search" class="form-control form-control-rounded form-control-solid w-250px ps-15"
+                    <input type="text" wire:model.live.debounce.300ms="search" class="form-control form-control-rounded form-control-solid w-250px ps-15"
                            placeholder="Search Users"/>
                 </div>
             </div>

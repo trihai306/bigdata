@@ -16,12 +16,11 @@
         "hammerstone/fast-paginate": "^1.0",
         "kjmtrue/vietnam-zone": "^1.0",
         "kreait/laravel-firebase": "^5.6",
+        "laravel-notification-channels/fcm": "^3.2",
         "laravel/framework": "^v10.39.0",
-        "laravel/pulse": "^v1.0.0-beta8",
         "laravel/sanctum": "^v3.3.3",
         "laravel/tinker": "^v2.8.2",
-        "livewire/livewire": "^v3.3.4",
-        "maantje/pulse-database": "^0.1.0",
+        "livewire/livewire": "^v3.4.5",
         "maatwebsite/excel": "^3.1.51",
         "mhmiton/laravel-modules-livewire": "^2.2",
         "nwidart/laravel-modules": "*",
@@ -45,6 +44,9 @@
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {
+        "files": [
+            "app/helpers.php"
+        ],
         "psr-4": {
             "App\\": "app/",
             "Modules\\": "Modules/",

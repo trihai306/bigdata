@@ -22,7 +22,7 @@
                             @foreach($this->defineColumns() as $column)
                                 <div class="form-check mb-2">
                                     <input class="form-check-input" type="checkbox"
-                                           wire:model.live="columnVisibility.{{ $column->name }}"
+                                           wire:model.live.debounce.300ms="columnVisibility.{{ $column->name }}"
                                         {{ $column->visible ? 'checked' : '' }}>
                                     <label class="form-check-label" for="{{ $column->name }}">
                                         {{ $column->label }}
@@ -138,7 +138,7 @@
                     class="col-sm-12 col-md-4 d-flex align-items-center justify-content-center justify-content-md-center">
                     <div class="dataTables_length">
                         <label>
-                            <select class="form-select form-select-solid" wire:model.live="perPage">
+                            <select class="form-select form-select-solid" wire:model.live.debounce.300ms="perPage">
                                 @foreach($this->pages as $page)
                                     @if($page == $perPage)
                                         <option value="{{ $page }}" selected>{{ $page }}</option>
