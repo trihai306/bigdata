@@ -27,7 +27,7 @@ class PostPolicy
 
     public function storeBulk(User $user): bool
     {
-        return false;
+        return true;
     }
 
     public function update(User $user, Post $model): bool
@@ -35,17 +35,17 @@ class PostPolicy
         if ($user->id == $model->user_id){
             return true;
         }
-        return false;
+        return true;
     }
 
     public function updateBulk(User $user, Post $model): bool
     {
-        return false;
+        return true;
     }
 
     public function deleteBulk(User $user, Post $model): bool
     {
-        return false;
+        return true;
     }
 
     public function delete(User $user, Post $model): bool
@@ -53,6 +53,6 @@ class PostPolicy
         if ($user->id == $model->user_id){
             return true;
         }
-        return false;
+        return true;
     }
 }
