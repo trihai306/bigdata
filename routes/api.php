@@ -2,6 +2,7 @@
 
 use App\Events\UserPrivateMessageEvent;
 use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\Api\NotificationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/edit-profile', [AuthController::class, 'editProfile']);
     Route::put('/change-password', [AuthController::class, 'changePassword']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('api/v1/notifications', [NotificationController::class, 'index']);
+    Route::put('api/v1/notifications/{id}/mark-as-read', [NotificationController::class, 'markAsRead']);
 });
 
 Route::post('/pusher/auth', function (Illuminate\Http\Request $request) {

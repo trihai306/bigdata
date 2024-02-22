@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('address')->nullable();
             $table->dateTime('birthday')->nullable();
             $table->string('store_name');
+            $table->string('phone_token')->nullable();
             $table->enum('gender',['male', 'female', 'non-binary', 'genderqueer', 'transgender', 'genderfluid', 'agender'])->nullable();
             $table->string('password');
             $table->enum('status', ['active', 'inactive', 'blocked'])->default('active');
