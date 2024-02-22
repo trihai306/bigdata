@@ -18,6 +18,13 @@ class Table extends BaseTable
     protected string $model = User::class;
     public string $urlCreate = 'admin.users.create';
 
+    protected function setListeners(): array
+    {
+        return [
+            'check'=>'check',
+        ];
+    }
+
     protected function columns(): array
     {
         return [
@@ -73,6 +80,9 @@ class Table extends BaseTable
             Action::make('delete', __('delete'), 'fas fa-trash-alt')->setConfirm(function ($data) {
                 return ['message' => __('Are you sure you want to delete this permission?'), 'id' => $data->id, 'nameMethod' => 'delete'];
             }),
+            Action::make('check', __('check'), 'fas fa-trash-alt')->setConfirm(function ($data) {
+                return ['message' => __('check?'), 'id' => $data->id, 'nameMethod' => 'check'];
+            })
         ]);
     }
 
@@ -82,5 +92,10 @@ class Table extends BaseTable
             ResetAction::make(),
             \Future\Table\Future\Tables\Headers\Actions\Action::make('create', __('future::messages.add_data'))->to(route($this->urlCreate)),
         ];
+    }
+
+    public function check()
+    {
+        dd('check');
     }
 }
