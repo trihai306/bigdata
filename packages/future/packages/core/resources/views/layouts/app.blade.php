@@ -7,7 +7,7 @@
     <meta name="csrf-token" value="{{ csrf_token() }}">
     <title>Tabler - Premium and Open Source dashboard template with responsive and high quality UI.</title>
     <!-- CSS files -->
-    <link href="{{ asset('dist/css/tabler.css') }}"   rel="stylesheet"/>
+    <link href="{{ asset('dist/css/tabler.min.css') }}"   rel="stylesheet"/>
     <link href="{{ asset('dist/css/tabler-flags.min.css') }}"   rel="stylesheet"/>
     <link href="{{ asset('dist/css/tabler-payments.min.css') }}"   rel="stylesheet"/>
     <link href="{{ asset('dist/css/tabler-vendors.min.css') }}"   rel="stylesheet"/>

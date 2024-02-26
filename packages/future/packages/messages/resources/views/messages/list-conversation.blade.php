@@ -1,5 +1,5 @@
 <div class="col-12 col-lg-5 col-xl-3 border-end">
-    <div class="card-header d-none d-md-block">
+    <div class="card-header d-none d-md-block" style="padding: 20px 16px">
         <div class="input-group">
             <input type="text" wire:model.live.debounce.400ms="search" value="" class="form-control" placeholder="Search…"
                    aria-label="Search">

@@ -107,7 +107,7 @@ class CreateMessage extends Component
             'created_at' => $message->created_at->diffForHumans(),
             'sender' => $message->sender,
         ];
-        event(new UserMessageEvent($messageData, Auth::id(), $this->userId));
+        event(new UserMessageEvent( $this->userId, $messageData, Auth::id()));
         $this->dispatch('messageSent', ['message' => $messageData]);
     }
 

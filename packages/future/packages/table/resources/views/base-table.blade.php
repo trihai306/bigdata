@@ -42,7 +42,6 @@
 
                 </div>
             </div>
-
         </div>
         <div class="card-body table-responsive table-loading py-4">
             <table class="table align-middle table-row-dashed gy-5">

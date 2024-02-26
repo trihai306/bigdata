@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
+    protected $page = 10;
     public function index(Request $request)
     {
         $notifications = auth()->user()->notifications()->paginate($this->page);
