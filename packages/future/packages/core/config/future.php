@@ -1,11 +1,13 @@
 <?php
 
 return [
-    "core"=>[
+    "future"=>[
         'route' => [
             'prefix' => 'admin',
             'as' => 'admin.',
             'middleware' => ['web', 'auth'],
         ],
+        'messages' => true,
+        'notifications' => true,
     ]
 ];

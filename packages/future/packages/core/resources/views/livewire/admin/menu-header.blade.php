@@ -1,9 +1,9 @@
-<div class="collapse navbar-collapse" id="sidebar-menu">
+<div class="collapse navbar-collapse mr-0" id="sidebar-menu">
     <ul class="navbar-nav pt-lg-3">
         @foreach($menus as $menu)
             @if(Auth::user()->can($menu->permission))
                 @if($menu->children->isEmpty())
-                    <li class="nav-item @if(request()->is($menu->url)) active @endif">
+                    <li class="nav-item  @if(request()->is($menu->url)) rounded rounded-2 bg-primary @endif">
                         <a class="nav-link" wire:navigate  href="{{route($menu->permission)}}">
                                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                                         <i class="{{$menu->icon}}"></i>

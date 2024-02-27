@@ -15,7 +15,7 @@ class Select extends Field
         return $this;
     }
 
-    public function modelData(string $modelClass, \Closure $transform)
+    public function model(string $modelClass, \Closure $transform)
     {
         $models = $modelClass::all();
         $this->options = $models->mapWithKeys($transform)->toArray();
@@ -25,6 +25,12 @@ class Select extends Field
     public function relation(callable $callback)
     {
         $callback($this);
+        return $this;
+    }
+
+    public function multiple()
+    {
+        $this->StyleAttributes['multiple'] = 'multiple';
         return $this;
     }
 

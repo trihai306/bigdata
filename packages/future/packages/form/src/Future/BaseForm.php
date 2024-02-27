@@ -53,7 +53,7 @@ abstract class BaseForm extends Component
             }
             $this->notificationOk('Save success');
         } catch (Exception $e) {
-            $this->notificationError('Save error');
+            $this->notificationError($e->getMessage());
         }
         $this->dispatch('refreshTable');
     }

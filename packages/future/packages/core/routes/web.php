@@ -10,7 +10,7 @@ Route::group(['middleware' => ['web', 'guest']], function () {
     Route::get('admin/logout', [\Future\Core\Http\Controllers\AuthController::class, 'logout'])->name('logout');
     Route::get('admin/forgot', [\Future\Core\Http\Controllers\AuthController::class, 'forgotPassword'])->name('forgot-password');
 });
-Route::group(config('core.core.route'), function () {
+Route::group(config('future.future.route'), function () {
 
     route::get('profile', [\Future\Core\Http\Controllers\AuthController::class, 'profile'])->name('profile');
     $directory = app_path('Future');

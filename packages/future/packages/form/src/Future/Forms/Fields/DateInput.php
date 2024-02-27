@@ -8,7 +8,7 @@ use Future\Form\Future\Forms\Field;
 class DateInput extends Field
 {
     protected string $label;
-
+    protected string $format = 'DD/MM/YYYY';
     public function label(string $label): Field
     {
         $this->label = $label;
@@ -21,6 +21,12 @@ class DateInput extends Field
         return $this;
     }
 
+    public function format(string $format = 'DD/MM/YYYY'): Field
+    {
+        $this->format = $format;
+        return $this;
+    }
+
     public function render()
     {
         return View::make('future::base.form.dateinput', [
@@ -30,8 +36,8 @@ class DateInput extends Field
             'attributes' => $this->getAttributes(),
             'placeholder' => $this->placeholder,
             'label' => $this->label,
-            'defaultValue' => $this->defaultValue,
             'canHide' => $this->canHide,
+            'format' => $this->format,
         ])->render();
     }
 }

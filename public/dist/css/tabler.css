@@ -16934,7 +16934,6 @@ Navbar vertical
 }
 @media (min-width: 992px) {
     .navbar-vertical.navbar-expand-lg {
-        width: 15rem;
         position: fixed;
         top: 64px;
         left: 0;

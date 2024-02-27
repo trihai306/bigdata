@@ -1,5 +1,6 @@
 @include('future::app.sidebar')
-<header class="navbar navbar-expand-md d-none position-sticky top-0 d-lg-flex d-print-none m-0" data-bs-theme="dark" style="z-index: 100">
+<header class="navbar navbar-expand-md d-none position-sticky top-0 d-lg-flex d-print-none m-0" data-bs-theme="dark"
+        style="z-index: 100">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu"
                 aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,7 +8,7 @@
         </button>
         <h1 class="navbar-brand  d-none-navbar-horizontal pe-0 pe-md-3">
             <a href="">
-{{--                <img src="{{asset('dist/img/logo.png')}}" width="200" height="32" alt="Tabler" class="navbar-brand-image">--}}
+                {{--                <img src="{{asset('dist/img/logo.png')}}" width="200" height="32" alt="Tabler" class="navbar-brand-image">--}}
             </a>
         </h1>
         <div class="navbar-nav flex-row order-md-last mt-2">
@@ -37,15 +38,19 @@
                             d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"/>
                     </svg>
                 </a>
-                @livewire('future::admin.messages.icon')
-                @livewire('future::livewire.admin.notifications.icon')
+                @if(config('future.future.messages'))
+                    @livewire('future::admin.messages.icon')
+                @endif
+                @if(config('future.future.notifications'))
+                    @livewire('future::livewire.admin.notifications.icon')
+                @endif
 
             </div>
             <div class="nav-item dropdown">
                 <a href="#" class=" nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
                    aria-label="Open user menu">
                     <span class="avatar avatar-sm"
-                          style="background-image: url({{asset(Auth::user()->avatar ?? '')}})"></span>
+                          style="background-image: url({{ auth()->user()->avatar ? Storage::url(auth()->user()->avatar) : asset('static/avatars/001f.jpg') }})"></span>
                     <div class="d-none d-xl-block ps-2">
                         <div>{{Auth::user()->name}}</div>
                         <div class="mt-1 small text-muted">{{
@@ -54,7 +59,6 @@
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
-                    <a href="#" class="dropdown-item">Status</a>
                     <a wire:navigate href="{{route('admin.profile')}}" class="dropdown-item">Profile</a>
                     <div class="dropdown-divider"></div>
                     <a href="./settings.html" class="dropdown-item">Settings</a>

@@ -4,7 +4,7 @@
 @endphp
 @if(!$canHide)
     @if($label)
-        <div class="form-label">{{$label}}</div>
+        <label class="form-label">{{$label}}</label>
     @endif
 
     <select name="{{ $name }}" id="{{$name}}"  wire:model="data.{{ $name }}" {{ $required }} class="{{ $classes }}" {{ $attributes }}>
@@ -21,7 +21,8 @@
 
     @script
     <script>
-        window.TomSelect && Array.from(document.querySelectorAll('select')).forEach(select => {
+        window.TomSelect && function() {
+            var select = document.getElementById("{{$name}}");
             new TomSelect(select, {
                 copyClassesToDropdown: false,
                 dropdownParent: 'body',
@@ -41,10 +42,10 @@
                     },
                 },
                 onInitialize: function() {
-                    var defaultValue = select.value;
+
                 }
             });
-        });
+        }();
     </script>
     @endscript
 @endif
