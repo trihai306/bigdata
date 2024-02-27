@@ -31,6 +31,7 @@ class DateInput extends Field
             'placeholder' => $this->placeholder,
             'label' => $this->label,
             'defaultValue' => $this->defaultValue,
+            'canHide' => $this->canHide,
         ])->render();
     }
 }

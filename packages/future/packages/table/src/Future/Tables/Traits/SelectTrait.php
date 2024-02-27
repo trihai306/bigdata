@@ -22,7 +22,10 @@ trait SelectTrait {
      */
     public $selectedRows = [];
 
-    public function SelectedRows($selectedRows){
+    public function SelectedRows($selectedRows,$nameMethod=null,$message = null){
         $this->selectedRows = $selectedRows;
+        $this->dispatch('swalConfirm',message: $message, nameMethod: $nameMethod);
     }
+
+
 }

@@ -31,6 +31,7 @@ class Radio extends Field
             'defaultValue' => $this->defaultValue,
             'name' => $this->name,
             'label' => $this->label,
+            'canHide' => $this->canHide,
         ]);
     }
 }

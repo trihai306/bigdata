@@ -15,7 +15,7 @@ class Checkbox extends Field
         $checked = $this->defaultValue ? 'checked' : '';
         $name = $this->name;
         $label = $this->label;
-
-        return view('future::base.form.checkbox', compact('required', 'classes', 'attributes', 'checked', 'name', 'label'));
+        $canHide = $this->canHide;
+        return view('future::base.form.checkbox', compact('required', 'classes', 'canHide','attributes', 'checked', 'name', 'label'));
     }
 }

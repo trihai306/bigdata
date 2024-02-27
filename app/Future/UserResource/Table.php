@@ -80,11 +80,9 @@ class Table extends BaseTable
             Action::make('delete', __('delete'), 'fas fa-trash-alt')->setConfirm(function ($data) {
                 return ['message' => __('Are you sure you want to delete this permission?'), 'id' => $data->id, 'nameMethod' => 'delete'];
             }),
-            Action::make('check', __('check'), 'fas fa-trash-alt')->setConfirm(function ($data) {
-                return ['message' => __('check?'), 'id' => $data->id, 'nameMethod' => 'check'];
-            })
         ]);
     }
+
 
     protected function headerActions(): array
     {
@@ -94,8 +92,5 @@ class Table extends BaseTable
         ];
     }
 
-    public function check()
-    {
-        dd('check');
-    }
+
 }

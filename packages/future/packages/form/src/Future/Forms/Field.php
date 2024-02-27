@@ -86,10 +86,20 @@ class Field
         return $this;
     }
 
-    public function canEdit(callable $callback): self
+    public function canStore($hide = false): self
     {
-        if ($callback()) {
-            $this->canHide = false;
+        $currentRouteName = request()->route()->getName();
+        if (str_contains($currentRouteName, 'edit')) {
+            $this->canHide = $hide;
+        }
+        return $this;
+    }
+
+    public function canCreate($hide = false): self
+    {
+        $currentRouteName = request()->route()->getName();
+        if (str_contains($currentRouteName, 'edit')) {
+            $this->canHide = $hide;
         }
         return $this;
     }

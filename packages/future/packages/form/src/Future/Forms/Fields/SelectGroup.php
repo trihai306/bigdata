@@ -23,6 +23,7 @@ class SelectGroup extends Field
             'name' => $this->name,
             'required' => $required,
             'classes' => $classes,
+            'canHide' => $this->canHide,
             'options' => $this->options,
             'defaultValue' => $this->defaultValue,
         ])->render();

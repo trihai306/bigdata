@@ -8,7 +8,7 @@ trait Functions
     {
         return array_merge($this->setListeners(), [
             "delete" => 'delete',
-            "deleteSelect" => 'deleteSelect',
+            "deletes" => 'deletes',
         ]);
     }
 
@@ -22,6 +22,12 @@ trait Functions
         return [];
     }
 
+    protected function resetSelect()
+    {
+        $this->selectAll = false;
+        $this->selectedRows = [];
+        $this->dispatch('reset-select');
+    }
     public function delete(int $id) : void
     {
         try {
@@ -36,15 +42,14 @@ trait Functions
         }
     }
 
-    public function deleteSelect()
+    public function deletes()
     {
         try {
             $this->model::destroy($this->selectedRows);
             $this->dispatch('swalSuccess', [
                 'message' => 'Xóa thành công',
             ]);
-            $this->selectAll = false;
-            $this->selectedRows = [];
+            $this->resetSelect();
         } catch (\Exception $e) {
             $this->dispatch('swalError', [
                 'message' => 'Xóa thất bại',

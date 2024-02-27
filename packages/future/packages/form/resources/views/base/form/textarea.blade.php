@@ -4,19 +4,21 @@
     $placeholder = isset($placeholder) ? 'placeholder='.$placeholder : '';
 @endphp
 
+@if(!$canHide)
 
-
-<div  wire:ignore>
-    @if($label)
-        <label for="{{ $name }}" class="mb-2">{{ $label }}</label>
-    @endif
-    <textarea name="{{ $name }}" id="{{$name}}" wire:model="data.{{ $name }}" {{ $required }} class="{{ $classes }} @error('data.'.$name) is-invalid @enderror" {{ $attributes }} {{ $placeholder }}></textarea>
-</div>
-@error('data.'.$name)
-<div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-    <div data-field="{{$name}}" data-validator="notEmpty">{{$message}}</div>
-</div>
-@enderror
+    <div wire:ignore>
+        @if($label)
+            <label for="{{ $name }}" class="mb-2">{{ $label }}</label>
+        @endif
+        <textarea name="{{ $name }}" id="{{$name}}" wire:model="data.{{ $name }}"
+                  {{ $required }} class="{{ $classes }} @error('data.'.$name) is-invalid @enderror" {{ $attributes }} {{ $placeholder }}></textarea>
+    </div>
+    @error('data.'.$name)
+    <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+        <div data-field="{{$name}}" data-validator="notEmpty">{{$message}}</div>
+    </div>
+    @enderror
+@endif
 
 @script
 <script>

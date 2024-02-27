@@ -22,7 +22,7 @@ class Form extends BaseForm
                 Row::make($sm = 12, $md = 6, $lg = 6)->schema([
                     TextInput::make('name')->required()->label('Tên')->placeholder('Name'),
                     TextInput::make('email')->required()->label('Email')->placeholder('Email'),
-                    TextInput::make('password')->required()->password()->label('Mật khẩu')->placeholder('Password'),
+                    TextInput::make('password')->required()->password()->label('Mật khẩu')->placeholder('Password')->canStore(true),
                     TextArea::make('address')->label('Địa chỉ')->placeholder('Address'),
                     Select::make('gender')->label('Giới tính')->options([
                         'male' => 'nam',

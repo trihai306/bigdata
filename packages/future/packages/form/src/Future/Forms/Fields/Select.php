@@ -37,6 +37,7 @@ class Select extends Field
             'options' => $this->options,
             'defaultValue' => $this->defaultValue,
             'label' => $this->label,
+            'canHide' => $this->canHide,
             'name' => $this->name,
         ]);
     }

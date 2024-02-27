@@ -1,5 +1,5 @@
 @include('future::app.sidebar')
-<header class="navbar navbar-expand-md d-none d-lg-flex d-print-none m-0" data-bs-theme="dark">
+<header class="navbar navbar-expand-md d-none position-sticky top-0 d-lg-flex d-print-none m-0" data-bs-theme="dark" style="z-index: 100">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu"
                 aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,7 +7,7 @@
         </button>
         <h1 class="navbar-brand  d-none-navbar-horizontal pe-0 pe-md-3">
             <a href="">
-                {{--                <img src="{{asset('dist/img/logo.png')}}" width="200" height="32" alt="Tabler" class="navbar-brand-image">--}}
+{{--                <img src="{{asset('dist/img/logo.png')}}" width="200" height="32" alt="Tabler" class="navbar-brand-image">--}}
             </a>
         </h1>
         <div class="navbar-nav flex-row order-md-last mt-2">

@@ -40,6 +40,7 @@ class TextNumber extends Field
             'placeholder' => $this->placeholder,
             'label' => $this->label,
             'name' => $this->name,
+            'canHide' => $this->canHide,
         ]);
     }
 }
