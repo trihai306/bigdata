@@ -169,6 +169,7 @@ return [
         \Future\Table\TableServiceProvider::class,
         \Future\Core\FutureServiceProvider::class,
         \Future\Messages\MessagesServiceProvider::class,
+//        NotificationsServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -193,7 +194,6 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
         'Redis' => Illuminate\Support\Facades\Redis::class,
-        'Image' => Intervention\Image\Facades\Image::class,
     ])->toArray(),
 
 ];

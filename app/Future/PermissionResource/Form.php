@@ -2,8 +2,6 @@
 
 namespace App\Future\PermissionResource;
 
-
-
 use Future\Form\Future\BaseForm;
 use Future\Form\Future\Forms\Fields\TextInput;
 use Future\Form\Future\Forms\Layouts\Card;

@@ -9,7 +9,6 @@ use Future\Table\Future\Tables\Actions\Actions;
 use Future\Table\Future\Tables\Columns\TextColumn;
 use Future\Table\Future\Tables\FilterInput;
 use Future\Table\Future\Tables\Headers\Actions\ResetAction;
-use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Models\Permission;
 
 class Table extends BaseTable
@@ -19,12 +18,7 @@ class Table extends BaseTable
 
     protected function columns(): array
     {
-        return [
-            TextColumn::make('name', __('permission_name'))->searchable()->sortable(),
-            TextColumn::make('guard_name', __('Guard Name'))->searchable()->sortable(),
-            TextColumn::make('created_at', __('Created At'))->sortable(),
-            TextColumn::make('updated_at', __('Updated At'))->sortable(),
-            ];
+        return [TextColumn::make('name', __('permission_name'))->searchable()->sortable(), TextColumn::make('guard_name', __('Guard Name'))->searchable()->sortable(), TextColumn::make('created_at', __('Created At'))->sortable(), TextColumn::make('updated_at', __('Updated At'))->sortable(),];
     }
 
     protected function filters(): array
@@ -34,18 +28,13 @@ class Table extends BaseTable
 
     protected function actions(Actions $actions)
     {
-        return $actions->create([
-            Action::make('edit', __('edit'), 'fas fa-edit')->modal('edit', Form::class),
-            Action::make('delete', __('delete'), 'fas fa-trash-alt')->setConfirm(function ($data) {
+        return $actions->create([Action::make('edit', __('edit'), 'fas fa-edit')->modal('edit', Form::class), Action::make('delete', __('delete'), 'fas fa-trash-alt')->setConfirm(function ($data) {
             return ['message' => __('Are you sure you want to delete this permission?'), 'id' => $data->id, 'nameMethod' => 'delete'];
-        }),
-        ]);
+        }),]);
     }
 
     protected function headerActions(): array
     {
-        return [
-            ResetAction::make(),
-            \Future\Table\Future\Tables\Headers\Actions\Action::make('create', __('Create Permission'))->modal('create', Form::class)];
+        return [ResetAction::make(), \Future\Table\Future\Tables\Headers\Actions\Action::make('create', __('Create Permission'))->modal('create', Form::class)];
     }
 }

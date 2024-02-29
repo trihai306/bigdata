@@ -3,7 +3,6 @@
 namespace App\Future\UserResource\Modal;
 
 use App\Models\User;
-use Future\Form\Future\BaseForm;
 use Future\Form\Future\Forms\Fields\DateInput;
 use Future\Form\Future\Forms\Fields\Select;
 use Future\Form\Future\Forms\Fields\TextArea;

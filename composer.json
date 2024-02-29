@@ -11,12 +11,11 @@
         "php": "^8.1",
         "barryvdh/laravel-dompdf": "^2.0.1",
         "binaryk/laravel-restify": "^8.3.2",
-        "future/cms": "dev-master",
         "guzzlehttp/guzzle": "^7.8.1",
         "hammerstone/fast-paginate": "^1.0",
+        "adminftr/future": "*",
         "kjmtrue/vietnam-zone": "^1.0",
         "kreait/laravel-firebase": "^5.6",
-        "laravel-notification-channels/fcm": "^3.2",
         "laravel/framework": "^v10.39.0",
         "laravel/sanctum": "^v3.3.3",
         "laravel/tinker": "^v2.8.2",
@@ -28,7 +27,6 @@
         "propaganistas/laravel-phone": "^5.0",
         "pusher/pusher-php-server": "^7.2",
         "rennokki/laravel-eloquent-query-cache": "^3.4",
-        "smirltech/laravel-fcm": "^1.0",
         "spatie/laravel-permission": "^5.11",
         "unisharp/laravel-filemanager": "^2.6"
     },
@@ -92,7 +90,7 @@
     "repositories": [
         {
             "type": "path",
-            "url": "./packages/*"
+            "url": "./packages/trihai306/*"
         }
     ]
 }
