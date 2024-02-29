@@ -12,7 +12,7 @@
             "dist": {
                 "type": "path",
                 "url": "./packages/trihai306/adminftr",
-                "reference": "284100d777b869a97449463eb551f39f905ce43c"
+                "reference": "230a0cfced03a877a8c9cb34ddd16840859315fa"
             },
             "require": {
                 "livewire/livewire": ">=3.3.5",
@@ -24,7 +24,8 @@
                     "Future\\Core\\": "./core/src/",
                     "Future\\Form\\": "./form/src/",
                     "Future\\Table\\": "./table/src/",
-                    "Future\\Messages\\": "./messages/src/"
+                    "Future\\Messages\\": "./messages/src/",
+                    "Future\\Notifications\\": "./notifications/src/"
                 }
             },
             "license": [
