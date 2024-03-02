@@ -75,11 +75,10 @@ class AuthController extends Controller
         return response()->json($request->user());
     }
 
-    public function editProfile(EditProfileRequest $request)
+    public function editProfile(Request $request)
     {
         try {
-            $data = $request->validated();
-
+            $data = $request->only(['name', 'email', 'phone', 'avatar', 'address', 'birthday', 'gender', 'password', 'status', 'field', 'type','store_name']);
             if ($request->has('avatar')) {
                 $file = $request->file('avatar');
                 $filename = time() . '.' . $file->getClientOriginalExtension();
