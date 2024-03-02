@@ -171,6 +171,7 @@ return [
         \Future\Table\TableServiceProvider::class,
         \Future\Core\FutureServiceProvider::class,
         \Future\Messages\MessagesServiceProvider::class,
+        \Future\Widgets\WidgetsServiceProvider::class,
         /*
          * Application Service Providers...
          */
