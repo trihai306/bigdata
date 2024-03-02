@@ -4,7 +4,7 @@ namespace App\Future;
 
 use App\Future\PermissionResource\Form;
 use App\Future\PermissionResource\Table;
-use Future\Core\Http\resource\BaseResource;
+use Future\Core\Http\Resource\BaseResource;
 use Spatie\Permission\Models\Role;
 
 
