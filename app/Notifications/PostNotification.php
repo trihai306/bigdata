@@ -14,13 +14,13 @@ class PostNotification extends Notification
     public $type;
     public $content;
     public $title;
-    public $id;
+    public $id_post;
     public function __construct($type, $content, $title,$id)
     {
         $this->type = $type;
         $this->content = $content;
         $this->title = $title;
-        $this->id = $id;
+        $this->id_post = $id;
     }
 
     public function via($notifiable)
