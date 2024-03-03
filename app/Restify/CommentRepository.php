@@ -57,7 +57,7 @@ class CommentRepository extends Repository
         $user = Auth::user();
         $fcmMessage = [
             "message" => [
-                "token" => $user->phone_token,
+                "token" => "{$user->phone_token}",
                 "notification" => [
                     "body" => "bạn có comment",
                     "title" => "Push notification Dina app"
