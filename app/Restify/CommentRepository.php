@@ -59,10 +59,12 @@ class CommentRepository extends Repository
             "message" => [
                 "token" => $user->phone_token,
                 "notification" => [
-                    'title' => 'có lượt comment',
-                    'content' => "abc",
-                    'type' => "comment",
-                    'id' => $resource->post_id
+                    "body" => "bạn có comment",
+                    "title" => "Push notification Dina app"
+                ],
+                "data" => [
+                    'type' => 'comment',
+                    'id' => '1'
                 ]
             ]
         ];
