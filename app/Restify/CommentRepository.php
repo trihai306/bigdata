@@ -68,7 +68,7 @@ class CommentRepository extends Repository
                 ]
             ]
         ];
-        sendFCMNotification($fcmMessage);
+        dd(sendFCMNotification($fcmMessage));
         $user->notify(new PostNotification('comment', 'abc', 'có lượt comment',$resource->post_id));
     }
 }
