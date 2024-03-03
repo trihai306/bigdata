@@ -4,6 +4,8 @@ namespace App\Restify;
 
 
 use App\Models\Comment;
+use App\Models\Post;
+use App\Models\User;
 use App\Notifications\PostNotification;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
 use Illuminate\Support\Facades\Auth;
@@ -54,7 +56,8 @@ class CommentRepository extends Repository
 
     public static function stored($resource, RestifyRequest $request)
     {
-        $user = Auth::user();
+        $post = Post::find($resource->post_id);
+        $user = User::find($post->user_id);
         $fcmMessage = [
             "message" => [
                 "token" => "{$user->phone_token}",
