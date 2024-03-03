@@ -22,7 +22,7 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/forgot-password', [AuthController::class, 'forgotPassword']);
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 
-Route::middleware(['auth:sanctum'])->group(function () {
+Route::middleware(['auth:sanctum','api'])->group(function () {
     Route::get('/profile', [AuthController::class, 'getProfile']);
     Route::put('/edit-profile', [AuthController::class, 'editProfile']);
     Route::put('/change-password', [AuthController::class, 'changePassword']);
