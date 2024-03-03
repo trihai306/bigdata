@@ -64,7 +64,7 @@ class CommentRepository extends Repository
                 ],
                 "data" => [
                     'type' => 'comment',
-                    'id' => "$resource->post_id"
+                    'id' => "{$resource->post_id}"
                 ]
             ]
         ];
