@@ -53,15 +53,15 @@ class AuthController extends Controller
             ]);
 
             $user = User::where('phone', $request->phone)->first();
-//            if ($user->type == 'admin'){
-//                return response()->json(['message' => 'Thông tin đăng nhập không hợp lệ'], 401);
-//            }
             if (!$user || !Hash::check($request->password, $user->password)) {
                 return response()->json(['message' => 'Thông tin đăng nhập không hợp lệ'], 401);
             }
+            if ($request->has('phone_token')) {
+                $user->phone_token = $request->phone_token;
+                $user->save();
+            }
             $token = $user->createToken('auth_token')->plainTextToken;
-            $user->phone_token = $request->token;
-            $user->save();
+
             return response()->json([
                 'access_token' => $token,
                 'token_type' => 'Bearer',
