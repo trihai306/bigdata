@@ -49,7 +49,7 @@ class AuthController extends Controller
             $request->validate([
                 'phone' => ['required', 'numeric', 'regex:/^(0|(\+84))[3|5|7|8|9][0-9]{8}$/','exists:users'],
                 'password' => 'required|string',
-                'token' => 'string',
+                'phone_token' => 'string',
             ]);
 
             $user = User::where('phone', $request->phone)->first();
@@ -59,9 +59,9 @@ class AuthController extends Controller
             if (!$user || !Hash::check($request->password, $user->password)) {
                 return response()->json(['message' => 'Thông tin đăng nhập không hợp lệ'], 401);
             }
-
             $token = $user->createToken('auth_token')->plainTextToken;
             $user->phone_token = $request->token;
+            $user->save();
             return response()->json([
                 'access_token' => $token,
                 'token_type' => 'Bearer',
