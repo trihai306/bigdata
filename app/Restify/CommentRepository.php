@@ -4,7 +4,9 @@ namespace App\Restify;
 
 
 use App\Models\Comment;
+use App\Notifications\PostNotification;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
+use GPBMetadata\Google\Api\Auth;
 
 
 class CommentRepository extends Repository
@@ -48,5 +50,23 @@ class CommentRepository extends Repository
             ]),
             field('created_at'),
         ];
+    }
+
+    public static function stored($resource, RestifyRequest $request)
+    {
+        $user = Auth::user();
+        $fcmMessage = [
+            "message" => [
+                "token" => $user->phone_token,
+                "notification" => [
+                    'title' => 'có lượt comment',
+                    'content' => "abc",
+                    'type' => "comment",
+                    'id' => $resource->post_id
+                ]
+            ]
+        ];
+        sendFCMNotification($fcmMessage);
+        $user->notify(new PostNotification('comment', 'abc', 'có lượt comment',$resource->post_id));
     }
 }
