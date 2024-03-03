@@ -6,7 +6,7 @@ namespace App\Restify;
 use App\Models\Comment;
 use App\Notifications\PostNotification;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
-use GPBMetadata\Google\Api\Auth;
+use Illuminate\Support\Facades\Auth;
 
 
 class CommentRepository extends Repository
