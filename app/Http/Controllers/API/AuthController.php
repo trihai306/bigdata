@@ -78,22 +78,27 @@ class AuthController extends Controller
 
     public function editProfile(Request $request)
     {
-        try {
-            $data = $request->only(['name', 'email', 'phone', 'avatar', 'address', 'birthday', 'gender', 'password', 'status', 'field', 'type','store_name']);
-            if ($request->has('avatar')) {
-                $file = $request->file('avatar');
-                $filename = time() . '.' . $file->getClientOriginalExtension();
-                $file->move(public_path('uploads'), $filename);
-                $data['avatar'] = $filename;
-            }
-
-            $user = $request->user();
-            $user->update($data);
-
-            return response()->json(['message' => 'Cập nhật thông tin thành công','user'=>$user], 200);
-        } catch (ValidationException $e) {
-            return response()->json(['errors' => $e->errors()], 422);
+        $data = $request->validate([
+            'name' => 'string|max:255',
+            'phone' => ['numeric', 'regex:/^(0|(\+84))[3|5|7|8|9][0-9]{8}$/'],
+            'address' => 'string',
+            'store_name' => 'string',
+            'type' => 'string|in:buyer,seller',
+            'field' => 'type,seller|string|in:leather_goods,clothing,all',
+            'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg',
+        ]);
+        if ($request->has('avatar')) {
+            $file = $request->file('avatar');
+            $filename = time() . '.' . $file->getClientOriginalExtension();
+            $file->move(public_path('uploads'), $filename);
+            $data['avatar'] = $filename;
         }
+
+        $user = $request->user();
+        $user->update($data);
+
+        return response()->json(['message' => 'Cập nhật thông tin thành công','user'=>$user], 200);
+
     }
 
     public function logout(Request $request)
