@@ -58,20 +58,7 @@ class CommentRepository extends Repository
     {
         $post = Post::find($resource->post_id);
         $user = User::find($post->user_id);
-        $fcmMessage = [
-            "message" => [
-                "token" => "{$user->phone_token}",
-                "notification" => [
-                    "body" => "bạn có comment",
-                    "title" => "Push notification Dina app"
-                ],
-                "data" => [
-                    'type' => 'comment',
-                    'id' => "{$resource->post_id}"
-                ]
-            ]
-        ];
-        sendFCMNotification($fcmMessage);
+        sendFirebaseNotification($user->phone_token, 'bạn có comment', 'Push notification Dina app', ['type' => 'comment', 'id' => $resource->post_id]);
         $user->notify(new PostNotification('comment', 'abc', 'có lượt comment',$resource->post_id));
     }
 }

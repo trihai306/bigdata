@@ -4,15 +4,15 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2e419b44780ac7893164edd64bc7dd4a",
+    "content-hash": "e0f7fd9bafa4f7bef08e92281c04ad5d",
     "packages": [
         {
             "name": "adminftr/future",
-            "version": "dev-master",
+            "version": "1.x-dev",
             "dist": {
                 "type": "path",
                 "url": "./packages/trihai306/adminftr",
-                "reference": "7f56306e1b8084e1baf163f49b4e012ce9f6f95b"
+                "reference": "ec3184a08a884e5df69734fbd1996b2d2d159311"
             },
             "require": {
                 "livewire/livewire": ">=3.3.5",

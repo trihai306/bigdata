@@ -14,23 +14,13 @@ use Illuminate\Support\Facades\Redis;
 */
 route::get('/', function () {
 
-    $fcmMessage = [
-        "message" => [
-            "token" => "fb9gE7HzRgGRJzmNRDF9pH:APA91bFcquJ_bcb3PcNkj4rO1o_1F8e3gNzWCIc6R33XnpgKZaUVNQGfAc8G3yx68lftyhintSD5PvA2ILpm0RWSbIAzDtRzYsHmi-uVn1xGD12rC-iLSrBcAA790YEBbaGwHGrfU9Za",
-            "notification" => [
-                "body" => "bạn có comment",
-                "title" => "Push notification Dina app"
-            ],
-            "data" => [
-                'title' => 'có lượt comment',
-                'content' => 'abc',
-                'type' => 'comment',
-                'id' => '1'
-            ]
-        ]
-    ];
-//
-    $response = sendFCMNotification($fcmMessage);
-    dd($response);
+    $deviceToken = 'fb9gE7HzRgGRJzmNRDF9pH:APA91bFcquJ_bcb3PcNkj4rO1o_1F8e3gNzWCIc6R33XnpgKZaUVNQGfAc8G3yx68lftyhintSD5PvA2ILpm0RWSbIAzDtRzYsHmi-uVn1xGD12rC-iLSrBcAA790YEBbaGwHGrfU9Za';
+    $title = 'Hello World';
+    $body = 'This is a test notification';
+    $data = ['key1' => 'value1', 'key2' => 'value2'];
+
+    $result = sendFirebaseNotification($deviceToken, $title, $body, $data);
+
+    dd($result);
     return view('welcome');
 });
