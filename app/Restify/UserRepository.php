@@ -38,7 +38,7 @@ class UserRepository extends Repository
                 'required' => 'Trường này là bắt buộc.',
             ]),
 
-            field('avatar')->image()->disk('public')->storingRules('required')->messages([
+            field('avatar')->storingRules('required')->messages([
                 'required' => 'Trường này là bắt buộc.',
             ]),
 
