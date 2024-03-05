@@ -20,7 +20,5 @@ route::get('/', function () {
     $data = ['key1' => 'value1', 'key2' => 'value2'];
 
     $result = sendFirebaseNotification($deviceToken, $title, $body, $data);
-
-    dd($result);
     return view('welcome');
 });
