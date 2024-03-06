@@ -39,7 +39,7 @@ class UserRepository extends Repository
             ]),
 
             field('avatar')->storingRules('required')->messages([
-                'required' => 'Trường này là bắt buộc.',
+                'required' =>    'Trường này là bắt buộc.',
             ]),
 
             field('phone')->rules('required', 'unique:users', 'phone')->messages([
