@@ -81,4 +81,5 @@ class User extends Authenticatable
     {
         return $this->conversations()->where('id', $conversation_id)->exists();
     }
+    
 }

@@ -26,6 +26,7 @@ class UserRepository extends Repository
     public static function indexQuery(RestifyRequest $request, \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Relations\Relation $query)
     {
         $query->where('status', 'active');
+
         return parent::indexQuery($request, $query);
     }
 

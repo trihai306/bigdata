@@ -3,12 +3,25 @@
 namespace App\Restify;
 
 use App\Models\UserConversation;
+use Binaryk\LaravelRestify\Fields\BelongsTo;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
 
 
 class UserConversationRepository extends Repository
 {
     public static string $model = UserConversation::class;
+
+    public static array $search = [
+        'id',
+    ];
+
+    public static array $sort = [
+        'id',
+        'user_id',
+        'conversation_id',
+        'date_joined',
+        'last_read_at',
+    ];
 
     public function fields(RestifyRequest $request): array
     {
@@ -26,6 +39,14 @@ class UserConversationRepository extends Repository
                 'required' => 'Trường này là bắt buộc.',
             ]),
             field('last_read_at'),
+        ];
+    }
+
+    public static function related(): array
+    {
+        return [
+            'user' => BelongsTo::make('user', UserRepository::class),
+            'conversation' => BelongsTo::make('conversation', ConversationRepository::class),
         ];
     }
 }

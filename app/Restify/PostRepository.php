@@ -31,7 +31,6 @@ class PostRepository extends Repository
     public static function indexQuery(RestifyRequest $request, Relation|Builder $query)
 
     {
-//         $query->where('status', 'published');
         return parent::indexQuery($request, $query);
     }
 

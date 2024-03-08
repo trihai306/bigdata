@@ -7,6 +7,7 @@ use App\Models\User;
 use Future\Table\Future\BaseTable;
 use Future\Table\Future\Tables\Actions\Action;
 use Future\Table\Future\Tables\Actions\Actions;
+use Future\Table\Future\Tables\BulkActions\BulkAction;
 use Future\Table\Future\Tables\Columns\ImageColumn;
 use Future\Table\Future\Tables\Columns\TextColumn;
 use Future\Table\Future\Tables\FilterInput;
@@ -92,5 +93,10 @@ class Table extends BaseTable
         ];
     }
 
-
+    protected function bulkActions(): array
+    {
+        return [
+            BulkAction::make('deletes', __('deletes'), 'fas fa-trash-alt', 'deletes', __('Are you sure you want to delete this permission?')),
+        ];
+    }
 }

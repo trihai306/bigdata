@@ -14,6 +14,7 @@ class ConversationRepository extends Repository
     public static array $search = [
         'id',
         'name',
+        'users.name',
     ];
     public static array $sort = [
         'id',
@@ -27,6 +28,7 @@ class ConversationRepository extends Repository
         'id' => 'integer',
         'name'=>'string',
         'type'=>'string',
+        'users.name'=>'string',
     ];
 
     public static function indexQuery(RestifyRequest $request, Relation|Builder $query)
@@ -48,6 +50,7 @@ class ConversationRepository extends Repository
             field('lastMessage')->canStore(fn() => false)->canUpdate(fn() => false),
         ];
     }
+
 
     public static function related(): array
     {
