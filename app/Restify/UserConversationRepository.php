@@ -38,7 +38,7 @@ class UserConversationRepository extends Repository
             field('date_joined')->rules('required')->messages([
                 'required' => 'Trường này là bắt buộc.',
             ]),
-            field('last_read_at'),
+            field('last_seen_message_id'),
         ];
     }
 
