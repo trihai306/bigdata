@@ -15,7 +15,8 @@ class User extends Authenticatable
     use HasRoles;
     use HasMessages;
     protected $fillable = [
-        'name', 'email', 'phone', 'avatar', 'address', 'birthday', 'gender', 'password', 'status', 'field', 'type','store_name','phone_token'
+        'name', 'email', 'phone', 'avatar', 'address', 'birthday', 'gender', 'password',
+        'status', 'field', 'type','store_name','phone_token'
     ];
 
     protected $hidden = [
@@ -81,5 +82,5 @@ class User extends Authenticatable
     {
         return $this->conversations()->where('id', $conversation_id)->exists();
     }
-    
+
 }
