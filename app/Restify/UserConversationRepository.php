@@ -47,6 +47,7 @@ class UserConversationRepository extends Repository
         return [
             'user' => BelongsTo::make('user', UserRepository::class),
             'conversation' => BelongsTo::make('conversation', ConversationRepository::class),
+            'lastSeenMessage' => BelongsTo::make('lastSeenMessage', MessageRepository::class),
         ];
     }
 }
