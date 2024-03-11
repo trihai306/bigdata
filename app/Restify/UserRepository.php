@@ -67,7 +67,9 @@ class UserRepository extends Repository
                 'in' => 'Trường này phải nằm trong danh sách cho trước.',
             ]),
 
-            field('gender')->rules('required', 'in:male,female,non-binary,genderqueer,transgender,genderfluid,agender')->messages([
+            field('gender')
+                ->rules('required', 'in:male,female,non-binary,genderqueer,transgender,genderfluid,agender')
+                ->messages([
                 'required' => 'Trường này là bắt buộc.',
                 'in' => 'Trường này phải nằm trong danh sách cho trước.',
             ]),

@@ -48,6 +48,7 @@ class ConversationRepository extends Repository
             field('name'),
             field('users')->canStore(fn() => false)->canUpdate(fn() => false),
             field('lastMessage')->canStore(fn() => false)->canUpdate(fn() => false),
+            field('lastSeenMessage')->canStore(fn() => false)->canUpdate(fn() => false),
         ];
     }
 

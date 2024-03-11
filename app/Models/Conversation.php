@@ -28,4 +28,9 @@ class Conversation extends Model
     {
         return $this->hasOne(Message::class)->latest();
     }
+
+    public function lastSeenMessage()
+    {
+        return $this->hasOne(UserConversation::class)->where('user_id', auth()->id());
+    }
 }
