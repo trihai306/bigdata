@@ -21,6 +21,7 @@ class MessageRepository extends Repository
     public static array $search = [
         'id',
         'content',
+        'conversation_id',
     ];
 
     public static array $sort = [
@@ -52,7 +53,6 @@ class MessageRepository extends Repository
             if($conversationId)
             {
                 $request->merge(['conversation_id' => $conversationId->id]);
-                dd($request->all());
                 return parent::index($request);
             }
             return response()->json(['message' => 'You are not allowed to access this conversation'], 403);
