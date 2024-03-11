@@ -16,13 +16,13 @@ use Future\Table\Future\Tables\Headers\Actions\ResetAction;
 
 class Table extends BaseTable
 {
-    protected string $model = User::class;
     public string $urlCreate = 'admin.users.create';
+    protected string $model = User::class;
 
     protected function setListeners(): array
     {
         return [
-            'check'=>'check',
+            'check' => 'check',
         ];
     }
 
@@ -31,14 +31,14 @@ class Table extends BaseTable
         return [
             TextColumn::make('id', __('ID'))->searchable()->sortable(),
             ImageColumn::make('avatar', __('user_avatar')),
-            TextColumn::make('name', __('user_name'))->searchable()->sortable()->description(function (User $user){
+            TextColumn::make('name', __('user_name'))->searchable()->sortable()->description(function (User $user) {
                 return $user->phone;
-            })->width('200px'),
+            }),
             TextColumn::make('address', __('user_address'))->searchable()->sortable(),
             TextColumn::make('birthday')->dateTime(),
             TextColumn::make('roles', __('user_roles'))->renderHtml(function (User $user) {
                 return $user->roles->map(function ($role) {
-                    return "<span class='badge bg-primary'>{$role->name}</span>";
+                    return "<span class='badge bg-primary text-white'>{$role->name}</span>";
                 })->implode(' ');
             }),
             TextColumn::make('status', __('user_status'))->badge(
@@ -51,12 +51,12 @@ class Table extends BaseTable
                     'inactive' => __('inactive'),
                 ]
             ),
-            TextColumn::make('gender',__('gender'))->badge([
-                'male'=>'primary',
-                'female'=>'danger',
-            ],[
-                'male'=>'Nam',
-                'female'=>'Nữ',
+            TextColumn::make('gender', __('gender'))->badge([
+                'male' => 'primary',
+                'female' => 'danger',
+            ], [
+                'male' => 'Nam',
+                'female' => 'Nữ',
             ]),
             TextColumn::make('created_at', __('Created At'))->dateTime()->sortable(),
             TextColumn::make('updated_at', __('Updated At'))->dateTime()->sortable(),
@@ -77,9 +77,11 @@ class Table extends BaseTable
             Action::make('edit', __('edit'), 'fas fa-edit')->setLink(function ($data) {
                 return route('admin.users.edit', $data->id);
             }),
-            Action::make('password', __('change password'), 'fa fa-key')->modal(__('Change Password'), ChangePassword::class),
+            Action::make('password', __('change password'), 'fa fa-key')
+                ->modal(__('Change Password'), ChangePassword::class),
             Action::make('delete', __('delete'), 'fas fa-trash-alt')->setConfirm(function ($data) {
-                return ['message' => __('Are you sure you want to delete this permission?'), 'id' => $data->id, 'nameMethod' => 'delete'];
+                return ['message' => __('Are you sure you want to delete this permission?'),
+                    'id' => $data->id, 'nameMethod' => 'delete'];
             }),
         ]);
     }
@@ -89,14 +91,16 @@ class Table extends BaseTable
     {
         return [
             ResetAction::make(),
-            \Future\Table\Future\Tables\Headers\Actions\Action::make('create', __('future::messages.add_data'))->to(route($this->urlCreate)),
+            \Future\Table\Future\Tables\Headers\Actions\Action::make('create', __('future::messages.add_data'))
+                ->to(route($this->urlCreate)),
         ];
     }
 
     protected function bulkActions(): array
     {
         return [
-            BulkAction::make('deletes', __('deletes'), 'fas fa-trash-alt', 'deletes', __('Are you sure you want to delete this permission?')),
+            BulkAction::make('deletes', __('deletes'), 'fas fa-trash-alt', 'deletes',
+                __('Are you sure you want to delete this permission?')),
         ];
     }
 }
