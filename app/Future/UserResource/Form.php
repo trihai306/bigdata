@@ -15,6 +15,7 @@ use Future\Form\Future\Forms\Layouts\Row;
 class Form extends BaseForm
 {
     protected $model = User::class;
+
     public function form(\Future\Form\Future\Forms\Form $form)
     {
         return $form->schema([
@@ -34,18 +35,20 @@ class Form extends BaseForm
                         'genderfluid' => 'giới tính linh hoạt',
                         'agender' => 'không giới tính'
                     ]),
-//                    DateInput::make('birthday')->label('Ngày sinh'),
+                    DateInput::make('birthday')->label('Ngày sinh'),
                 ])
             ])
-        ]);
+        ])->createRules([
+            'data.name' => 'required',
+            'data.email' => 'required|email',
+            'data.password' => 'required',
+            'data.address' => 'required'
+        ])->editRules([
+                'data.name' => 'required',
+                'data.email' => 'required|email',
+                'data.address' => 'required'
+            ]);
     }
 
-    public function rules()
-    {
-        return [
-            'data.name' => 'required',
-            'data.email' => 'required|email|unique:users,email',
-            'data.password' => 'required',
-        ];
-    }
+
 }
