@@ -21,7 +21,7 @@ class UserMessageEvent implements ShouldBroadcast
     {
         $this->userId = $userId;
         $this->message = $message;
-        $this->sender = User::find($sender);
+        $this->sender = $sender;
         $this->user = User::find($userId);
     }
 

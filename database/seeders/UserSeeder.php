@@ -28,6 +28,6 @@ class UserSeeder extends Seeder
             ]);
         }
       //seed 100 users
-        UserFactory::new()->count(1000)->create();
+        UserFactory::new()->count(100)->create();
     }
 }

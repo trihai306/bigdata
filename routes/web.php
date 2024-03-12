@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Redis;
 */
 route::get('/', function () {
 
-    $deviceToken = 'fb9gE7HzRgGRJzmNRDF9pH:APA91bFcquJ_bcb3PcNkj4rO1o_1F8e3gNzWCIc6R33XnpgKZaUVNQGfAc8G3yx68lftyhintSD5PvA2ILpm0RWSbIAzDtRzYsHmi-uVn1xGD12rC-iLSrBcAA790YEBbaGwHGrfU9Za';
+    $deviceToken = 'cL_hFXdLRo2zrLnmQWTD2T:APA91bEH4rcCC-AmWqJS2hqtfA-ClfedzAKmmQ7jdeJOhGxP_HNNvf_ISCQAIJORYWrPBvEa67342qHLJ5LnxvkSRC9lyg5bszP-2PNYyCtGJs8c-Wrcr7gyKq-0OnRFluweqn0z7WAh';
     $title = 'Hello World';
     $body = 'This is a test notification';
     $data = ['key1' => 'value1', 'key2' => 'value2'];
