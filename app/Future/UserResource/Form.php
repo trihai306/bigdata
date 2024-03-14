@@ -20,7 +20,7 @@ class Form extends BaseForm
     {
         return $form->schema([
             Card::make()->schema([
-                Row::make($sm = 12, $md = 6, $lg = 6)->schema([
+                Row::make(12, 6, 6)->schema([
                     TextInput::make('name')->required()->label('Tên')->placeholder('Name'),
                     TextInput::make('email')->required()->label('Email')->placeholder('Email'),
                     TextInput::make('password')->required()->password()->label('Mật khẩu')

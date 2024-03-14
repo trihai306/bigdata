@@ -1,14 +1,13 @@
 <?php
 namespace App\Events;
 
-use App\Models\User;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PrivateChannel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcastNow;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class UserMessageEvent implements ShouldBroadcast
+class UserMessageEvent implements ShouldBroadcastNow
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -17,12 +16,12 @@ class UserMessageEvent implements ShouldBroadcast
     public $sender;
     public $user;
 
-    public function __construct($userId, $message, $sender)
+    public function __construct($user, $message, $sender)
     {
-        $this->userId = $userId;
         $this->message = $message;
         $this->sender = $sender;
-        $this->user = User::find($userId);
+        $this->user = $user;
+        $this->userId = $user->id;
     }
 
     public function broadcastOn()
