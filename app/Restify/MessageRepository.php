@@ -5,6 +5,7 @@ namespace App\Restify;
 use App\Events\UserPrivateMessageEvent;
 use App\Models\Conversation;
 use App\Models\Message;
+use App\Models\User;
 use Binaryk\LaravelRestify\Fields\BelongsTo;
 use Binaryk\LaravelRestify\Fields\HasMany;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
@@ -45,6 +46,7 @@ class MessageRepository extends Repository
     {
         if($request->user_id != null && $request->user_id != Auth::id() && $request->conversation_id == null)
         {
+            $user = User::find($request->user_id);
             $conversationId = Conversation::whereHas('users', function (Builder $query) use ($request) {
                 $query->where('user_id', $request->user_id);
             })->whereHas('users', function (Builder $query) {
@@ -53,6 +55,7 @@ class MessageRepository extends Repository
             if($conversationId)
             {
                 $request->merge(['conversation_id' => $conversationId->id]);
+                $request->merge(['user' => $user]);
                 return parent::index($request);
             }
             return response()->json(['message' => 'You are not allowed to access this conversation'], 403);
