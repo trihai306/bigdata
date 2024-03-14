@@ -46,7 +46,7 @@ class MessageRepository extends Repository
     {
         if($request->user_id != null && $request->user_id != Auth::id() && $request->conversation_id == null)
         {
-            $user = User::find($request->user_id);
+
             $conversationId = Conversation::whereHas('users', function (Builder $query) use ($request) {
                 $query->where('user_id', $request->user_id);
             })->whereHas('users', function (Builder $query) {
@@ -55,7 +55,7 @@ class MessageRepository extends Repository
             if($conversationId)
             {
                 $request->merge(['conversation_id' => $conversationId->id]);
-                $request->merge(['user' => $user]);
+
                 return parent::index($request);
             }
             return response()->json(['message' => 'You are not allowed to access this conversation'], 403);
@@ -71,6 +71,9 @@ class MessageRepository extends Repository
     {
         try {
             if ($request->conversation_id == null && $request->user_id != null) {
+                $user = User::find($request->user_id);
+                $request->merge(['user' => $user]);
+
                 if ($request->user_id == Auth::id()) {
                     return response()->json(['message' => 'You cannot send message to yourself'], 403);
                 }
@@ -104,6 +107,7 @@ class MessageRepository extends Repository
                     $request->merge(['attachment_url' => json_encode($attachmentUrls)]);
                 }
                 $request->merge(['sender_id' => Auth::id()]);
+
                 return parent::store($request);
             }
             return response()->json(['message' => 'You are not allowed to access this conversation'], 403);
