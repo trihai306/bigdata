@@ -113,7 +113,7 @@ class MessageRepository extends Repository
     public static function stored($resource, RestifyRequest $request)
     {
         $sender = Auth::user();
-        event(new \App\Events\UserMessageEvent($request->user_id, $resource, $sender->id));
+        event(new \App\Events\UserMessageEvent($request->user, $resource, $sender->id));
     }
 
     public function fields(RestifyRequest $request): array
