@@ -47,7 +47,6 @@ class MessageRepository extends Repository
         $userId = $request->user_id;
         $authId = Auth::id();
         if($userId && $userId != $authId && $request->conversation_id == null) {
-            dd($userId, $authId);
             $conversation = Conversation::whereHas('users', function (Builder $query) use ($userId, $authId) {
                 $query->whereIn('user_id', [$userId, $authId]);
             })->where(function($query) use ($userId, $authId) {
@@ -57,7 +56,7 @@ class MessageRepository extends Repository
                     $query->where('user_id', $authId);
                 });
             })->first();
-
+            dd($conversation);
             $request->merge(['conversation_id' => optional($conversation)->id]);
         }
 
