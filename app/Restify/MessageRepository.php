@@ -56,10 +56,9 @@ class MessageRepository extends Repository
                     $query->where('user_id', $authId);
                 });
             })->first();
-            dd($conversation);
             $request->merge(['conversation_id' => optional($conversation)->id]);
         }
-
+        dd($request->all());
         if (!Auth::user()->hasConversation($request->conversation_id)) {
             return response()->json(['message' => 'You are not allowed to access this conversation', 'data' => []], 403);
         }
