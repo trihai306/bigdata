@@ -50,7 +50,13 @@ class MessageRepository extends Repository
         if($userId && $userId != $authId && $request->conversation_id == null) {
             $conversation = Conversation::whereHas('users', function (Builder $query) use ($userId, $authId) {
                 $query->whereIn('user_id', [$userId, $authId]);
-            })->havingRaw('COUNT(DISTINCT user_id) = 2')->first();
+            })->where(function($query) use ($userId, $authId) {
+                $query->whereHas('users', function (Builder $query) use ($userId) {
+                    $query->where('user_id', $userId);
+                })->whereHas('users', function (Builder $query) use ($authId) {
+                    $query->where('user_id', $authId);
+                });
+            })->first();
 
             $request->merge(['conversation_id' => optional($conversation)->id]);
         }
