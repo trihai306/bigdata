@@ -57,7 +57,6 @@ class MessageRepository extends Repository
                 });
             })->first();
             $request->merge(['conversation_id' => optional($conversation)->id]);
-            $request->request->remove('user_id');
         }
         dd($request->all());
         if (!Auth::user()->hasConversation($request->conversation_id)) {
