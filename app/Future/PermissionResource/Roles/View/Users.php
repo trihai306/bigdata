@@ -11,8 +11,7 @@ class Users extends Component
     use WithPagination;
 
     public $role;
-    public $searchUser = '';
-    public $selectedUserName = '';
+
     public $search = ''; // Thêm biến tìm kiếm nếu cần
     public $selectedUser = null;
 
@@ -25,38 +24,7 @@ class Users extends Component
         $this->role = $role;
     }
 
-    public function searchUser()
-    {
-        $users = User::whereNotIn('id', $this->role->users->pluck('id'))
-            ->where('name', 'like', '%'.$this->searchUser.'%')
-            ->get();
 
-        return $users;
-    }
-
-    public function selectUser($userId, $userName)
-    {
-        $this->selectedUser = $userId;
-        $this->selectedUserName = $userName;
-    }
-
-    public function saveUser()
-    {
-        try {
-            if ($this->selectedUser) {
-                $this->role->users()->attach($this->selectedUser);
-                $this->selectedUser = null;
-                $this->selectedUserName = '';
-            }
-            $this->dispatch('swalSuccess', [
-                'message' => 'Thêm người dùng thành công'
-            ]);
-        }catch (\Exception $exception) {
-            $this->dispatch('swalError', [
-                'message' => 'Thêm người dùng thất bại'
-            ]);
-        }
-    }
 
     public function deleteRoleUser($id)
     {
@@ -78,7 +46,6 @@ class Users extends Component
         $users = $this->role->users()
             ->where('name', 'like', '%'.$this->search.'%')
             ->paginate(10);
-
         return view('livewire.roles.view.users', compact('users'));
     }
 }
