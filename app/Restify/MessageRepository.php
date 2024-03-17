@@ -44,7 +44,7 @@ class MessageRepository extends Repository
 
     public function index(RestifyRequest $request)
     {
-        return response()->json(['requests'=>$request->all(), 403);
+        return response()->json(['requests'=>$request->all()], 403);
         $userId = $request->user_id;
         $authId = Auth::id();
         if($userId && $userId != $authId && $request->conversation_id == null) {
