@@ -59,7 +59,8 @@ class MessageRepository extends Repository
             $request->merge(['conversation_id' => optional($conversation)->id]);
         }
         if (!Auth::user()->hasConversation($request->conversation_id)) {
-            return response()->json(['message' => 'You are not allowed to access this conversation', 'data' => []], 403);
+            return response()->json(['message' => 'You are not allowed to access this conversation',
+                'data' => []], 403);
         }
 
         return parent::index($request);
