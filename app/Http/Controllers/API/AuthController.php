@@ -60,6 +60,10 @@ class AuthController extends Controller
                 $user->phone_token = $request->phone_token;
                 $user->save();
             }
+
+            // Xóa tất cả các token hiện có của người dùng
+            $user->tokens()->delete();
+
             $token = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([
