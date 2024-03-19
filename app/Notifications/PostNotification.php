@@ -15,12 +15,16 @@ class PostNotification extends Notification
     public $content;
     public $title;
     public $id_post;
-    public function __construct($type, $content, $title,$id)
+    public $user;
+    public $id_comment;
+    public function __construct($type, $content, $title,$id,$user,$id_comment)
     {
         $this->type = $type;
         $this->content = $content;
         $this->title = $title;
         $this->id_post = $id;
+        $this->user = $user;
+        $this->id_comment = $id_comment;
     }
 
     public function via($notifiable)
@@ -34,7 +38,9 @@ class PostNotification extends Notification
             'type' => $this->type,
             'content' => $this->content,
             'title' => $this->title,
-            'id_post'=>$this->id
+            'id_post'=>$this->id,
+            'user'=>$this->user,
+            'id_comment'=>$this->id_comment
         ];
     }
 }

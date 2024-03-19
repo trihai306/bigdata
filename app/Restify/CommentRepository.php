@@ -64,7 +64,7 @@ class CommentRepository extends Repository
                 'bạn có comment',
                 'Push notification Dina app',
                 ['type' => 'comment', 'id_notice'=> "$resource->id.$resource->post_id",'id' => (string)$resource->post_id]);
-            $user->notify(new PostNotification('comment', 'abc', 'có lượt comment',$resource->post_id));
+            $user->notify(new PostNotification('comment', 'abc', 'có lượt comment',$resource->post_id,$user,$resource->id));
         }
 
     }

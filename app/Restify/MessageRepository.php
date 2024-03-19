@@ -60,7 +60,7 @@ class MessageRepository extends Repository
         }
         if (!Auth::user()->hasConversation($request->conversation_id)) {
             return response()->json(['message' => 'You are not allowed to access this conversation',
-                'data' => []], 403);
+                'data' => []], 200);
         }
 
         return parent::index($request);
