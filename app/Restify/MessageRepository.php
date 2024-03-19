@@ -96,7 +96,6 @@ class MessageRepository extends Repository
             if (Auth::user()->hasConversation($request->conversation_id)) {
 
                 if ($request->type == 'images') {
-                     //lưu tất cả file vào storage
                     $files = $request->file('attachment_url');
                     $attachmentUrls = [];
                     foreach ($files as $file) {
