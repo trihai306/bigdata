@@ -20,7 +20,7 @@ class AuthController extends Controller
         try {
             $data = $request->validate([
                 'name' => 'required|string|max:255',
-                'phone' => ['required', 'numeric', 'unique:users', 'regex:/^(0|(\+84))[3|5|7|8|9][0-9]{8}$/'],
+                'phone' => ['required', 'numeric', 'unique:users', 'regex:/^(0|(\84))[3|5|7|8|9][0-9]{8}$/'],
                 'password' => 'required|string|min:6',
                 'confirm_password' => 'required|string|same:password',
                 'address' => 'required|string',
@@ -32,7 +32,7 @@ class AuthController extends Controller
             $data['password'] = Hash::make($data['password']);
 
             $user = User::create($data);
-            $otp = (new Otp)->generate($user->phone, 'numeric', 6, 6);
+            $otp = (new Otp)->generate('84'.$user->phone, 'numeric', 6, 6);
             $sms = new SpeedSMSAPI('X5ypO-zjgfecptVf1C5vLVJ0MdyMZPzr');
            $sms->sendSMS(['84'.$user->phone], 'Ma xac thuc SPEEDSMS.VN cua ban la ' . $otp->token,
                 SpeedSMSAPI::SMS_TYPE_CSKH, 'SPEEDSMS.VN');
@@ -134,10 +134,7 @@ class AuthController extends Controller
             $user->password_reset_token = hash('sha256', $token);
             $user->save();
 
-            Mail::raw("Mã token để đặt lại mật khẩu của bạn là: $token", function ($message) use ($user) {
-                $message->to($user->phone . '@your-sms-gateway.com')
-                    ->subject('Mã Token Đặt Lại Mật Khẩu');
-            });
+
 
             return response(['message' => 'Đã gửi mã token đặt lại mật khẩu.'], 200);
         } catch (ValidationException $e) {
