@@ -12,7 +12,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 use SpeedSMSAPI;
-
+use Ichtrojan\Otp\Otp;
 class AuthController extends Controller
 {
     public function register(Request $request)
@@ -32,12 +32,12 @@ class AuthController extends Controller
             $data['password'] = Hash::make($data['password']);
 
             $user = User::create($data);
-            $token = $user->createToken('auth_token')->plainTextToken;
-
+            $otp = (new Otp)->generate($user->phone, 'numeric', 6, 6);
+            $sms = new SpeedSMSAPI('X5ypO-zjgfecptVf1C5vLVJ0MdyMZPzr');
+           $sms->sendSMS([$user->phone], 'Ma xac thuc SPEEDSMS.VN cua ban la ' . $otp->token,
+                SpeedSMSAPI::SMS_TYPE_CSKH, 'SPEEDSMS.VN');
             return response()->json([
-                'access_token' => $token,
-                'token_type' => 'Bearer',
-                'user' => $user->makeHidden('password')
+                'message' => 'Đăng ký tài khoản thành công',
             ]);
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
@@ -196,9 +196,29 @@ class AuthController extends Controller
 
     public function sendOTP(Request $request)
     {
-        $sms = new SpeedSMSAPI('X5ypO-zjgfecptVf1C5vLVJ0MdyMZPzr');
-        $sms = $sms->sendSMS(['84396130621'], 'Ma xac thuc SPEEDSMS.VN cua ban la 12345',
-            SpeedSMSAPI::SMS_TYPE_CSKH, 'SPEEDSMS.VN');
-        return response(['message' => $sms], 200);
+//        $sms = new SpeedSMSAPI('X5ypO-zjgfecptVf1C5vLVJ0MdyMZPzr');
+//        $sms = $sms->sendSMS(['84396130621'], 'Ma xac thuc SPEEDSMS.VN cua ban la 12345',
+//            SpeedSMSAPI::SMS_TYPE_CSKH, 'SPEEDSMS.VN');
+        $otp = (new Otp)->generate('abc', 'numeric', 6, 6)->token;
+        return response(['message' => $otp], 200);
+    }
+
+    public function veriOTP(Request $request)
+    {
+        $request->validate([
+            'otp' => 'required|string',
+            'phone' => 'required|string'
+        ]);
+
+        $otp = (new Otp)->validate($request->phone, $request->otp);
+
+        if (!$otp) {
+            return response(['message' => 'Xác thực thất bại'], 400);
+        }
+
+        $user = User::where('phone', $request->phone)->firstOrFail();
+        $user->update(['validated' => true]);
+
+        return response(['message' => 'Xác thực thành công'], 200);
     }
 }
