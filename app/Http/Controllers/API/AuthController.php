@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
+use SpeedSMSAPI;
 
 class AuthController extends Controller
 {
@@ -56,6 +57,12 @@ class AuthController extends Controller
             if (!$user || !Hash::check($request->password, $user->password)) {
                 return response()->json(['message' => 'Thông tin đăng nhập không hợp lệ'], 401);
             }
+
+            // Check if the user's account has been validated
+            if (!$user->validated) {
+                return response()->json(['message' => 'Tài khoản chưa được xác thực'], 401);
+            }
+
             if ($request->has('phone_token')) {
                 $user->phone_token = $request->phone_token;
                 $user->save();
@@ -185,5 +192,13 @@ class AuthController extends Controller
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
         }
+    }
+
+    public function sendOTP(Request $request)
+    {
+        $sms = new SpeedSMSAPI('X5ypO-zjgfecptVf1C5vLVJ0MdyMZPzr');
+        $sms = $sms->sendSMS(['84396130621'], 'Ma xac thuc SPEEDSMS.VN cua ban la 12345',
+            SpeedSMSAPI::SMS_TYPE_CSKH, 'SPEEDSMS.VN');
+        return response(['message' => $sms], 200);
     }
 }
