@@ -47,7 +47,7 @@ class AuthController extends Controller
     {
         try {
             $request->validate([
-                'phone' => ['required', 'numeric', 'regex:/^(0|(\84))[3|5|7|8|9][0-9]{8}$/','exists:users'],
+                'phone' => ['required', 'numeric', 'regex:/^(0|(\+84))[3|5|7|8|9][0-9]{8}$/','exists:users'],
                 'password' => 'required|string',
                 'phone_token' => 'string',
             ]);
