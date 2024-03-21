@@ -196,7 +196,7 @@ class AuthController extends Controller
             'phone' => 'required|string',
             'phone_token' => 'required|string'
         ]);
-
+        dd($request->all());
         $otp = (new Otp)->validate($request->phone, $request->otp);
 
         if (!$otp) {
