@@ -32,7 +32,7 @@ class AuthController extends Controller
             $data['password'] = Hash::make($data['password']);
 
             $user = User::create($data);
-            $otp = (new Otp)->generate('84'.$user->phone, 'numeric', 6, 6);
+            $otp = (new Otp)->generate($user->phone, 'numeric', 6, 6);
             $sms = new SpeedSMSAPI('X5ypO-zjgfecptVf1C5vLVJ0MdyMZPzr');
            $sms->sendSMS(['84'.$user->phone], 'Ma xac thuc SPEEDSMS.VN cua ban la ' . $otp->token,
                 SpeedSMSAPI::SMS_TYPE_CSKH, 'SPEEDSMS.VN');
