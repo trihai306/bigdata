@@ -194,20 +194,12 @@ class AuthController extends Controller
         }
     }
 
-    public function sendOTP(Request $request)
-    {
-//        $sms = new SpeedSMSAPI('X5ypO-zjgfecptVf1C5vLVJ0MdyMZPzr');
-//        $sms = $sms->sendSMS(['84396130621'], 'Ma xac thuc SPEEDSMS.VN cua ban la 12345',
-//            SpeedSMSAPI::SMS_TYPE_CSKH, 'SPEEDSMS.VN');
-        $otp = (new Otp)->generate('abc', 'numeric', 6, 6)->token;
-        return response(['message' => $otp], 200);
-    }
-
     public function veriOTP(Request $request)
     {
         $request->validate([
             'otp' => 'required|string',
-            'phone' => 'required|string'
+            'phone' => 'required|string',
+            'phone_token' => 'required|string'
         ]);
 
         $otp = (new Otp)->validate($request->phone, $request->otp);
@@ -217,8 +209,12 @@ class AuthController extends Controller
         }
 
         $user = User::where('phone', $request->phone)->firstOrFail();
-        $user->update(['validated' => true]);
-
-        return response(['message' => 'Xác thực thành công'], 200);
+        $user->update(['validated' => true, 'phone_token' => $request->phone_token]);
+        $token = $user->createToken('auth_token')->plainTextToken;
+        $otp->delete();
+        return response([
+            'message' => 'Xác thực thành công',
+            'access_token' => $token,
+            ], 200);
     }
 }
