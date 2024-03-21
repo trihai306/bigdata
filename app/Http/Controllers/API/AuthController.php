@@ -20,7 +20,7 @@ class AuthController extends Controller
         try {
             $data = $request->validate([
                 'name' => 'required|string|max:255',
-                'phone' => ['required', 'numeric', 'unique:users', 'regex:/^(0|(\84))[3|5|7|8|9][0-9]{8}$/'],
+                'phone' => ['required', 'numeric', 'unique:users', 'regex:/^(0|(\+84))[3|5|7|8|9][0-9]{8}$/'],
                 'password' => 'required|string|min:6',
                 'confirm_password' => 'required|string|same:password',
                 'address' => 'required|string',
@@ -28,9 +28,8 @@ class AuthController extends Controller
                 'type' => 'required|string|in:buyer,seller',
                 'field' => 'required_if:type,seller|string|in:leather_goods,clothing,all',
             ]);
-
+            $data['phone'] = ltrim($data['phone'], '0');
             $data['password'] = Hash::make($data['password']);
-
             $user = User::create($data);
             $otp = (new Otp)->generate($user->phone, 'numeric', 6, 6);
             $sms = new SpeedSMSAPI('X5ypO-zjgfecptVf1C5vLVJ0MdyMZPzr');
@@ -52,8 +51,6 @@ class AuthController extends Controller
                 'password' => 'required|string',
                 'phone_token' => 'string',
             ]);
-            // xóa số 0 ở đầu số điện thoại
-            $request->phone = ltrim($request->phone, '0');
             $user = User::where('phone', $request->phone)->first();
             if (!$user || !Hash::check($request->password, $user->password)) {
                 return response()->json(['message' => 'Thông tin đăng nhập không hợp lệ'], 401);
