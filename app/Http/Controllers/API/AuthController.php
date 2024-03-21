@@ -48,11 +48,12 @@ class AuthController extends Controller
     {
         try {
             $request->validate([
-                'phone' => ['required', 'numeric', 'regex:/^(0|(\+84))[3|5|7|8|9][0-9]{8}$/','exists:users'],
+                'phone' => ['required', 'numeric', 'regex:/^(0|(\84))[3|5|7|8|9][0-9]{8}$/','exists:users'],
                 'password' => 'required|string',
                 'phone_token' => 'string',
             ]);
-
+            // xóa số 0 ở đầu số điện thoại
+            $request->phone = ltrim($request->phone, '0');
             $user = User::where('phone', $request->phone)->first();
             if (!$user || !Hash::check($request->password, $user->password)) {
                 return response()->json(['message' => 'Thông tin đăng nhập không hợp lệ'], 401);
