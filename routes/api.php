@@ -29,6 +29,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/change-password', [AuthController::class, 'changePassword']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('v1/notifications', [NotificationController::class, 'index']);
+    Route::get('v1/notifications/unread', [NotificationController::class, 'notificationUnread']);
     Route::put('v1/notifications/{id}/mark-as-read', [NotificationController::class, 'markAsRead']);
 });
 
