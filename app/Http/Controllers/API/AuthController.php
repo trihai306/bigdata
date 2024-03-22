@@ -58,9 +58,9 @@ class AuthController extends Controller
             }
 
             // Check if the user's account has been validated
-            if (!$user->validated) {
-                return response()->json(['message' => 'Tài khoản chưa được xác thực'], 401);
-            }
+//            if (!$user->validated) {
+//                return response()->json(['message' => 'Tài khoản chưa được xác thực'], 401);
+//            }
 
             if ($request->has('phone_token')) {
                 $user->phone_token = $request->phone_token;
