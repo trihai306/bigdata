@@ -34,8 +34,12 @@ class ConversationRepository extends Repository
     public static function indexQuery(RestifyRequest $request, Relation|Builder $query)
 
     {
-        $query->whereHas('users', function ($q) {
+        $query->whereHas('users', function ($q) use ($request) {
             $q->where('user_id', auth()->user()->id);
+
+            if ($request->username) {
+                $q->where('name', 'like', '%' . $request->username . '%');
+            }
         });
         return parent::indexQuery($request, $query);
     }
