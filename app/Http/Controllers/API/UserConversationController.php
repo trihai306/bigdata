@@ -15,7 +15,7 @@ class UserConversationController extends Controller
         ]);
 
         $userConversation = UserConversation::where('conversation_id', $conversationId)
-            ->where('user_id', $request->user_id)
+            ->where('user_id', auth()->id())
             ->first();
 
         if ($userConversation) {
