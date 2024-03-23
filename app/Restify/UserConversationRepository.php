@@ -30,7 +30,6 @@ class UserConversationRepository extends Repository
     public function fields(RestifyRequest $request): array
     {
         return [
-            id(),
             field('user_id')->rules('required', 'exists:users,id')->messages([
                 'required' => 'Trường này là bắt buộc.',
                 'exists' => 'Trường này đã tồn tại.',

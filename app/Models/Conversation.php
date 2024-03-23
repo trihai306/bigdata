@@ -22,8 +22,6 @@ class Conversation extends Model
     {
         return $this->belongsToMany(User::class, 'user_conversations');
     }
-
-    //lấy tin nhắn cuối cùng của cuộc trò chuyện
     public function lastMessage()
     {
         return $this->hasOne(Message::class)->latest();

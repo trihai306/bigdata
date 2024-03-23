@@ -3,6 +3,7 @@
 use App\Events\UserPrivateMessageEvent;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\NotificationController;
+use App\Http\Controllers\API\UserConversationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +32,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('v1/notifications', [NotificationController::class, 'index']);
     Route::get('v1/notifications/unread', [NotificationController::class, 'notificationUnread']);
     Route::put('v1/notifications/{id}/mark-as-read', [NotificationController::class, 'markAsRead']);
+   Route::put('v1/user-conversations/{conversationId}/update-last-seen-message', [UserConversationController::class, 'updateLastSeenMessage']);
 });
 
 Route::post('/pusher/auth', function (Illuminate\Http\Request $request) {
