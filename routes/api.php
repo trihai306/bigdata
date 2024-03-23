@@ -32,7 +32,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('v1/notifications', [NotificationController::class, 'index']);
     Route::get('v1/notifications/unread', [NotificationController::class, 'notificationUnread']);
     Route::put('v1/notifications/{id}/mark-as-read', [NotificationController::class, 'markAsRead']);
-   Route::put('v1/update-user-conversation/{conversationId}/update-last-seen-message', [UserConversationController::class, 'updateLastSeenMessage']);
+   Route::post('v1/update-user-conversation/{conversationId}/update-last-seen-message', [UserConversationController::class, 'updateLastSeenMessage']);
 });
 
 Route::post('/pusher/auth', function (Illuminate\Http\Request $request) {
