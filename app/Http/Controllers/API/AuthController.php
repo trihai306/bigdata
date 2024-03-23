@@ -200,7 +200,7 @@ class AuthController extends Controller
 
         $request->validate([
             'otp' => 'required|string',
-            'phone' => 'required|string|exists:users,phone',
+            'phone' => 'required|string',
             'phone_token' => 'required|string'
         ]);
 
@@ -232,7 +232,7 @@ class AuthController extends Controller
     {
         $request->phone = ltrim($request->phone, '0');
         $request->validate([
-            'phone' => 'required|string|exists:users,phone',
+            'phone' => 'required|string',
         ]);
         $user = User::where('phone', $request->phone)->first();
         if (!$user) {
