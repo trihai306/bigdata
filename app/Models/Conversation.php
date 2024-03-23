@@ -33,4 +33,9 @@ class Conversation extends Model
     {
         return $this->hasOne(UserConversation::class)->where('user_id', auth()->id());
     }
+
+    public function userConversations()
+    {
+        return $this->hasMany(UserConversation::class);
+    }
 }
