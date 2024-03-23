@@ -61,6 +61,7 @@ class ConversationRepository extends Repository
     {
         return [
             'messages' =>HasMany::make('messages', MessageRepository::class),
+            'userConversations' => HasMany::make('userConversations', UserConversationRepository::class),
         ];
     }
 }

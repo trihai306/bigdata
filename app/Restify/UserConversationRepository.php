@@ -10,6 +10,10 @@ use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
 class UserConversationRepository extends Repository
 {
     public static string $model = UserConversation::class;
+    public static function indexQuery(RestifyRequest $request, $query)
+    {
+        return $query->where('user_id', $request->user()->id);
+    }
 
     public static array $search = [
         'id',
