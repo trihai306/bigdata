@@ -31,9 +31,9 @@ class AuthController extends Controller
             ]);
             $data['password'] = Hash::make($data['password']);
             $user = User::create($data);
-            $otp = (new Otp)->generate($user->phone, 'numeric', 6, 6);
+            $otp = (new Otp)->generate($user->phone, 'numeric', 6, 1);
             $sms = new SpeedSMSAPI('X5ypO-zjgfecptVf1C5vLVJ0MdyMZPzr');
-           $sms->sendSMS(['84'.$user->phone], 'Ma xac thuc SPEEDSMS.VN cua ban la ' . $otp->token,
+            $sms->sendSMS(['84' . $user->phone], 'Ma xac thuc SPEEDSMS.VN cua ban la ' . $otp->token,
                 SpeedSMSAPI::SMS_TYPE_CSKH, 'SPEEDSMS.VN');
             return response()->json([
                 'message' => 'Đăng ký tài khoản thành công',
@@ -57,10 +57,9 @@ class AuthController extends Controller
                 return response()->json(['message' => 'Thông tin đăng nhập không hợp lệ'], 401);
             }
 
-            // Check if the user's account has been validated
-//            if (!$user->validated) {
-//                return response()->json(['message' => 'Tài khoản chưa được xác thực'], 401);
-//            }
+            if (!$user->phone_verified_at) {
+                return response()->json(['message' => 'Tài khoản chưa được xác thực'], 401);
+            }
 
             if ($request->has('phone_token')) {
                 $user->phone_token = $request->phone_token;
@@ -98,7 +97,7 @@ class AuthController extends Controller
             'field' => 'type,seller|string|in:leather_goods,clothing,all',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
-         if ($request->has('avatar')) {
+        if ($request->has('avatar')) {
             $file = $request->file('avatar');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads'), $filename);
@@ -108,7 +107,7 @@ class AuthController extends Controller
         $user = $request->user();
         $user->update($data);
 
-        return response()->json(['message' => 'Cập nhật thông tin thành công','user'=>$user], 200);
+        return response()->json(['message' => 'Cập nhật thông tin thành công', 'user' => $user], 200);
 
     }
 
@@ -136,7 +135,6 @@ class AuthController extends Controller
             $token = Str::random(60);
             $user->password_reset_token = hash('sha256', $token);
             $user->save();
-
 
 
             return response(['message' => 'Đã gửi mã token đặt lại mật khẩu.'], 200);
@@ -197,31 +195,52 @@ class AuthController extends Controller
 
     public function veriOTP(Request $request)
     {
-
+        // Xác thực dữ liệu đầu vào
         $request->validate([
             'otp' => 'required|string',
             'phone' => 'required|string',
             'phone_token' => 'required|string'
         ]);
         $request->phone = ltrim($request->phone, '0');
-      if ($request->otp == '123456') {
-            $otp = true;
-        }
-        else{
-            $otp = (new Otp)->validate($request->phone, $request->otp);
-        }
+
+        // Kiểm tra OTP
+        $otp = $request->otp == '123456' ? true : (new Otp)->validate($request->phone, $request->otp);
 
         if (!$otp) {
             return response(['message' => 'Xác thực thất bại'], 400);
         }
+        try {
+            $user = User::where('phone', $request->phone)->firstOrFail();
+            $user->update([
+                'phone_verified_at' => now(), // Cập nhật thời gian xác thực
+                'phone_token' => $request->phone_token
+            ]);
 
-        $user = User::where('phone', $request->phone)->firstOrFail();
-
-        $user->update(['validated' => true, 'phone_token' => $request->phone_token]);
-        $token = $user->createToken('auth_token')->plainTextToken;
-        return response([
-            'message' => 'Xác thực thành công',
-            'access_token' => $token,
+            $token = $user->createToken('auth_token')->plainTextToken;
+            return response([
+                'message' => 'Xác thực thành công',
+                'access_token' => $token,
             ], 200);
+        } catch (\Exception $e) {
+            // Xử lý ngoại lệ tại đây
+            return response(['message' => 'Lỗi hệ thống'], 500);
+        }
+    }
+
+    public function sendOTP(Request $request)
+    {
+        $request->validate([
+            'phone' => 'required|string',
+        ]);
+        $request->phone = ltrim($request->phone, '0');
+        $user = User::where('phone', $request->phone)->first();
+        if (!$user) {
+            return response(['message' => 'Không tìm thấy người dùng'], 404);
+        }
+        $otp = (new Otp)->generate($user->phone, 'numeric', 6, 1);
+        $sms = new SpeedSMSAPI('X5ypO-zjgfecptVf1C5vLVJ0MdyMZPzr');
+        $sms->sendSMS(['84' . $user->phone], 'Ma xac thuc SPEEDSMS.VN cua ban la ' . $otp->token,
+            SpeedSMSAPI::SMS_TYPE_CSKH, 'SPEEDSMS.VN');
+        return response(['message' => 'Đã gửi mã OTP'], 200);
     }
 }
