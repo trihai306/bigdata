@@ -243,13 +243,9 @@ class AuthController extends Controller
         $request->validate([
             'phone' => 'required|string',
         ]);
-        $user = User::where('phone', $request->phone)->first();
-        if (!$user) {
-            return response(['message' => 'Không tìm thấy người dùng'], 404);
-        }
-        $otp = (new Otp)->generate($user->phone, 'numeric', 6, 1);
+        $otp = (new Otp)->generate($request->phone, 'numeric', 6, 1);
         $sms = new SpeedSMSAPI('X5ypO-zjgfecptVf1C5vLVJ0MdyMZPzr');
-        $sms->sendSMS(['84' . $user->phone], 'Ma xac thuc SPEEDSMS.VN cua ban la ' . $otp->token,
+        $sms->sendSMS(['84' . $request->phone], 'Ma xac thuc SPEEDSMS.VN cua ban la ' . $otp->token,
             SpeedSMSAPI::SMS_TYPE_CSKH, 'SPEEDSMS.VN');
         return response(['message' => 'Đã gửi mã OTP'], 200);
     }
