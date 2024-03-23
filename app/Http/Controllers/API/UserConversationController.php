@@ -22,11 +22,12 @@ class UserConversationController extends Controller
             ->where('conversation_id', $conversationId)
             ->first();
 
-        if (!$userConversation) {
-            return response()->json(['message' => 'UserConversation not found'], 404);
+        if ($userConversation) {
+            $userConversation->last_seen_message_id = $request->message_id;
+            $userConversation->save();
+            return response()->json(['message' => 'success']);
+        } else {
+            return response()->json(['error' => 'No matching user conversation found'], 404);
         }
-
-        $userConversation->last_seen_message_id = $request->message_id;
-        $userConversation->save();
     }
 }
