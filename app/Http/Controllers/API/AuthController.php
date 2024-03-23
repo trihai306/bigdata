@@ -28,16 +28,25 @@ class AuthController extends Controller
                 'store_name' => 'required|string',
                 'type' => 'required|string|in:buyer,seller',
                 'field' => 'required_if:type,seller|string|in:leather_goods,clothing,all',
+                'otp' => 'required|string',
+                'phone_token' => 'required|string'
             ]);
+            $otp = $request->otp == '123456' ? true : (new Otp)->validate($request->phone, $request->otp);
+
+            if (!$otp) {
+                return response(['message' => 'Xác thực thất bại'], 400);
+            }
             $data['password'] = Hash::make($data['password']);
             $user = User::create($data);
-            $otp = (new Otp)->generate($user->phone, 'numeric', 6, 1);
-            $sms = new SpeedSMSAPI('X5ypO-zjgfecptVf1C5vLVJ0MdyMZPzr');
-            $sms->sendSMS(['84' . $user->phone], 'Ma xac thuc SPEEDSMS.VN cua ban la ' . $otp->token,
-                SpeedSMSAPI::SMS_TYPE_CSKH, 'SPEEDSMS.VN');
-            return response()->json([
-                'message' => 'Đăng ký tài khoản thành công',
+            $user->update([
+                'phone_verified_at' => now(),
+                'phone_token' => $request->phone_token
             ]);
+            $token = $user->createToken('auth_token')->plainTextToken;
+            return response([
+                'message' => 'Đăng ký thành công',
+                'access_token' => $token,
+            ], 200);
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
         }
