@@ -196,12 +196,13 @@ class AuthController extends Controller
     public function veriOTP(Request $request)
     {
         // Xác thực dữ liệu đầu vào
+        $request->phone = ltrim($request->phone, '0');
+
         $request->validate([
             'otp' => 'required|string',
-            'phone' => 'required|string',
+            'phone' => 'required|string|exists:users,phone',
             'phone_token' => 'required|string'
         ]);
-        $request->phone = ltrim($request->phone, '0');
 
         // Kiểm tra OTP
         $otp = $request->otp == '123456' ? true : (new Otp)->validate($request->phone, $request->otp);
@@ -229,10 +230,10 @@ class AuthController extends Controller
 
     public function sendOTP(Request $request)
     {
-        $request->validate([
-            'phone' => 'required|string',
-        ]);
         $request->phone = ltrim($request->phone, '0');
+        $request->validate([
+            'phone' => 'required|string|exists:users,phone',
+        ]);
         $user = User::where('phone', $request->phone)->first();
         if (!$user) {
             return response(['message' => 'Không tìm thấy người dùng'], 404);
