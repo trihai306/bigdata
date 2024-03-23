@@ -12,7 +12,11 @@ class UserConversation extends Model
     use HasFactory;
 
     protected $fillable = ['user_id', 'conversation_id', 'date_joined', 'last_seen_message_id'];
+    // Set the primary key to an array of columns
+    protected $primaryKey = ['user_id', 'conversation_id'];
 
+    // Disable incrementing
+    public $incrementing = false;
     public function user()
     {
         return $this->belongsTo(User::class);
