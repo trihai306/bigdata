@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Models\UserConversation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserConversationController extends Controller
 {
@@ -14,16 +15,18 @@ class UserConversationController extends Controller
             'message_id' => 'required|exists:messages,id'
         ]);
 
-        $userConversation = UserConversation::where('conversation_id', $conversationId)
-            ->where('user_id', auth()->id())
+        $user = Auth::user(); // Get the authenticated user
+
+        // Check if the authenticated user is part of the conversation
+        $userConversation = $user->userConversations()
+            ->where('conversation_id', $conversationId)
             ->first();
 
-        if ($userConversation) {
-            $userConversation->last_seen_message_id = $request->message_id;
-            $userConversation->save();
-            return response()->json(['message' => 'success']);
-        } else {
-            return response()->json(['error' => 'No matching user conversation found'], 404);
+        if (!$userConversation) {
+            return response()->json(['message' => 'UserConversation not found'], 404);
         }
+
+        $userConversation->last_seen_message_id = $request->message_id;
+        $userConversation->save();
     }
 }
