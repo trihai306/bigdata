@@ -48,7 +48,7 @@ class AuthController extends Controller
         try {
             $request->phone = ltrim($request->phone, '0');
             $request->validate([
-                'phone' => ['required', 'numeric', 'unique:users', 'regex:/^[3|5|7|8|9][0-9]{8}$/'],
+                'phone' => ['required', 'numeric', 'unique:users'],
                 'password' => 'required|string',
                 'phone_token' => 'string',
             ]);
@@ -211,11 +211,11 @@ class AuthController extends Controller
         }
         try {
             $user = User::where('phone', $request->phone)->firstOrFail();
+
             $user->update([
-                'phone_verified_at' => now(), // Cập nhật thời gian xác thực
+                'phone_verified_at' => now(),
                 'phone_token' => $request->phone_token
             ]);
-
             $token = $user->createToken('auth_token')->plainTextToken;
             return response([
                 'message' => 'Xác thực thành công',
