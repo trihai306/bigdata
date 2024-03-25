@@ -3,6 +3,7 @@
 namespace App\Restify;
 
 use App\Models\UserUserSearch;
+use Binaryk\LaravelRestify\Fields\BelongsTo;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,6 +33,14 @@ class UserUserSearchRepository extends Repository
         'searched_at' => 'datetime',
     ];
 
+    public static function related(): array
+    {
+        return [
+            'user' => BelongsTo::make('user', 'user_id', UserRepository::class),
+            'searched_user' => BelongsTo::make('searched_user', 'searched_user_id', UserRepository::class),
+        ];
+    }
+
     public function fields(RestifyRequest $request): array
     {
         return [
@@ -50,7 +59,7 @@ class UserUserSearchRepository extends Repository
 
     public function store(RestifyRequest $request)
     {
-        $request->user_id = Auth::id();
+        $request->merge(['user_id' => Auth::id()]);
         if ($request->user_id == $request->searched_user_id) {
             return response()->json(['message' => 'Không thể tìm kiếm chính mình'], 400);
         }
