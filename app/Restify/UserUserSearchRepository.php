@@ -36,8 +36,8 @@ class UserUserSearchRepository extends Repository
     public static function related(): array
     {
         return [
-            'user' => BelongsTo::make('users', UserRepository::class),
-            'searched_user' => BelongsTo::make('searchedUser', UserRepository::class),
+//            'user' => BelongsTo::make('users', UserRepository::class),
+//            'searched_user' => BelongsTo::make('searchedUser', UserRepository::class),
         ];
     }
 
@@ -49,7 +49,7 @@ class UserUserSearchRepository extends Repository
             field('searched_user_id'),
             field('searched_at'),
             field('user'),
-            field('searched_user'),
+            field('searchedUser'),
         ];
     }
 
