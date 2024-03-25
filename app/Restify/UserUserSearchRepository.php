@@ -48,6 +48,8 @@ class UserUserSearchRepository extends Repository
             field('user_id'),
             field('searched_user_id'),
             field('searched_at'),
+            field('user'),
+            field('searched_user'),
         ];
     }
 
