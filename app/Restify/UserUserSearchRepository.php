@@ -36,8 +36,8 @@ class UserUserSearchRepository extends Repository
     public static function related(): array
     {
         return [
-            'user' => BelongsTo::make('user', 'user_id', UserRepository::class),
-            'searched_user' => BelongsTo::make('searched_user', 'searched_user_id', UserRepository::class),
+            'user' => BelongsTo::make('users', UserRepository::class),
+            'searched_user' => BelongsTo::make('searchedUser', UserRepository::class),
         ];
     }
 
@@ -55,7 +55,10 @@ class UserUserSearchRepository extends Repository
     {
         $request->merge(['user_id' => Auth::id()]);
         $query = parent::index($request);
-        $query->orderBy('searched_at', 'desc');
+
+        if ($query instanceof \Illuminate\Database\Eloquent\Builder) {
+            $query->orderBy('searched_at', 'desc');
+        }
 
         return $query;
     }
