@@ -53,7 +53,7 @@ class UserUserSearchRepository extends Repository
 
     public function index(RestifyRequest $request)
     {
-        $request->user_id = Auth::id();
+        $request->merge(['user_id' => Auth::id()]);
         $query = parent::index($request);
         $query->orderBy('searched_at', 'desc');
 
