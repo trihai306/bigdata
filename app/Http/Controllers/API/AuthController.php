@@ -99,13 +99,18 @@ class AuthController extends Controller
         $request['phone'] = ltrim($request['phone'], '0');
         $data = $request->validate([
             'name' => 'string|max:255',
-            'phone' => ['required', 'numeric', 'unique:users', 'regex:/^[3|5|7|8|9][0-9]{8}$/'],
+            'phone' => [ 'numeric', 'unique:users', 'regex:/^[3|5|7|8|9][0-9]{8}$/'],
             'address' => 'string',
             'store_name' => 'string',
             'type' => 'string|in:buyer,seller',
+            'password' => 'string|min:6',
             'field' => 'type,seller|string|in:leather_goods,clothing,all',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
+        //validate xem mật khẩu cũ có đúng không
+        if (!Hash::check($request->password, $request->user()->password)) {
+            return response()->json(['message' => 'Mật khẩu cũ không chính xác'], 400);
+        }
         if ($request->has('avatar')) {
             $file = $request->file('avatar');
             $filename = time() . '.' . $file->getClientOriginalExtension();

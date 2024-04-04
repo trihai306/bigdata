@@ -33,14 +33,6 @@ class UserUserSearchRepository extends Repository
         'searched_at' => 'datetime',
     ];
 
-    public static function related(): array
-    {
-        return [
-//            'user' => BelongsTo::make('users', UserRepository::class),
-//            'searched_user' => BelongsTo::make('searchedUser', UserRepository::class),
-        ];
-    }
-
     public function fields(RestifyRequest $request): array
     {
         return [
