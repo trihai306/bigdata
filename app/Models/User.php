@@ -20,7 +20,7 @@ class User extends Authenticatable
     ];
 
     protected $hidden = [
-         'remember_token',
+        'password', 'remember_token',
     ];
     protected $dates = ['last_login_at', 'updated_at', 'created_at','birthday'];
 
