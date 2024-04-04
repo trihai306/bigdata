@@ -110,11 +110,13 @@ class AuthController extends Controller
         ]);
 
         $user = User::find($request->user()->id);
+        $user->password = Hash::make($request->password);
+        $user->save();
         dd($user);
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json(['message' => 'Thông tin đăng nhập không hợp lệ'], 401);
         }
-
+        unset($data['password']);
 
         if ($request->has('avatar')) {
             $file = $request->file('avatar');
