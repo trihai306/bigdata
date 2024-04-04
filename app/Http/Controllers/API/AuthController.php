@@ -103,6 +103,7 @@ class AuthController extends Controller
             'address' => 'string',
             'store_name' => 'string',
             'type' => 'string|in:buyer,seller',
+            'birthday' => 'date',
             'password' => 'string|min:6',
             'field' => 'type,seller|string|in:leather_goods,clothing,all',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg',
