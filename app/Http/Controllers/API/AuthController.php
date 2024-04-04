@@ -110,6 +110,7 @@ class AuthController extends Controller
         ]);
 
         $user = User::find($request->user()->id);
+        dd($user);
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json(['message' => 'Thông tin đăng nhập không hợp lệ'], 401);
         }
