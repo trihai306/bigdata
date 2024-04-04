@@ -108,8 +108,9 @@ class AuthController extends Controller
             'field' => 'type,seller|string|in:leather_goods,clothing,all',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
-        //validate xem mật khẩu cũ có đúng không
-        if (Hash::check($request->password, $request->user()->password)) {
+
+        $user = User::find($request->user()->id);
+        if (Hash::check($request->password, $user->password)) {
             return response()->json(['message' => 'Mật khẩu không chính xác'], 400);
         }
         if ($request->has('avatar')) {
