@@ -110,7 +110,7 @@ class AuthController extends Controller
         ]);
 
         $user = User::find($request->user()->id);
-        if (Hash::check($request->password, $user->password)) {
+        if (!Hash::check($request->password, $user->password)) {
             return response()->json(['message' => 'Mật khẩu không chính xác'], 400);
         }
         if ($request->has('avatar')) {
