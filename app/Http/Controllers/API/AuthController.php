@@ -109,7 +109,7 @@ class AuthController extends Controller
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
         //validate xem mật khẩu cũ có đúng không
-        if (!Hash::check($request->password, $request->user()->password)) {
+        if (Hash::check($request->password, $request->user()->password)) {
             return response()->json(['message' => 'Mật khẩu không chính xác'], 400);
         }
         if ($request->has('avatar')) {
