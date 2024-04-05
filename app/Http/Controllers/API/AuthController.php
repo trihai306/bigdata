@@ -108,7 +108,12 @@ class AuthController extends Controller
             'field' => 'type,seller|string|in:leather_goods,clothing,all',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
-
+        if ($request->has('phone')) {
+            $data['phone_verified_at'] = null;
+        }
+        else {
+            $data['phone'] = $request->user()->phone;
+        }
         $user = User::find($request->user()->id);
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json(['message' => 'Thông tin đăng nhập không hợp lệ'], 401);
