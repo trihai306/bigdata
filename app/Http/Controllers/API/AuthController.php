@@ -7,6 +7,7 @@ use App\Models\User;
 use Exception;
 use Ichtrojan\Otp\Otp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -101,7 +102,7 @@ class AuthController extends Controller
             'store_name' => 'string',
             'type' => 'string|in:buyer,seller',
             'birthday' => 'date',
-            'field' => 'type,seller|string|in:leather_goods,clothing,all',
+            'field' => 'string|in:leather_goods,clothing,all',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
         if ($request->has('avatar')) {
@@ -110,6 +111,10 @@ class AuthController extends Controller
             $file->move(public_path('uploads'), $filename);
             $data['avatar'] = $filename;
         }
+        if(Auth::user()->type == 'buyer'){
+            $data['field'] = null;
+        }
+
         $user = $request->user();
         $user->update($data);
 
@@ -257,6 +262,10 @@ class AuthController extends Controller
         $user = User::find($request->user()->id);
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json(['message' => 'Thông tin đăng nhập không hợp lệ'], 401);
+        }
+        //check phone có giống phone cũ không
+        if ($user->phone == $request->phone) {
+            return response()->json(['message' => 'Số điện thoại mới không được trùng với số điện thoại cũ'], 400);
         }
         //send OTP
         $otp = (new Otp)->generate($request->phone, 'numeric', 6, 1);
