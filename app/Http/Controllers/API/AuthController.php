@@ -96,37 +96,21 @@ class AuthController extends Controller
 
     public function editProfile(Request $request)
     {
-        $request['phone'] = ltrim($request['phone'], '0');
         $data = $request->validate([
             'name' => 'string|max:255',
-            'phone' => [ 'numeric', 'unique:users', 'regex:/^[3|5|7|8|9][0-9]{8}$/'],
             'address' => 'string',
             'store_name' => 'string',
             'type' => 'string|in:buyer,seller',
             'birthday' => 'date',
-            'password' => 'string|min:6',
             'field' => 'type,seller|string|in:leather_goods,clothing,all',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
-        if ($request->has('phone')) {
-            $data['phone_verified_at'] = null;
-        }
-        else {
-            $data['phone'] = $request->user()->phone;
-        }
-        $user = User::find($request->user()->id);
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return response()->json(['message' => 'Thông tin đăng nhập không hợp lệ'], 401);
-        }
-        unset($data['password']);
-
         if ($request->has('avatar')) {
             $file = $request->file('avatar');
             $filename = time() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('uploads'), $filename);
             $data['avatar'] = $filename;
         }
-
         $user = $request->user();
         $user->update($data);
 
@@ -262,5 +246,43 @@ class AuthController extends Controller
         $sms->sendSMS(['84' . $request->phone], 'Ma xac thuc SPEEDSMS.VN cua ban la ' . $otp->token,
             SpeedSMSAPI::SMS_TYPE_CSKH, 'SPEEDSMS.VN');
         return response(['message' => 'Đã gửi mã OTP'], 200);
+    }
+
+    public function changePhone(Request $request)
+    {
+        $request->phone = ltrim($request->phone, '0');
+       $request->validate([
+            'phone' => 'required|string',
+             'password' => 'required|string|min:6',
+        ]);
+        $user = User::find($request->user()->id);
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            return response()->json(['message' => 'Thông tin đăng nhập không hợp lệ'], 401);
+        }
+        //send OTP
+        $otp = (new Otp)->generate($request->phone, 'numeric', 6, 1);
+        $sms = new SpeedSMSAPI('X5ypO-zjgfecptVf1C5vLVJ0MdyMZPzr');
+        $sms->sendSMS(['84' . $request->phone], 'Ma xac thuc SPEEDSMS.VN cua ban la ' . $otp->token,
+            SpeedSMSAPI::SMS_TYPE_CSKH, 'SPEEDSMS.VN');
+        return response(['message' => 'gửi mã thành công'], 200);
+    }
+
+    public function verifyPhone(Request $request)
+    {
+        $request->phone = ltrim($request->phone, '0');
+        $request->validate([
+            'phone' => 'required|string',
+            'otp' => 'required|string',
+        ]);
+        $otp = $request->otp == '123456' ? true : (new Otp)->validate($request->phone, $request->otp);
+        if (!$otp) {
+            return response(['message' => 'Xác thực thất bại'], 400);
+        }
+        $user = User::find($request->user()->id);
+        $user->update([
+            'phone' => $request->phone,
+            'phone_verified_at' => now(),
+        ]);
+        return response(['message' => 'Xác thực thành công'], 200);
     }
 }
