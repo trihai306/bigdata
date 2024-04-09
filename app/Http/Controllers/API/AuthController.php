@@ -3,16 +3,15 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\EditProfileRequest;
 use App\Models\User;
+use Exception;
+use Ichtrojan\Otp\Otp;
 use Illuminate\Http\Request;
-
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 use SpeedSMSAPI;
-use Ichtrojan\Otp\Otp;
+
 class AuthController extends Controller
 {
     public function register(Request $request)
@@ -229,7 +228,7 @@ class AuthController extends Controller
                 'message' => 'Xác thực thành công',
                 'access_token' => $token,
             ], 200);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // Xử lý ngoại lệ tại đây
             return response(['message' => 'Lỗi hệ thống'], 500);
         }
@@ -251,9 +250,9 @@ class AuthController extends Controller
     public function changePhone(Request $request)
     {
         $request->phone = ltrim($request->phone, '0');
-       $request->validate([
-            'phone' => 'required|string',
-             'password' => 'required|string|min:6',
+        $request->validate([
+            'phone' => 'required|string|regex:/^[3|5|7|8|9][0-9]{8}$/|unique:users',
+            'password' => 'required|string|min:6',
         ]);
         $user = User::find($request->user()->id);
         if (!$user || !Hash::check($request->password, $user->password)) {
@@ -271,7 +270,7 @@ class AuthController extends Controller
     {
         $request->phone = ltrim($request->phone, '0');
         $request->validate([
-            'phone' => 'required|string',
+            'phone' => 'required|string|regex:/^[3|5|7|8|9][0-9]{8}$/|unique:users',
             'otp' => 'required|string',
         ]);
         $otp = $request->otp == '123456' ? true : (new Otp)->validate($request->phone, $request->otp);
