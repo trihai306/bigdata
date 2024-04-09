@@ -251,7 +251,7 @@ class AuthController extends Controller
     {
         $request->phone = ltrim($request->phone, '0');
         $request->validate([
-            'phone' => 'required|string|regex:/^[3|5|7|8|9][0-9]{8}$/|unique:users',
+            'phone' => 'required|string|unique:users',
             'password' => 'required|string|min:6',
         ]);
         $user = User::find($request->user()->id);
@@ -270,7 +270,7 @@ class AuthController extends Controller
     {
         $request->phone = ltrim($request->phone, '0');
         $request->validate([
-            'phone' => 'required|string|regex:/^[3|5|7|8|9][0-9]{8}$/|unique:users',
+            'phone' => 'required|string|unique:users',
             'otp' => 'required|string',
         ]);
         $otp = $request->otp == '123456' ? true : (new Otp)->validate($request->phone, $request->otp);
