@@ -243,7 +243,7 @@ class AuthController extends Controller
     {
         $request->phone = ltrim($request->phone, '0');
         $request->validate([
-            'phone' => 'required|string',
+            'phone' => 'required|string|unique:users',
         ]);
         $otp = (new Otp)->generate($request->phone, 'numeric', 6, 1);
         $sms = new SpeedSMSAPI('X5ypO-zjgfecptVf1C5vLVJ0MdyMZPzr');
