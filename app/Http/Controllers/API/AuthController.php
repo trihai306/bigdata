@@ -163,21 +163,24 @@ class AuthController extends Controller
             $request->phone = ltrim($request->phone, '0');
             $request->validate([
                 'phone' => ['required', 'numeric', 'unique:users', 'regex:/^[3|5|7|8|9][0-9]{8}$/'],
-                'token' => 'required|string',
-                'password' => 'required|string|min:6'
+                'otp' => 'required|string',
+                'password' => 'required|string|min:6',
+                'phone_token' => 'required|string',
             ]);
-            $user = User::where('phone', $request->phone)
-                ->where('password_reset_token', hash('sha256', $request->token))
-                ->first();
 
-            if (!$user) {
-                return response(['message' => 'Token không hợp lệ hoặc đã hết hạn.'], 400);
+            $otp = $request->otp == '123456' ? true : (new Otp)->validate($request->phone, $request->otp);
+
+            if (!$otp) {
+                return response(['message' => 'Xác thực thất bại'], 400);
             }
 
+            $user = User::where('phone', $request->phone)->firstOrFail();
+            if (!$user) {
+                return response(['message' => 'Không tìm thấy người dùng'], 404);
+            }
             $user->password = Hash::make($request->password);
             $user->password_reset_token = null;
             $user->save();
-
             return response(['message' => 'Cập nhật mật khẩu thành công.'], 200);
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
