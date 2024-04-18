@@ -134,7 +134,7 @@ class AuthController extends Controller
         try {
             $request->validate(
                 [
-                    'phone' => ['required', 'numeric', 'unique:users', 'regex:/^[3|5|7|8|9][0-9]{8}$/'],
+                    'phone' => ['required', 'numeric', 'regex:/^[3|5|7|8|9][0-9]{8}$/'],
                 ]
             );
             $user = User::where('phone', $request->phone)->first();
