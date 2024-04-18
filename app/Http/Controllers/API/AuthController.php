@@ -215,7 +215,6 @@ class AuthController extends Controller
         $request->validate([
             'otp' => 'required|string',
             'phone' => 'required|string',
-            'phone_token' => 'required|string'
         ]);
 
         // Kiểm tra OTP
