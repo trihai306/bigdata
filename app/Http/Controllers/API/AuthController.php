@@ -179,7 +179,6 @@ class AuthController extends Controller
                 return response(['message' => 'Không tìm thấy người dùng'], 404);
             }
             $user->password = Hash::make($request->password);
-            $user->password_reset_token = null;
             $user->save();
             return response(['message' => 'Cập nhật mật khẩu thành công.'], 200);
         } catch (ValidationException $e) {
