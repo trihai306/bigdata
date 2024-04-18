@@ -162,7 +162,7 @@ class AuthController extends Controller
         try {
             $request->phone = ltrim($request->phone, '0');
             $request->validate([
-                'phone' => ['required', 'numeric', 'unique:users', 'regex:/^[3|5|7|8|9][0-9]{8}$/'],
+                'phone' => ['required', 'numeric', 'regex:/^[3|5|7|8|9][0-9]{8}$/'],
                 'otp' => 'required|string',
                 'password' => 'required|string|min:6',
                 'phone_token' => 'required|string',
