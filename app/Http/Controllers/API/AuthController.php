@@ -143,12 +143,15 @@ class AuthController extends Controller
                 return response(['message' => 'Không tìm thấy người dùng'], 404);
             }
 
-            $token = Str::random(60);
-            $user->password_reset_token = hash('sha256', $token);
-            $user->save();
+            // Generate OTP
+            $otp = (new Otp)->generate($request->phone, 'numeric', 6, 1);
 
+            // Send OTP via SMS
+            $sms = new SpeedSMSAPI('X5ypO-zjgfecptVf1C5vLVJ0MdyMZPzr');
+            $sms->sendSMS(['84' . $request->phone], 'Ma xac thuc SPEEDSMS.VN cua ban la ' . $otp->token,
+                SpeedSMSAPI::SMS_TYPE_CSKH, 'SPEEDSMS.VN');
 
-            return response(['message' => 'Đã gửi mã token đặt lại mật khẩu.'], 200);
+            return response(['message' => 'Đã gửi mã OTP'], 200);
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
         }
@@ -204,7 +207,7 @@ class AuthController extends Controller
         }
     }
 
-    public function veriOTP(Request $request)
+    public function verifyOTP(Request $request)
     {
         // Xác thực dữ liệu đầu vào
         $request->phone = ltrim($request->phone, '0');
