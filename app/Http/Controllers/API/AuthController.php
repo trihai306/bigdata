@@ -7,14 +7,28 @@ use App\Models\User;
 use Exception;
 use Ichtrojan\Otp\Otp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use SpeedSMSAPI;
-
+use Ichtrojan\Otp\Models\Otp as OtpModel;
 class AuthController extends Controller
 {
+    private function canSendOtp($phone) {
+        $tenMinutesAgo = Carbon::now()->subMinutes(10);
+        if (!OtpModel::where('identifier', $phone)
+            ->where('created_at', '>', $tenMinutesAgo)
+            ->exists()){
+            return [
+                'message' => 'Vui lòng đợi 10 phút để gửi lại mã OTP',
+                'status' => false
+            ];
+        }
+        return [
+            'status' => 'success'
+        ];
+    }
     public function register(Request $request)
     {
         try {
@@ -143,9 +157,10 @@ class AuthController extends Controller
             if (!$user) {
                 return response(['message' => 'Không tìm thấy người dùng'], 404);
             }
-
-            // Generate OTP
-            $otp = (new Otp)->generate($request->phone, 'numeric', 6, 1);
+            if (!$this->canSendOtp($request->phone)['status']) {
+                return response()->json(['message' => $this->canSendOtp($request->phone)['message']], 400);
+            }
+            $otp = (new Otp)->generate($request->phone, 'numeric', 6, 10);
 
             // Send OTP via SMS
             $sms = new SpeedSMSAPI('X5ypO-zjgfecptVf1C5vLVJ0MdyMZPzr');
@@ -251,7 +266,10 @@ class AuthController extends Controller
         $request->validate([
             'phone' => 'required|string|unique:users',
         ]);
-        $otp = (new Otp)->generate($request->phone, 'numeric', 6, 1);
+        if (!$this->canSendOtp($request->phone)['status']) {
+            return response()->json(['message' => $this->canSendOtp($request->phone)['message']], 400);
+        }
+        $otp = (new Otp)->generate($request->phone, 'numeric', 6, 10);
         $sms = new SpeedSMSAPI('X5ypO-zjgfecptVf1C5vLVJ0MdyMZPzr');
         $sms->sendSMS(['84' . $request->phone], 'Ma xac thuc SPEEDSMS.VN cua ban la ' . $otp->token,
             SpeedSMSAPI::SMS_TYPE_CSKH, 'SPEEDSMS.VN');
@@ -277,8 +295,11 @@ class AuthController extends Controller
         if ($phone) {
             return response()->json(['message' => 'Số điện thoại đã tồn tại'], 400);
         }
+        if (!$this->canSendOtp($request->phone)['status']) {
+            return response()->json(['message' => $this->canSendOtp($request->phone)['message']], 400);
+        }
         //send OTP
-        $otp = (new Otp)->generate($request->phone, 'numeric', 6, 1);
+        $otp = (new Otp)->generate($request->phone, 'numeric', 6, 10);
         $sms = new SpeedSMSAPI('X5ypO-zjgfecptVf1C5vLVJ0MdyMZPzr');
         $sms->sendSMS(['84' . $request->phone], 'Ma xac thuc SPEEDSMS.VN cua ban la ' . $otp->token,
             SpeedSMSAPI::SMS_TYPE_CSKH, 'SPEEDSMS.VN');
