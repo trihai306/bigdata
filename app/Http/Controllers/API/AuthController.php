@@ -273,6 +273,10 @@ class AuthController extends Controller
         if ($user->phone == $request->phone) {
             return response()->json(['message' => 'Số điện thoại mới không được trùng với số điện thoại cũ'], 400);
         }
+        $phone = User::where('phone', $request->phone)->first();
+        if ($phone) {
+            return response()->json(['message' => 'Số điện thoại đã tồn tại'], 400);
+        }
         //send OTP
         $otp = (new Otp)->generate($request->phone, 'numeric', 6, 1);
         $sms = new SpeedSMSAPI('X5ypO-zjgfecptVf1C5vLVJ0MdyMZPzr');
