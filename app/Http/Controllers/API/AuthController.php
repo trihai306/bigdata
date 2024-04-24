@@ -17,11 +17,18 @@ class AuthController extends Controller
 {
     private function canSendOtp($phone) {
         $tenMinutesAgo = Carbon::now()->subMinutes(10);
-        if (!OtpModel::where('identifier', $phone)
+        $otpCount = OtpModel::where('identifier', $phone)
             ->where('created_at', '>', $tenMinutesAgo)
-            ->exists()){
+            ->count();
+        //lấy phần tử cuối cùng trong mảng
+        $lastOtp = OtpModel::where('identifier', $phone)
+            ->where('created_at', '>', $tenMinutesAgo)
+            ->orderBy('created_at', 'desc')
+            ->first();
+        if ($otpCount >= 3){
             return [
-                'message' => 'Vui lòng đợi 10 phút để gửi lại mã OTP',
+                'message' => 'Bạn đã thử quá 3 lần',
+                'time' => $lastOtp->created_at->diffForHumans(),
                 'status' => false
             ];
         }
