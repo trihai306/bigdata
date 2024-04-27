@@ -331,4 +331,14 @@ class AuthController extends Controller
         ]);
         return response(['message' => 'Xác thực thành công'], 200);
     }
+
+    public function checkActive(Request $request)
+    {
+        $isActive = $request->isActive;
+        $user = $request->user();
+        $user->update([
+            'is_active' => $isActive
+        ]);
+        return response()->json(['is_active' => $isActive]);
+    }
 }
