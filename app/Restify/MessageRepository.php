@@ -118,6 +118,15 @@ class MessageRepository extends Repository
     public static function stored($resource, RestifyRequest $request)
     {
         $sender = Auth::user();
+        if($sender->is_active){
+            sendFirebaseNotification(
+                (string)$sender->phone_token,
+                'bạn có tin nhắn mới',
+                'Push notification Dina app',
+                ['type' => 'message', 'id_notice'=> "$resource->id.$resource->conversation_id",
+                    'id' => (string)$resource->conversation_id]
+            );
+        }
         event(new \App\Events\UserMessageEvent($request->user, $resource, $sender->id));
     }
 
