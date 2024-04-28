@@ -118,7 +118,7 @@ class MessageRepository extends Repository
     public static function stored($resource, RestifyRequest $request)
     {
         $sender = Auth::user();
-        if($request->user->is_active){
+        if(!$request->user->is_active){
             sendFirebaseNotification(
                 (string)$request->user->phone_token,
                 'bạn có tin nhắn mới',
