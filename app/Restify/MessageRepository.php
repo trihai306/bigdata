@@ -127,7 +127,7 @@ class MessageRepository extends Repository
                     'id' => (string)$resource->conversation_id]
             );
         }
-        event(new \App\Events\UserMessageEvent($sender, $resource, $sender->id));
+        event(new \App\Events\UserMessageEvent($request->user, $resource, $sender));
     }
 
     public function fields(RestifyRequest $request): array
