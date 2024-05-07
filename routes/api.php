@@ -32,6 +32,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/verify-phone', [AuthController::class, 'verifyPhone']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('v1/is-active', [AuthController::class, 'checkActive']);
+    Route::get('v1/count-unread-user', [UserConversationController::class, 'countUnreadUser']);
     Route::get('v1/notifications', [NotificationController::class, 'index']);
     Route::get('v1/notifications/unread', [NotificationController::class, 'notificationUnread']);
     Route::put('v1/notifications/{id}/mark-as-read', [NotificationController::class, 'markAsRead']);

@@ -30,4 +30,15 @@ class UserConversationController extends Controller
             return response()->json(['error' => 'No matching user conversation found'], 404);
         }
     }
+
+    public function countUnreadUser(Request $request)
+    {
+        $user = Auth::user(); // Get the authenticated user
+
+        $unreadConversations = $user->userConversations()
+            ->where('last_seen_message_id', '<', 'last_message_id')
+            ->count();
+
+        return response()->json(['unread_conversations' => $unreadConversations]);
+    }
 }
