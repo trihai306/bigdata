@@ -36,7 +36,7 @@ class UserConversationController extends Controller
         $user = Auth::user(); // Get the authenticated user
 
         $unreadConversations = $user->userConversations()
-            ->where('last_seen_message_id', '<', 'last_message_id')
+            ->whereRaw('last_seen_message_id < (SELECT id FROM messages WHERE conversation_id = user_conversations.conversation_id ORDER BY id DESC LIMIT 1)')
             ->count();
 
         return response()->json(['unread_conversations' => $unreadConversations]);
