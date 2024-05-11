@@ -21,7 +21,7 @@ class ConversationRepository extends Repository
     public static function sorts(): array
     {
         return [
-        'lastMessage.created_at'=>function(RestifyRequest $request, $query, $direction) {
+        'lastmessage.created_at'=>function(RestifyRequest $request, $query, $direction) {
          dd($query);
         }
         ];
