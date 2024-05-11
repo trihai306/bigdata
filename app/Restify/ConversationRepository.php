@@ -21,7 +21,9 @@ class ConversationRepository extends Repository
     public static function sorts(): array
     {
         return [
-        'lastMessage.created_at'=>SortableFilter::make()->setColumn('lastMessage.created_at'),
+        'lastMessage.created_at'=>function(RestifyRequest $request, $query, $direction) {
+         dd($query);
+        }
         ];
     }
 
