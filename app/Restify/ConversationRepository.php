@@ -22,7 +22,6 @@ class ConversationRepository extends Repository
             },
             'message' => function (RestifyRequest $request, $query, $direction) {
                 $query->join('messages', 'messages.conversation_id', '=', 'conversations.id')
-                    ->select('conversations.*')
                     ->orderBy('messages.created_at', $direction);
         }];
     }
