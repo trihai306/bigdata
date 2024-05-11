@@ -18,10 +18,10 @@ class ConversationRepository extends Repository
     {
         return [
             'id'=>function (RestifyRequest $request, $query, $direction) {
-              dd($query);
-            },
-            'message.created_at' => function (RestifyRequest $request, $query, $direction) {
 
+            },
+            'message' => function (RestifyRequest $request, $query, $direction) {
+                dd($query);
         }];
     }
 
