@@ -41,7 +41,7 @@ class ConversationRepository extends Repository
             }
         });
         $query->with('lastMessage')->get()->sortByDesc(function ($conversation) {
-            return $conversation->lastMessage->created_at;
+            return $conversation->lastMessage->id;
         });
         return parent::indexQuery($request, $query);
     }
