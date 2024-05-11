@@ -4,6 +4,7 @@ namespace App\Restify;
 
 use App\Models\Conversation;
 use Binaryk\LaravelRestify\Fields\HasMany;
+use Binaryk\LaravelRestify\Fields\HasOne;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -16,13 +17,7 @@ class ConversationRepository extends Repository
         'name',
         'users.name',
     ];
-    public static array $sort = [
-        'id',
-        'name',
-        'type',
-        'created_at',
-        'updated_at',
-    ];
+
 
     public static array $match = [
         'id' => 'integer',
@@ -39,9 +34,6 @@ class ConversationRepository extends Repository
             if ($request->username) {
                 $q->where('name', 'like', '%' . $request->username . '%');
             }
-        });
-        $query->with('lastMessage')->get()->sortByDesc(function ($conversation) {
-            return $conversation->lastMessage->id;
         });
         return parent::indexQuery($request, $query);
     }
@@ -63,6 +55,7 @@ class ConversationRepository extends Repository
     {
         return [
             'messages' =>HasMany::make('messages', MessageRepository::class),
+            'lastMessage' => HasOne::make('lastMessage', MessageRepository::class)->sortable('id'),
 //            'userConversations' => HasMany::make('userConversations', UserConversationRepository::class),
         ];
     }
