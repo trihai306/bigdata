@@ -21,7 +21,7 @@ class ConversationRepository extends Repository
 
             },
             'message' => function (RestifyRequest $request, $query, $direction) {
-                $query->orderBy('last_message_id', $direction);
+               dd($query);
         }];
     }
 
@@ -49,7 +49,6 @@ class ConversationRepository extends Repository
             field('name'),
             field('users')->canStore(fn() => false)->canUpdate(fn() => false),
             field('lastMessage')->canStore(fn() => false)->canUpdate(fn() => false),
-            field('last_message_id')->canStore(fn() => false)->canUpdate(fn() => false),
             field('lastSeenMessage')->canStore(fn() => false)->canUpdate(fn() => false),];
     }
 }
