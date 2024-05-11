@@ -21,7 +21,7 @@ class ConversationRepository extends Repository
 
             },
             'message' => function (RestifyRequest $request, $query, $direction) {
-               dd($query);
+                dd($query->with('lastMessage'));
         }];
     }
 
