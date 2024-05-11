@@ -20,10 +20,9 @@ class ConversationRepository extends Repository
     ];
     public static function sorts(): array
     {
-        dd('abc');
         return [
-        'lastmessage.created_at'=>function(RestifyRequest $request, $query, $direction) {
-
+        'message.created_at'=>function(RestifyRequest $request, $query, $direction) {
+         dd($query);
         }
         ];
     }
