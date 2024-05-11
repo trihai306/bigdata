@@ -21,7 +21,8 @@ class ConversationRepository extends Repository
 
             },
             'message' => function (RestifyRequest $request, $query, $direction) {
-                $query->with('lastMessage')->orderBy('lastMessage.created_at', $direction);
+                $query->join('messages', 'conversations.id', '=', 'messages.conversation_id')
+                    ->orderBy('messages.created_at', $direction);
         }];
     }
 
