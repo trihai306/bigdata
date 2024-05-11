@@ -39,10 +39,7 @@ class ConversationRepository extends Repository
             if ($request->username) {
                 $q->where('name', 'like', '%' . $request->username . '%');
             }
-        })
-            ->leftJoin('messages', 'conversations.id', '=', 'messages.conversation_id')
-            ->orderBy('messages.created_at', 'desc');
-
+        });
         return parent::indexQuery($request, $query);
     }
 
