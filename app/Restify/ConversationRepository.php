@@ -7,32 +7,23 @@ use Binaryk\LaravelRestify\Fields\HasMany;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Binaryk\LaravelRestify\Fields\BelongsTo;
-use Binaryk\LaravelRestify\Filters\SortableFilter;
 
 class ConversationRepository extends Repository
 {
     public static string $model = Conversation::class;
-    public static array $search = [
-        'id',
-        'name',
-        'users.name',
-    ];
+    public static array $search = ['id', 'name', 'users.name',];
+    public static array $match = ['id' => 'integer', 'name' => 'string', 'type' => 'string', 'users.name' => 'string',];
+
     public static function sorts(): array
     {
         return [
-        'message.created_at'=>function(RestifyRequest $request, $query, $direction) {
-         dd($query);
-        }
-        ];
-    }
+            'id'=>function (RestifyRequest $request, $query, $direction) {
+              dd($query);
+            },
+            'message.created_at' => function (RestifyRequest $request, $query, $direction) {
 
-    public static array $match = [
-        'id' => 'integer',
-        'name'=>'string',
-        'type'=>'string',
-        'users.name'=>'string',
-    ];
+        }];
+    }
 
     public static function indexQuery(RestifyRequest $request, Relation|Builder $query)
     {
@@ -46,24 +37,14 @@ class ConversationRepository extends Repository
         return parent::indexQuery($request, $query);
     }
 
-    public function fields(RestifyRequest $request): array
+    public static function related(): array
     {
-        return [
-            id(),
-            field('type'),
-            field('name'),
-            field('users')->canStore(fn() => false)->canUpdate(fn() => false),
-            field('lastMessage')->canStore(fn() => false)->canUpdate(fn() => false),
-            field('lastSeenMessage')->canStore(fn() => false)->canUpdate(fn() => false),
+        return ['messages' => HasMany::make('messages', MessageRepository::class),//            'userConversations' => HasMany::make('userConversations', UserConversationRepository::class),
         ];
     }
 
-
-    public static function related(): array
+    public function fields(RestifyRequest $request): array
     {
-        return [
-            'messages' =>HasMany::make('messages', MessageRepository::class),
-//            'userConversations' => HasMany::make('userConversations', UserConversationRepository::class),
-        ];
+        return [id(), field('type'), field('name'), field('users')->canStore(fn() => false)->canUpdate(fn() => false), field('lastMessage')->canStore(fn() => false)->canUpdate(fn() => false), field('lastSeenMessage')->canStore(fn() => false)->canUpdate(fn() => false),];
     }
 }
