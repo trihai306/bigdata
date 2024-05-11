@@ -40,7 +40,7 @@ class ConversationRepository extends Repository
                 $q->where('name', 'like', '%' . $request->username . '%');
             }
         });
-        $query->with('lastMessage')->get()->sortBy(function ($conversation) {
+        $query->with('lastMessage')->get()->sortByDesc(function ($conversation) {
             return $conversation->lastMessage->created_at;
         });
         return parent::indexQuery($request, $query);
