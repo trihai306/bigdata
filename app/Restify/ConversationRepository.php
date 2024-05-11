@@ -21,8 +21,7 @@ class ConversationRepository extends Repository
 
             },
             'message' => function (RestifyRequest $request, $query, $direction) {
-                $query->join('messages', 'messages.conversation_id', '=', 'conversations.id')
-                    ->orderBy('messages.created_at', $direction);
+                $query->orderBy('last_message_id', $direction);
         }];
     }
 
@@ -46,6 +45,11 @@ class ConversationRepository extends Repository
 
     public function fields(RestifyRequest $request): array
     {
-        return [id(), field('type'), field('name'), field('users')->canStore(fn() => false)->canUpdate(fn() => false), field('lastMessage')->canStore(fn() => false)->canUpdate(fn() => false), field('lastSeenMessage')->canStore(fn() => false)->canUpdate(fn() => false),];
+        return [id(), field('type'),
+            field('name'),
+            field('users')->canStore(fn() => false)->canUpdate(fn() => false),
+            field('lastMessage')->canStore(fn() => false)->canUpdate(fn() => false),
+            field('last_message_id')->canStore(fn() => false)->canUpdate(fn() => false),
+            field('lastSeenMessage')->canStore(fn() => false)->canUpdate(fn() => false),];
     }
 }

@@ -36,4 +36,9 @@ class Conversation extends Model
     {
         return $this->hasMany(UserConversation::class);
     }
+
+    public function last_message_id()
+    {
+        return $this->hasOne(Message::class)->latest()->select('id');
+    }
 }
