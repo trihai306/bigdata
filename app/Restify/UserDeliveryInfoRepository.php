@@ -35,10 +35,7 @@ class UserDeliveryInfoRepository extends Repository
     {
         return [
             id(),
-            field('user_id')->rules('required', 'exists:users,id')->messages([
-                'required' => 'Trường này là bắt buộc.',
-                'exists' => 'Trường này đã tồn tại.',
-            ]),
+            field('user_id'),
             field('address')->rules('required')->messages([
                 'required' => 'Trường này là bắt buộc.',
             ]),
