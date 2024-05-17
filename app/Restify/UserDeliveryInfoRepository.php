@@ -39,13 +39,13 @@ class UserDeliveryInfoRepository extends Repository
             field('address')->rules('required')->messages([
                 'required' => 'Trường này là bắt buộc.',
             ]),
-            field('district_id')->rules('required', 'exists:districts,id')->messages([
+            field('district_id')->rules('required')->messages([
                 'required' => 'Trường này là bắt buộc.',
             ]),
-            field('province_id')->rules('required', 'exists:provinces,id')->messages([
+            field('province_id')->rules('required')->messages([
                 'required' => 'Trường này là bắt buộc.',
             ]),
-            field('ward_id')->rules('required', 'exists:wards,id')->messages([
+            field('ward_id')->rules('required')->messages([
                 'required' => 'Trường này là bắt buộc.',
             ]),
             field('phone')->rules('required')->messages([
