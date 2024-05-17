@@ -48,6 +48,9 @@ class UserDeliveryInfoRepository extends Repository
             field('ward_id')->rules('required')->messages([
                 'required' => 'Trường này là bắt buộc.',
             ]),
+            field('receiver_name')->rules('required')->messages([
+                'required' => 'Trường này là bắt buộc.',
+            ]),
             field('phone')->rules('required')->messages([
                 'required' => 'Trường này là bắt buộc.',
             ]),
