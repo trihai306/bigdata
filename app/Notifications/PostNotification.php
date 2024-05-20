@@ -17,12 +17,12 @@ class PostNotification extends Notification
     public $id_post;
     public $user;
     public $id_comment;
-    public function __construct($type, $content, $title,$id,$user,$id_comment)
+    public function __construct($type, $content, $title,$id_post,$user,$id_comment)
     {
         $this->type = $type;
         $this->content = $content;
         $this->title = $title;
-        $this->id_post = $id;
+        $this->id_post = $id_post;
         $this->user = $user;
         $this->id_comment = $id_comment;
     }
