@@ -38,7 +38,7 @@ class PostNotification extends Notification
             'type' => $this->type,
             'content' => $this->content,
             'title' => $this->title,
-            'id_post'=>$this->id,
+            'id_post'=>$this->id_post,
             'user'=>$this->user,
             'id_comment'=>$this->id_comment
         ];
