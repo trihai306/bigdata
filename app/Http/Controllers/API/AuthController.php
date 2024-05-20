@@ -124,6 +124,7 @@ class AuthController extends Controller
             'type' => 'string|in:buyer,seller',
             'birthday' => 'date',
             'gender' => 'string',
+            'delivery_id' => 'string,exists:user_delivery_infos,id',
             'field' => 'string|in:leather_goods,clothing,all',
             'avatar' => 'image|mimes:jpeg,png,jpg,gif,svg',
         ]);
