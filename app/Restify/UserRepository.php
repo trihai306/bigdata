@@ -43,6 +43,7 @@ class UserRepository extends Repository
                 'required' =>    'Trường này là bắt buộc.',
             ]),
 
+            field('delivery_id'),
             field('phone')->rules('required', 'unique:users', 'phone')->messages([
                 'required' => 'Trường này là bắt buộc.',
                 'unique' => 'Trường này phải là duy nhất.',

@@ -16,7 +16,7 @@ class User extends Authenticatable
     use HasMessages;
     protected $fillable = [
         'name', 'email', 'phone', 'avatar', 'address', 'birthday', 'gender', 'password','is_active',
-        'status', 'field', 'type','store_name','phone_token','phone_verified_at','email_verified_at'
+        'status', 'field', 'type','store_name','phone_token','phone_verified_at','email_verified_at','delivery_id'
     ];
 
     protected $hidden = [
