@@ -43,11 +43,4 @@ class ContractRepository extends Repository
         ];
     }
 
-    public static function related()
-    {
-        return [
-            'partyAInfo',
-            'partyBInfo',
-        ];
-    }
 }
