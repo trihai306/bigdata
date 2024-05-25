@@ -6,6 +6,7 @@ use App\Models\PartyBInfo;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\Auth;
 
 class PartyBInfoRepository extends Repository
 {
@@ -24,6 +25,9 @@ class PartyBInfoRepository extends Repository
     public function store(RestifyRequest $request)
     {
         $request->merge(['user_id' => $request->user()->id]);
+        if (Auth::user()->type == 'buyer') {
+            return response()->json(['message' => 'Bạn không có quyền thực hiện hành động này'], 403);
+        }
         if ($request->contract_id) {
             $contract = $request->user()->contracts()->find($request->contract_id);
             if (!$contract) {
