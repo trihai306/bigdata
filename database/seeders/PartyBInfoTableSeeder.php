@@ -22,7 +22,7 @@ class PartyBInfoTableSeeder extends Seeder
                     'user_id' => 6,
                     'contract_id' => $contract->id,
                     'email' => $faker->safeEmail(),
-                    'tax_id' => $faker->randomNumber(),
+                    'tax_id' => $faker->unique()->randomNumber(),
                     'bank_account_number' => $faker->bankAccountNumber(),
                     'bank_name' => $faker->company(),
                     'business_name' => $faker->company(),
