@@ -10,6 +10,7 @@ class PartyAInfo extends Model
     use HasFactory;
 
     protected $fillable = [
+        'user_id', // Add this line
         'contract_id',
         'account_number',
         'email',
@@ -21,5 +22,10 @@ class PartyAInfo extends Model
     public function contract()
     {
         return $this->belongsTo(Contract::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -12,6 +12,7 @@ class PartyBInfo extends Model
     protected $fillable = [
         'contract_id',
         'email',
+        'user_id',
         'tax_id',
         'bank_account_number',
         'bank_name',
@@ -25,5 +26,10 @@ class PartyBInfo extends Model
     public function contract()
     {
         return $this->belongsTo(Contract::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

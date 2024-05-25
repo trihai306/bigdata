@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Middleware\ForceJsonResponse;
-use App\Http\Middleware\ValidateJsonRequest;
+use App\Http\Middleware\JsonValidationMiddleware;
 use Binaryk\LaravelRestify\Http\Middleware\AuthorizeRestify;
 use Binaryk\LaravelRestify\Http\Middleware\DispatchRestifyStartingEvent;
 use Binaryk\LaravelRestify\Repositories\ActionLogRepository;
@@ -98,6 +97,7 @@ return [
     'middleware' => [
         'api',
         'auth:sanctum',
+        JsonValidationMiddleware::class,
         DispatchRestifyStartingEvent::class,
         AuthorizeRestify::class,
     ],
