@@ -19,7 +19,7 @@ class PartyBInfoTableSeeder extends Seeder
         foreach ($users as $user) {
             foreach ($contracts as $contract) {
                 PartyBInfo::create([
-                    'user_id' => $user->id,
+                    'user_id' => 6,
                     'contract_id' => $contract->id,
                     'email' => $faker->safeEmail(),
                     'tax_id' => $faker->randomNumber(),
