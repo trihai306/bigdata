@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\PartyBInfo;
+use App\Models\Contract;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class PartyBInfoPolicy
+class ContractPolicy
 {
     use HandlesAuthorization;
 
@@ -15,7 +15,7 @@ class PartyBInfoPolicy
         return true;
     }
 
-    public function show(User $user = null, PartyBInfo $model): bool
+    public function show(User $user = null, Contract $model): bool
     {
         return true;
     }
@@ -30,22 +30,22 @@ class PartyBInfoPolicy
         return true;
     }
 
-    public function update(User $user, PartyBInfo $model): bool
+    public function update(User $user, Contract $model): bool
     {
         return true;
     }
 
-    public function updateBulk(User $user, PartyBInfo $model): bool
+    public function updateBulk(User $user, Contract $model): bool
     {
         return true;
     }
 
-    public function deleteBulk(User $user, PartyBInfo $model): bool
+    public function deleteBulk(User $user, Contract $model): bool
     {
         return true;
     }
 
-    public function delete(User $user, PartyBInfo $model): bool
+    public function delete(User $user, Contract $model): bool
     {
         return true;
     }

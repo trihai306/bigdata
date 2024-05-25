@@ -21,6 +21,18 @@ class PartyBInfoRepository extends Repository
         return parent::indexQuery($request, $query);
     }
 
+    public function store(RestifyRequest $request)
+    {
+        $request->merge(['user_id' => $request->user()->id]);
+        if ($request->contract_id) {
+            $contract = $request->user()->contracts()->find($request->contract_id);
+            if (!$contract) {
+                return response()->json(['message' => 'Hơp đồng không tồn tại'], 404);
+            }
+        }
+        return parent::store($request);
+    }
+
     public function fields(RestifyRequest $request): array
     {
         return [

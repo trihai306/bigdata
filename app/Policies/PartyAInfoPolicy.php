@@ -22,31 +22,31 @@ class PartyAInfoPolicy
 
     public function store(User $user): bool
     {
-        return false;
+        return true;
     }
 
     public function storeBulk(User $user): bool
     {
-        return false;
+        return true;
     }
 
     public function update(User $user, PartyAInfo $model): bool
     {
-        return false;
+        return true;
     }
 
     public function updateBulk(User $user, PartyAInfo $model): bool
     {
-        return false;
+        return true;
     }
 
     public function deleteBulk(User $user, PartyAInfo $model): bool
     {
-        return false;
+        return true;
     }
 
     public function delete(User $user, PartyAInfo $model): bool
     {
-        return false;
+        return true;
     }
 }
