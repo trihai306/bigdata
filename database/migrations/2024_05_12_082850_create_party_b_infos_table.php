@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('party_b_infos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('contract_id');
-            $table->string('email')->unique();
-            $table->string('tax_id')->unique();
+            $table->string('email');
+            $table->string('tax_id');
             $table->string('bank_account_number');
             $table->string('bank_name');
             $table->string('business_name');
