@@ -12,7 +12,7 @@ class PartyAInfoRepository extends Repository
 {
     public static string $model = PartyAInfo::class;
     public static array $search = ['contract_id', 'account_number', 'email', 'bank_name', 'address', 'recipient_name'];
-
+    public static string $uriKey = 'partyainfos';
     public static function indexQuery(RestifyRequest $request, Relation|Builder $query)
     {
        $user = $request->user();
