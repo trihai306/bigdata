@@ -20,6 +20,8 @@ class Contract extends Model
         'confirmation_c',
         'terms_agreed',
         'status',
+        'post_id',
+        'viewed',
         'estimated_delivery_date',
     ];
 
