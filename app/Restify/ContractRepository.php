@@ -29,7 +29,18 @@ class ContractRepository extends Repository
       if ($request->user()->type == 'seller') {
             return response()->json(['message' => 'Bạn không có quyền thực hiện hành động này'], 403);
         }
+        if ($request->post_id) {
+            $post = $request->user()->posts()->find($request->post_id);
+            if (!$post) {
+                return response()->json(['message' => 'Bài viết không tồn tại'], 404);
+            }
+        }
         return parent::store($request);
+    }
+
+    public static function stored($resource, RestifyRequest $request){
+        $resource->status = 'new';
+        $resource->save();
     }
 
     public function fields(RestifyRequest $request): array
