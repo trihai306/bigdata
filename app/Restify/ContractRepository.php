@@ -40,6 +40,7 @@ class ContractRepository extends Repository
 
     public static function stored($resource, RestifyRequest $request){
         $resource->status = 'new';
+        $resource->viewed = false;
         $resource->save();
     }
 
