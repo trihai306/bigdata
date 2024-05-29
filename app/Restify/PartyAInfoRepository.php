@@ -2,6 +2,7 @@
 
 namespace App\Restify;
 
+use App\Models\Contract;
 use App\Models\PartyAInfo;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
 use Illuminate\Database\Eloquent\Builder;
@@ -27,7 +28,7 @@ class PartyAInfoRepository extends Repository
             return response()->json(['message' => 'Bạn không có quyền thực hiện hành động này'], 403);
         }
         if ($request->contract_id) {
-            $contract = $request->user()->contracts()->find($request->contract_id);
+            $contract = Contract::find($request->contract_id);
             if (!$contract) {
                return response()->json(['message' => 'Hơp đồng không tồn tại'], 404);
             }
