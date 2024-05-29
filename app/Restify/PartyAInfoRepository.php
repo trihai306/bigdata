@@ -39,7 +39,7 @@ class PartyAInfoRepository extends Repository
     {
         return [
             id(),
-            field('user_id')->rules('required'), // Add this line
+            field('user_id'), // Add this line
             field('contract_id')->rules('required'),
             field('account_number')->rules('required'),
             field('email')->rules('email'),
