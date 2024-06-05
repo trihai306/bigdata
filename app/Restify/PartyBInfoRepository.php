@@ -41,17 +41,17 @@ class PartyBInfoRepository extends Repository
     {
         return [
             id(),
-            field('user_id')->rules('required'),
-            field('contract_id')->rules('required'),
-            field('email')->rules('email'),
-            field('tax_id')->rules('required'),
-            field('bank_account_number')->rules('required'),
-            field('bank_name')->rules('required'),
-            field('business_name')->rules('required'),
-            field('position')->rules('required'),
-            field('address')->rules('required'),
-            field('phone_number')->rules('required'),
-            field('full_name')->rules('required'),
+            field('user_id'),
+            field('contract_id'),
+            field('email'),
+            field('tax_id'),
+            field('bank_account_number'),
+            field('bank_name'),
+            field('business_name'),
+            field('position'),
+            field('address'),
+            field('phone_number'),
+            field('full_name'),
         ];
     }
 }
