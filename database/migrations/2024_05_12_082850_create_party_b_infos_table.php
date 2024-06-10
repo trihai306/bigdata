@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('party_b_infos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('contract_id');
             $table->string('email');
             $table->string('tax_id');
             $table->string('bank_account_number');
@@ -24,7 +23,6 @@ return new class extends Migration
             $table->string('phone_number');
             $table->string('full_name');
             $table->timestamps();
-            $table->foreign('contract_id')->references('id')->on('contracts')->onDelete('cascade');
         });
     }
 

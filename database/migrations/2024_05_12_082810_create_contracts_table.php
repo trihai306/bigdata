@@ -29,6 +29,8 @@ return new class extends Migration
                 'shop_cancellation', 'vtp_cancellation'
             ])->default('new');
             $table->date('estimated_delivery_date')->nullable();
+            $table->integer('id_party_b_info')->nullable();
+            $table->integer('id_party_a_info');
             $table->timestamps();
         });
     }

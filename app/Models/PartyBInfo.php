@@ -10,7 +10,6 @@ class PartyBInfo extends Model
     use HasFactory;
 
     protected $fillable = [
-        'contract_id',
         'email',
         'user_id',
         'tax_id',
@@ -22,11 +21,6 @@ class PartyBInfo extends Model
         'phone_number',
         'full_name',
     ];
-
-    public function contract()
-    {
-        return $this->belongsTo(Contract::class);
-    }
 
     public function user()
     {

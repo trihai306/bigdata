@@ -13,13 +13,10 @@ class PartyBInfoRepository extends Repository
 {
     public static string $model = PartyBInfo::class;
     public static array $search = [
-        'contract_id', 'email', 'user_id', 'tax_id', 'bank_account_number', 'bank_name', 'business_name', 'position', 'address', 'phone_number', 'full_name'
+        'email', 'user_id', 'tax_id', 'bank_account_number', 'bank_name', 'business_name', 'position', 'address', 'phone_number', 'full_name'
     ];
     public static function indexQuery(RestifyRequest $request, Relation|Builder $query)
     {
-        $query->whereHas('contract', function ($q) use ($request) {
-            $q->where('user_id', $request->user()->id);
-        });
         return parent::indexQuery($request, $query);
     }
 
@@ -29,12 +26,6 @@ class PartyBInfoRepository extends Repository
         if (Auth::user()->type == 'buyer') {
             return response()->json(['message' => 'Bạn không có quyền thực hiện hành động này'], 403);
         }
-        if ($request->contract_id) {
-            $contract = Contract::find($request->contract_id);
-            if (!$contract) {
-                return response()->json(['message' => 'Hơp đồng không tồn tại'], 404);
-            }
-        }
         return parent::store($request);
     }
 
@@ -43,7 +34,6 @@ class PartyBInfoRepository extends Repository
         return [
             id(),
             field('user_id'),
-            field('contract_id'),
             field('email'),
             field('tax_id'),
             field('bank_account_number'),

@@ -20,6 +20,8 @@ class Contract extends Model
         'confirmation_c',
         'terms_agreed',
         'status',
+        'id_party_b_info',
+        'id_party_a_info',
         'post_id',
         'viewed',
         'estimated_delivery_date',
@@ -34,11 +36,11 @@ class Contract extends Model
 
     public function partyAInfo()
     {
-        return $this->hasOne(PartyAInfo::class);
+        return $this->belongsTo(PartyAInfo::class, 'id_party_a_info');
     }
 
     public function partyBInfo()
     {
-        return $this->hasOne(PartyBInfo::class);
+        return $this->belongsTo(PartyBInfo::class, 'id_party_b_info');
     }
 }

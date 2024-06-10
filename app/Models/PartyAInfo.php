@@ -11,7 +11,6 @@ class PartyAInfo extends Model
 
     protected $fillable = [
         'user_id', // Add this line
-        'contract_id',
         'account_number',
         'email',
         'bank_name',

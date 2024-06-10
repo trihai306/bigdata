@@ -12,8 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('contracts', function (Blueprint $table) {
-            $table->bigInteger('post_id')->unique()->nullable();
-            $table->boolean('viewed')->default(false)->after('status');
+            $table->bigInteger('post_id')->nullable();
+            $table->boolean('viewed_a')->default(false)->after('status');
+            $table->boolean('viewed_b')->default(false)->after('viewed_a');
         });
     }
 
