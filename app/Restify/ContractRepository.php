@@ -15,12 +15,16 @@ class ContractRepository extends Repository
     ];
     public static function indexQuery(RestifyRequest $request, Relation|Builder $query): Builder
     {
-        $query->whereHas('partyAInfo', function ($q) use ($request) {
-            $q->where('user_id', $request->user()->id);
-        })->orWhereHas('partyBInfo', function ($q) use ($request) {
-            $q->where('user_id', $request->user()->id);
-        });
-
+        if ($request->user()->type == 'seller') {
+            $query->whereHas('partyBInfo', function ($q) use ($request) {
+                $q->where('user_id', $request->user()->id);
+            });
+        }
+        else {
+            $query->whereHas('partyAInfo', function ($q) use ($request) {
+                $q->where('user_id', $request->user()->id);
+            });
+        }
         return parent::indexQuery($request, $query);
     }
 
