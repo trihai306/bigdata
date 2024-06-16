@@ -29,6 +29,16 @@ class PartyBInfoRepository extends Repository
         return parent::store($request);
     }
 
+    public static function stored($resource, RestifyRequest $request){
+        $contract = Contract::find($resource->contract_id);
+        if (!$contract) {
+            return response()->json(['message' => 'Hợp đồng không tồn tại'], 404);
+        }
+        $contract->id_party_b_info = $resource->id;
+        $contract->confirmation_b = 1;
+        $contract->save();
+    }
+
     public function fields(RestifyRequest $request): array
     {
         return [
