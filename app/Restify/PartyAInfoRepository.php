@@ -34,11 +34,21 @@ class PartyAInfoRepository extends Repository
         return [
             id(),
             field('user_id'), // Add this line
-            field('account_number')->rules('required'),
-            field('email')->rules('email'),
-            field('bank_name')->rules('required'),
-            field('address')->rules('required'),
-            field('recipient_name')->rules('required'),
+            field('account_number')->rules('required')->messages([
+                'required' => 'Số tài khoản không được để trống',
+            ]),
+            field('email')->rules('email')->messages([
+                'email' => 'Email không hợp lệ',
+            ]),
+            field('bank_name')->rules('required')->messages([
+                'required' => 'Tên ngân hàng không được để trống',
+            ]),
+            field('address')->rules('required')->messages([
+                'required' => 'Địa chỉ không được để trống',
+            ]),
+            field('recipient_name')->rules('required')->messages([
+                'required' => 'Tên người nhận không được để trống',
+            ])
             ];
     }
 }

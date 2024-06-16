@@ -34,15 +34,33 @@ class PartyBInfoRepository extends Repository
         return [
             id(),
             field('user_id'),
-            field('email'),
-            field('tax_id'),
-            field('bank_account_number'),
-            field('bank_name'),
-            field('business_name'),
-            field('position'),
-            field('address'),
-            field('phone_number'),
-            field('full_name'),
+            field('email')->rules('email')->messages([
+                'email' => 'Email không hợp lệ',
+            ]),
+            field('tax_id')->rules('required')->messages([
+                'required' => 'Mã số thuế không được để trống',
+            ]),
+            field('bank_account_number')->rules('required')->messages([
+                'required' => 'Số tài khoản ngân hàng không được để trống',
+            ]),
+            field('bank_name')->rules('required')->messages([
+                'required' => 'Tên ngân hàng không được để trống',
+            ]),
+            field('business_name')->rules('required')->messages([
+                'required' => 'Tên doanh nghiệp không được để trống',
+            ]),
+            field('position')->rules('required')->messages([
+                'required' => 'Chức vụ không được để trống',
+            ]),
+            field('address')->rules('required')->messages([
+                'required' => 'Địa chỉ không được để trống',
+            ]),
+            field('phone_number')->rules('required')->messages([
+                'required' => 'Số điện thoại không được để trống',
+            ]),
+            field('full_name')->rules('required')->messages([
+                'required' => 'Họ và tên không được để trống',
+            ])
         ];
     }
 }
