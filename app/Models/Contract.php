@@ -24,6 +24,8 @@ class Contract extends Model
         'id_party_a_info',
         'post_id',
         'id_user_b',
+        'viewed_a',
+        'viewed_b',
         'viewed',
         'estimated_delivery_date',
     ];

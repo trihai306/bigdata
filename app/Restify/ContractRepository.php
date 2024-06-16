@@ -40,7 +40,8 @@ class ContractRepository extends Repository
 
     public static function stored($resource, RestifyRequest $request){
         $resource->status = 'new';
-        $resource->viewed = false;
+        $resource->viewed_a = false;
+        $resource->viewed_b = false;
         $resource->save();
     }
 
@@ -69,7 +70,8 @@ class ContractRepository extends Repository
                 'required' => 'Thông tin bên A không được để trống',
                 'exists' => 'Thông tin bên A không tồn tại',
             ]),
-            field('viewed'),
+            field('viewed_a'),
+            field('viewed_b'),
             field('confirmation_a'),
             field('confirmation_b'),
             field('confirmation_c'),
