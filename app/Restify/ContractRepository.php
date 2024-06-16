@@ -61,11 +61,13 @@ class ContractRepository extends Repository
                 'required' => 'Bài viết không được để trống',
             ]),
             field('id_party_b_info'),
-            field('id_user_b')->rules('required')->messages([
+            field('id_user_b')->rules(['required', 'exists:users,id'])->messages([
                 'required' => 'Người dùng bên B không được để trống',
+                'exists' => 'Người dùng bên B không tồn tại',
             ]),
-            field('id_party_a_info')->rules('required')->messages([
+            field('id_party_a_info')->rules('required', 'exists:party_a_infos,id')->messages([
                 'required' => 'Thông tin bên A không được để trống',
+                'exists' => 'Thông tin bên A không tồn tại',
             ]),
             field('viewed'),
             field('confirmation_a'),
