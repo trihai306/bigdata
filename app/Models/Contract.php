@@ -23,6 +23,7 @@ class Contract extends Model
         'id_party_b_info',
         'id_party_a_info',
         'post_id',
+        'id_user_b',
         'viewed',
         'estimated_delivery_date',
     ];
@@ -42,5 +43,10 @@ class Contract extends Model
     public function partyBInfo()
     {
         return $this->belongsTo(PartyBInfo::class, 'id_party_b_info');
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user_b');
     }
 }

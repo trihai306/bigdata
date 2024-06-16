@@ -51,15 +51,29 @@ class ContractRepository extends Repository
             field('invoice_image'),
             field('product_image'),
             field('description'),
-            field('total_amount')->rules('required'),
-            field('deposit_amount')->rules('required'),
-            field('post_id')->rules('required'),
+            field('total_amount')->rules('required')->messages([
+                'required' => 'Tổng số tiền không được để trống',
+            ]),
+            field('deposit_amount')->rules('required')->messages([
+                'required' => 'Số tiền đặt cọc không được để trống',
+            ]),
+            field('post_id')->rules('required')->messages([
+                'required' => 'Bài viết không được để trống',
+            ]),
+            field('id_party_b_info'),
+            field('id_user_b')->rules('required')->messages([
+                'required' => 'Người dùng bên B không được để trống',
+            ]),
+            field('id_party_a_info')->rules('required')->messages([
+                'required' => 'Thông tin bên A không được để trống',
+            ]),
             field('viewed'),
             field('confirmation_a'),
             field('confirmation_b'),
             field('confirmation_c'),
             field('terms_agreed'),
             field('status'),
+
             field('estimated_delivery_date'),
         ];
     }
