@@ -16,8 +16,8 @@ class ContractRepository extends Repository
     public static function indexQuery(RestifyRequest $request, Relation|Builder $query): Builder
     {
         if ($request->user()->type == 'seller') {
-            $query->whereHas('partyBInfo', function ($q) use ($request) {
-                $q->where('user_id', $request->user()->id);
+            $query->whereHas('user', function ($q) use ($request) {
+                $q->where('id', $request->user()->id);
             });
         }
         else {

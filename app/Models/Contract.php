@@ -51,4 +51,10 @@ class Contract extends Model
     {
         return $this->belongsTo(User::class, 'id_user_b');
     }
+
+    public function post()
+    {
+        return $this->belongsTo(Post::class, 'post_id');
+    }
+
 }

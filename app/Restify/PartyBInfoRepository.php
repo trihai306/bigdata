@@ -34,10 +34,7 @@ class PartyBInfoRepository extends Repository
         if (!$contract) {
             return response()->json(['message' => 'Hợp đồng không tồn tại'], 404);
         }
-        $contract->update([
-            'id_party_b_info' => $resource->id,
-            'confirmation_b' => 1,
-        ]);
+        Contract::where('id', $resource->contract_id)->update(['id_party_b_info' => $resource->id]);
     }
 
     public function fields(RestifyRequest $request): array
