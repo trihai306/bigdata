@@ -39,10 +39,12 @@ class PartyBInfoRepository extends Repository
         $contract->id_party_b_info = $resource->id;
         $contract->confirmation_b = true;
         $contract->save();
-        $contract->partyAInfo->user->notify(new ContractNotification('contract', 'Đối tác đã xác nhận hợp đồng', 'Đối tác đã xác nhận hợp đồng', $contract->id));
+        $userA = $contract->partyAInfo->user;
+        $contract->partyAInfo->user->notify(new ContractNotification('contract', 'Đối tác đã xác nhận hợp đồng', 'Đối tác đã xác nhận hợp đồng', $contract->id,$userA));
         sendFirebaseNotification($contract->partyAInfo->user->device_token, 'Đối tác đã xác nhận hợp đồng', 'Đối tác đã xác nhận hợp đồng', [
             'type' => 'contract',
             'id' => $contract->id,
+            'user' => $contract->partyAInfo->user->toArray(),
         ]);
     }
 

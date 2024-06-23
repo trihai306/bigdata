@@ -38,7 +38,9 @@ class ContractRepository extends Repository
         $resource->save();
         if ($resource->id_user_b != null) {
             $user = User::find($resource->id_user_b);
-            $user->notify(new ContractNotification('contract', 'Bạn có một hợp đồng mới', 'Bạn có một hợp đồng mới từ ' . $resource->partyAInfo->user->name, $resource->id));
+            $userA = $contract->partyAInfo->user;
+            $user->notify(new ContractNotification('contract', 'Bạn có một hợp đồng mới',
+                'Bạn có một hợp đồng mới từ ',$contract->id,$userA));
             sendFirebaseNotification($user->device_token, 'Bạn có một hợp đồng mới', 'Bạn có một hợp đồng mới từ ' . $resource->partyAInfo->user->name, [
                 'type' => 'contract',
                 'id' => $resource->id,
