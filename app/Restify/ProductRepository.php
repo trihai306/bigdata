@@ -29,29 +29,29 @@ class ProductRepository extends Repository
     {
         return [
             id(),
-            field('field')->rules('required')->messages([
+            field('field')->rules('required')->storeBulkRules('required')->messages([
                 'required' => 'Lĩnh vực không được để trống',
             ]),
-            field('contract_id')->rules('required')->messages([
+            field('contract_id')->rules('required')->storeBulkRules('required')->messages([
                 'required' => 'Contract ID không được để trống',
             ]),
-            field('name')->rules('required')->messages([
+            field('name')->rules('required')->storeBulkRules('required')->messages([
                 'required' => 'Tên không được để trống',
             ]),
-            field('color')->rules('required')->messages([
+            field('color')->rules('required')->storeBulkRules('required')->messages([
                 'required' => 'Màu sắc không được để trống',
             ]),
-            field('quantity')->rules('required')->messages([
+            field('quantity')->rules('required')->storeBulkRules('required')->messages([
                 'required' => 'Số lượng không được để trống',
             ]),
-            field('price')->rules('required')->messages([
+            field('price')->rules('required')->storeBulkRules('required')->messages([
                 'required' => 'Giá không được để trống',
             ]),
-            field('gender')->rules('required')->messages([
+            field('gender')->rules('required')->storeBulkRules('required')->messages([
                 'required' => 'Giới tính không được để trống',
             ]),
             field('size'),
-            field('material')->rules('required')->messages([
+            field('material')->rules('required')->storeBulkRules('required')->messages([
                 'required' => 'Chất liệu không được để trống',
             ]),
             field('description'),
