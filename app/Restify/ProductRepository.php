@@ -24,6 +24,7 @@ class ProductRepository extends Repository
         'description',
     ];
 
+
     public function fields(RestifyRequest $request): array
     {
         return [

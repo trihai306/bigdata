@@ -34,8 +34,8 @@ class PartyBInfoRepository extends Repository
     }
 
     public static function stored($resource, RestifyRequest $request){
-
-        Contract::where('id', $resource->contract_id)->update(['id_party_b_info' => $resource->id]);
+        $contract = Contract::where('id', $resource->contract_id)->update(['id_party_b_info' => $resource->id]);
+        dd($contract);
     }
 
     public function fields(RestifyRequest $request): array

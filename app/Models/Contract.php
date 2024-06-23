@@ -57,4 +57,9 @@ class Contract extends Model
         return $this->belongsTo(Post::class, 'post_id');
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'contract_id');
+    }
+
 }

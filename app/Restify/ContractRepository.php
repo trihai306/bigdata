@@ -48,7 +48,10 @@ class ContractRepository extends Repository
 
     public static function related(): array
     {
-        return ['partyAInfo' => PartyAInfoRepository::class, 'partyBInfo' => PartyBInfoRepository::class,];
+        return ['partyAInfo' => PartyAInfoRepository::class,
+            'partyBInfo' => PartyBInfoRepository::class,
+            'products' => ProductRepository::class,
+            ];
     }
 
     public function store(RestifyRequest $request)
