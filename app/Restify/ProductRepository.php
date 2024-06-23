@@ -18,7 +18,7 @@ class ProductRepository extends Repository
         'color',
         'quantity',
         'price',
-        'sex',
+        'gender',
         'size',
         'material',
         'description',

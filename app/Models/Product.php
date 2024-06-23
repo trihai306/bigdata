@@ -16,7 +16,7 @@ class Product extends Model
         'color',
         'quantity',
         'price',
-        'sex',
+        'gender',
         'size',
         'material',
         'description',
