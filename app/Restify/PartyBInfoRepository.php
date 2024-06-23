@@ -37,7 +37,6 @@ class PartyBInfoRepository extends Repository
         $contract = Contract::find($request->contract_id);
         $contract->id_party_b_info = $resource->id;
         $contract->save();
-        dd($contract);
     }
 
     public function fields(RestifyRequest $request): array
