@@ -4,6 +4,7 @@ namespace App\Restify;
 
 use App\Models\Contract;
 use App\Models\PartyBInfo;
+use App\Notifications\ContractNotification;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -36,7 +37,13 @@ class PartyBInfoRepository extends Repository
     public static function stored($resource, RestifyRequest $request){
         $contract = Contract::find($request->contract_id);
         $contract->id_party_b_info = $resource->id;
+        $contract->confirmation_b = true;
         $contract->save();
+        $contract->partyAInfo->user->notify(new ContractNotification('contract', 'Đối tác đã xác nhận hợp đồng', 'Đối tác đã xác nhận hợp đồng', $contract->id));
+        sendFirebaseNotification($contract->partyAInfo->user->device_token, 'Đối tác đã xác nhận hợp đồng', 'Đối tác đã xác nhận hợp đồng', [
+            'type' => 'contract',
+            'id' => $contract->id,
+        ]);
     }
 
     public function fields(RestifyRequest $request): array
