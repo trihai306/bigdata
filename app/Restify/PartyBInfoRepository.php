@@ -26,14 +26,15 @@ class PartyBInfoRepository extends Repository
         if (Auth::user()->type == 'buyer') {
             return response()->json(['message' => 'Bạn không có quyền thực hiện hành động này'], 403);
         }
+        $contract = Contract::find($request->contract_id);
+        if (!$contract) {
+            return response()->json(['message' => 'Hợp đồng không tồn tại'], 404);
+        }
         return parent::store($request);
     }
 
     public static function stored($resource, RestifyRequest $request){
-        $contract = Contract::find($resource->contract_id);
-        if (!$contract) {
-            return response()->json(['message' => 'Hợp đồng không tồn tại'], 404);
-        }
+
         Contract::where('id', $resource->contract_id)->update(['id_party_b_info' => $resource->id]);
     }
 
