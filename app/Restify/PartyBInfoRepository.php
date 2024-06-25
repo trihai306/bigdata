@@ -40,6 +40,7 @@ class PartyBInfoRepository extends Repository
         $contract->confirmation_b = true;
         $contract->save();
         $userA = $contract->partyAInfo->user;
+        $userB = $contract->partyBInfo->user;
         $contract->partyAInfo->user->notify(new ContractNotification('contract', 'Đối tác đã xác nhận hợp đồng',
             'Đối tác đã xác nhận hợp đồng', $contract->id,$userA));
         sendFirebaseNotification(
@@ -48,7 +49,7 @@ class PartyBInfoRepository extends Repository
             'Đối tác đã xác nhận hợp đồng', [
             'type' => 'contract',
             'id' => $contract->id,
-            'user' => $userA,
+            'user' => $userB,
         ]);
     }
 
