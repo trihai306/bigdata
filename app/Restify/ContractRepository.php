@@ -41,7 +41,7 @@ class ContractRepository extends Repository
             $userA = $contract->partyAInfo->user;
             $user->notify(new ContractNotification('contract', 'Bạn có một hợp đồng mới',
                 'Bạn có một hợp đồng mới từ ',$contract->id, $userA));
-            sendFirebaseNotification($user->device_token, 'Bạn có một hợp đồng mới', 'Bạn có một hợp đồng mới từ ' . $resource->partyAInfo->user->name, [
+            sendFirebaseNotification($user->phone_token, 'Bạn có một hợp đồng mới', 'Bạn có một hợp đồng mới từ ' . $resource->partyAInfo->user->name, [
                 'type' => 'contract',
                 'id' => $resource->id,
                 'user' => $resource->partyAInfo->user->toArray(),

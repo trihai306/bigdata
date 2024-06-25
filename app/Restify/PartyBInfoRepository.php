@@ -44,7 +44,7 @@ class PartyBInfoRepository extends Repository
         $contract->partyAInfo->user->notify(new ContractNotification('contract', 'Đối tác đã xác nhận hợp đồng',
             'Đối tác đã xác nhận hợp đồng', $contract->id,$userA));
         sendFirebaseNotification(
-            $contract->partyAInfo->user->device_token,
+            $contract->partyAInfo->user->phone_token,
             'Đối tác đã xác nhận hợp đồng',
             'Đối tác đã xác nhận hợp đồng', [
             'type' => 'contract',
