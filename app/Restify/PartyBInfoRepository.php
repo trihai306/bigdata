@@ -49,7 +49,7 @@ class PartyBInfoRepository extends Repository
             'Đối tác đã xác nhận hợp đồng', [
             'type' => 'contract',
             'id' => $contract->id,
-            'user' => $userB,
+//            'user' => $userB,
         ]);
     }
 
