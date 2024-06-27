@@ -38,6 +38,7 @@ class PartyBInfoRepository extends Repository
         $contract = Contract::find($request->contract_id);
         $contract->id_party_b_info = $resource->id;
         $contract->confirmation_b = true;
+        $contract->status = 'pending';
         $contract->save();
         $userA = $contract->partyAInfo->user;
         $userB = $contract->partyBInfo->user;
@@ -49,7 +50,7 @@ class PartyBInfoRepository extends Repository
             'Đối tác đã xác nhận hợp đồng', [
             'type' => 'contract',
             'id' => $contract->id,
-//            'user' => $userB,
+            'user' => $userB,
         ]);
     }
 
