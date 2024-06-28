@@ -71,6 +71,41 @@ class ContractRepository extends Repository
         return parent::store($request);
     }
 
+
+    public function update(RestifyRequest $request, $repositoryId){
+        if ($request->user()->type == 'seller') {
+            if($request->hasFile('invoice_image')){
+                $file = $request->file('invoice_image');
+                $filename = time().'_'.$file->getClientOriginalName();
+                $path = $file->storeAs('invoices', $filename, 'public');
+                $request->merge(['invoice_image' => $path]);
+                return parent::update($request, $repositoryId);
+            }
+        }
+        else{
+            return response()->json(['message' => 'Bạn không có quyền thực hiện hành động này'], 403);
+        }
+
+        if ($request->user()->type == 'seller') {
+            if($request->hasFile('product_image')){
+                $files = $request->file('product_image');
+                $paths = [];
+
+                foreach ($files as $file) {
+                    $filename = time().'_'.$file->getClientOriginalName();
+                    $path = $file->storeAs('products', $filename, 'public');
+                    $paths[] = $path;
+                }
+
+                $request->merge(['product_image' => $paths]);
+                return parent::update($request, $repositoryId);
+            }
+        }
+        else{
+            return response()->json(['message' => 'Bạn không có quyền thực hiện hành động này'], 403);
+        }
+    }
+
     public function fields(RestifyRequest $request): array
     {
         return [id(), field('invoice_image'), field('product_image'), field('description'), field('total_amount')->rules('required')->messages(['required' => 'Tổng số tiền không được để trống',]), field('deposit_amount')->rules('required')->messages(['required' => 'Số tiền đặt cọc không được để trống',]), field('post_id')->rules('required')->messages(['required' => 'Bài viết không được để trống',]), field('id_party_b_info'), field('id_user_b')->rules(['required', 'exists:users,id'])->messages(['required' => 'Người dùng bên B không được để trống', 'exists' => 'Người dùng bên B không tồn tại',]), field('id_party_a_info')->rules('required', 'exists:party_a_infos,id')->messages(['required' => 'Thông tin bên A không được để trống', 'exists' => 'Thông tin bên A không tồn tại',]), field('viewed_a'), field('viewed_b'), field('confirmation_a'), field('confirmation_b'), field('confirmation_c'), field('terms_agreed'), field('status'),
