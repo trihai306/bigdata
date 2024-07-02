@@ -35,7 +35,7 @@ class ContractRepository extends Repository
         $contract->confirmation_c = true;
         $contract->viewed_a = false;
         $contract->viewed_b = false;
-        $resource->save();
+        $contract->save();
         if ($resource->id_user_b != null) {
             $user = User::find($resource->id_user_b);
             $userA = $contract->partyAInfo->user;
