@@ -51,7 +51,8 @@ class ContractRepository extends Repository
 
     public static function related(): array
     {
-        return ['partyAInfo' => PartyAInfoRepository::class,
+        return [
+            'partyAInfo' => PartyAInfoRepository::class,
             'partyBInfo' => PartyBInfoRepository::class,
             'products' => ProductRepository::class,
             ];
@@ -90,7 +91,6 @@ class ContractRepository extends Repository
             if($request->hasFile('product_image')){
                 $files = $request->file('product_image');
                 $paths = [];
-
                 foreach ($files as $file) {
                     $filename = time().'_'.$file->getClientOriginalName();
                     $path = $file->storeAs('products', $filename, 'public');
@@ -98,12 +98,13 @@ class ContractRepository extends Repository
                 }
 
                 $request->merge(['product_image' => $paths]);
-                return parent::update($request, $repositoryId);
+
             }
         }
         else{
             return response()->json(['message' => 'Bạn không có quyền thực hiện hành động này'], 403);
         }
+        return parent::update($request, $repositoryId);
     }
 
     public function fields(RestifyRequest $request): array
