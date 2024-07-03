@@ -74,35 +74,24 @@ class ContractRepository extends Repository
 
 
     public function update(RestifyRequest $request, $repositoryId){
-        if ($request->user()->type == 'seller') {
-            if($request->hasFile('invoice_image')){
-                $file = $request->file('invoice_image');
+        if($request->hasFile('invoice_image')){
+            $file = $request->file('invoice_image');
+            $filename = time().'_'.$file->getClientOriginalName();
+            $path = $file->storeAs('invoices', $filename, 'public');
+            $request->merge(['invoice_image' => $path]);
+            return parent::update($request, $repositoryId);
+        }
+        if($request->hasFile('product_image')){
+            $files = $request->file('product_image');
+            $paths = [];
+            foreach ($files as $file) {
                 $filename = time().'_'.$file->getClientOriginalName();
-                $path = $file->storeAs('invoices', $filename, 'public');
-                $request->merge(['invoice_image' => $path]);
-                return parent::update($request, $repositoryId);
+                $path = $file->storeAs('products', $filename, 'public');
+                $paths[] = $path;
             }
-        }
-        else{
-            return response()->json(['message' => 'Bạn không có quyền thực hiện hành động này'], 403);
-        }
 
-        if ($request->user()->type == 'seller') {
-            if($request->hasFile('product_image')){
-                $files = $request->file('product_image');
-                $paths = [];
-                foreach ($files as $file) {
-                    $filename = time().'_'.$file->getClientOriginalName();
-                    $path = $file->storeAs('products', $filename, 'public');
-                    $paths[] = $path;
-                }
+            $request->merge(['product_image' => $paths]);
 
-                $request->merge(['product_image' => $paths]);
-
-            }
-        }
-        else{
-            return response()->json(['message' => 'Bạn không có quyền thực hiện hành động này'], 403);
         }
         return parent::update($request, $repositoryId);
     }
