@@ -97,7 +97,6 @@ class ContractRepository extends Repository
      */
     protected function handleFileUpload(RestifyRequest $request, string $inputName, string $storagePath) {
         $files = $request->file($inputName);
-        dd($files);
         if (is_array($files)) {
             $paths = [];
             foreach ($files as $file) {
