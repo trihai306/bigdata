@@ -80,7 +80,6 @@ class ContractRepository extends Repository
             $path = $file->storeAs('invoices', $filename, 'public');
             $request->merge(['invoice_image' => $path]);
         }
-        dd( $request->file('product_image'));
         if($request->hasFile('product_image')){
             $files = $request->file('product_image');
             $paths = [];
@@ -89,6 +88,7 @@ class ContractRepository extends Repository
                 $path = $file->storeAs('products', $filename, 'public');
                 $paths[] = $path;
             }
+            $this->dd($paths);
             $request->merge(['product_image' => $paths]);
 
         }
