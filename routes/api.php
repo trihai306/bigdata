@@ -37,6 +37,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('v1/notifications/unread', [NotificationController::class, 'notificationUnread']);
     Route::put('v1/notifications/{id}/mark-as-read', [NotificationController::class, 'markAsRead']);
    Route::post('v1/update-user-conversation/{conversationId}/update-last-seen-message', [UserConversationController::class, 'updateLastSeenMessage']);
+   Route::put('v1/update-image/{id}',[\App\Http\Controllers\API\ContractController::class,'updateImage']);
 });
 
 Route::post('/pusher/auth', function (Illuminate\Http\Request $request) {

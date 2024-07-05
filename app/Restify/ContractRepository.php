@@ -74,7 +74,6 @@ class ContractRepository extends Repository
 
 
     public function update(RestifyRequest $request, $repositoryId){
-        dd($request->all());
         if($request->hasFile('invoice_image')){
             $file = $request->file('invoice_image');
             $filename = time().'_'.$file->getClientOriginalName();
