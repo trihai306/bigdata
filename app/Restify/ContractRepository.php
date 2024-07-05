@@ -74,33 +74,50 @@ class ContractRepository extends Repository
 
 
     public function update(RestifyRequest $request, $repositoryId){
-        if($request->hasFile('invoice_image')){
-            $file = $request->file('invoice_image');
-            $filename = time().'_'.$file->getClientOriginalName();
-            $path = $file->storeAs('invoices', $filename, 'public');
-            $request->merge(['invoice_image' => $path]);
+        if ($request->hasFile('invoice_image')) {
+            $invoiceImagePath = $this->handleFileUpload($request, 'invoice_image', 'invoices');
+            $request->merge(['invoice_image' => $invoiceImagePath]);
         }
-        if($request->hasFile('product_image')){
-            $files = $request->file('product_image');
-            //kiểm tra xem có phải là 1 file hay không
-            if(!is_array($files)){
-                $filename = time().'_'.$file->getClientOriginalName();
-                $path = $file->storeAs('product_image', $filename, 'public');
-                $request->merge(['product_image' => $path]);
-            }
-           else{
-               $paths = [];
-               foreach ($files as $file) {
-                   $filename = time().'_'.$file->getClientOriginalName();
-                   $path = $file->storeAs('products', $filename, 'public');
-                   $paths[] = $path;
-               }
-               $request->merge(['product_image' => $paths]);
 
-           }
-
+        if ($request->hasFile('product_image')) {
+            $productImagePaths = $this->handleFileUpload($request, 'product_image', 'products');
+            $request->merge(['product_image' => $productImagePaths]);
         }
+
         return parent::update($request, $repositoryId);
+    }
+
+    /**
+     * Handle file uploads for both single and multiple files.
+     *
+     * @param RestifyRequest $request
+     * @param string $inputName
+     * @param string $storagePath
+     * @return array|string
+     */
+    protected function handleFileUpload(RestifyRequest $request, string $inputName, string $storagePath) {
+        $files = $request->file($inputName);
+        if (is_array($files)) {
+            $paths = [];
+            foreach ($files as $file) {
+                $paths[] = $this->uploadFile($file, $storagePath);
+            }
+            return $paths;
+        } else {
+            return $this->uploadFile($files, $storagePath);
+        }
+    }
+
+    /**
+     * Upload a single file and return its storage path.
+     *
+     * @param UploadedFile $file
+     * @param string $storagePath
+     * @return string
+     */
+    protected function uploadFile($file, string $storagePath) {
+        $filename = time() . '_' . $file->getClientOriginalName();
+        return $file->storeAs($storagePath, $filename, 'public');
     }
 
     public function fields(RestifyRequest $request): array
