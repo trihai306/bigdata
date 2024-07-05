@@ -74,12 +74,12 @@ class ContractRepository extends Repository
 
 
     public function update(RestifyRequest $request, $repositoryId){
+        dd($request->all());
         if($request->hasFile('invoice_image')){
             $file = $request->file('invoice_image');
             $filename = time().'_'.$file->getClientOriginalName();
             $path = $file->storeAs('invoices', $filename, 'public');
             $request->merge(['invoice_image' => $path]);
-            return parent::update($request, $repositoryId);
         }
         if($request->hasFile('product_image')){
             $files = $request->file('product_image');
@@ -89,7 +89,6 @@ class ContractRepository extends Repository
                 $path = $file->storeAs('products', $filename, 'public');
                 $paths[] = $path;
             }
-
             $request->merge(['product_image' => $paths]);
 
         }
