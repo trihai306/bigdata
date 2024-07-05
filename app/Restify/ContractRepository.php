@@ -82,14 +82,22 @@ class ContractRepository extends Repository
         }
         if($request->hasFile('product_image')){
             $files = $request->file('product_image');
-            $paths = [];
-            foreach ($files as $file) {
+            //kiểm tra xem có phải là 1 file hay không
+            if(!is_array($files)){
                 $filename = time().'_'.$file->getClientOriginalName();
-                $path = $file->storeAs('products', $filename, 'public');
-                $paths[] = $path;
+                $path = $file->storeAs('product_image', $filename, 'public');
+                $request->merge(['product_image' => $path]);
             }
-            dd($paths);
-            $request->merge(['product_image' => $paths]);
+           else{
+               $paths = [];
+               foreach ($files as $file) {
+                   $filename = time().'_'.$file->getClientOriginalName();
+                   $path = $file->storeAs('products', $filename, 'public');
+                   $paths[] = $path;
+               }
+               $request->merge(['product_image' => $paths]);
+
+           }
 
         }
         return parent::update($request, $repositoryId);
