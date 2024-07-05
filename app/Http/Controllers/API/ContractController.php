@@ -10,6 +10,7 @@ class ContractController extends Controller
 {
     public function updateImage(Request $request, $id)
     {
+        dd($request->all());
         $contract = Contract::find($id);
         if ($request->hasFile('invoice_image')) {
             $file = $request->file('invoice_image');
