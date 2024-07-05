@@ -88,7 +88,7 @@ class ContractRepository extends Repository
                 $path = $file->storeAs('products', $filename, 'public');
                 $paths[] = $path;
             }
-            $this->dd($paths);
+            dd($paths);
             $request->merge(['product_image' => $paths]);
 
         }
