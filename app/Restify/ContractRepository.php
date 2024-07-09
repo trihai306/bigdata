@@ -81,6 +81,8 @@ class ContractRepository extends Repository
 
         if ($request->hasFile('product_image')) {
             $productImagePaths = $this->handleFileUpload($request, 'product_image', 'products');
+            //json_encode($productImagePaths);
+            $productImagePaths = json_encode($productImagePaths);
             $request->merge(['product_image' => $productImagePaths]);
         }
 
