@@ -1,0 +1,35 @@
+{
+    "name": "adminftr/future",
+    "description": "admin package",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Hai Nguyen",
+            "email": "haidev306@gmail.com"
+        }
+    ],
+    "homepage": "https://github.com/trihai306/adminFTR",
+    "require": {
+        "php": "^8.2",
+        "livewire/livewire": ">=3.3.5",
+        "hammerstone/fast-paginate": "^1.0.1",
+        "whitecube/laravel-search-builder": "*",
+        "ext-zip": "*",
+        "ext-json": "*",
+        "laravel/framework": "^9.0|^10.0|^11.0",
+        "league/flysystem": "^3.0",
+        "intervention/image-laravel": "^1.2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Future\\Core\\": "./core/src/",
+            "Future\\Form\\": "./form/src/",
+            "Future\\Table\\": "./table/src/",
+            "Future\\Messages\\": "./messages/src/",
+            "Future\\Notifications\\": "./notifications/src/",
+            "Future\\Widgets\\": "./widgets/src/",
+            "Future\\FileManager\\": "./laravel-file-manager/src/"
+        }
+    }
+}
