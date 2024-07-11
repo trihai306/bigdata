@@ -2,7 +2,6 @@
 
 namespace App\Future\PermissionResource\Roles\View;
 
-use App\Models\User;
 use Livewire\Component;
 use Livewire\WithPagination;
 

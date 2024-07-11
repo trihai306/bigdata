@@ -74,22 +74,27 @@ class UpdateMenu extends Command
             $this->info('Skipping route with no name');
             return;
         }
-        //xóa toàn bộ menu
 
+        $urlParts = explode('/', $route->uri);
+        $parentId = null;
 
-        Menu::Create(
-            [
-                'url' => $route->uri,
-                'title' => $route->uri === 'admin' ? 'Dashboard' : ucfirst(str_replace('admin/', '', $route->uri)),
-                'permission' => $routeName,
-            ],
-            [
-                'parent_id' => null,
-                'order' => 0,
-                'icon' => 'fas fa-tachometer-alt',
-                'badge' => null
-            ]
-        );
+        foreach ($urlParts as $part) {
+            $url = implode('/', array_slice($urlParts, 0, array_search($part, $urlParts) + 1));
+
+            $menu = Menu::firstOrCreate(
+                ['url' => $url],
+                [
+                    'title' => $url === 'admin' ? 'Dashboard' : ucfirst(str_replace('admin/', '', $url)),
+                    'permission' => $routeName,
+                    'parent_id' => $parentId,
+                    'order' => 0,
+                    'icon' => 'fas fa-tachometer-alt',
+                    'badge' => null
+                ]
+            );
+
+            $parentId = $menu->id;
+        }
 
         Permission::firstOrCreate(['name' => $routeName]);
         $admin->givePermissionTo($routeName);

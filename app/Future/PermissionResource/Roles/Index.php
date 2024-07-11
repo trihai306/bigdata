@@ -8,29 +8,8 @@ use Spatie\Permission\Models\Role;
 
 class Index extends Component
 {
-    public $roles;
-
     // Add the listeners array
     protected $listeners = ['roleUpdated' => 'reloadRoles', 'deleteRole' => 'deleteRole'];
-
-    public function mount()
-    {
-
-        $this->reloadRoles();
-    }
-
-    public function reloadRoles()
-    {
-
-        $this->roles = Role::with('permissions')->get();
-    }
-
-    public function render()
-    {
-        return view('livewire.roles.index', [
-            'roles' => $this->roles
-        ]);
-    }
 
     public function deleteRole($roleId)
     {
@@ -43,11 +22,16 @@ class Index extends Component
                 $role->delete();
             });
 
-            session()->flash('success', 'Role deleted successfully.');
-            $this->reloadRoles();
+            $this->dispatch('alert-success', 'Role deleted successfully.', 'Success');
         } else {
-            session()->flash('error', 'Role not found.');
+            $this->dispatch('alert-error', 'Role not found.', 'Error');
         }
     }
-}
 
+    public function render()
+    {
+        $roles = Role::with(['permissions', 'users'])->paginate();
+
+        return view('livewire.roles.index', compact('roles'));
+    }
+}
