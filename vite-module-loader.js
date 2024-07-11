@@ -1,45 +1,45 @@
 import fs from 'fs/promises';
 import path from 'path';
+import {pathToFileURL} from 'url';
 
-async function collectModuleAssetsPaths(paths, modulesPath) {
-  modulesPath = path.join(__dirname, modulesPath);
+async function collectModuleAssetsPaths(paths, mainPackageDir) {
+    try {
+        const authorsDirectories = await fs.readdir(mainPackageDir);
 
-  const moduleStatusesPath = path.join(__dirname, 'modules_statuses.json');
+        for (const authorDir of authorsDirectories) {
+            // Skip files like '.DS_Store' or 'composer.json' directly in this directory
+            const authorPath = path.join(mainPackageDir, authorDir);
+            const stat = await fs.stat(authorPath);
+            if (!stat.isDirectory()) {
+                continue;
+            }
 
-  try {
-    // Read module_statuses.json
-    const moduleStatusesContent = await fs.readFile(moduleStatusesPath, 'utf-8');
-    const moduleStatuses = JSON.parse(moduleStatusesContent);
+            const packagesDirectories = await fs.readdir(authorPath);
+            for (const packageDir of packagesDirectories) {
+                const packagePath = path.join(authorPath, packageDir);
+                const stat = await fs.stat(packagePath);
+                if (!stat.isDirectory()) {
+                    continue;
+                }
+                //kiểm tra xem trong thư mục package có file vite.config.js không
+                const viteConfigPath = path.join(packagePath, 'vite.config.js').replace(/\\/g, '/');
+                try {
+                    await fs.access(viteConfigPath);
+                    const moduleConfig = await import(pathToFileURL(viteConfigPath).href);
 
-    // Read module directories
-    const moduleDirectories = await fs.readdir(modulesPath);
-
-    for (const moduleDir of moduleDirectories) {
-      if (moduleDir === '.DS_Store') {
-        // Skip .DS_Store directory
-        continue;
-      }
-
-      // Check if the module is enabled (status is true)
-      if (moduleStatuses[moduleDir] === true) {
-        const viteConfigPath = path.join(modulesPath, moduleDir, 'vite.config.js');
-        const stat = await fs.stat(viteConfigPath);
-
-        if (stat.isFile()) {
-          // Import the module-specific Vite configuration
-          const moduleConfig = await import(viteConfigPath);
-
-          if (moduleConfig.paths && Array.isArray(moduleConfig.paths)) {
-            paths.push(...moduleConfig.paths);
-          }
+                    if (moduleConfig.paths && Array.isArray(moduleConfig.paths)) {
+                        paths.push(...moduleConfig.paths);
+                    }
+                } catch (error) {
+                    // console.error(`Error accessing or importing from ${viteConfigPath}: ${error}`);
+                }
+            }
         }
-      }
+    } catch (error) {
+        console.error(`Error reading module statuses or module configurations: ${error}`);
     }
-  } catch (error) {
-    console.error(`Error reading module statuses or module configurations: ${error}`);
-  }
 
-  return paths;
+    return paths;
 }
 
 export default collectModuleAssetsPaths;

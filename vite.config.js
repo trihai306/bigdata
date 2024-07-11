@@ -1,11 +1,26 @@
-import { defineConfig } from 'vite';
+import {defineConfig} from 'vite';
 import laravel from 'laravel-vite-plugin';
+import collectModuleAssetsPaths from './vite-module-loader.js';
 
-export default defineConfig({
-    plugins: [
-        laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
-            refresh: true,
-        }),
-    ],
-});
+async function getConfig() {
+    const paths = [
+        'resources/css/app.scss',
+        'resources/js/app.js'
+    ];
+    const allPaths = await collectModuleAssetsPaths(paths, 'packages');
+    console.log(allPaths);
+    return defineConfig({
+        server: {
+            host: '0.0.0.0',
+            port: '3001',
+        },
+        plugins: [
+            laravel({
+                input: allPaths,
+                refresh: true,
+            })
+        ]
+    });
+}
+
+export default getConfig();
