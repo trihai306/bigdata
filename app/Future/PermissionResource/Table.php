@@ -20,7 +20,10 @@ class Table extends BaseTable
     {
         return [
             TextColumn::make('id', __('ID'))->searchable()->sortable(),
-            TextColumn::make('name', __('permission_name'))->searchable()->sortable(), TextColumn::make('guard_name', __('Guard Name'))->searchable()->sortable(), TextColumn::make('created_at', __('Created At'))->sortable(), TextColumn::make('updated_at', __('Updated At'))->sortable(),
+            TextColumn::make('name', __('permission_name'))->searchable()->sortable(),
+            TextColumn::make('guard_name', __('Guard Name'))->searchable()->sortable(),
+            TextColumn::make('created_at', __('Created At'))->sortable(),
+            TextColumn::make('updated_at', __('Updated At'))->sortable(),
         ];
     }
 

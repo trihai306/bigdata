@@ -16,7 +16,7 @@ class Form extends ModalForm
         return $form->schema([
             Row::make($sm = 12, $md = 6, $lg = 6)->schema([
                 TextInput::make('name')->required()->label('Tên')->placeholder('Name'),
-                TextInput::make('guard_name')->required()->label('Guard Name')->placeholder('Guard Name'),
+                //TextInput::make('guard_name')->required()->label('Guard Name')->placeholder('Guard Name'),
             ]),
         ]);
     }

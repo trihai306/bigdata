@@ -37,27 +37,27 @@ class Contract extends Model
         'shop_cancellation', 'vtp_cancellation'
     ];
 
-    public function partyAInfo()
+    public function partyAInfo(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(PartyAInfo::class, 'id_party_a_info');
     }
 
-    public function partyBInfo()
+    public function partyBInfo(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(PartyBInfo::class, 'id_party_b_info');
     }
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(User::class, 'id_user_b');
     }
 
-    public function post()
+    public function post(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Post::class, 'post_id');
     }
 
-    public function products()
+    public function products(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
         return $this->hasMany(Product::class, 'contract_id');
     }

@@ -101,7 +101,8 @@ class Table extends BaseTable
                 return route('admin.users.edit', $data->id);
             })->size('font-size:20px;'),
             Action::make('password', __('change password'), 'fa fa-key')
-                ->modal(ChangePassword::class)->size('font-size:20px;'),
+                ->modal(ChangePassword::class)
+                ->size('font-size:20px;'),
             Action::make('delete', __('delete'), 'fas fa-trash-alt')->confirm(function ($data) {
                 return [
                     'message' => __('Are you sure you want to delete this permission?'),

@@ -32,7 +32,7 @@ class Users extends Component
             $this->dispatch('swalSuccess', [
                 'message' => 'Xóa người dùng thành công'
             ]);
-        }catch (\Exception $exception) {
+        } catch (\Exception $exception) {
             $this->dispatch('swalError', [
                 'message' => 'Xóa người dùng thất bại'
             ]);
