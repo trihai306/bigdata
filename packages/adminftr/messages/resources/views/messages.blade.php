@@ -10,41 +10,12 @@
                         <div class="chat">
                             @if($messages->total() > 10 && $messages->currentPage() < $messages->lastPage())
                                 <div class="chat-bubbles mb-3" x-intersect="loadMore()">
-                                    <div class="chat-item mt-5">
-                                        <div class="row align-items-end">
-                                            <div class="col-auto">
-                                                <span class="avatar">
-                                                    <div class="placeholder bg-secondary"
-                                                         style="width: 50px; height: 50px;"></div>
-                                                </span>
-                                            </div>
-                                            <div class="col col-lg-6">
-                                                <div class="chat-bubble">
-                                                    <div class="chat-bubble-title">
-                                                        <div class="row">
-                                                            <div class="col chat-bubble-author">
-                                                                <div class="placeholder-glow">
-                                                        <span class="placeholder bg-secondary"
-                                                              style="width: 400px;"></span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-auto chat-bubble-date">
-                                                                <div class="placeholder-glow">
-                                                        <span class="placeholder bg-secondary"
-                                                              style="width: 400px;"></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="chat-bubble-body">
-                                                        <div class="placeholder-glow">
-                                                            <span class="placeholder bg-secondary"
-                                                                  style="width: 100%;"></span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <div class="spinner-grow" role="status"></div>
+                                        <div class="spinner-grow" role="status"></div>
+                                        <div class="spinner-grow" role="status"></div>
+                                        <div class="spinner-grow" role="status"></div>
+                                        <div class="spinner-grow" role="status"></div>
                                     </div>
                                 </div>
                             @endif
@@ -174,7 +145,7 @@
                                                 <div class="col-auto">
                                                     @if($message->sender->avatar)
                                                         <span class="avatar"
-                                                              style="background-image: url({{ asset($message->sender->avatar) }})"></span>
+                                                              style="background-image: url({{ asset('storage/'.$message->sender->avatar) }})"></span>
                                                     @else
                                                         <span class="avatar">{{ $message->sender->name[0] }}</span>
                                                     @endif
@@ -187,7 +158,7 @@
                                                 <div class="col-auto">
                                                     @if($message->sender->avatar)
                                                         <span class="avatar"
-                                                              style="background-image: url({{ asset($message->sender->avatar) }})"></span>
+                                                              style="background-image: url({{ asset('storage/'.$message->sender->avatar) }})"></span>
                                                     @else
                                                         <span class="avatar">{{ $message->sender->name[0] }}</span>
                                                     @endif
@@ -364,9 +335,10 @@
             return chatItem;
         },
         createAvatarColumn(avatar, name) {
+            const currentDomain = window.location.origin;
             return `
         <div class="col-auto">
-            <span class="avatar" style="${avatar ? `background-image: url(${avatar})` : ''}">
+            <span class="avatar" style="${avatar ? `background-image: url(${currentDomain}/storage/${avatar})` : ''}">
                 ${avatar ? '' : name[0]}
             </span>
         </div>

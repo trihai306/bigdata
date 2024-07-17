@@ -2,7 +2,6 @@
 
 namespace Future\Messages\Future\Messages;
 
-use Future\Messages\Http\Models\Conversation;
 use Future\Messages\Http\Models\Message;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
@@ -13,10 +12,12 @@ use Livewire\WithPagination;
 class Messages extends Component
 {
     use WithPagination;
-    #[Url]
-    #[Locked]
+
+    #[Url, Locked]
     public $conversationId;
+
     public $page = 10;
+
     public $message = '';
 
     public function mount($conversationId = null)
@@ -40,23 +41,25 @@ class Messages extends Component
 
     public function loadMore()
     {
-        $this->page += 10;
-        return true;
+        $this->page += 15;
     }
 
     public function render()
     {
         $user = null;
         $messages = [];
+
         if ($this->conversationId) {
-            $user = Conversation::find($this->conversationId)->users()->where('id', '!=', auth()->user()->id)->first();
             $conversation = auth()->user()->conversations()->findOrFail($this->conversationId);
 
-            $messages = $conversation->when($conversation->exists(), function () {
-                return $this->getMessages()->fastPaginate($this->page);
-            }, function () {
-                return [];
-            });
+            $user = $conversation->users()
+                ->where('id', '!=', auth()->user()->id)
+                ->first();
+
+            $messages = $this->getMessages()
+                ->when($conversation->exists(), function ($query) {
+                    return $query->fastPaginate($this->page);
+                });
         }
 
         return view('messages::messages', compact('messages', 'user'));
@@ -64,7 +67,7 @@ class Messages extends Component
 
     protected function getMessages()
     {
-        return Message::with(['sender'])
+        return Message::with('sender')
             ->where('conversation_id', $this->conversationId)
             ->orderByDesc('created_at');
     }

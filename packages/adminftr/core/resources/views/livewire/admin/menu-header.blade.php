@@ -8,7 +8,7 @@
                         $menu->children->contains(function ($child) {
                             return request()->is($child->url);
                         });
-                    $menuClass = $isActive ? 'text-white rounded rounded-2 bg-primary show' : '';
+                    $menuClass = $isActive ? 'rounded rounded-2 bg-primary show' : '';
                 @endphp
 
                 <li class="nav-item mb-2 px-md-2{{ $menu->children->isEmpty() ? '' : ' dropdown' }}">

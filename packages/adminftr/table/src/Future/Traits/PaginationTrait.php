@@ -18,7 +18,7 @@ trait PaginationTrait
      * The number of items to be displayed per page.
      */
     #[Url]
-    public int $perPage = 10;
+    public int $perPage = 15;
 
     /**
      * The available options for items per page.

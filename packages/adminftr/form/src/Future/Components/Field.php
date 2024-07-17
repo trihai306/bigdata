@@ -106,7 +106,7 @@ class Field
         return $this;
     }
 
-    public function canStore($hide)
+    public function canUpdate($hide)
     {
         $currentRouteName = UrlHelper::getUrl();
         if (str_contains($currentRouteName, 'edit')) {
@@ -116,10 +116,10 @@ class Field
         return $this;
     }
 
-    public function canCreate($hide)
+    public function canStore($hide)
     {
         $currentRouteName = UrlHelper::getUrl();
-        if (str_contains($currentRouteName, 'edit')) {
+        if (str_contains($currentRouteName, 'create')) {
             $this->canHide = ! $hide;
         }
 

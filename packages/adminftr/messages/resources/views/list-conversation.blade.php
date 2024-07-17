@@ -37,7 +37,7 @@
                                             wire:model.live.debounce.500ms="searchUser"
                                             autocomplete="off"
                                         >
-                                        <span class="input-icon-addon" >
+                                        <span class="input-icon-addon">
                                           <div class="spinner-border spinner-border-sm text-secondary"
                                                wire:loading wire:target="searchUser" role="status"></div>
                                         </span>
@@ -74,8 +74,9 @@
                                         @endif
                                     </ul>
                                 </div>
-                                <button type="submit" class="btn btn-primary w-100"  data-bs-dismiss="modal"
-                                        aria-label="Close">Create</button>
+                                <button type="submit" class="btn btn-primary w-100" data-bs-dismiss="modal"
+                                        aria-label="Close">Create
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -84,38 +85,43 @@
         </div>
     </div>
     <div class="card-body p-0 scrollable" style="max-height: 80vh">
-        <div class="nav flex-column nav-pills" role="tablist" wire:poll.keep-alive.60s>
-            @foreach($conversations as $conversation)
-                <a href="#chat-{{$conversation->id}}" x-on:click="$wire.changeConversation({{$conversation->id}})"
-                   class="nav-link text-start mw-100 p-3
-                   @if($conversationId == $conversation->id)
-                          active
-                   @endif
-                   " data-bs-toggle="pill" role="tab" aria-selected="true">
-                    <div class="row align-items-center flex-fill">
-                        <div class="col-auto">
-                            @if($conversation->users[0]->avatar)
-                                <span class="avatar"
-                                      style="background-image: url({{ asset($conversation->users[0]->avatar) }})"></span>
-                            @else
-                                <span class="avatar">
-                                    {{ $conversation->users[0]->name[0] }}
-                                </span>
-                            @endif
-                        </div>
-                        <div class="col text-body">
-                            <div>{{ $conversation->users[0]->name }}</div>
-                            <div class="text-secondary text-truncate w-100">
-                                {{$conversation->lastMessage->content}}
+        <div class="nav flex-column nav-pills " role="tablist">
+            @if($conversations)
+                @foreach($conversations as $conversation)
+                    @if($conversation->users->isNotEmpty() && $conversation->lastMessage)
+                        <a href="#chat-{{$conversation->id}}"
+                           x-on:click="$wire.changeConversation({{$conversation->id}})"
+                           class="nav-link text-start mw-100 p-3
+                       @if($conversationId == $conversation->id)
+                              active
+                       @endif
+                       " data-bs-toggle="pill" role="tab" aria-selected="true">
+                            <div class="row align-items-center flex-fill">
+                                <div class="col-auto">
+                                    @if($conversation->users[0]->avatar)
+                                        <span class="avatar"
+                                              style="background-image: url({{ asset($conversation->users[0]->avatar) }})"></span>
+                                    @else
+                                        <span class="avatar">
+                                        {{ $conversation->users[0]->name[0] ?? 'N/A' }}
+                                    </span>
+                                    @endif
+                                </div>
+                                <div class="col text-body">
+                                    <div>{{ $conversation->users[0]->name ?? 'Unknown' }}</div>
+                                    <div class="text-secondary text-truncate w-100">
+                                        {{$conversation->lastMessage->content ?? 'No message'}}
+                                    </div>
+                                    <small class="text-secondary">
+                                        {{$conversation->lastMessage->created_at->diffForHumans() ?? 'N/A'}}
+                                    </small>
+                                </div>
                             </div>
-                            <small class="text-secondary">
-                                {{$conversation->lastMessage->created_at->diffForHumans()}}
-                            </small>
-                        </div>
-                    </div>
-                </a>
-            @endforeach
-            @if($conversations->total() > 10 && $conversations->currentPage() < $conversations->lastPage())
+                        </a>
+                    @endif
+                @endforeach
+            @endif
+            @if($conversations && $conversations->total() > 10 && $conversations->currentPage() < $conversations->lastPage())
                 <div x-data="{}" x-intersect="$wire.loadMore()" class="w-100 d-block">
                     <ul class="list-group list-group-flush placeholder-glow">
                         <li class="list-group-item">

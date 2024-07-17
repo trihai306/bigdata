@@ -114,6 +114,7 @@
 
     & > .navbar-nav {
         & > .nav-item {
+            position: static;
             @include media-breakpoint-up(lg, $grid-breakpoints) {
                 & {
                     position: relative;
@@ -130,7 +131,7 @@
                     left: 100%;
                     top: 0;
                     width: 170px;
-                    background-color: #fff;
+                    background-color: var(--tblr-header-bg);
                     overflow: hidden;
 
                     .dropdown-item.nav-link {
@@ -145,8 +146,6 @@
                     }
                 }
             }
-
-            position: static;
 
             .nav-link {
                 align-items: center;
