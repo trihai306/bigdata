@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 class ContractRepository extends Repository
 {
     public static string $model = Contract::class;
-    public static array $search = ['invoice_image', 'product_image', 'description', 'total_amount', 'deposit_amount', 'confirmation_a', 'confirmation_b', 'confirmation_c', 'terms_agreed', 'status', 'estimated_delivery_date', 'post_id', 'viewed'];
+    public static array $search = ['invoice_image', 'product_image','code' ,'description', 'total_amount', 'deposit_amount', 'confirmation_a', 'confirmation_b', 'confirmation_c', 'terms_agreed', 'status', 'estimated_delivery_date', 'post_id', 'viewed'];
 
     public static function indexQuery(RestifyRequest $request, Relation|Builder $query): Builder
     {
@@ -69,6 +69,7 @@ class ContractRepository extends Repository
 //                return response()->json(['message' => 'Bài viết không tồn tại'], 404);
 //            }
 //        }
+        $request->merge(['code' => 'HD' . time()]);
         return parent::store($request);
     }
 
@@ -127,6 +128,7 @@ class ContractRepository extends Repository
         return [id(), field('invoice_image'),
             field('product_image'),
             field('description'),
+            field('code')->canStore(fn() => false)->canUpdate(fn() => false),
             field('total_amount')->storingRules('required')->messages(['required' => 'Tổng số tiền không được để trống',]),
             field('deposit_amount')->storingRules('required')->messages(['required' => 'Số tiền đặt cọc không được để trống',]),
             field('post_id')->storingRules('required')->messages(['required' => 'Bài viết không được để trống',]),

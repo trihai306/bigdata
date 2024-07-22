@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('contracts', function (Blueprint $table) {
             $table->id();
+            $table->string('code')->unique();
             $table->string('invoice_image')->nullable();
             $table->string('product_image')->nullable();
             $table->string('description')->nullable();

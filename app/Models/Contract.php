@@ -18,6 +18,7 @@ class Contract extends Model
         'confirmation_a',
         'confirmation_b',
         'confirmation_c',
+        'code',
         'terms_agreed',
         'status',
         'id_party_b_info',
