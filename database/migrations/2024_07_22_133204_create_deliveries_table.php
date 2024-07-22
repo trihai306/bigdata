@@ -11,8 +11,9 @@ class CreateDeliveriesTable extends Migration
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
             $table->timestamp('scheduled_delivery_time')->nullable();
-            $table->text('special_nature')->nullable();
-            $table->string('package_image')->nullable();
+            $table->string('contract_id');
+            $table->text('special_nature');
+            $table->string('package_image');
             $table->decimal('length', 8, 2)->nullable();
             $table->decimal('width', 8, 2)->nullable();
             $table->decimal('height', 8, 2)->nullable();

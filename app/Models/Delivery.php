@@ -21,7 +21,8 @@ class Delivery extends Model
         'order_note', // Ghi chú đơn hàng
         'status', // Trạng thái đơn
         'user_delivery_info_id', // Khóa ngoại
-        'shipping_code' // Mã vận chuyển
+        'shipping_code', // Mã vận chuyển
+        'contract_id' // Mã hợp đồng
     ];
 
     protected $casts = [
@@ -36,5 +37,10 @@ class Delivery extends Model
     public function userDeliveryInfo()
     {
         return $this->belongsTo(UserDeliveryInfo::class); // Thông tin giao hàng liên kết với người dùng
+    }
+
+    public function contract()
+    {
+        return $this->belongsTo(Contract::class);
     }
 }
