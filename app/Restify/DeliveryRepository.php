@@ -18,16 +18,23 @@ class DeliveryRepository extends Repository
             id(),
 
             Field::make('scheduled_delivery_time')
-                ->rules('required', 'date_format:Y-m-d H:i:s')
+                ->rules('required', 'in:full_day,morning,afternoon,night,sunday,holiday,time_work')
                 ->messages([
-                    'required' => 'Thời gian giao hẹn là bắt buộc.',
-                    'date_format' => 'Thời gian giao hẹn phải theo định dạng Y-m-d H:i:s.',
+                    'required' => 'Thời gian giao hàng dự kiến là bắt buộc.',
+                    'in' => 'Thời gian giao hàng dự kiến phải là một trong những tùy chọn được định trước.',
                 ]),
-            Field::make('shipping_code')->canStore(fn()=>false)->canUpdate(fn()=>false),
+
+            Field::make('contract_id')
+                ->rules('required', 'string', 'exists:contracts,id')
+                ->messages([
+                    'required' => 'Mã hợp đồng là bắt buộc.',
+                    'exists' => 'Mã hợp đồng phải tồn tại trong hệ thống.',
+                ]),
             Field::make('special_nature')
                 ->rules('nullable', 'string'),
 
-            Field::make('package_image')->canStore(fn()=>false)->canUpdate(fn()=>false),
+            Field::make('package_image')
+                ->rules('nullable', 'array'),
 
             Field::make('length')
                 ->rules('required', 'numeric')
@@ -53,7 +60,7 @@ class DeliveryRepository extends Repository
             Field::make('delivery_service')
                 ->rules('required', 'string')
                 ->messages([
-                    'required' => 'Dịch vụ chuyển phát là bắt buộc.',
+                    'required' => 'Dịch vụ giao hàng là bắt buộc.',
                 ]),
 
             Field::make('additional_services')
@@ -63,16 +70,17 @@ class DeliveryRepository extends Repository
                 ->rules('nullable', 'string'),
 
             Field::make('status')
-                ->rules('required', 'string')
+                ->rules('required', 'in:picking_up,picked_up,in_transit,delivering,awaiting_redelivery,successfully_delivered,awaiting_processing,return_approved,returned,delivery_cancelled,returning,continue_delivery,shop_cancelled_pickup,vtp_cancelled_pickup')
                 ->messages([
                     'required' => 'Trạng thái đơn hàng là bắt buộc.',
+                    'in' => 'Trạng thái đơn hàng phải là một trong các tùy chọn hợp lệ.',
                 ]),
 
             Field::make('user_delivery_info_id')
                 ->rules('required', 'exists:user_delivery_infos,id')
                 ->messages([
-                    'required' => 'Thông tin người dùng vận chuyển là bắt buộc.',
-                    'exists' => 'Thông tin người dùng vận chuyển phải tồn tại trong hệ thống.',
+                    'required' => 'Thông tin người gửi là bắt buộc.',
+                    'exists' => 'Thông tin người gửi phải tồn tại trong hệ thống.',
                 ])
         ];
     }
@@ -80,16 +88,15 @@ class DeliveryRepository extends Repository
     public static function stored($resource, RestifyRequest $request){
         if($request->hasFile('package_image')){
             $package_images = [];
-            //lưu nhiều ảnh ảnh vào storage thư mục delivery/id cho từng delivery
+            // Lưu nhiều ảnh vào thư mục 'delivery/id' cho mỗi đơn hàng
             foreach($request->file('package_image') as $file){
                 $path = $file->store('delivery/'.$resource->id);
                 $package_images[] = $path;
             }
-            //decode thành json để lưu vào db
+            // Encode thành JSON để lưu vào cơ sở dữ liệu
             $resource->package_image = json_encode($package_images);
             $resource->save();
         }
-
     }
 
     public static function related(): array
