@@ -6,6 +6,8 @@ use App\Models\Delivery;
 use Binaryk\LaravelRestify\Http\Requests\RestifyRequest;
 use Binaryk\LaravelRestify\Fields\Field;
 use Binaryk\LaravelRestify\Repositories\Repository;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 class DeliveryRepository extends Repository
 {
@@ -98,6 +100,21 @@ class DeliveryRepository extends Repository
             $resource->package_image = json_encode($package_images);
             $resource->save();
         }
+    }
+
+
+    public static function indexQuery(RestifyRequest $request, Relation|Builder $query)
+    {
+        // so sánh user id trong contract với user dăng nhập theo inforparty a va b truy câập vào info party a và b so sánh theo user_id
+        $query->whereHas('contract', function($q) use ($request){
+          $q->whereHas('partyAInfo', function($q) use ($request){
+              $q->where('user_id', $request->user()->id);
+          })->orWhereHas('partyBInfo', function($q) use ($request){
+              $q->where('user_id', $request->user()->id);
+          });
+        });
+        return parent::indexQuery($request, $query);
+
     }
 
     public static function related(): array

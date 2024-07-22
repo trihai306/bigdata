@@ -35,16 +35,32 @@ class GoodRepository extends Repository
             id(),
 
             Field::make('name')
-                ->rules('required', 'string', 'max:255'),
+                ->rules('required', 'string', 'max:255')
+            ->messages([
+                'required' => 'Tên hàng hóa là bắt buộc.',
+                'string' => 'Tên hàng hóa phải là một chuỗi.',
+                'max' => 'Tên hàng hóa không được vượt quá 255 ký tự.',
+            ]),
 
             Field::make('quantity')
-                ->rules('required', 'integer', 'min:1'),
+                ->rules('required', 'integer', 'min:1')->messages([
+                    'required' => 'Số lượng là bắt buộc.',
+                    'integer' => 'Số lượng phải là một số nguyên.',
+                    'min' => 'Số lượng phải lớn hơn 0.',
+                ]),
 
             Field::make('weight')
-                ->rules('required', 'numeric', 'min:0'),
+                ->rules('required', 'numeric', 'min:0')->messages([
+                    'required' => 'Trọng lượng là bắt buộc.',
+                    'numeric' => 'Trọng lượng phải là một số.',
+                    'min' => 'Trọng lượng phải lớn hơn hoặc bằng 0.',
+                ]),
 
             Field::make('delivery_id')
-                ->rules('required', 'exists:deliveries,id')
+                ->rules('required', 'exists:deliveries,id')->messages([
+                    'required' => 'Mã vận chuyển là bắt buộc.',
+                    'exists' => 'Mã vận chuyển phải tồn tại trong hệ thống.',
+                ]),
         ];
     }
 }
