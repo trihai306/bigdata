@@ -58,9 +58,10 @@ class DeliveryRepository extends Repository
                 ]),
 
             Field::make('delivery_service')
-                ->rules('required', 'string')
+                ->rules('required', 'string', 'in:economical_delivery,fast_ecommerce_package,express_ecommerce_package')
                 ->messages([
                     'required' => 'Dịch vụ giao hàng là bắt buộc.',
+                    'in' => 'Dịch vụ giao hàng phải là một trong các tùy chọn hợp lệ.',
                 ]),
 
             Field::make('additional_services')

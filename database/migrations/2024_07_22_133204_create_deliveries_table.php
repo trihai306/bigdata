@@ -19,7 +19,11 @@ class CreateDeliveriesTable extends Migration
             $table->decimal('length', 8, 2);
             $table->decimal('width', 8, 2)->nullable();
             $table->decimal('height', 8, 2)->nullable();
-            $table->string('delivery_service');
+            $table->enum('delivery_service', [
+                'economical_delivery',   // Chuyển phát tiết kiệm
+                'fast_ecommerce_package',    // Gói TMĐT Nhanh
+                'express_ecommerce_package',  // Gói TMĐT Hỏa tốc, hẹn giờ
+            ]);
             $table->json('additional_services')->nullable();
             $table->text('order_note')->nullable();
             $table->enum('status', [
