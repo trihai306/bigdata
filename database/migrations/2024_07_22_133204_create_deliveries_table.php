@@ -45,8 +45,6 @@ class CreateDeliveriesTable extends Migration
 
             $table->unsignedBigInteger('user_delivery_info_id');
             $table->timestamps();
-
-            $table->foreign('user_delivery_info_id')->references('id')->on('user_delivery_infos')->onDelete('cascade');
         });
     }
 
