@@ -128,7 +128,7 @@ class ContractRepository extends Repository
         return [id(), field('invoice_image'),
             field('product_image'),
             field('description'),
-            field('code')->canStore(fn() => false)->canUpdate(fn() => false),
+            field('code')->canUpdate(fn() => false),
             field('total_amount')->storingRules('required')->messages(['required' => 'Tổng số tiền không được để trống',]),
             field('deposit_amount')->storingRules('required')->messages(['required' => 'Số tiền đặt cọc không được để trống',]),
             field('post_id')->storingRules('required')->messages(['required' => 'Bài viết không được để trống',]),
