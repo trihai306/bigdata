@@ -80,10 +80,9 @@ class DeliveryRepository extends Repository
                 ]),
 
             Field::make('user_delivery_info_id')
-                ->rules('required', 'exists:user_delivery_infos,id')
+                ->rules('required')
                 ->messages([
-                    'required' => 'Thông tin người gửi là bắt buộc.',
-                    'exists' => 'Thông tin người gửi phải tồn tại trong hệ thống.',
+                    'required' => 'Thông tin người gửi là bắt buộc.'
                 ])
         ];
     }
