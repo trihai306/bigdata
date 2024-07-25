@@ -67,7 +67,7 @@ class DeliveryRepository extends Repository
                 ]),
 
             Field::make('additional_services')
-                ->rules('nullable', 'array'),
+                ->rules('nullable'),
 
             Field::make('order_note')
                 ->rules('nullable', 'string'),
