@@ -23,13 +23,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Future\\Core\\": "./core/src/",
-            "Future\\Form\\": "./form/src/",
-            "Future\\Table\\": "./table/src/",
-            "Future\\Messages\\": "./messages/src/",
-            "Future\\Notifications\\": "./notifications/src/",
-            "Future\\Widgets\\": "./widgets/src/",
-            "Future\\FileManager\\": "./laravel-file-manager/src/"
+            "Adminftr\\Core\\": "./core/src/",
+            "Adminftr\\Form\\": "./form/src/",
+            "Adminftr\\Table\\": "./table/src/",
+            "Adminftr\\Messages\\": "./messages/src/",
+            "Adminftr\\Notifications\\": "./notifications/src/",
+            "Adminftr\\Widgets\\": "./widgets/src/",
+            "Adminftr\\FileManager\\": "./laravel-file-manager/src/"
         }
     }
 }

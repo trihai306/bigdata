@@ -1,8 +1,8 @@
 <?php
 
-namespace Future\Form\Future\Components\Fields;
+namespace Adminftr\Form\Future\Components\Fields;
 
-use Future\Form\Future\Components\Field;
+use Adminftr\Form\Future\Components\Field;
 
 class PhoneNumber extends Field
 {

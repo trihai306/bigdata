@@ -1,8 +1,8 @@
 <?php
 
-use Future\FileManager\Controllers\FileManagerController;
-use manager\src\Services\ConfigService\ConfigRepository;
+use Adminftr\FileManager\Controllers\FileManagerController;
 use Illuminate\Support\Facades\Route;
+use manager\src\Services\ConfigService\ConfigRepository;
 
 $config = resolve(ConfigRepository::class);
 
@@ -21,7 +21,7 @@ Route::group(config('future.future.route'), function () {
 Route::group([
     'middleware' => $middleware,
     'prefix' => $config->getRoutePrefix(),
-    'namespace' => ' Future\FileManager\Controllers',
+    'namespace' => ' Adminftr\FileManager\Controllers',
 ], function () {
 
     Route::get('initialize', [FileManagerController::class, 'initialize'])

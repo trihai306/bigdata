@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Widgets;
+namespace Adminftr\Widgets;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -8,15 +8,13 @@ class WidgetsServiceProvider extends ServiceProvider
 {
     /**
      * Perform post-registration booting of services.
-     *
-     * @return void
      */
     public function boot(): void
     {
-         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'widget');
-         $this->loadViewsFrom(__DIR__.'/../resources/views', 'widget');
-         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-//         $this->loadRoutesFrom(__DIR__.'/routes.php');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'widget');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'widget');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        //         $this->loadRoutesFrom(__DIR__.'/routes.php');
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
@@ -26,12 +24,10 @@ class WidgetsServiceProvider extends ServiceProvider
 
     /**
      * Register any package services.
-     *
-     * @return void
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/widgets.php', 'widgets');
+        $this->mergeConfigFrom(__DIR__.'/../config/widgets.php', 'widgets');
 
         // Register the service the package provides.
         $this->app->singleton('widgets', function ($app) {
@@ -51,14 +47,12 @@ class WidgetsServiceProvider extends ServiceProvider
 
     /**
      * Console-specific booting.
-     *
-     * @return void
      */
     protected function bootForConsole(): void
     {
         // Publishing the configuration file.
         $this->publishes([
-            __DIR__ . '/../config/widgets.php' => config_path('widgets.php'),
+            __DIR__.'/../config/widgets.php' => config_path('widgets.php'),
         ], 'widgets.config');
 
         // Publishing the views.

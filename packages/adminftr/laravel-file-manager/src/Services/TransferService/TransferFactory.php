@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\FileManager\Services\TransferService;
+namespace Adminftr\FileManager\Services\TransferService;
 
 class TransferFactory
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Form\Future\Components\Actions;
+namespace Adminftr\Form\Future\Components\Actions;
 
 class Action
 {

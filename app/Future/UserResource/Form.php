@@ -3,23 +3,22 @@
 namespace App\Future\UserResource;
 
 use App\Models\User;
-use Future\Form\Future\BaseForm;
-use Future\Form\Future\Components\Actions\Action;
-use Future\Form\Future\Components\Fields\DateInput;
-use Future\Form\Future\Components\Fields\Radio;
-use Future\Form\Future\Components\Fields\Select;
-use Future\Form\Future\Components\Fields\TextArea;
-use Future\Form\Future\Components\Fields\TextInput;
-use Future\Form\Future\Components\Layouts\Card;
-use Future\Form\Future\Components\Layouts\Col;
-use Future\Form\Future\Components\Layouts\Row;
-use Spatie\Permission\Models\Role;
+use Adminftr\Form\Future\BaseForm;
+use Adminftr\Form\Future\Components\Actions\Action;
+use Adminftr\Form\Future\Components\Fields\DateInput;
+use Adminftr\Form\Future\Components\Fields\Radio;
+use Adminftr\Form\Future\Components\Fields\Select;
+use Adminftr\Form\Future\Components\Fields\TextArea;
+use Adminftr\Form\Future\Components\Fields\TextInput;
+use Adminftr\Form\Future\Components\Layouts\Card;
+use Adminftr\Form\Future\Components\Layouts\Col;
+use Adminftr\Form\Future\Components\Layouts\Row;
 
 class Form extends BaseForm
 {
     protected $model = User::class;
 
-    public function form(\Future\Form\Future\Components\Form $form)
+    public function form(\Adminftr\Form\Future\Components\Form $form)
     {
         return $form->schema([
             Row::make()->schema([
@@ -29,13 +28,14 @@ class Form extends BaseForm
                             TextInput::make('name')
                                 ->label('Tên')
                                 ->required()
-                                ->placeholder('Name'),
-                            TextInput::make('email')->required()->label('Email')->placeholder('Email'),
+                                ->placeholder('Name')->canUpdate(false),
                             TextInput::make('password')->required()->password()->label('Mật khẩu')
-                                ->placeholder('Password')->canStore(false),
-                            DateInput::make('birthday')->label('Ngày sinh'),
+                                ->placeholder('Password')->canStore(true)->canUpdate(true),
+                            TextInput::make('password_confirmation')->required()->password()->label('Xác nhận mật khẩu')
+                                ->placeholder('Password confirmation')->canStore(false)->canUpdate(true),
+                            DateInput::make('birthday')->label('Ngày sinh')->canUpdate(false),
                             Col::make()->schema([
-                                TextArea::make('address')->label('Địa chỉ')->required()->placeholder('Address'),
+                                TextArea::make('address')->label('Địa chỉ')->required()->placeholder('Address')->canUpdate(false),
                             ])->col(12),
 
                         ]),
@@ -44,11 +44,6 @@ class Form extends BaseForm
                 Col::make()->schema([
                     Card::make()->schema([
                         Row::make()->schema([
-                            Select::make('user.roles')->label('Vai trò')->required()->liveSearch(
-                                function ($query) {
-                                    return Role::where('name', 'like', '%'.$query.'%')->limit(20)->get();
-                                }
-                            )->multiple(),
                             Select::make('gender')->label('Giới tính')->options(
                                 [
                                     ['id' => 'male', 'label' => 'nam'],
@@ -59,21 +54,12 @@ class Form extends BaseForm
                                     ['id' => 'genderfluid', 'label' => 'giới tính linh hoạt'],
                                     ['id' => 'agender', 'label' => 'không giới tính'],
                                 ]
-                            )->required(),
+                            )->required()->canUpdate(false),
                             Radio::make('status')->label('Trạng thái')->options([['id' => 'active', 'label' => 'Hoạt động'], ['id' => 'inactive', 'label' => 'Không hoạt động']])->required(),
                         ]),
                     ]),
                 ])->sm(12)->md(6)->lg(4),
             ]),
         ]);
-    }
-
-    public function Actions()
-    {
-        return [
-            Action::make('save', 'Lưu')->color('primary')->action(function ($state) {}),
-            Action::make('saveAndClose', 'Lưu và đóng')->color('primary'),
-            Action::make('cancel', 'Hủy')->color('danger'),
-        ];
     }
 }

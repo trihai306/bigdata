@@ -37,7 +37,7 @@ Open configuration file - config/file-manager.php
     *
     * default - config file(ConfigACLRepository)
     */
-   'aclRepository' => \ Future\FileManager\Services\ACLService\ConfigACLRepository::class,
+   'aclRepository' => \ Adminftr\FileManager\Services\ACLService\ConfigACLRepository::class,
    ```
 
    Now you can add your rules in 'aclRules' array. But if you want to store your rules in another place, such as a
@@ -118,7 +118,7 @@ I add this disk to file-manager config file
 
 namespace App\Http;
 
-use  Future\FileManager\Services\ACLService\ACLRepository;
+use  Adminftr\FileManager\Services\ACLService\ACLRepository;
 
 class UsersACLRepository implements ACLRepository
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace Future\Table\Future\Components\Columns;
+namespace Adminftr\Table\Future\Components\Columns;
 
-use Future\Table\Future\Components\Column;
+use Adminftr\Table\Future\Components\Column;
 use Illuminate\Database\Eloquent\Model;
 
 class IconColumn extends Column

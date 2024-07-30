@@ -1,8 +1,8 @@
 <?php
 
-namespace Future\FileManager\Services\TransferService;
+namespace Adminftr\FileManager\Services\TransferService;
 
-use Future\FileManager\Traits\PathTrait;
+use Adminftr\FileManager\Traits\PathTrait;
 use Illuminate\Support\Facades\Storage;
 use League\Flysystem\FilesystemException;
 use League\Flysystem\MountManager;

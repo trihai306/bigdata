@@ -1,10 +1,10 @@
 <?php
 
-namespace Future\FileManager\Requests;
+namespace Adminftr\FileManager\Requests;
 
-use manager\src\Services\ConfigService\ConfigRepository;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Storage;
+use manager\src\Services\ConfigService\ConfigRepository;
 
 class RequestValidator extends FormRequest
 {

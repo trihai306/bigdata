@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Table\Future\Traits;
+namespace Adminftr\Table\Future\Traits;
 
 use Livewire\Attributes\Url;
 

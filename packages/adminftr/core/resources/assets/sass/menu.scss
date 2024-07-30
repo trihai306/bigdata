@@ -4,10 +4,11 @@
     background-color: var(--tblr-header-bg);
     border-bottom: 1px solid var(--tblr-border-color);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: sticky !important;
 }
 
-#sidebar-wrapper {
-    //z-index: 888;
+.dropdown-item {
+    background-color: var(--tblr-header-bg);
 }
 
 .page-wrapper {
@@ -114,7 +115,6 @@
 
     & > .navbar-nav {
         & > .nav-item {
-            position: static;
             @include media-breakpoint-up(lg, $grid-breakpoints) {
                 & {
                     position: relative;
@@ -146,6 +146,8 @@
                     }
                 }
             }
+
+            position: static;
 
             .nav-link {
                 align-items: center;

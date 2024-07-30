@@ -3,13 +3,13 @@
 namespace App\Future\PermissionResource;
 
 use App\Future\PermissionResource\Modal\Form;
-use Future\Table\Future\BaseTable;
-use Future\Table\Future\Components\Actions\Action;
-use Future\Table\Future\Components\Actions\Actions;
-use Future\Table\Future\Components\Columns\TextColumn;
-use Future\Table\Future\Components\FilterInput;
-use Future\Table\Future\Components\Headers\Actions\ResetAction;
-use Future\Widgets\Future\Widgets\Widget;
+use Adminftr\Table\Future\BaseTable;
+use Adminftr\Table\Future\Components\Actions\Action;
+use Adminftr\Table\Future\Components\Actions\Actions;
+use Adminftr\Table\Future\Components\Columns\TextColumn;
+use Adminftr\Table\Future\Components\FilterInput;
+use Adminftr\Table\Future\Components\Headers\Actions\ResetAction;
+use Adminftr\Widgets\Future\Widgets\Widget;
 use Spatie\Permission\Models\Permission;
 
 class Table extends BaseTable

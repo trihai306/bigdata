@@ -2,16 +2,16 @@
 
 namespace App\Future\PermissionResource;
 
-use Future\Form\Future\BaseForm;
-use Future\Form\Future\Components\Fields\TextInput;
-use Future\Form\Future\Components\Layouts\Card;
-use Future\Form\Future\Components\Layouts\Row;
+use Adminftr\Form\Future\BaseForm;
+use Adminftr\Form\Future\Components\Fields\TextInput;
+use Adminftr\Form\Future\Components\Layouts\Card;
+use Adminftr\Form\Future\Components\Layouts\Row;
 use Spatie\Permission\Models\Permission;
 
 class Form extends BaseForm
 {
     public $model = Permission::class;
-    public function form(\Future\Form\Future\Components\Form $form)
+    public function form(\Adminftr\Form\Future\Components\Form $form)
     {
         return $form->schema([
            Card::make()->schema([

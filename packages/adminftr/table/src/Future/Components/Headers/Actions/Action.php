@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Table\Future\Components\Headers\Actions;
+namespace Adminftr\Table\Future\Components\Headers\Actions;
 
 class Action
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Table\Future\Traits;
+namespace Adminftr\Table\Future\Traits;
 
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Response;

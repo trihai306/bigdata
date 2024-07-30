@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Form\Future\Components\Layouts\Tab;
+namespace Adminftr\Form\Future\Components\Layouts\Tab;
 
 class TabItem
 {

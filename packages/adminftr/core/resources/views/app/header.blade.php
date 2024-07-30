@@ -1,4 +1,4 @@
-<header class="navbar navbar-expand-md d-none position-sticky d-lg-block border-0 d-print-none" id="navbar-header">
+<header class="navbar navbar-expand-md d-none d-lg-block border-0 d-print-none" id="navbar-header">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu"
                 aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,7 +22,7 @@
 
             <div class="d-none d-md-flex">
                 <a href="?theme=dark" class="nav-link me-2 px-0 hide-theme-dark" title="Enable dark mode"
-                   data-bs-toggle="tooltip" data-bs-placement="bottom">
+                   data-bs-toggle="tooltip" data-bs-placement="bottom" id="dark-mode-toggle">
                     <!-- Download SVG icon from http://tabler-icons.io/i/moon -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                          viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
@@ -32,7 +32,7 @@
                     </svg>
                 </a>
                 <a href="?theme=light" class="nav-link px-0 hide-theme-light" title="Enable light mode"
-                   data-bs-toggle="tooltip" data-bs-placement="bottom">
+                   data-bs-toggle="tooltip" data-bs-placement="bottom" id="light-mode-toggle">
                     <!-- Download SVG icon from http://tabler-icons.io/i/sun -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
                          viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"

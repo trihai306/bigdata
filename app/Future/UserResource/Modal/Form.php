@@ -3,18 +3,18 @@
 namespace App\Future\UserResource\Modal;
 
 use App\Models\User;
-use Future\Form\Future\Components\Fields\DateInput;
-use Future\Form\Future\Components\Fields\TextArea;
-use Future\Form\Future\Components\Fields\TextInput;
-use Future\Form\Future\Components\Layouts\Row;
-use Future\Form\Future\ModalForm;
-use packages\adminftr\form\src\Future\Components\Fields\Select;
+use Adminftr\Form\Future\Components\Fields\DateInput;
+use Adminftr\Form\Future\Components\Fields\TextArea;
+use Adminftr\Form\Future\Components\Fields\TextInput;
+use Adminftr\Form\Future\Components\Layouts\Row;
+use Adminftr\Form\Future\ModalForm;
+use Adminftr\Form\Future\Components\Fields\Select;
 
 class Form extends ModalForm
 {
     protected $model = User::class;
 
-    public function form(\Future\Form\Future\Components\Form $form)
+    public function form(\Adminftr\Form\Future\Components\Form $form)
     {
         return $form->schema([
             Row::make($sm = 12, $md = 6, $lg = 6)->schema([

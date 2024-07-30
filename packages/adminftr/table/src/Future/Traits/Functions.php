@@ -1,14 +1,14 @@
 <?php
 
-namespace Future\Table\Future\Traits;
+namespace Adminftr\Table\Future\Traits;
 
 trait Functions
 {
     public function getListeners()
     {
         return array_merge($this->setListeners(), [
-            'delete' => 'delete',
             'bulk' => 'bulk',
+            'callbackActions' => 'callbackActions',
         ]);
     }
 
@@ -20,17 +20,6 @@ trait Functions
         return [];
     }
 
-    public function delete($data): void
-    {
-
-        try {
-            $this->model::destroy($data['id']);
-            $this->dispatch('swalSuccess', ['message' => 'Xóa thành công']);
-        } catch (Exception $e) {
-            $this->dispatch('swalError', ['message' => 'Xóa thất bại']);
-        }
-    }
-
     public function bulk($data, $name): void
     {
         $bulkActions = $this->bulkActions();
@@ -40,6 +29,39 @@ trait Functions
             }
         }
         $this->dispatch('reset-select');
+    }
+
+    public function callbackActions($data, $name)
+    {
+        $model = $this->model;
+        $data = $model::find($data['id']);
+        if (! $data) {
+            $this->dispatch('swalError', ['message' => 'Không tìm thấy dữ liệu']);
+
+            return;
+        }
+        $actions = $this->defineActions($data);
+        $actions = $actions['actions'];
+        foreach ($actions as $action) {
+            if ($action->name == $name) {
+                if ($action->callbackConfirm) {
+                    call_user_func($action->callbackConfirm, $data);
+                } else {
+                    $this->dispatch('swalError', ['message' => 'Không tìm thấy callback']);
+                }
+            }
+        }
+
+    }
+
+    public function callbackWidgets($data, $name)
+    {
+        $widgets = $this->defineWidgets();
+        foreach ($widgets as $widget) {
+            if ($widget->name == $name) {
+                call_user_func($widget->callback, $data);
+            }
+        }
     }
 
     protected function resetSelect()

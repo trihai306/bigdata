@@ -1,8 +1,8 @@
 <?php
 
-namespace Future\Widgets\Future\Widgets;
+namespace Adminftr\Widgets\Future\Widgets;
 
-use Future\Widgets\Future\Traits\WidgetTrait;
+use Adminftr\Widgets\Future\Traits\WidgetTrait;
 
 class Widget
 {
@@ -25,14 +25,18 @@ class Widget
         return new self($title, $description);
     }
 
-    public function setIcon(string $icon): void
+    public function icon(string $icon)
     {
         $this->icon = $icon;
+
+        return $this;
     }
 
-    public function setColor($color): void
+    public function color($color)
     {
         $this->color = $color;
+
+        return $this;
     }
 
     public function callback($callback)

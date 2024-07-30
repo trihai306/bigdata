@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Messages;
+namespace Adminftr\Messages;
 
 class Messages
 {

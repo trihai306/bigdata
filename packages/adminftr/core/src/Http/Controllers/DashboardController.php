@@ -1,5 +1,5 @@
 <?php
-namespace Future\Core\Http\Controllers;
+namespace Adminftr\Core\Http\Controllers;
 use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller

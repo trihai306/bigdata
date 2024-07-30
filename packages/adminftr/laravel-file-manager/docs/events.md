@@ -2,12 +2,12 @@
 
 ### BeforeInitialization
 
-> Future\FileManager\Events\BeforeInitialization
+> Adminftr\FileManager\Events\BeforeInitialization
 
 Example:
 
 ```php
-\Event::listen(' Future\FileManager\Events\BeforeInitialization',
+\Event::listen(' Adminftr\FileManager\Events\BeforeInitialization',
     function ($event) {
         
     }
@@ -16,12 +16,12 @@ Example:
 
 ### DiskSelected
 
-> Future\FileManager\Events\DiskSelected
+> Adminftr\FileManager\Events\DiskSelected
 
 Example:
 
 ```php
-\Event::listen(' Future\FileManager\Events\DiskSelected',
+\Event::listen(' Adminftr\FileManager\Events\DiskSelected',
     function ($event) {
         \Log::info('DiskSelected:', [$event->disk()]);
     }
@@ -30,10 +30,10 @@ Example:
 
 ### FilesUploading
 
-> Future\FileManager\Events\FilesUploading
+> Adminftr\FileManager\Events\FilesUploading
 
 ```php
-\Event::listen(' Future\FileManager\Events\FilesUploading',
+\Event::listen(' Adminftr\FileManager\Events\FilesUploading',
     function ($event) {
         \Log::info('FilesUploading:', [
             $event->disk(),
@@ -47,10 +47,10 @@ Example:
 
 ### FilesUploaded
 
-> Future\FileManager\Events\FilesUploaded
+> Adminftr\FileManager\Events\FilesUploaded
 
 ```php
-\Event::listen(' Future\FileManager\Events\FilesUploaded',
+\Event::listen(' Adminftr\FileManager\Events\FilesUploaded',
     function ($event) {
         \Log::info('FilesUploaded:', [
             $event->disk(),
@@ -64,10 +64,10 @@ Example:
 
 ### Deleting
 
-> Future\FileManager\Events\Deleting
+> Adminftr\FileManager\Events\Deleting
 
 ```php
-\Event::listen(' Future\FileManager\Events\Deleting',
+\Event::listen(' Adminftr\FileManager\Events\Deleting',
     function ($event) {
         \Log::info('Deleting:', [
             $event->disk(),
@@ -79,10 +79,10 @@ Example:
 
 ### Deleted
 
-> Future\FileManager\Events\Deleted
+> Adminftr\FileManager\Events\Deleted
 
 ```php
-\Event::listen(' Future\FileManager\Events\Deleted',
+\Event::listen(' Adminftr\FileManager\Events\Deleted',
     function ($event) {
         \Log::info('Deleted:', [
             $event->disk(),
@@ -94,10 +94,10 @@ Example:
 
 ### Paste
 
-> Future\FileManager\Events\Paste
+> Adminftr\FileManager\Events\Paste
 
 ```php
-\Event::listen(' Future\FileManager\Events\Paste',
+\Event::listen(' Adminftr\FileManager\Events\Paste',
     function ($event) {
         \Log::info('Paste:', [
             $event->disk(),
@@ -110,10 +110,10 @@ Example:
 
 ### Rename
 
-> Future\FileManager\Events\Rename
+> Adminftr\FileManager\Events\Rename
 
 ```php
-\Event::listen(' Future\FileManager\Events\Rename',
+\Event::listen(' Adminftr\FileManager\Events\Rename',
     function ($event) {
         \Log::info('Rename:', [
             $event->disk(),
@@ -127,10 +127,10 @@ Example:
 
 ### Download
 
-> Future\FileManager\Events\Download
+> Adminftr\FileManager\Events\Download
 
 ```php
-\Event::listen(' Future\FileManager\Events\Download',
+\Event::listen(' Adminftr\FileManager\Events\Download',
     function ($event) {
         \Log::info('Download:', [
             $event->disk(),
@@ -144,10 +144,10 @@ Example:
 
 ### DirectoryCreating
 
-> Future\FileManager\Events\DirectoryCreating
+> Adminftr\FileManager\Events\DirectoryCreating
 
 ```php
-\Event::listen(' Future\FileManager\Events\DirectoryCreating',
+\Event::listen(' Adminftr\FileManager\Events\DirectoryCreating',
     function ($event) {
         \Log::info('DirectoryCreating:', [
             $event->disk(),
@@ -160,10 +160,10 @@ Example:
 
 ### DirectoryCreated
 
-> Future\FileManager\Events\DirectoryCreated
+> Adminftr\FileManager\Events\DirectoryCreated
 
 ```php
-\Event::listen(' Future\FileManager\Events\DirectoryCreated',
+\Event::listen(' Adminftr\FileManager\Events\DirectoryCreated',
     function ($event) {
         \Log::info('DirectoryCreated:', [
             $event->disk(),
@@ -176,10 +176,10 @@ Example:
 
 ### FileCreating
 
-> Future\FileManager\Events\FileCreating
+> Adminftr\FileManager\Events\FileCreating
 
 ```php
-\Event::listen(' Future\FileManager\Events\FileCreating',
+\Event::listen(' Adminftr\FileManager\Events\FileCreating',
     function ($event) {
         \Log::info('FileCreating:', [
             $event->disk(),
@@ -192,10 +192,10 @@ Example:
 
 ### FileCreated
 
-> Future\FileManager\Events\FileCreated
+> Adminftr\FileManager\Events\FileCreated
 
 ```php
-\Event::listen(' Future\FileManager\Events\FileCreated',
+\Event::listen(' Adminftr\FileManager\Events\FileCreated',
     function ($event) {
         \Log::info('FileCreated:', [
             $event->disk(),
@@ -208,10 +208,10 @@ Example:
 
 ### FileUpdate
 
-> Future\FileManager\Events\FileUpdate
+> Adminftr\FileManager\Events\FileUpdate
 
 ```php
-\Event::listen(' Future\FileManager\Events\FileUpdate',
+\Event::listen(' Adminftr\FileManager\Events\FileUpdate',
     function ($event) {
         \Log::info('FileUpdate:', [
             $event->disk(),
@@ -223,10 +223,10 @@ Example:
 
 ### Zip
 
-> Future\FileManager\Events\Zip
+> Adminftr\FileManager\Events\Zip
 
 ```php
-\Event::listen(' Future\FileManager\Events\Zip',
+\Event::listen(' Adminftr\FileManager\Events\Zip',
     function ($event) {
         \Log::info('Zip:', [
             $event->disk(),
@@ -240,10 +240,10 @@ Example:
 
 ### ZipCreated
 
-> Future\FileManager\Events\ZipCreated
+> Adminftr\FileManager\Events\ZipCreated
 
 ```php
-\Event::listen(' Future\FileManager\Events\ZipCreated',
+\Event::listen(' Adminftr\FileManager\Events\ZipCreated',
     function ($event) {
         \Log::info('ZipCreated:', [
             $event->disk(),
@@ -257,10 +257,10 @@ Example:
 
 ### ZipFailed
 
-> Future\FileManager\Events\ZipCreated
+> Adminftr\FileManager\Events\ZipCreated
 
 ```php
-\Event::listen(' Future\FileManager\Events\ZipFailed',
+\Event::listen(' Adminftr\FileManager\Events\ZipFailed',
     function ($event) {
         \Log::info('ZipFailed:', [
             $event->disk(),
@@ -274,10 +274,10 @@ Example:
 
 ### Unzip
 
-> Future\FileManager\Events\Unzip
+> Adminftr\FileManager\Events\Unzip
 
 ```php
-\Event::listen(' Future\FileManager\Events\Unzip',
+\Event::listen(' Adminftr\FileManager\Events\Unzip',
     function ($event) {
         \Log::info('Unzip:', [
             $event->disk(),
@@ -290,10 +290,10 @@ Example:
 
 ### UnzipCreated
 
-> Future\FileManager\Events\UnzipCreated
+> Adminftr\FileManager\Events\UnzipCreated
 
 ```php
-\Event::listen(' Future\FileManager\Events\UnzipCreated',
+\Event::listen(' Adminftr\FileManager\Events\UnzipCreated',
     function ($event) {
         \Log::info('UnzipCreated:', [
             $event->disk(),
@@ -306,10 +306,10 @@ Example:
 
 ### UnzipFailed
 
-> Future\FileManager\Events\UnzipFailed
+> Adminftr\FileManager\Events\UnzipFailed
 
 ```php
-\Event::listen(' Future\FileManager\Events\UnzipFailed',
+\Event::listen(' Adminftr\FileManager\Events\UnzipFailed',
     function ($event) {
         \Log::info('UnzipFailed:', [
             $event->disk(),

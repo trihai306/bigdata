@@ -1,23 +1,23 @@
 <?php
 
-namespace Future\Widgets\Future\Traits;
-
-use Carbon\Carbon;
-use Livewire\Attributes\Url;
+namespace Adminftr\Widgets\Future\Traits;
 
 trait WidgetTrait
 {
     public string $title;
+
     public string $description;
+
     public array $extraAttributes = [];
+
     public array $col = ['md' => 6, 'xl' => 3];
 
-    public function setTitle(string $title): void
+    public function title(string $title): void
     {
         $this->title = $title;
     }
 
-    public function setDescription(string $description): void
+    public function description(string $description): void
     {
         $this->description = $description;
     }

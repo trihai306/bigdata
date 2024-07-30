@@ -1,15 +1,15 @@
 <?php
 
-namespace Future\Form\Future;
+namespace Adminftr\Form\Future;
 
+use Adminftr\Form\Future\Components\Form;
+use Adminftr\Form\Future\Components\UrlHelper;
+use Adminftr\Form\Future\Traits\DataInitializationTrait;
+use Adminftr\Form\Future\Traits\DataPersistenceTrait;
+use Adminftr\Form\Future\Traits\DataValidationTrait;
+use Adminftr\Form\Future\Traits\FieldExtractionTrait;
+use Adminftr\Form\Future\Traits\NotificationTrait;
 use Exception;
-use Future\Form\Future\Components\Form;
-use Future\Form\Future\Components\UrlHelper;
-use Future\Form\Future\Traits\DataInitializationTrait;
-use Future\Form\Future\Traits\DataPersistenceTrait;
-use Future\Form\Future\Traits\DataValidationTrait;
-use Future\Form\Future\Traits\FieldExtractionTrait;
-use Future\Form\Future\Traits\NotificationTrait;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Locked;
 use Livewire\Component;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Table\Future\Components\BulkActions;
+namespace Adminftr\Table\Future\Components\BulkActions;
 
 class BulkAction
 {

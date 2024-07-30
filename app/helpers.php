@@ -1,7 +1,7 @@
 <?php
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\Messaging;
-
+use Illuminate\Support\Facades\Http;
 function sendFirebaseNotification($deviceToken, $title, $body, $data = []) {
     try {
         // Lấy đường dẫn tới file firebase-credentials.json từ biến môi trường
@@ -253,5 +253,46 @@ class SpeedSMSAPI {
             curl_close($http);
             return json_decode($result, true);
         }
+    }
+}
+
+class ViettelPostAPI
+{
+    private const ROOT_URL = "https://partner.viettelpost.vn";
+    private $USERNAME;
+    private $PASSWORD;
+
+    public function __construct()
+    {
+        $this->USERNAME = env('VIETTEL_POST_USERNAME', '0969113654');
+        $this->PASSWORD = env('VIETTEL_POST_PASSWORD', 'Cntt@123');
+    }
+
+    public function login()
+    {
+        $url = self::ROOT_URL . '/v2/user/login';
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json'
+        ])->post($url, [
+            'USERNAME' => $this->USERNAME,
+            'PASSWORD' => $this->PASSWORD
+        ]);
+
+        if ($response->successful()) {
+            $this->accessToken = $response->json(); // Assuming token is returned in response
+            return $response->body();
+        } else {
+            return null; // Consider throwing an exception or logging this error
+        }
+    }
+
+    public function createStore($store)
+    {
+        $url = self::ROOT_URL . '/v2/user/registerInventory';
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+        ])->post($url, $store);
+
+        return $response->successful() ? $response->body() : null; // Add error handling
     }
 }

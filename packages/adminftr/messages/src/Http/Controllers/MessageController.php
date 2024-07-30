@@ -1,9 +1,9 @@
 <?php
 
-namespace Future\Messages\Http\Controllers;
+namespace Adminftr\Messages\Http\Controllers;
 
+use Adminftr\Messages\Http\Models\Conversation;
 use App\Http\Controllers\Controller;
-use Future\Messages\Http\Models\Conversation;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller

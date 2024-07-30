@@ -1,10 +1,10 @@
 <?php
 
-namespace Future\FileManager\Middleware;
+namespace Adminftr\FileManager\Middleware;
 
+use Adminftr\FileManager\Services\ACLService\ACL;
+use Adminftr\FileManager\Traits\PathTrait;
 use Closure;
-use Future\FileManager\Services\ACLService\ACL;
-use Future\FileManager\Traits\PathTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
@@ -72,7 +72,7 @@ class FileManagerACL
     /**
      * Handle an incoming request.
      *
-     * @param Request $request
+     * @param  Request  $request
      * @return mixed
      */
     public function handle($request, Closure $next)

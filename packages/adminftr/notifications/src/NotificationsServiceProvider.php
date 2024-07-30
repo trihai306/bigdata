@@ -1,10 +1,10 @@
 <?php
 
-namespace Future\Notifications;
+namespace Adminftr\Notifications;
 
-use Future\Notifications\Future\Notification;
-use Future\Notifications\Future\NotificationIcon;
-use Future\Notifications\Future\NotiList;
+use Adminftr\Notifications\Future\Notification;
+use Adminftr\Notifications\Future\NotificationIcon;
+use Adminftr\Notifications\Future\NotiList;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 

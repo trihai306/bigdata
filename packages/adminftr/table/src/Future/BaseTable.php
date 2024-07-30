@@ -1,20 +1,21 @@
 <?php
 
-namespace Future\Table\Future;
+namespace Adminftr\Table\Future;
 
-use Future\Table\Future\Traits\Actions;
-use Future\Table\Future\Traits\Can;
-use Future\Table\Future\Traits\Columns;
-use Future\Table\Future\Traits\ColumnVisibilityTrait;
-use Future\Table\Future\Traits\DateRangeTrait;
-use Future\Table\Future\Traits\FilterColumnsTrait;
-use Future\Table\Future\Traits\Functions;
-use Future\Table\Future\Traits\PaginationTrait;
-use Future\Table\Future\Traits\SearchTrait;
-use Future\Table\Future\Traits\SelectTrait;
-use Future\Table\Future\Traits\SortTrait;
-use Future\Table\Future\Traits\WidgetsTrait;
+use Adminftr\Table\Future\Traits\Actions;
+use Adminftr\Table\Future\Traits\Can;
+use Adminftr\Table\Future\Traits\Columns;
+use Adminftr\Table\Future\Traits\ColumnVisibilityTrait;
+use Adminftr\Table\Future\Traits\DateRangeTrait;
+use Adminftr\Table\Future\Traits\FilterColumnsTrait;
+use Adminftr\Table\Future\Traits\Functions;
+use Adminftr\Table\Future\Traits\PaginationTrait;
+use Adminftr\Table\Future\Traits\SearchTrait;
+use Adminftr\Table\Future\Traits\SelectTrait;
+use Adminftr\Table\Future\Traits\SortTrait;
+use Adminftr\Table\Future\Traits\WidgetsTrait;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Cache;
 use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -27,6 +28,8 @@ abstract class BaseTable extends Component
     public array $forms = [];
 
     public string $title;
+
+    public string $description;
 
     protected string $view = 'future::base-table';
 
@@ -52,18 +55,11 @@ abstract class BaseTable extends Component
     #[On('refreshTable')]
     public function render()
     {
-        $actions = $this->getActions();
-        $actions = $actions->actions;
         $data = $this->applyTableQuery()->fastPaginate($this->perPage, pageName: 'page')->onEachSide(1);
         $this->dispatch('reset-select');
 
         return view($this->view, [
-            'columns' => $this->defineColumns(),
-            'actions' => $actions,
-            'headerActions' => $this->headerActions(),
-            'InputFilters' => $this->defineFilters(),
             'data' => $data,
-            'bulkActions' => $this->bulkActions(),
         ]);
     }
 
@@ -99,8 +95,19 @@ abstract class BaseTable extends Component
         }, $relations);
         $with = array_merge($with, $this->with);
 
-        $model = $this->model::query()->select($select);
+        $cacheKey = 'table_query_cache_'.class_basename($this->model);
+        if (config('future.cache.enabled')) {
+            return Cache::remember($cacheKey, 300, function () use ($select, $with) {
+                return $this->executeQuery($select, $with);
+            });
+        } else {
+            return $this->executeQuery($select, $with);
+        }
+    }
 
+    private function executeQuery($select, $with): Builder
+    {
+        $model = $this->model::query()->select($select);
         if (! empty($with)) {
             $model->with($with);
         }
@@ -115,7 +122,7 @@ abstract class BaseTable extends Component
 
     public function boot()
     {
-        $this->forms = $this->actions(new Components\Actions\Actions())->forms();
+        $this->forms = $this->actions(new Components\Actions\Actions)->forms();
 
         $headerForms = collect($this->headerActions())
             ->filter(function ($headerAction) {
@@ -129,7 +136,6 @@ abstract class BaseTable extends Component
                 ];
             })
             ->toArray();
-
         $this->forms = array_merge($this->forms, $headerForms);
     }
 

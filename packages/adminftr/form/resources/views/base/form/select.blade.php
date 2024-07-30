@@ -28,7 +28,6 @@
                         }
                     },
                     @if($liveSearch)
-
                     load: function(query, callback) {
                         $wire.call("searchSelect", query, "{{$name}}").then(response => {
                             const data = response.map(item => ({

@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 use App\Models\User;
-use Future\Messages\Http\Models\Conversation;
-use Future\Messages\Http\Models\Message;
+use Adminftr\Messages\Http\Models\Conversation;
+use Adminftr\Messages\Http\Models\Message;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;

@@ -1,11 +1,11 @@
 <?php
 
-namespace Future\Table\Future\Traits;
+namespace Adminftr\Table\Future\Traits;
 
-use packages\adminftr\core\src\Http\Exports\DataExport;
-use Future\Core\Http\Imports\DataImport;
+use Adminftr\Core\Http\Imports\DataImport;
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Facades\Excel;
+use packages\adminftr\core\src\Http\Exports\DataExport;
 
 trait Importable
 {

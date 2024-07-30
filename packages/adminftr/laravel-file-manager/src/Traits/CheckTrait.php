@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\FileManager\Traits;
+namespace Adminftr\FileManager\Traits;
 
 use Illuminate\Support\Facades\Storage;
 

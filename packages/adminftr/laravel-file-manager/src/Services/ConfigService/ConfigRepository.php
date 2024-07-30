@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\FileManager\Services\ConfigService;
+namespace Adminftr\FileManager\Services\ConfigService;
 
 /**
  * Interface ConfigRepository

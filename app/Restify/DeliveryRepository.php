@@ -33,7 +33,7 @@ class DeliveryRepository extends Repository
                     'exists' => 'Mã hợp đồng phải tồn tại trong hệ thống.',
                 ]),
             Field::make('special_nature')
-                ->rules('nullable', 'string'),
+                ->rules('nullable'),
 
             Field::make('package_image')
                 ->rules('nullable', 'array'),

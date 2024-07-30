@@ -1,10 +1,10 @@
 <?php
 
-namespace Future\Messages;
+namespace Adminftr\Messages;
 
-use Future\Messages\Future\Messages\CreateMessage;
-use Future\Messages\Future\Messages\ListConversation;
-use Future\Messages\Future\Messages\MessageIcon;
+use Adminftr\Messages\Future\Messages\CreateMessage;
+use Adminftr\Messages\Future\Messages\ListConversation;
+use Adminftr\Messages\Future\Messages\MessageIcon;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 
@@ -16,7 +16,7 @@ class MessagesServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Livewire::component('future::admin.messages.icon', MessageIcon::class);
-        Livewire::component('future::messages.messages', \Future\Messages\Future\Messages\Messages::class);
+        Livewire::component('future::messages.messages', \Adminftr\Messages\Future\Messages\Messages::class);
         Livewire::component('future::messages.create-message', CreateMessage::class);
         Livewire::component('future::messages.list-conversation', ListConversation::class);
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'messages');
@@ -26,29 +26,6 @@ class MessagesServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
-    }
-
-    /**
-     * Register any package services.
-     */
-    public function register(): void
-    {
-        $this->mergeConfigFrom(__DIR__.'/../config/messages.php', 'messages');
-
-        // Register the service the package provides.
-        $this->app->singleton('messages', function ($app) {
-            return new Messages;
-        });
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return ['messages'];
     }
 
     /**
@@ -83,5 +60,28 @@ class MessagesServiceProvider extends ServiceProvider
 
         // Registering package commands.
         // $this->commands([]);
+    }
+
+    /**
+     * Register any package services.
+     */
+    public function register(): void
+    {
+        $this->mergeConfigFrom(__DIR__.'/../config/messages.php', 'messages');
+
+        // Register the service the package provides.
+        $this->app->singleton('messages', function ($app) {
+            return new Messages;
+        });
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['messages'];
     }
 }

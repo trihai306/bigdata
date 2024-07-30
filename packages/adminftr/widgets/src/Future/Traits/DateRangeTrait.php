@@ -1,8 +1,7 @@
 <?php
 
-namespace Future\Widgets\Future\Traits;
+namespace Adminftr\Widgets\Future\Traits;
 
-use Carbon\Carbon;
 use Livewire\Attributes\Url;
 
 trait DateRangeTrait
@@ -26,15 +25,16 @@ trait DateRangeTrait
     {
         foreach ($this->dateRangeFilter as $column => $value) {
             if (! empty($value)) {
-                $dateArray = explode(" to ", $this->dateRangeFilter[$column]);
+                $dateArray = explode(' to ', $this->dateRangeFilter[$column]);
                 $startDate = $dateArray[0];
                 if (isset($dateArray[1])) {
                     $query->whereBetween($column, [$startDate, $dateArray[1]]);
                 } else {
-                    $query->whereDate($column ,$startDate);
+                    $query->whereDate($column, $startDate);
                 }
             }
         }
+
         return $query;
     }
 }

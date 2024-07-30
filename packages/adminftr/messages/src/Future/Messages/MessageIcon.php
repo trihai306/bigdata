@@ -1,9 +1,9 @@
 <?php
 
-namespace Future\Messages\Future\Messages;
+namespace Adminftr\Messages\Future\Messages;
 
+use Adminftr\Messages\Http\Models\Message;
 use DB;
-use Future\Messages\Http\Models\Message;
 use Livewire\Attributes\Lazy;
 use Livewire\Attributes\On;
 use Livewire\Component;

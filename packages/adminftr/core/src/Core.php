@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Core;
+namespace Adminftr\Core;
 
 class Core
 {

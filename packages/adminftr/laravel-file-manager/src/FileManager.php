@@ -1,13 +1,12 @@
 <?php
 
-namespace Future\FileManager;
+namespace Adminftr\FileManager;
 
-use Future\FileManager\Events\Deleted;
-use manager\src\Services\ConfigService\ConfigRepository;
-use Future\FileManager\Services\TransferService\TransferFactory;
-use Future\FileManager\Traits\CheckTrait;
-use Future\FileManager\Traits\ContentTrait;
-use Future\FileManager\Traits\PathTrait;
+use Adminftr\FileManager\Events\Deleted;
+use Adminftr\FileManager\Services\TransferService\TransferFactory;
+use Adminftr\FileManager\Traits\CheckTrait;
+use Adminftr\FileManager\Traits\ContentTrait;
+use Adminftr\FileManager\Traits\PathTrait;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
@@ -15,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Laravel\Facades\Image;
 use League\Flysystem\FilesystemException;
+use manager\src\Services\ConfigService\ConfigRepository;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class FileManager

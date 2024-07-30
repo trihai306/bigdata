@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Table\Future\Components;
+namespace Adminftr\Table\Future\Components;
 
 use Exception;
 use Illuminate\Support\HtmlString;

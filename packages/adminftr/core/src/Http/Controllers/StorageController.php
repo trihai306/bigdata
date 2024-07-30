@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Core\Http\Controllers;
+namespace Adminftr\Core\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;

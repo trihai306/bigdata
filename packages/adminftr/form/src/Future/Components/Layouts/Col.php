@@ -1,12 +1,15 @@
 <?php
 
-namespace Future\Form\Future\Components\Layouts;
+namespace Adminftr\Form\Future\Components\Layouts;
 
 class Col
 {
     public $canHide = false;
+
     protected $classes = '';
+
     protected $attributes = [];
+
     protected $content;
 
     public static function make()

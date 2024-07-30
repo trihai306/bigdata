@@ -1,12 +1,12 @@
 <?php
 
-namespace Future\Messages\Future\Messages;
+namespace Adminftr\Messages\Future\Messages;
 
+use Adminftr\Messages\Http\Models\Conversation;
+use Adminftr\Messages\Http\Models\Message;
 use App\Models\User;
 use DB;
 use Exception;
-use Future\Messages\Http\Models\Conversation;
-use Future\Messages\Http\Models\Message;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -14,11 +14,15 @@ use Livewire\Component;
 class ListConversation extends Component
 {
     public $search;
+
     public $page = 10;
+
     public $searchUser;
+
     public $pageUser = 10;
 
     public $user;
+
     #[Locked]
     public $conversationId = null;
 
@@ -54,7 +58,7 @@ class ListConversation extends Component
             $conversation = $user->conversations()->whereHas('users', function ($query) use ($newUser) {
                 $query->where('id', $newUser->id);
             })->first();
-            if (!$conversation) {
+            if (! $conversation) {
                 $conversation = conversation::create([
                     'type' => 'private',
                 ]);
@@ -63,7 +67,7 @@ class ListConversation extends Component
             }
             $this->conversationId = $conversation->id;
             $this->dispatch('changeConversation', $this->conversationId);
-        }catch (Exception $e){
+        } catch (Exception $e) {
             $this->dispatch('notification', [
                 'title' => 'Error',
                 'message' => $e->getMessage(),
@@ -76,16 +80,18 @@ class ListConversation extends Component
     public function render()
     {
         if ($this->searchUser) {
-            $users = User::where('name', 'like', '%' . $this->searchUser . '%')->paginate($this->pageUser);
+            $users = User::where('name', 'like', '%'.$this->searchUser.'%')->paginate($this->pageUser);
         } else {
             $users = User::paginate($this->pageUser);
         }
+
         return view('messages::list-conversation',
             [
                 'conversations' => $this->getConversations(),
                 'users' => $users,
             ]);
     }
+
     protected function getConversations()
     {
         $user = auth()->user();
@@ -103,10 +109,10 @@ class ListConversation extends Component
                 'lastMessage',
                 'lastSeenMessage' => function ($query) use ($user) {
                     $query->where('user_id', $user->id);
-                }
+                },
             ])
             ->whereHas('users', function ($query) {
-                $query->where('name', 'like', '%' . $this->search . '%');
+                $query->where('name', 'like', '%'.$this->search.'%');
             })
             ->orderBy('last_messages.last_message_at', 'desc')
             ->fastPaginate($this->page);

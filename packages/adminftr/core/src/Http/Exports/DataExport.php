@@ -1,5 +1,5 @@
 <?php
-namespace Future\Core\Http\Exports;
+namespace Adminftr\Core\Http\Exports;
 
 use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\FileManager\Events;
+namespace Adminftr\FileManager\Events;
 
 use Illuminate\Http\Request;
 

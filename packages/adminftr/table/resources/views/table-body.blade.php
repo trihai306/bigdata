@@ -17,7 +17,7 @@
                     <td>{!! $column->render($item) !!}</td>
                 @endif
             @endforeach
-            @if($actions)
+            @if($this->getActions()->actions)
                 @if($this->defineActions($item))
                     <td class="text-center">
                         <div>

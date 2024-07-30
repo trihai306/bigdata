@@ -5,16 +5,16 @@ namespace App\Future\PaymentManagementResource;
 use App\Future\PaymentManagementResource\Modal\Form;
 use App\Models\Contract;
 use App\Models\User;
-use Future\Table\Future\BaseTable;
-use Future\Table\Future\Components\Actions\Action;
-use Future\Table\Future\Components\Actions\Actions;
-use Future\Table\Future\Components\Columns\TextColumn;
-use Future\Table\Future\Components\FilterInput;
-use Future\Table\Future\Components\Filters\DateFilter;
-use Future\Table\Future\Components\Filters\SelectFilter;
-use Future\Table\Future\Components\Filters\TextFilter;
-use Future\Table\Future\Components\Headers\Actions\ResetAction;
-use Future\Widgets\Future\Widgets\Widget;
+use Adminftr\Table\Future\BaseTable;
+use Adminftr\Table\Future\Components\Actions\Action;
+use Adminftr\Table\Future\Components\Actions\Actions;
+use Adminftr\Table\Future\Components\Columns\TextColumn;
+use Adminftr\Table\Future\Components\FilterInput;
+use Adminftr\Table\Future\Components\Filters\DateFilter;
+use Adminftr\Table\Future\Components\Filters\SelectFilter;
+use Adminftr\Table\Future\Components\Filters\TextFilter;
+use Adminftr\Table\Future\Components\Headers\Actions\ResetAction;
+use Adminftr\Widgets\Future\Widgets\Widget;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
@@ -72,12 +72,12 @@ class Table extends BaseTable
         return $actions->create(
             [
                 Action::make('updateStatus', __('Xác nhận thanh toán'), 'fas fa-edit')->modal(Form::class),
-                Action::make('delete', __('Xoá'), 'fas fa-trash-alt')->confirm(function ($data) {
+               /* Action::make('delete', __('Xoá'), 'fas fa-trash-alt')->confirm(function ($data) {
                     return [
                         'message' => __('Bạn cho chắc muốn xoá hợp đồng?'),
                         'params' => $data, 'nameMethod' => 'delete',
                     ];
-                }),
+                }),*/
             ]
         );
     }
@@ -86,7 +86,7 @@ class Table extends BaseTable
     {
         return [
             ResetAction::make(),
-            \Future\Table\Future\Components\Headers\Actions\Action::make('create', __('Tạo mới hợp đồng'))
+            \Adminftr\Table\Future\Components\Headers\Actions\Action::make('create', __('Tạo mới hợp đồng'))
                 ->modal('create', Form::class),
         ];
     }

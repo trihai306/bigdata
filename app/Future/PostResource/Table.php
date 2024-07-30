@@ -4,14 +4,14 @@ namespace App\Future\PostResource;
 
 use App\Future\PostResource\Modal\Form;
 use App\Models\Post;
-use Future\Table\Future\BaseTable;
-use Future\Table\Future\Components\Actions\Action;
-use Future\Table\Future\Components\Actions\Actions;
-use Future\Table\Future\Components\Columns\TextColumn;
-use Future\Table\Future\Components\Filters\DateFilter;
-use Future\Table\Future\Components\Filters\SelectFilter;
-use Future\Table\Future\Components\Headers\Actions\ResetAction;
-use Future\Widgets\Future\Widgets\Widget;
+use Adminftr\Table\Future\BaseTable;
+use Adminftr\Table\Future\Components\Actions\Action;
+use Adminftr\Table\Future\Components\Actions\Actions;
+use Adminftr\Table\Future\Components\Columns\TextColumn;
+use Adminftr\Table\Future\Components\Filters\DateFilter;
+use Adminftr\Table\Future\Components\Filters\SelectFilter;
+use Adminftr\Table\Future\Components\Headers\Actions\ResetAction;
+use Adminftr\Widgets\Future\Widgets\Widget;
 use Illuminate\Support\HtmlString;
 
 class Table extends BaseTable

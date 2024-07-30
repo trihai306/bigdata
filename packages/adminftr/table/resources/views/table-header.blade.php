@@ -10,9 +10,9 @@
                 <button class='btn align-text-top dropdown-toggle' type='button'
                         data-bs-auto-close="outside"
                         data-bs-toggle='dropdown'>{{ __('table::table.bulk_actions') }}</button>
-                @if($bulkActions)
+                @if($this->bulkActions())
                     <ul class='dropdown-menu'>
-                        @foreach($bulkActions as $bulkAction)
+                        @foreach($this->bulkActions() as $bulkAction)
                             <li>{{ $bulkAction->render() }}</li>
                         @endforeach
                     </ul>
@@ -22,7 +22,7 @@
     </div>
 
     <div class="card-title">
-        <div class="d-flex align-items-center position-relative my-1">
+        <div class="d-flex align-items-center position-relative">
             <label class="form-label">
                 <input type="text" class="form-control form-control-solid" wire:model.live.debounce.300ms="search"
                        placeholder="{{ __('future::messages.search') }}">

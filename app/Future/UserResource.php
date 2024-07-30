@@ -2,7 +2,7 @@
 namespace App\Future;
 use App\Future\UserResource\Form;
 use App\Future\UserResource\Table;
-use Future\Core\Http\Resource\BaseResource;
+use Adminftr\Core\Http\Resource\BaseResource;
 
 
 class UserResource extends BaseResource

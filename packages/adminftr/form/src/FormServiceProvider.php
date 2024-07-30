@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Form;
+namespace Adminftr\Form;
 
 use Illuminate\Support\ServiceProvider;
 

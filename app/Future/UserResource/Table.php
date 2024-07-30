@@ -2,21 +2,21 @@
 
 namespace App\Future\UserResource;
 
+use Adminftr\Table\Future\BaseTable;
 use App\Future\UserResource\Modal\ChangePassword;
 use App\Models\User;
 use Carbon\Carbon;
-use Future\Notifications\Future\Notification;
-use Future\Table\Future\BaseTable;
-use Future\Table\Future\Components\Actions\Action;
-use Future\Table\Future\Components\Actions\Actions;
-use Future\Table\Future\Components\BulkActions\BulkAction;
-use Future\Table\Future\Components\Columns\ImageColumn;
-use Future\Table\Future\Components\Columns\TextColumn;
-use Future\Table\Future\Components\Filters\DateFilter;
-use Future\Table\Future\Components\Filters\SelectFilter;
-use Future\Table\Future\Components\Filters\TextFilter;
-use Future\Table\Future\Components\Headers\Actions\ResetAction;
-use Future\Widgets\Future\Widgets\Widget;
+use Adminftr\Notifications\Future\Notification;
+use Adminftr\Table\Future\Components\Actions\Action;
+use Adminftr\Table\Future\Components\Actions\Actions;
+use Adminftr\Table\Future\Components\BulkActions\BulkAction;
+use Adminftr\Table\Future\Components\Columns\ImageColumn;
+use Adminftr\Table\Future\Components\Columns\TextColumn;
+use Adminftr\Table\Future\Components\Filters\DateFilter;
+use Adminftr\Table\Future\Components\Filters\SelectFilter;
+use Adminftr\Table\Future\Components\Filters\TextFilter;
+use Adminftr\Table\Future\Components\Headers\Actions\ResetAction;
+use Adminftr\Widgets\Future\Widgets\Widget;
 use Illuminate\Support\HtmlString;
 use Spatie\Permission\Models\Role;
 
@@ -26,33 +26,35 @@ class Table extends BaseTable
 
     protected array $select = ['phone', 'email'];
 
-    protected function setListeners(): array
-    {
-        return [
-            'check' => 'check',
-        ];
-    }
-
     protected function columns(): array
     {
         return [
             TextColumn::make('id', __('ID'))->searchable()->sortable(),
             ImageColumn::make('avatar', __('user_avatar')),
-            TextColumn::make('name', __('user_name'))->searchable()->sortable()->description(function (User $user) {
-                return new HtmlString("<p>{$user->phone}</p><p>{$user->email}</p>");
+            TextColumn::make('name', __('Họ và tên'))->searchable()->sortable()->description(function (User $user) {
+                return new HtmlString("<p>số điện thoại: {$user->phone}</p>");
             }),
-            TextColumn::make('birthday')->dateTime(),
-            TextColumn::make('status', __('user_status'))->badge(
+            TextColumn::make('birthday','Ngày sinh')->dateTime(),
+            TextColumn::make('type','vai trò')->badge([
+                'buyer' => 'primary',
+                'seller' => 'danger',
+                'admin' => 'success',
+            ], [
+                'buyer' => 'Người mua',
+                'user' => 'Người bán',
+                'admin' => 'Quản trị viên',
+            ]),
+            TextColumn::make('status', __('Trạng thái'))->badge(
                 [
                     'active' => 'success',
                     'inactive' => 'danger',
                 ],
                 [
-                    'active' => __('active'),
-                    'inactive' => __('inactive'),
+                    'active' => __('Hoạt động'),
+                    'inactive' => __('Khóa'),
                 ]
             ),
-            TextColumn::make('gender', __('gender'))->badge([
+            TextColumn::make('gender', __('giới tính'))->badge([
                 'male' => 'primary',
                 'female' => 'danger',
             ], [
@@ -100,14 +102,12 @@ class Table extends BaseTable
             Action::make('edit', __('edit'), 'fas fa-edit')->link(function ($data) {
                 return route('admin.users.edit', $data->id);
             })->size('font-size:20px;'),
-            Action::make('password', __('change password'), 'fa fa-key')
-                ->modal(ChangePassword::class)
-                ->size('font-size:20px;'),
-            Action::make('delete', __('delete'), 'fas fa-trash-alt')->confirm(function ($data) {
-                return [
-                    'message' => __('Are you sure you want to delete this permission?'),
-                    'params' => $data, 'nameMethod' => 'delete',
-                ];
+            Action::make('delete', __('delete'), 'fas fa-trash-alt')->confirm('Xóa', function ($data) {
+                $name = $data->name;
+                return 'Bạn có chắc chắn muốn xóa người dùng '.$name.' không?';
+            }, function ($model) {
+                $model->delete();
+                $this->dispatch('swalSuccess', ['message' => 'Xóa thành công']);
             }),
         ]);
     }
@@ -116,7 +116,7 @@ class Table extends BaseTable
     {
         return [
             ResetAction::make(),
-            \Future\Table\Future\Components\Headers\Actions\Action::make('create', __('future::messages.add_data'))
+            \Adminftr\Table\Future\Components\Headers\Actions\Action::make('create', __('future::messages.add_data'))
                 ->to(route('admin.users.create')),
         ];
     }
@@ -132,84 +132,8 @@ class Table extends BaseTable
             )
                 ->callback(function ($data) {
                     User::destroy($data);
-                    Notification::make()->send();
                 }),
         ];
     }
 
-    /**
-     * Thống kê tổng số người dùng (Tổng số, đang hoạt động, mới trong tháng)   - (1)
-     * Thống kê tổng số người dùng có sinh nhật tháng này                       - (2)
-     * Thống kê người dùng chưa điền đủ thông tin                               - (3)
-     * Thống kê tổng số người dùng theo roles                                   - (4)
-     */
-    protected function widgets()
-    {
-        // (1)
-        $widgetTotalUser = Widget::make('0 người dùng', '0 người dùng được kích hoạt')
-            ->callback(function ($widget) {
-                $currentMonth = Carbon::now()->format('m');
-                $currentYear = Carbon::now()->format('Y');
-                $totalUser = $this->model::query()->count();
-                $activeUser = $this->model::query()->where('status', 'active')->count();
-                $newUserThisMonth = $this->model::query()->whereYear('created_at', $currentYear)
-                    ->whereMonth('created_at', $currentMonth)
-                    ->count();
-                $widget->title = $totalUser.' người dùng';
-                $widget->description = $activeUser.' người dùng được kích hoạt';
-                $widget->setIcon('fa fa-user');
-                $widget->setCol(['md' => 6, 'xl' => 4]);
-                $widget->setColor('green');
-                if ($newUserThisMonth > 0) {
-                    $widget->setExtraAttributes(['subtitleColor' => 'text-green', 'subtitle' => '+'.$newUserThisMonth]);
-                } else {
-                    $widget->setExtraAttributes(['subtitle' => '+'.$newUserThisMonth]);
-                }
-            });
-
-        // (2)
-        $widgetBirthdayUser = Widget::make('0 người dùng có sinh nhật vào tháng này', '')
-            ->callback(function ($widget) {
-                $currentMonth = Carbon::now()->format('m');
-                $userBirthdayCount = $this->model::query()->whereMonth('birthday', $currentMonth)
-                    ->count();
-                $widget->title = $userBirthdayCount.' người dùng có sinh nhật vào tháng này';
-                $widget->setIcon('fa fa-cake-candles');
-                $widget->setCol(['md' => 6, 'xl' => 4]);
-                $widget->setColor('pink');
-            });
-
-        // // (3)
-        $widgetUnfilledInfoUser = Widget::make('0 người dùng chưa hoàn thiện hồ sơ', '')
-            ->callback(function ($widget) {
-                $userUnfilledInfoCount = $this->model::query()
-                    ->whereNull('email')
-                    ->orWhereNull('phone')
-                    ->orWhereNull('address')
-                    ->orWhereNull('birthday')
-                    ->orWhereNull('gender')
-                    ->orWhere('avatar', 'avatars/img.png')
-                    ->count();
-                $widget->title = $userUnfilledInfoCount.' người dùng chưa hoàn thiện hồ sơ';
-                $widget->setIcon('fa fa-user-xmark');
-                $widget->setCol(['md' => 6, 'xl' => 4]);
-                $widget->setColor('red');
-            });
-
-        // // (4)
-        $widgetRoles = [];
-        $rolesWithUserCount = Role::withCount('users')->limit(2)->get();
-        foreach ($rolesWithUserCount as $role) {
-            $widgetRole = Widget::make(strtoupper($role->name), '0 người dùng');
-            $widgetRole->setCol(['md' => 6, 'xl' => 4]);
-            $widgetRoles[] = $widgetRole;
-        }
-
-        return [
-            $widgetTotalUser,
-            $widgetBirthdayUser,
-            $widgetUnfilledInfoUser,
-            ...$widgetRoles,
-        ];
-    }
 }

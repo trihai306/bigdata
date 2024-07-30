@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Table\Future\Components\Filters;
+namespace Adminftr\Table\Future\Components\Filters;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -81,7 +81,7 @@ class SelectFilter extends Filter
             'multiple' => $this->multiple,
             'valueField' => $this->valueField,
             'labelField' => $this->labelField,
-//            'liveSearch' => $this->liveSearch,
-            ]);
+            //            'liveSearch' => $this->liveSearch,
+        ]);
     }
 }

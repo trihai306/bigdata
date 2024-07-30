@@ -403,7 +403,9 @@
             }
         },
         scrollToBottom() {
-            document.getElementById('body-scroll').scrollTo(0, document.getElementById('body-scroll').scrollHeight);
+            if (document.getElementById('body-scroll')) {
+                document.getElementById('body-scroll').scrollTo(0, document.getElementById('body-scroll').scrollHeight);
+            }
         },
         listenForMessages() {
             window.Echo.private(`App.Models.User.{{Auth::user()->id}}`)
@@ -433,7 +435,5 @@
         }
 
     }));
-
-
 </script>
 @endscript

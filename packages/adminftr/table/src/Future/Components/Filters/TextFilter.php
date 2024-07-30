@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Table\Future\Components\Filters;
+namespace Adminftr\Table\Future\Components\Filters;
 
 class TextFilter extends Filter
 {

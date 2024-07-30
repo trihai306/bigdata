@@ -30,8 +30,10 @@
 <script src="{{ asset('dist/js/demo-theme.min.js') }}"></script>
 <div class="page" id="page">
     @include('future::app.header')
-    <div class="page-wrapper {{ $_COOKIE['sidebarState'] === 'collapsed' ? 'state-collapsed' : '' }}"
-         id="page-wrapper">
+    @include('future::app.sidebar')
+    <div
+        class="page-wrapper {{ request()->cookie('sidebarState') === 'collapsed' ? 'state-collapsed' : '' }}"
+        id="page-wrapper">
         <div class="page-body">
             <div class="container-fluid" id="content">
                 @yield('content')
@@ -41,7 +43,6 @@
         @include('future::app.footer')
 
     </div>
-    @include('future::app.sidebar')
 
 </div>
 

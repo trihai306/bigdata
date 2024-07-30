@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Core\Future\Auth;
+namespace Adminftr\Core\Future\Auth;
 
 use Illuminate\Support\Facades\Password;
 use Livewire\Component;

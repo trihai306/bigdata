@@ -1,23 +1,21 @@
 <?php
 
-namespace Future\Messages\Http\Policies;
-
+namespace Adminftr\Messages\Http\Policies;
 
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Modules\Conversation\app\Models\Message;
 
-
 class MessagePolicy
 {
     use HandlesAuthorization;
 
-    public function allowRestify(User $user = null): bool
+    public function allowRestify(?User $user = null): bool
     {
         return $user->HasRole('admin');
     }
 
-    public function show(User $user = null, Message $model): bool
+    public function show(?User $user, Message $model): bool
     {
         return true;
     }

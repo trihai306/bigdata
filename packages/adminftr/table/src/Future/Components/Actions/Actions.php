@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Table\Future\Components\Actions;
+namespace Adminftr\Table\Future\Components\Actions;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,6 +16,7 @@ class Actions
     public ?Model $data = null;
 
     private string $renderMethodButton = 'renderAsButtons';
+
     private string $renderMethod = 'renderAsDropdown';
 
     public static function create(array $actions, string $renderMethod = 'renderAsDropdown'): self

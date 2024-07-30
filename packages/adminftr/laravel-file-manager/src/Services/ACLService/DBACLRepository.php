@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\FileManager\Services\ACLService;
+namespace Adminftr\FileManager\Services\ACLService;
 
 /**
  * Class DBACLRepository

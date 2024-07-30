@@ -1,10 +1,10 @@
 <?php
 
-namespace Future\Form\Future\Components\Fields;
+namespace Adminftr\Form\Future\Components\Fields;
 
-use Future\Form\Future\Components\Field;
-use Future\Form\Future\Components\UrlHelper;
-use Future\Table\Future\BaseTable;
+use Adminftr\Form\Future\Components\Field;
+use Adminftr\Form\Future\Components\UrlHelper;
+use Adminftr\Table\Future\BaseTable;
 
 class TextInput extends Field
 {

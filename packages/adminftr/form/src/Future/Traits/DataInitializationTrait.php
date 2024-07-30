@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Form\Future\Traits;
+namespace Adminftr\Form\Future\Traits;
 
 trait DataInitializationTrait
 {
@@ -15,9 +15,10 @@ trait DataInitializationTrait
 
     private function loadModelData($inputs)
     {
-        $fieldNames = array_map(fn ($input) => $input->name, $inputs);
+        $fieldNames = array_map(fn ($input) => $input->name, array_filter($inputs, fn ($input) => $input->canHide !== false));
         $relations = [];
         $fields = [];
+        dd($fieldNames);
         foreach ($fieldNames as $fieldName) {
             if (str_contains($fieldName, '.')) {
                 $parts = explode('.', $fieldName);

@@ -1,24 +1,24 @@
 <?php
 
-namespace Future\FileManager\Controllers;
+namespace Adminftr\FileManager\Controllers;
 
-use Future\FileManager\Events\BeforeInitialization;
-use Future\FileManager\Events\Deleting;
-use Future\FileManager\Events\DirectoryCreated;
-use Future\FileManager\Events\DirectoryCreating;
-use Future\FileManager\Events\DiskSelected;
-use Future\FileManager\Events\Download;
-use Future\FileManager\Events\FileCreated;
-use Future\FileManager\Events\FilesUploaded;
-use Future\FileManager\Events\FilesUploading;
-use Future\FileManager\Events\FileUpdate;
-use Future\FileManager\Events\Paste;
-use Future\FileManager\Events\Rename;
-use Future\FileManager\Events\Unzip as UnzipEvent;
-use Future\FileManager\Events\Zip as ZipEvent;
-use Future\FileManager\FileManager;
-use Future\FileManager\Requests\RequestValidator;
-use Future\FileManager\Services\Zip;
+use Adminftr\FileManager\Events\BeforeInitialization;
+use Adminftr\FileManager\Events\Deleting;
+use Adminftr\FileManager\Events\DirectoryCreated;
+use Adminftr\FileManager\Events\DirectoryCreating;
+use Adminftr\FileManager\Events\DiskSelected;
+use Adminftr\FileManager\Events\Download;
+use Adminftr\FileManager\Events\FileCreated;
+use Adminftr\FileManager\Events\FilesUploaded;
+use Adminftr\FileManager\Events\FilesUploading;
+use Adminftr\FileManager\Events\FileUpdate;
+use Adminftr\FileManager\Events\Paste;
+use Adminftr\FileManager\Events\Rename;
+use Adminftr\FileManager\Events\Unzip as UnzipEvent;
+use Adminftr\FileManager\Events\Zip as ZipEvent;
+use Adminftr\FileManager\FileManager;
+use Adminftr\FileManager\Requests\RequestValidator;
+use Adminftr\FileManager\Services\Zip;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;

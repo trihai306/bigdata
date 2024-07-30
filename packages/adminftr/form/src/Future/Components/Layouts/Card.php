@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Form\Future\Components\Layouts;
+namespace Adminftr\Form\Future\Components\Layouts;
 
 class Card
 {

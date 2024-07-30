@@ -1,7 +1,8 @@
 <?php
 
+use Adminftr\Core\FutureServiceProvider;
 use App\Providers\RestifyServiceProvider;
-use Future\Notifications\NotificationsServiceProvider;
+use Adminftr\Notifications\NotificationsServiceProvider;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -165,7 +166,7 @@ return [
         RestifyServiceProvider::class,
         UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
         JeroenG\Packager\PackagerServiceProvider::class,
-        \Future\Core\FutureServiceProvider::class,
+        FutureServiceProvider::class,
         /*
          * Application Service Providers...
          */

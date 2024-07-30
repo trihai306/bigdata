@@ -1,11 +1,11 @@
 <?php
 
-namespace Future\Messages\Http\Models\Traits;
+namespace Adminftr\Messages\Http\Models\Traits;
 
-use Future\Messages\Http\Models\Conversation;
-use Future\Messages\Http\Models\Message;
-use Future\Messages\Http\Models\MessageReaction;
-use Future\Messages\Http\Models\UserConversation;
+use Adminftr\Messages\Http\Models\Conversation;
+use Adminftr\Messages\Http\Models\Message;
+use Adminftr\Messages\Http\Models\MessageReaction;
+use Adminftr\Messages\Http\Models\UserConversation;
 
 trait HasMessages
 {
@@ -83,5 +83,4 @@ trait HasMessages
 
         return $unreadMessagesCount;
     }
-
 }

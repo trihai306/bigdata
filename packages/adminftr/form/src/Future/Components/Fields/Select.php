@@ -1,9 +1,9 @@
 <?php
 
-namespace Future\Form\Future\Components\Fields;
+namespace Adminftr\Form\Future\Components\Fields;
 
+use Adminftr\Form\Future\Components\Field;
 use Closure;
-use Future\Form\Future\Components\Field;
 use Illuminate\Database\Eloquent\Model;
 
 class Select extends Field
@@ -61,7 +61,7 @@ class Select extends Field
     public function liveSearch(?callable $callback = null)
     {
         $this->liveSearch = true;
-        $this->plugins[] = 'virtual_scroll';
+        //        $this->plugins[] = 'virtual_scroll';
         if ($callback) {
             $this->callbackSearch = $callback;
         }

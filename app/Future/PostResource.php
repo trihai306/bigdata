@@ -2,7 +2,7 @@
 namespace App\Future;
 use App\Future\PostResource\Form;
 use App\Future\PostResource\Table;
-use Future\Core\Http\Resource\BaseResource;
+use Adminftr\Core\Http\Resource\BaseResource;
 
 
 class PostResource extends BaseResource

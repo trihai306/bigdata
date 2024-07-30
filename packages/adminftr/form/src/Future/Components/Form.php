@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Form\Future\Components;
+namespace Adminftr\Form\Future\Components;
 
 class Form
 {

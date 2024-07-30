@@ -1,10 +1,10 @@
 <?php
 
-namespace Future\Form\Future;
+namespace Adminftr\Form\Future;
 
+use Adminftr\Form\Future\Components\Form;
+use Adminftr\Form\Future\Traits\NotificationTrait;
 use Exception;
-use Future\Form\Future\Components\Form;
-use Future\Form\Future\Traits\NotificationTrait;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;

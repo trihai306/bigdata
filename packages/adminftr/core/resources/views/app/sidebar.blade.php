@@ -1,5 +1,7 @@
 <aside
-    class="navbar navbar-vertical navbar-expand-lg {{ $_COOKIE['sidebarState'] === 'collapsed' ? 'state-collapsed' : '' }}"
+    class="navbar navbar-vertical navbar-expand-lg
+     {{ request()->cookie('sidebarState') === 'collapsed' ? 'state-collapsed' : '' }}
+     "
     id="sidebar-wrapper" style="z-index: 999">
     <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu"

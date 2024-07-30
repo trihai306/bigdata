@@ -54,3 +54,7 @@ Route::post('/pusher/auth', function (Illuminate\Http\Request $request) {
     return response($pusher->socket_auth($request->input('channel_name'), $request->input('socket_id')));
 });
 
+Route::get('/test', function () {
+   $viettel = new  viettelPostAPI();
+   dd($viettel->login());
+});

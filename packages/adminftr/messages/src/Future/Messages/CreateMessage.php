@@ -1,11 +1,11 @@
 <?php
 
-namespace Future\Messages\Future\Messages;
+namespace Adminftr\Messages\Future\Messages;
 
+use Adminftr\Messages\Http\Models\Conversation;
+use Adminftr\Messages\Http\Models\Message;
 use App\Events\UserMessageEvent;
 use Exception;
-use Future\Messages\Http\Models\Conversation;
-use Future\Messages\Http\Models\Message;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;

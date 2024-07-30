@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use Future\Core\Http\Models\Menu;
+use Adminftr\Core\Http\Models\Menu;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Route;
 use Spatie\Permission\Models\Permission;

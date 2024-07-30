@@ -1,8 +1,8 @@
 <?php
 namespace App\Future;
+use Adminftr\Core\Http\Resource\BaseResource;
 use App\Future\ContractResource\Form;
 use App\Future\ContractResource\Table;
-use Future\Core\Http\Resource\BaseResource;
 
 
 class ContractResource extends BaseResource

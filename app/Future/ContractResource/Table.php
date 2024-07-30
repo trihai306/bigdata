@@ -5,16 +5,16 @@ namespace App\Future\ContractResource;
 use App\Future\ContractResource\Modal\Form;
 use App\Models\Contract;
 use App\Models\User;
-use Future\Table\Future\BaseTable;
-use Future\Table\Future\Components\Actions\Action;
-use Future\Table\Future\Components\Actions\Actions;
-use Future\Table\Future\Components\Columns\TextColumn;
-use Future\Table\Future\Components\FilterInput;
-use Future\Table\Future\Components\Filters\DateFilter;
-use Future\Table\Future\Components\Filters\SelectFilter;
-use Future\Table\Future\Components\Filters\TextFilter;
-use Future\Table\Future\Components\Headers\Actions\ResetAction;
-use Future\Widgets\Future\Widgets\Widget;
+use Adminftr\Table\Future\BaseTable;
+use Adminftr\Table\Future\Components\Actions\Action;
+use Adminftr\Table\Future\Components\Actions\Actions;
+use Adminftr\Table\Future\Components\Columns\TextColumn;
+use Adminftr\Table\Future\Components\FilterInput;
+use Adminftr\Table\Future\Components\Filters\DateFilter;
+use Adminftr\Table\Future\Components\Filters\SelectFilter;
+use Adminftr\Table\Future\Components\Filters\TextFilter;
+use Adminftr\Table\Future\Components\Headers\Actions\ResetAction;
+use Adminftr\Widgets\Future\Widgets\Widget;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
@@ -83,11 +83,11 @@ class Table extends BaseTable
                 Action::make('view', __('View'), 'fas fa-edit')->link(function ($data) {
                     return route('admin.contracts.edit', $data->id);
                 }),
-                Action::make('delete', __('Xoá'), 'fas fa-trash-alt')->confirm(function ($data) {
-                    return [
-                        'message' => __('Bạn cho chắc muốn xoá hợp đồng?'),
-                        'params' => $data, 'nameMethod' => 'delete',
-                    ];
+                Action::make('delete', __('Xoá'), 'fas fa-trash-alt')->confirm(__('Bạn có chắc chắn muốn xoá?'), function ($data) {
+                    return 'Bạn có chắc chắn muốn xoá hợp đồng ' . $data->code . ' không?';
+                }, function ($data) {
+                    $data->delete();
+
                 }),
             ]
         );

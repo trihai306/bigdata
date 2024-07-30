@@ -1,12 +1,13 @@
 <?php
 
-namespace Future\Core;
+namespace Adminftr\Core;
 
-use Future\Core\Future\Admin\MenuHeader;
-use Future\Core\Future\Admin\Notifications;
-use Future\Core\Future\Admin\Profile;
-use Future\Core\Future\Auth\ForgotPassword;
-use Future\Core\Future\Auth\Login;
+use Adminftr\Core\Future\Admin\MenuHeader;
+use Adminftr\Core\Future\Admin\Notifications;
+use Adminftr\Core\Future\Admin\Profile;
+use Adminftr\Core\Future\Auth\ForgotPassword;
+use Adminftr\Core\Future\Auth\Login;
+use Adminftr\Core\Future\Dashboard;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use Route;
@@ -23,6 +24,7 @@ class CoreServiceProvider extends ServiceProvider
         Livewire::component('future::admin.menu-header', MenuHeader::class);
         Livewire::component('future::admin.profile', Profile::class);
         Livewire::component('future::admin.notifications', Notifications::class);
+        Livewire::component('future::admin.dashboard', Dashboard::class);
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'future');
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'future');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');

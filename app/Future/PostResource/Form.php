@@ -4,8 +4,8 @@ namespace App\Future\PostResource;
 
 use App\Models\Post;
 use App\Models\User;
-use Future\Form\Future\BaseForm;
-use Future\Form\Future\Components\Actions\Action;
+use Adminftr\Form\Future\BaseForm;
+use Adminftr\Form\Future\Components\Actions\Action;
 use Future\Form\Future\Components\Fields\Select;
 use Future\Form\Future\Components\Fields\TextArea;
 use Future\Form\Future\Components\Fields\TextInput;
@@ -17,7 +17,7 @@ class Form extends BaseForm
 {
     protected $model = Post::class;
 
-    public function form(\Future\Form\Future\Components\Form $form)
+    public function form(\Adminftr\Form\Future\Components\Form $form)
     {
         return $form->schema([
             Row::make()->schema([

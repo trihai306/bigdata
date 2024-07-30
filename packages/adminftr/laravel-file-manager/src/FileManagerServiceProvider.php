@@ -1,9 +1,9 @@
 <?php
 
-namespace Future\FileManager;
+namespace Adminftr\FileManager;
 
-use Future\FileManager\Middleware\FileManagerACL;
-use Future\FileManager\Services\ACLService\ACLRepository;
+use Adminftr\FileManager\Middleware\FileManagerACL;
+use Adminftr\FileManager\Services\ACLService\ACLRepository;
 use Illuminate\Support\ServiceProvider;
 use manager\src\Services\ConfigService\ConfigRepository;
 

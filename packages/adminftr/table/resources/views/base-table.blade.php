@@ -15,7 +15,9 @@
             <div class="progress-bar progress-bar-indeterminate bg-green" wire:loading></div>
         </div>
         @include('future::table-header')
-        <div class="table-responsive table-loading py-0">
+        <div class="
+         table-responsive
+         table-loading py-0">
             <table class="table card-table table-vcenter align-middle table-row-dashed gy-5 base-table">
                 @include('future::table-head')
                 @include('future::table-body')

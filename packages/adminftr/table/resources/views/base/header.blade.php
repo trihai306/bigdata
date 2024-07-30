@@ -2,7 +2,7 @@
     <div class="row align-items-center">
         <div class="col">
             <div class="page-pretitle">
-                {{$pretitle ?? 'Future'}}
+                {{$description ?? 'Future'}}
             </div>
             <h2 class="page-title">
                 {{$title ?? 'Table'}}
@@ -10,7 +10,7 @@
         </div>
         <div class="col-auto ms-auto d-print-none">
             <div class="btn-list">
-                @foreach($headerActions as $headerAction)
+                @foreach( $this->headerActions() as $headerAction)
                     {{ $headerAction->render()}}
                 @endforeach
                 <a class="btn btn-primary" data-bs-toggle="offcanvas" href="#offcanvasEnd" role="button"

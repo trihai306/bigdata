@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Table;
+namespace Adminftr\Table;
 
 class Table
 {

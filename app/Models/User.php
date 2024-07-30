@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Future\Messages\Http\Models\Traits\HasMessages;
+use Adminftr\Messages\Http\Models\Traits\HasMessages;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;

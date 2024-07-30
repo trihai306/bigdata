@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Widgets\Future\Widgets;
+namespace Adminftr\Widgets\Future\Widgets;
 
 class Widgets
 {

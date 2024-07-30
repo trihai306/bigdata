@@ -1,8 +1,8 @@
 <?php
 
-namespace Future\FileManager\Traits;
+namespace Adminftr\FileManager\Traits;
 
-use Future\FileManager\Services\ACLService\ACL;
+use Adminftr\FileManager\Services\ACLService\ACL;
 use Illuminate\Support\Facades\Storage;
 use League\Flysystem\AwsS3V3\AwsS3V3Adapter;
 use League\Flysystem\FilesystemException;

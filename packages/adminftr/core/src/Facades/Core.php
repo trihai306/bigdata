@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Core\Facades;
+namespace Adminftr\Core\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

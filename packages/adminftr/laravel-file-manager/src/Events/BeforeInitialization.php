@@ -1,14 +1,11 @@
 <?php
 
-namespace Future\FileManager\Events;
+namespace Adminftr\FileManager\Events;
 
 class BeforeInitialization
 {
     /**
      * BeforeInitialization constructor.
      */
-    public function __construct()
-    {
-
-    }
+    public function __construct() {}
 }

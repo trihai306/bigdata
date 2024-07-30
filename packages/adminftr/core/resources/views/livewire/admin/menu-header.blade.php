@@ -16,13 +16,13 @@
                        href="{{ route($menu->permission) }}"
                        @if (!$menu->children->isEmpty()) data-bs-toggle="dropdown" data-bs-auto-close="false"
                        aria-expanded="true" @endif>
-                        <span class="nav-link-icon d-md-none d-lg-inline-block{{ $isActive ? ' text-white' : '' }}">
+                        <span class="nav-link-icon d-md-none d-lg-inline-block {{ $isActive ? ' text-white' : '' }}">
                             <i class="{{ $menu->icon }}"></i>
                         </span>
-                        <span class="nav-link-title">{{ $menu->title }}</span>
+                        <span class="nav-link-title {{ $isActive ? ' text-white' : '' }}">{{ $menu->title }}</span>
                     </a>
                     @if (!$menu->children->isEmpty())
-                        <ul class="dropdown-menu{{ $isActive ? ' show' : '' }}"
+                        <ul class="dropdown-menu {{ $isActive ? ' show' : '' }}"
                             aria-labelledby="navbarDropdown{{ $loop->index }}">
                             <li>
                                 <a class="dropdown-item nav-link {{ $isActive && request()->is($menu->url) ? 'bg-primary text-white' : '' }}"
@@ -31,7 +31,7 @@
                             @foreach ($menu->children as $child)
                                 @if (Auth::user()->can($child->permission) && $child->id != $menu->id)
                                     <li>
-                                        <a class="dropdown-item nav-link{{ request()->is($child->url) ? 'bg-primary text-white' : '' }}"
+                                        <a class="dropdown-item nav-link {{ request()->is($child->url) ? 'bg-primary text-white' : '' }}"
                                            href="{{ route($child->permission) }}">{{ $child->title }}</a>
                                     </li>
                                 @endif
@@ -45,7 +45,9 @@
 
     <div class="collapse-menu d-none d-lg-block text-end">
         <button
-            class="btn btn-collapse-menu {{ $_COOKIE['sidebarState'] === 'collapsed' ? 'state-collapsed' : '' }}"
+            class="btn btn-collapse-menu
+            {{ request()->cookie('sidebarState') === 'collapsed' ? 'state-collapsed' : '' }}
+            "
             id="btn-collapse-menu">
             <svg class="icon-left" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"

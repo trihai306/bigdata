@@ -1,7 +1,7 @@
 <thead>
 <tr class="text-start text-muted fw-bold gs-0">
     @if($this->canSelect())
-        <th id="selectAllHeader" scope="col">
+        <th id="selectAllHeader" class="position-sticky top-0" scope="col">
             <div>
                 <input type="checkbox" id="selectAllCheckbox" class="form-check-input"
                        x-model="selectAll" x-on:click="updateSelectAll">
@@ -10,7 +10,7 @@
     @endif
     @foreach($this->defineColumns() as $column)
         @if($column->visible)
-            <th id="{{ $column->name }}Header" class="text-nowrap" scope="col" style="
+            <th id="{{ $column->name }}Header" class="text-nowrap  position-sticky top-0" scope="col" style="
          @if($column->width)
             width: {{ $column->width }};
         @endif
@@ -29,7 +29,7 @@
             </th>
         @endif
     @endforeach
-    @if($actions)
+    @if($this->getActions()->actions)
         <th id="actionsHeader" scope="col" class="text-center text-nowrap min-w-100px">
             {{ __('table::table.actions') }}
         </th>

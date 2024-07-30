@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Table\Future\Traits;
+namespace Adminftr\Table\Future\Traits;
 
 trait WidgetsTrait
 {
@@ -9,7 +9,8 @@ trait WidgetsTrait
         return $this->widgets();
     }
 
-    protected function widgets(){
+    protected function widgets()
+    {
         return [];
     }
 }

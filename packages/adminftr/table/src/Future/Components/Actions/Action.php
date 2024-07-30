@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Table\Future\Components\Actions;
+namespace Adminftr\Table\Future\Components\Actions;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,17 +23,21 @@ class Action
 
     public ?string $tooltip = null;
 
+    public $callbackConfirm = null;
+
     public bool $disabled = false;
 
     public array $SweetAlert = [];
 
     public bool $modal = false;
 
-    public ?string $color = 'text-dark';
+    public ?string $color = '';
 
     public ?string $size = '';
 
-    private array $postSetDataQueue = [];
+    public ?bool $hide = false;
+
+    public array $postSetDataQueue = [];
 
     public function __construct(string $name, string $label, ?string $icon = null)
     {
@@ -42,9 +46,16 @@ class Action
         $this->icon = $icon;
     }
 
-    public static function make(string $name, string $label, ?string $icon = null, ?Model $data = null): self
+    public static function make(string $name, string $label, ?string $icon = null): self
     {
-        return new self($name, $label, $icon, $data);
+        return new self($name, $label, $icon);
+    }
+
+    public function hide(bool $hide = true): self
+    {
+        $this->hide = $hide;
+
+        return $this;
     }
 
     public function id(int $id): self
@@ -99,23 +110,26 @@ class Action
         return $this;
     }
 
-    public function confirm(array|callable $options): self
+    public function confirm(string|callable $title, string|callable $message, callable $callable): self
     {
-        if ($this->data === null) {
-            if (is_callable($options)) {
-                $this->postSetDataQueue[] = function ($self) use ($options) {
-                    $self->confirm($options);
-                };
+        if ($this->data === null && (is_callable($title) || is_callable($message))) {
+            $this->postSetDataQueue[] = function ($self) use ($title, $message, $callable) {
+                $resolvedTitle = is_callable($title) ? $title($self->data) : $title;
+                $resolvedMessage = is_callable($message) ? $message($self->data) : $message;
+                $self->confirm($resolvedTitle, $resolvedMessage, $callable);
+            };
 
-                return $this;
-            }
+            return $this;
         }
-        if (is_callable($options)) {
-            $options = $options($this->data);
-        }
+        $resolvedTitle = is_callable($title) ? $title($this->data) : $title;
+        $resolvedMessage = is_callable($message) ? $message($this->data) : $message;
+        $this->callbackConfirm = $callable;
         $this->sweetAlert = [
             'eventName' => 'swalConfirm',
-            'options' => $options,
+            'title' => $resolvedTitle,
+            'message' => $resolvedMessage,
+            'params' => $this->data,
+            'name' => $this->name,
         ];
 
         return $this;

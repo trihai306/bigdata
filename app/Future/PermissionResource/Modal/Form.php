@@ -2,16 +2,16 @@
 
 namespace App\Future\PermissionResource\Modal;
 
-use Future\Form\Future\Components\Fields\TextInput;
-use Future\Form\Future\Components\Layouts\Row;
-use Future\Form\Future\ModalForm;
+use Adminftr\Form\Future\Components\Fields\TextInput;
+use Adminftr\Form\Future\Components\Layouts\Row;
+use Adminftr\Form\Future\ModalForm;
 use Spatie\Permission\Models\Permission;
 
 class Form extends ModalForm
 {
     public $model = Permission::class;
 
-    public function form(\Future\Form\Future\Components\Form $form)
+    public function form(\Adminftr\Form\Future\Components\Form $form)
     {
         return $form->schema([
             Row::make($sm = 12, $md = 6, $lg = 6)->schema([

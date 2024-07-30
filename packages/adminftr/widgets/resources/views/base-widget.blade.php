@@ -26,7 +26,7 @@
                         @if (isset($data->extraAttributes['subtitle']))
                             <span
                                 class="float-right font-weight-medium {{ $data->extraAttributes['subtitleColor'] ?? '' }}">
-                                ({{ $data->extraAttributes['subtitle'] }}) tháng này
+                                ({{ $data->extraAttributes['subtitle'] }})
                             </span>
                         @endif
                     </div>

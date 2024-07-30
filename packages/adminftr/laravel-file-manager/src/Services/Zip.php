@@ -1,11 +1,11 @@
 <?php
 
-namespace Future\FileManager\Services;
+namespace Adminftr\FileManager\Services;
 
-use Future\FileManager\Events\UnzipCreated;
-use Future\FileManager\Events\UnzipFailed;
-use Future\FileManager\Events\ZipCreated;
-use Future\FileManager\Events\ZipFailed;
+use Adminftr\FileManager\Events\UnzipCreated;
+use Adminftr\FileManager\Events\UnzipFailed;
+use Adminftr\FileManager\Events\ZipCreated;
+use Adminftr\FileManager\Events\ZipFailed;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use RecursiveDirectoryIterator;

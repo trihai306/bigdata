@@ -1,7 +1,7 @@
 <?php
 
-use Future\FileManager\Services\ACLService\ConfigACLRepository;
-use Future\FileManager\Services\ConfigService\DefaultConfigRepository;
+use Adminftr\FileManager\Services\ACLService\ConfigACLRepository;
+use Adminftr\FileManager\Services\ConfigService\DefaultConfigRepository;
 
 return [
 

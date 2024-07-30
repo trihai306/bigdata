@@ -1,8 +1,8 @@
 <?php
 namespace App\Future;
+use Adminftr\Core\Http\Resource\BaseResource;
 use App\Future\BillOfLadingResource\Form;
 use App\Future\BillOfLadingResource\Table;
-use Future\Core\Http\Resource\BaseResource;
 
 
 class BillOfLadingResource extends BaseResource

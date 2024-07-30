@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Notifications;
+namespace Adminftr\Notifications;
 
 class Notifications
 {

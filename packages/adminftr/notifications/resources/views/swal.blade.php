@@ -93,12 +93,17 @@
                     event['params'] = JSON.parse(event['params']);
                 }
                 const params = event['params'] || [];
-                Livewire.dispatch(event['nameMethod'], {
+                let dispatchObject = {
                     data: params
-                });
+                };
+                if (event['name']) {
+                    dispatchObject.name = event['name'];
+                }
+                Livewire.dispatch(event['nameMethod'], dispatchObject);
             }
-            swalConfirm('Are you sure?', event['message'], onYes);
+            swalConfirm(event['title'] ?? 'Are you sure?', event['message'], onYes);
         });
+
 
         Livewire.on('swalAlert', (event) => {
             swalAlert(event[0]);

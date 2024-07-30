@@ -1,8 +1,8 @@
 <?php
 
-namespace Future\Widgets\Future\Widgets;
+namespace Adminftr\Widgets\Future\Widgets;
 
-use Future\Widgets\Future\Traits\WidgetTrait;
+use Adminftr\Widgets\Future\Traits\WidgetTrait;
 
 class ProgressWidget
 {

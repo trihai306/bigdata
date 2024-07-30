@@ -1,5 +1,6 @@
 <?php
-namespace Future\Messages\Http\Policies;
+
+namespace Adminftr\Messages\Http\Policies;
 
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -9,12 +10,12 @@ class UserConversationPolicy
 {
     use HandlesAuthorization;
 
-    public function allowRestify(User $user = null): bool
+    public function allowRestify(?User $user = null): bool
     {
         return true;
     }
 
-    public function show(User $user = null, UserConversation $model): bool
+    public function show(?User $user, UserConversation $model): bool
     {
         return true;
     }

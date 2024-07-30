@@ -1,8 +1,8 @@
 <?php
 
-use Future\Core\Http\Controllers\AuthController;
-use Future\Core\Http\Controllers\DashboardController;
-use Future\Core\Http\Controllers\StorageController;
+use Adminftr\Core\Http\Controllers\AuthController;
+use Adminftr\Core\Http\Controllers\DashboardController;
+use Adminftr\Core\Http\Controllers\StorageController;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;

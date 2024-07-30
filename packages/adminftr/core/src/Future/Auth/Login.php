@@ -1,18 +1,20 @@
 <?php
 
-namespace Future\Core\Future\Auth;
+namespace Adminftr\Core\Future\Auth;
 
-use Livewire\Attributes\Renderless;
 use Livewire\Component;
 
 class Login extends Component
 {
     public $email;
+
     public $password;
+
     public function render()
     {
         return view('future::future.auth.login');
     }
+
     public function login()
     {
         $this->validate();

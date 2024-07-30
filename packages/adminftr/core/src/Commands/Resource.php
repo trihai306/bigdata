@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Core\Commands;
+namespace Adminftr\Core\Commands;
 
 use Illuminate\Console\Command;
 

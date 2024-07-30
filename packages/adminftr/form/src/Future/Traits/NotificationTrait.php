@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Form\Future\Traits;
+namespace Adminftr\Form\Future\Traits;
 
 trait NotificationTrait
 {

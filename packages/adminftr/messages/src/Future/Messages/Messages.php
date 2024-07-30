@@ -1,8 +1,8 @@
 <?php
 
-namespace Future\Messages\Future\Messages;
+namespace Adminftr\Messages\Future\Messages;
 
-use Future\Messages\Http\Models\Message;
+use Adminftr\Messages\Http\Models\Message;
 use Livewire\Attributes\Locked;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;

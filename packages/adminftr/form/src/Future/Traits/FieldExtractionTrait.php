@@ -1,9 +1,9 @@
 <?php
 
-namespace Future\Form\Future\Traits;
+namespace Adminftr\Form\Future\Traits;
 
-use Future\Form\Future\Components\Field;
-use Future\Form\Future\Components\Fields\Select;
+use Adminftr\Form\Future\Components\Field;
+use Adminftr\Form\Future\Components\Fields\Select;
 
 trait FieldExtractionTrait
 {

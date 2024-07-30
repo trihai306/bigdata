@@ -1,10 +1,10 @@
 <?php
 
-namespace Future\FileManager\Services\ACLService;
+namespace Adminftr\FileManager\Services\ACLService;
 
-use manager\src\Services\ConfigService\ConfigRepository;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Cache;
+use manager\src\Services\ConfigService\ConfigRepository;
 
 class ACL
 {

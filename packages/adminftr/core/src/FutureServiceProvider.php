@@ -1,16 +1,16 @@
 <?php
 
-namespace Future\Core;
+namespace Adminftr\Core;
 
+use Adminftr\FileManager\FileManagerServiceProvider;
+use Adminftr\Form\FormServiceProvider;
+use Adminftr\Form\Future\BaseForm;
+use Adminftr\Messages\MessagesServiceProvider;
+use Adminftr\Notifications\NotificationsServiceProvider;
+use Adminftr\Table\Future\BaseTable;
+use Adminftr\Table\TableServiceProvider;
+use Adminftr\Widgets\WidgetsServiceProvider;
 use Exception;
-use Future\FileManager\FileManagerServiceProvider;
-use Future\Form\FormServiceProvider;
-use Future\Form\Future\BaseForm;
-use Future\Messages\MessagesServiceProvider;
-use Future\Notifications\NotificationsServiceProvider;
-use Future\Table\Future\BaseTable;
-use Future\Table\TableServiceProvider;
-use Future\Widgets\WidgetsServiceProvider;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;

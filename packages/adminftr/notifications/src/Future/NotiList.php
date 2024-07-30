@@ -1,6 +1,6 @@
 <?php
 
-namespace Future\Notifications\Future;
+namespace Adminftr\Notifications\Future;
 
 use Exception;
 use Livewire\Component;
