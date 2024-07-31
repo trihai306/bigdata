@@ -1,4 +1,6 @@
 <?php
+
+use App\Models\CarrierToken;
 use Kreait\Firebase\Factory;
 use Kreait\Firebase\Messaging;
 use Illuminate\Support\Facades\Http;
@@ -278,21 +280,64 @@ class ViettelPostAPI
             'PASSWORD' => $this->PASSWORD
         ]);
 
+    return $response->json()['data']['token'];
+    }
+
+    public function loginFull()
+    {
+        $url = self::ROOT_URL . '/v2/user/ownerconnect';
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Token' => $this->login()
+        ])->post($url, [
+            'USERNAME' => $this->USERNAME,
+            'PASSWORD' => $this->PASSWORD
+        ]);
+
         if ($response->successful()) {
-            $this->accessToken = $response->json(); // Assuming token is returned in response
-            return $response->body();
+            $responseData = $response->json();
+            if($responseData['status']==200){
+                CarrierToken::updateOrCreate(
+                    ['carrier_name' => 'viettelpost'],
+                    ['token' => $responseData['data']['token'], 'expires_at' => now()]
+                );
+                return $response->body();
+            }
+            else{
+                return null;
+            }
         } else {
             return null; // Consider throwing an exception or logging this error
         }
     }
 
-    public function createStore($store)
+    public function getService($data)
     {
-        $url = self::ROOT_URL . '/v2/user/registerInventory';
+        $url = self::ROOT_URL . '/v2/order/getPriceAll';
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
-        ])->post($url, $store);
+            'Token' => CarrierToken::where('carrier_name', 'viettelpost')->first()->token
+        ])->post($url, $data);
+        return $response->json();
+    }
 
-        return $response->successful() ? $response->body() : null; // Add error handling
+    public function getPrice($data)
+    {
+        $url = self::ROOT_URL . '/v2/order/getPriceNlp';
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Token' => CarrierToken::where('carrier_name', 'viettelpost')->first()->token
+        ])->post($url, $data);
+        return $response->json();
+    }
+
+    public function createOrder($data)
+    {
+        $url = self::ROOT_URL . '/v2/order/createOrderNlp';
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Token' => CarrierToken::where('carrier_name', 'viettelpost')->first()->token
+        ])->post($url, $data);
+        return $response->json();
     }
 }

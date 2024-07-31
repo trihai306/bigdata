@@ -41,11 +41,7 @@ abstract class BaseForm extends Component
 
     public function render()
     {
-        $actions = $this->Actions();
-
-        return view('form::base-form', [
-            'actions' => $actions,
-        ]);
+        return view('form::base-form');
     }
 
     protected function Actions()
@@ -81,9 +77,17 @@ abstract class BaseForm extends Component
     {
         $this->skipRender();
         DB::beginTransaction();
-        $this->validateData();
         try {
-            $this->data = $this->beforeSave($this->data);
+            if(!empty($this->rules())){
+                $this->validate($this->rules(),$this->messages());
+            }
+
+            $url = $this->url;
+            if (str_contains($url, 'edit')) {
+                $this->data = $this->beforeUpdate($this->data);
+            } else {
+                $this->data = $this->beforeSave($this->data);
+            }
             $this->persistData();
             if (function_exists('afterSave')) {
                 return $this->afterSave($this->data);
@@ -97,6 +101,11 @@ abstract class BaseForm extends Component
     }
 
     protected function beforeSave(array $data)
+    {
+        return $data;
+    }
+
+    protected function beforeUpdate(array $data)
     {
         return $data;
     }

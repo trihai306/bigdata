@@ -15,12 +15,15 @@ trait DataInitializationTrait
 
     private function loadModelData($inputs)
     {
-        $fieldNames = array_map(fn ($input) => $input->name, array_filter($inputs, fn ($input) => $input->canHide !== false));
+        $fieldNames = array_map(fn ($input) => $input->name, array_filter($inputs, fn ($input) => $input->canHide !== true));
         $relations = [];
         $fields = [];
-        dd($fieldNames);
         foreach ($fieldNames as $fieldName) {
-            if (str_contains($fieldName, '.')) {
+            //thêm trường hợp check có _confirmation
+            if (str_contains($fieldName, '_confirmation')) {
+                $fieldName = str_replace('_confirmation', '', $fieldName);
+            }
+            elseif (str_contains($fieldName, '.')) {
                 $parts = explode('.', $fieldName);
                 $fieldName = str_replace('.', '_', $fieldName);
                 $relations[$parts[1]] = $fieldName;
@@ -29,8 +32,7 @@ trait DataInitializationTrait
                 $fields[] = $fieldName;
             }
         }
-
-        $this->model = $this->model::with(array_keys($relations))->select()->find($this->id);
+        $this->model = $this->model::with(array_keys($relations))->select($fields)->find($this->id);
 
         if ($this->model) {
             $this->data = $this->model->toArray();

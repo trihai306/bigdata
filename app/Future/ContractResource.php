@@ -14,4 +14,9 @@ class ContractResource extends BaseResource
             new Form()
         );
     }
+
+    public function show($id)
+    {
+        return view('contract.showContract');
+    }
 }

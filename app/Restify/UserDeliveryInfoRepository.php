@@ -36,6 +36,11 @@ class UserDeliveryInfoRepository extends Repository
         return [
             id(),
             field('user_id'),
+            field('store_id')->canStore(function ($request) {
+                return false;
+            })->canUpdate(function ($request) {
+                return false;
+            }),
             field('address')->rules('required')->messages([
                 'required' => 'Trường này là bắt buộc.',
             ]),
@@ -62,6 +67,7 @@ class UserDeliveryInfoRepository extends Repository
         if($request->user_id != $request->user()->id) {
             abort(403, 'Không thể thêm thông tin giao hàng cho người khác.');
         }
+
         return parent::store($request);
     }
 }

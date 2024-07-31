@@ -1,8 +1,8 @@
 <div>
     <form wire:submit.prevent="save">
         <div class="d-flex justify-content-end mb-4 btn-list">
-            @if($actions)
-                @foreach($actions as $action)
+            @if($this->Actions())
+                @foreach($this->Actions() as $action)
                     @if($action->hidden)
                         {!! $action->render() !!}
                     @endif

@@ -71,6 +71,6 @@ class FutureServiceProvider extends ServiceProvider
         $this->app->register(TableServiceProvider::class);
         $this->app->register(MessagesServiceProvider::class);
         $this->app->register(WidgetsServiceProvider::class);
-        $this->app->register(FileManagerServiceProvider::class);
+//        $this->app->register(FileManagerServiceProvider::class);
     }
 }

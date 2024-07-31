@@ -88,14 +88,18 @@ class Col
 
     public function render()
     {
-        $html = '<div class="'.$this->classes.'"';
-        foreach ($this->attributes as $name => $value) {
-            $html .= ' '.$name.'="'.$value.'"';
-        }
-        $html .= '>';
-        $html .= $this->content[0]->render();
-        $html .= '</div>';
+        if(!$this->content[0]->canHide){
+            $html = '<div class="'.$this->classes.'"';
+            foreach ($this->attributes as $name => $value) {
+                $html .= ' '.$name.'="'.$value.'"';
+            }
+            $html .= '>';
+            $html .= $this->content[0]->render();
+            $html .= '</div>';
 
-        return $html;
+            return $html;
+        }
+        return '';
+
     }
 }

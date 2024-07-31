@@ -15,7 +15,7 @@ trait FieldExtractionTrait
     private function extractFields($fields, $type, $isRelationship = false)
     {
         return array_reduce($fields, function ($extractedFields, $field) use ($type, $isRelationship) {
-            if ($field instanceof $type && (! $isRelationship || str_contains($field->name, '.'))) {
+            if ($field instanceof $type && (! $isRelationship || str_contains($field->name, '.')) && !$field->canHide) {
                 $extractedFields[] = $field;
             } elseif (method_exists($field, 'getFields')) {
                 $extractedFields = array_merge($extractedFields, $this->extractFields($field->getFields(), $type, $isRelationship));
