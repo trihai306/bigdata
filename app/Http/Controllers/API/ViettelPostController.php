@@ -63,6 +63,7 @@ class ViettelPostController extends Controller
 
     public function getPrice(Request $request)
     {
+        dd($request->all());
        $inputDelivery = $request->input(['sender_id', 'receiver_id']);
         $product = $request->input(['weight', 'price', 'length', 'width', 'height']);
         dd($inputDelivery);
