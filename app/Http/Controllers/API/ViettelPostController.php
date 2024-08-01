@@ -18,7 +18,7 @@ class ViettelPostController extends Controller
             // Thu thập thông tin từ request
             $inputDelivery = $request->only(['sender_id', 'receiver_id']);
             $product = $request->only(['weight', 'price', 'length', 'width', 'height']);
-
+            dd($inputDelivery);
             // Tìm thông tin giao hàng của người gửi và người nhận
             $sender = Delivery::find($inputDelivery['sender_id']);
             $receiver = Delivery::find($inputDelivery['receiver_id']);
