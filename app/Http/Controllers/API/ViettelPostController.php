@@ -27,7 +27,9 @@ class ViettelPostController extends Controller
             if (!$sender || !$receiver) {
                 return response()->json(['error' => 'Không tìm thấy thông tin người gửi hoặc người nhận.'], 404);
             }
-
+            // xóa " -" chuyen sang ","
+            $sender->address = str_replace(' -', ',', $sender->address);
+            $receiver->address = str_replace(' -', ',', $receiver->address);
             // Chuẩn bị dữ liệu cho API
             $input = [
                 "SENDER_ADDRESS" => $sender->address,
