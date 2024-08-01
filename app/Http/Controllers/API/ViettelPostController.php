@@ -89,7 +89,7 @@ class ViettelPostController extends Controller
                 "PRODUCT_TYPE" => "HH",
                 "NATIONAL_TYPE" => 1
             ];
-
+            dd($data);
             // Call API to get price
             $ViettelPostAPI = new ViettelPostAPI();
             $response = $ViettelPostAPI->getPrice($data);
