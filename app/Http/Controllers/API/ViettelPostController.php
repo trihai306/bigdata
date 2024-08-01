@@ -63,37 +63,50 @@ class ViettelPostController extends Controller
 
     public function getPrice(Request $request)
     {
-        dd($request->all());
-       $inputDelivery = $request->input(['sender_id', 'receiver_id']);
-        $product = $request->input(['weight', 'price', 'length', 'width', 'height']);
-        dd($inputDelivery);
-        $sender = UserDeliveryInfo::find($inputDelivery['sender_id']);
-        $receiver = UserDeliveryInfo::find($inputDelivery['receiver_id']);
+        try {
+            // Retrieve delivery information from request
+            $inputDelivery = $request->input(['sender_id', 'receiver_id']);
+            $product = $request->input(['weight', 'price', 'length', 'width', 'height']);
 
-        if (!$sender || !$receiver) {
-            return response()->json(['error' => 'Không tìm thấy thông tin người gửi hoặc người nhận.'], 204);
+            // Find delivery information for sender and receiver
+            $sender = UserDeliveryInfo::find($inputDelivery['sender_id']);
+            $receiver = UserDeliveryInfo::find($inputDelivery['receiver_id']);
+
+            // Check if sender and receiver information is found
+            if (!$sender || !$receiver) {
+                return response()->json(['error' => 'Không tìm thấy thông tin người gửi hoặc người nhận.'], 204); // No Content
+            }
+
+            // Prepare data for API request
+            $data = [
+                "PRODUCT_WEIGHT" => $product['weight'],
+                "PRODUCT_PRICE" => $product['price'],
+                "MONEY_COLLECTION" => 0,
+                "ORDER_SERVICE_ADD" => "",
+                "ORDER_SERVICE" => $request->input('service'),
+                "SENDER_DISTRICT" => $sender->district_id,
+                "SENDER_PROVINCE" => $sender->province_id,
+                "RECEIVER_DISTRICT" => $receiver->district_id,
+                "RECEIVER_PROVINCE" => $receiver->province_id,
+                "PRODUCT_LENGTH" => $product['length'],
+                "PRODUCT_WIDTH" => $product['width'],
+                "PRODUCT_HEIGHT" => $product['height'],
+                "PRODUCT_TYPE" => "HH",
+                "NATIONAL_TYPE" => 1
+            ];
+
+            // Call API to get price
+            $ViettelPostAPI = new ViettelPostAPI();
+            $response = $ViettelPostAPI->getPrice($data);
+
+            // Return API response
+            return response()->json($response);
+        } catch (\Exception $e) {
+            // Handle exceptions that occur during API call or data processing
+            return response()->json(['error' => 'Lỗi xử lý yêu cầu: ' . $e->getMessage()], 500);
         }
-
-        $data = [
-            "PRODUCT_WEIGHT" => $product['weight'],
-            "PRODUCT_PRICE" => $product['price'],
-            "MONEY_COLLECTION" => 0,
-            "ORDER_SERVICE_ADD" => "",
-            "ORDER_SERVICE" => $request->input('service'),
-            "SENDER_DISTRICT" => $sender->district_id,
-            "SENDER_PROVINCE" => $sender->province_id,
-            "RECEIVER_DISTRICT" => $receiver->district_id,
-            "RECEIVER_PROVINCE" => $receiver->province_id,
-            "PRODUCT_LENGTH" => $product['length'],
-            "PRODUCT_WIDTH" => $product['width'],
-            "PRODUCT_HEIGHT" => $product['height'],
-            "PRODUCT_TYPE" => "HH",
-            "NATIONAL_TYPE" => 1
-        ];
-        $ViettelPostAPI = new ViettelPostAPI();
-        $response = $ViettelPostAPI->getPrice($data);
-        return response()->json($response);
     }
+
 
     public function createOrder(Request $request)
     {
