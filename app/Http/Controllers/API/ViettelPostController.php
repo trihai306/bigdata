@@ -65,6 +65,7 @@ class ViettelPostController extends Controller
     {
        $inputDelivery = $request->input(['sender_id', 'receiver_id']);
         $product = $request->input(['weight', 'price', 'length', 'width', 'height']);
+        dd($inputDelivery);
         $sender = UserDeliveryInfo::find($inputDelivery['sender_id']);
         $receiver = UserDeliveryInfo::find($inputDelivery['receiver_id']);
 
