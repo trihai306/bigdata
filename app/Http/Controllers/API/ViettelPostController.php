@@ -32,8 +32,11 @@ class ViettelPostController extends Controller
             $receiver->address = str_replace(' -', ',', $receiver->address);
             // Chuẩn bị dữ liệu cho API
             $input = [
-                "SENDER_ADDRESS" => $sender->address,
-                "RECEIVER_ADDRESS" => $receiver->address,
+//                "SENDER_ADDRESS" => $sender->address,
+//                "RECEIVER_ADDRESS" => $receiver->address,
+            "SENDER_DISTRICT" => $sender->district_id,
+                "SENDER_PROVINCE" => $sender->province_id,
+                "RECEIVER_DISTRICT" => $receiver->district_id,
                 "RECEIVER_PROVINCE" => $receiver->province_id,
                 "PRODUCT_TYPE" => "HH",
                 "PRODUCT_WEIGHT" => $product['weight'],
