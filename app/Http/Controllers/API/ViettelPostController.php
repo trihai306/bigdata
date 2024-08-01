@@ -44,7 +44,6 @@ class ViettelPostController extends Controller
                 "PRODUCT_HEIGHT" => $product['height'],
                 "TYPE" => 1,
             ];
-            dd($input);
             // Gọi API để lấy dịch vụ
             $ViettelPostAPI = new ViettelPostAPI();
             $response = $ViettelPostAPI->getService($input);
