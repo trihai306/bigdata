@@ -63,6 +63,7 @@ class ViettelPostController extends Controller
         $product = $request->input(['weight', 'price', 'length', 'width', 'height']);
         $sender = Delivery::find($inputDelivery['sender_id']);
         $receiver = Delivery::find($inputDelivery['receiver_id']);
+        dd($sender, $receiver);
         if (!$sender || !$receiver) {
             return response()->json(['error' => 'Không tìm thấy thông tin người gửi hoặc người nhận.'], 404);
         }
