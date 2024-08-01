@@ -78,8 +78,10 @@ class ViettelPostController extends Controller
             "MONEY_COLLECTION" => 0,
             "ORDER_SERVICE_ADD" => "",
             "ORDER_SERVICE" => $request->input('service'),
-             "SENDER_ADDRESS" => $sender->address,
-            "RECEIVER_ADDRESS" => $receiver->address,
+            "SENDER_DISTRICT" => $sender->district_id,
+            "SENDER_PROVINCE" => $sender->province_id,
+            "RECEIVER_DISTRICT" => $receiver->district_id,
+            "RECEIVER_PROVINCE" => $receiver->province_id,
             "PRODUCT_LENGTH" => $product['length'],
             "PRODUCT_WIDTH" => $product['width'],
             "PRODUCT_HEIGHT" => $product['height'],
@@ -105,7 +107,7 @@ class ViettelPostController extends Controller
                 "PRODUCT_NAME" => $product->name,
                 "PRODUCT_QUANTITY" => $product->quantity,
                 "PRODUCT_PRICE" => $product->price,
-                'PRODUCT_WEIGHT' => 50,
+                'PRODUCT_WEIGHT' => 100,
             ];
         }
         $orderDetails = [
@@ -133,6 +135,8 @@ class ViettelPostController extends Controller
             "CHECK_UNIQUE" => true,
             "LIST_ITEM" => $listItem
         ];
-
+        $ViettelPostAPI = new ViettelPostAPI();
+        $response = $ViettelPostAPI->createOrder($orderDetails);
+        return response()->json($response);
     }
 }
