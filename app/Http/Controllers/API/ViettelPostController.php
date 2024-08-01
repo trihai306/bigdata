@@ -53,6 +53,9 @@ class ViettelPostController extends Controller
             "PRODUCT_TYPE" => "HH",
             "NATIONAL_TYPE" => 1
         ];
+        $ViettelPostAPI = new ViettelPostAPI();
+        $response = $ViettelPostAPI->getPrice($data);
+        return response()->json($response);
     }
 
     public function createOrder(Request $request)
