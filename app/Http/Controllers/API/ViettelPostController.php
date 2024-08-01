@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Delivery;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,32 +14,59 @@ class ViettelPostController extends Controller
 {
     public function getService(Request $request)
     {
-        $sender = Auth::user()->deliveryInfo;
-        $receiver = User::find($request->receiver_id)->deliveryInfo;
-        $product = $request->input(['weight', 'price', 'length', 'width', 'height']);
-        $input = [
-            "SENDER_ADDRESS" => $sender->address,
-            "RECEIVER_ADDRESS" => $receiver->address,
-            "RECEIVER_PROVINCE" => $receiver->province_id,
-            "PRODUCT_TYPE" => "HH",
-            "PRODUCT_WEIGHT" => $product['weight'],
-            "PRODUCT_PRICE" => $product['price'],
-            "MONEY_COLLECTION" => "0",
-            "PRODUCT_LENGTH" => $product['length'],
-            "PRODUCT_WIDTH" => $product['width'],
-            "PRODUCT_HEIGHT" => $product['height'],
-            "TYPE" => 1,
+        try {
+            // Thu thập thông tin từ request
+            $inputDelivery = $request->only(['sender_id', 'receiver_id']);
+            $product = $request->only(['weight', 'price', 'length', 'width', 'height']);
+
+            // Tìm thông tin giao hàng của người gửi và người nhận
+            $sender = Delivery::find($inputDelivery['sender_id']);
+            $receiver = Delivery::find($inputDelivery['receiver_id']);
+
+            // Kiểm tra người gửi và người nhận có tồn tại không
+            if (!$sender || !$receiver) {
+                return response()->json(['error' => 'Không tìm thấy thông tin người gửi hoặc người nhận.'], 404);
+            }
+
+            // Chuẩn bị dữ liệu cho API
+            $input = [
+                "SENDER_ADDRESS" => $sender->address,
+                "RECEIVER_ADDRESS" => $receiver->address,
+                "RECEIVER_PROVINCE" => $receiver->province_id,
+                "PRODUCT_TYPE" => "HH",
+                "PRODUCT_WEIGHT" => $product['weight'],
+                "PRODUCT_PRICE" => $product['price'],
+                "MONEY_COLLECTION" => "0",
+                "PRODUCT_LENGTH" => $product['length'],
+                "PRODUCT_WIDTH" => $product['width'],
+                "PRODUCT_HEIGHT" => $product['height'],
+                "TYPE" => 1,
             ];
-        $ViettelPostAPI = new ViettelPostAPI();
-        $response = $ViettelPostAPI->getService($input);
-        return response()->json($response);
+
+            // Gọi API để lấy dịch vụ
+            $ViettelPostAPI = new ViettelPostAPI();
+            $response = $ViettelPostAPI->getService($input);
+
+            // Trả về phản hồi từ API
+            return response()->json($response);
+
+        } catch (\Exception $e) {
+            // Xử lý ngoại lệ nếu có
+            return response()->json(['error' => 'Đã xảy ra lỗi: ' . $e->getMessage()], 500);
+        }
     }
+
 
     public function getPrice(Request $request)
     {
-        $sender = Auth::user()->deliveryInfo;
-        $receiver = User::find($request->receiver_id)->deliveryInfo;
+       $inputDelivery = $request->input(['sender_id', 'receiver_id']);
         $product = $request->input(['weight', 'price', 'length', 'width', 'height']);
+        $sender = Delivery::find($inputDelivery['sender_id']);
+        $receiver = Delivery::find($inputDelivery['receiver_id']);
+        if (!$sender || !$receiver) {
+            return response()->json(['error' => 'Không tìm thấy thông tin người gửi hoặc người nhận.'], 404);
+        }
+
         $data = [
             "PRODUCT_WEIGHT" => $product['weight'],
             "PRODUCT_PRICE" => $product['price'],
