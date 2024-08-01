@@ -64,13 +64,8 @@ class ViettelPostController extends Controller
     public function getPrice(Request $request)
     {
         try {
-            // Retrieve delivery information from request
-            $inputDelivery = $request->input(['sender_id', 'receiver_id']);
-            $product = $request->input(['weight', 'price', 'length', 'width', 'height']);
-
-            // Find delivery information for sender and receiver
-            $sender = UserDeliveryInfo::find($inputDelivery['sender_id']);
-            $receiver = UserDeliveryInfo::find($inputDelivery['receiver_id']);
+            $sender = UserDeliveryInfo::find($request->get('sender_id'));
+            $receiver = UserDeliveryInfo::find($request->get('receiver_id'));
 
             // Check if sender and receiver information is found
             if (!$sender || !$receiver) {
@@ -79,8 +74,8 @@ class ViettelPostController extends Controller
 
             // Prepare data for API request
             $data = [
-                "PRODUCT_WEIGHT" => $product['weight'],
-                "PRODUCT_PRICE" => $product['price'],
+                "PRODUCT_WEIGHT" => $request->input('weight'),
+                "PRODUCT_PRICE" => $request->input('price'),
                 "MONEY_COLLECTION" => 0,
                 "ORDER_SERVICE_ADD" => "",
                 "ORDER_SERVICE" => $request->input('service'),
@@ -88,9 +83,9 @@ class ViettelPostController extends Controller
                 "SENDER_PROVINCE" => $sender->province_id,
                 "RECEIVER_DISTRICT" => $receiver->district_id,
                 "RECEIVER_PROVINCE" => $receiver->province_id,
-                "PRODUCT_LENGTH" => $product['length'],
-                "PRODUCT_WIDTH" => $product['width'],
-                "PRODUCT_HEIGHT" => $product['height'],
+                "PRODUCT_LENGTH" => $request->input('length'),
+                "PRODUCT_WIDTH" => $request->input('width'),
+                "PRODUCT_HEIGHT" => $request->input('height'),
                 "PRODUCT_TYPE" => "HH",
                 "NATIONAL_TYPE" => 1
             ];
