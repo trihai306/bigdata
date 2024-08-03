@@ -13,6 +13,8 @@ class PartyAInfo extends Model
         'user_id', // Add this line
         'account_number',
         'email',
+        'district_id',
+        'province_id',
         'bank_name',
         'address',
         'recipient_name',

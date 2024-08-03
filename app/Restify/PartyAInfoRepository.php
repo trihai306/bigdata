@@ -37,6 +37,12 @@ class PartyAInfoRepository extends Repository
             field('account_number')->rules('required')->messages([
                 'required' => 'Số tài khoản không được để trống',
             ]),
+            field('district_id')->rules('required')->messages([
+                'required' => 'Quận/Huyện không được để trống',
+            ]),
+            field('province_id')->rules('required')->messages([
+                'required' => 'Tỉnh/Thành phố không được để trống',
+            ]),
             field('email')->rules('email')->messages([
                 'email' => 'Email không hợp lệ',
             ]),
