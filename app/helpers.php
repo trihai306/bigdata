@@ -323,7 +323,7 @@ class ViettelPostAPI
 
     public function getPrice($data)
     {
-        $url = self::ROOT_URL . '/v2/order/getPriceNlp';
+        $url = self::ROOT_URL . '/v2/order/getPrice';
         $response = Http::withHeaders([
             'Content-Type' => 'application/json',
             'Token' => CarrierToken::where('carrier_name', 'viettelpost')->first()->token
