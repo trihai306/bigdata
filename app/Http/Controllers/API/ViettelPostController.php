@@ -70,38 +70,38 @@ class ViettelPostController extends Controller
                 return response()->json(['error' => 'Không tìm thấy thông tin người gửi hoặc người nhận.'], 204); // No Content
             }
 
-//            $data = [
-//                "PRODUCT_WEIGHT" => $request->input('weight'),
-//                "PRODUCT_PRICE" => $request->input('price'),
-//                "MONEY_COLLECTION" => 0,
-//                "ORDER_SERVICE_ADD" => "",
-//                "ORDER_SERVICE" => $request->input('service'),
-//                "SENDER_DISTRICT" => $sender->district_id,
-//                "SENDER_PROVINCE" => $sender->province_id,
-//                "RECEIVER_DISTRICT" => $receiver->district_id,
-//                "RECEIVER_PROVINCE" => $receiver->province_id,
-//                "PRODUCT_LENGTH" => $request->input('length'),
-//                "PRODUCT_WIDTH" => $request->input('width'),
-//                "PRODUCT_HEIGHT" => $request->input('height'),
-//                "PRODUCT_TYPE" => "HH",
-//                "NATIONAL_TYPE" => 1
-//            ];
             $data = [
-                "PRODUCT_WEIGHT" => 100,
-                "PRODUCT_PRICE" => 96000,
+                "PRODUCT_WEIGHT" => $request->input('weight'),
+                "PRODUCT_PRICE" => $request->input('price'),
                 "MONEY_COLLECTION" => 0,
                 "ORDER_SERVICE_ADD" => "",
-                "ORDER_SERVICE" => "VCBO",
-                "SENDER_DISTRICT" => 12,
-                "SENDER_PROVINCE" => 1,
-                "RECEIVER_DISTRICT" => 12,
-                "RECEIVER_PROVINCE" => 1,
-                "PRODUCT_LENGTH" => 0,
-                "PRODUCT_WIDTH" => 0,
-                "PRODUCT_HEIGHT" => 0,
+                "ORDER_SERVICE" => $request->input('service'),
+                "SENDER_DISTRICT" => $sender->district_id,
+                "SENDER_PROVINCE" => $sender->province_id,
+                "RECEIVER_DISTRICT" => $receiver->district_id,
+                "RECEIVER_PROVINCE" => $receiver->province_id,
+                "PRODUCT_LENGTH" => $request->input('length'),
+                "PRODUCT_WIDTH" => $request->input('width'),
+                "PRODUCT_HEIGHT" => $request->input('height'),
                 "PRODUCT_TYPE" => "HH",
                 "NATIONAL_TYPE" => 1
             ];
+//            $data = [
+//                "PRODUCT_WEIGHT" => 100,
+//                "PRODUCT_PRICE" => 96000,
+//                "MONEY_COLLECTION" => 0,
+//                "ORDER_SERVICE_ADD" => "",
+//                "ORDER_SERVICE" => "VCBO",
+//                "SENDER_DISTRICT" => 12,
+//                "SENDER_PROVINCE" => 1,
+//                "RECEIVER_DISTRICT" => 12,
+//                "RECEIVER_PROVINCE" => 1,
+//                "PRODUCT_LENGTH" => 0,
+//                "PRODUCT_WIDTH" => 0,
+//                "PRODUCT_HEIGHT" => 0,
+//                "PRODUCT_TYPE" => "HH",
+//                "NATIONAL_TYPE" => 1
+//            ];
             // Call API to get price
             $ViettelPostAPI = new ViettelPostAPI();
             $response = $ViettelPostAPI->getPrice($data);
