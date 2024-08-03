@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('party_b_info', function (Blueprint $table) {
-            $table->unsignedBigInteger('delivery_id')->nullable()->after('province_id');
+        Schema::table('party_b_infos', function (Blueprint $table) {
+            $table->bigInteger('delivery_id')->nullable();
         });
     }
 
