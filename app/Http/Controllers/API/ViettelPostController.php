@@ -74,7 +74,7 @@ class ViettelPostController extends Controller
                 "PRODUCT_WEIGHT" => $request->input('weight'),
                 "PRODUCT_PRICE" => $request->input('price'),
                 "MONEY_COLLECTION" => 0,
-                "ORDER_SERVICE_ADD" => "",
+                "ORDER_SERVICE_ADD" => $request->input('service_add'),
                 "ORDER_SERVICE" => $request->input('service'),
                 "SENDER_DISTRICT" => $sender->district_id,
                 "SENDER_PROVINCE" => $sender->province_id,
