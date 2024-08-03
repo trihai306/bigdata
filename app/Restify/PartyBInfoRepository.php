@@ -68,11 +68,8 @@ class PartyBInfoRepository extends Repository
             field('bank_account_number')->rules('required')->messages([
                 'required' => 'Số tài khoản ngân hàng không được để trống',
             ]),
-            field('district_id')->rules('required')->messages([
-                'required' => 'Quận/Huyện không được để trống',
-            ]),
-            field('province_id')->rules('required')->messages([
-                'required' => 'Tỉnh/Thành phố không được để trống',
+            field('delivery_id')->rules('required')->messages([
+                'required' => 'Mã giao dịch không được để trống',
             ]),
             field('bank_name')->rules('required')->messages([
                 'required' => 'Tên ngân hàng không được để trống',

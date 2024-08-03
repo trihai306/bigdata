@@ -10,11 +10,10 @@ class PartyAInfo extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', // Add this line
+        'user_id',
         'account_number',
         'email',
-        'district_id',
-        'province_id',
+        'delivery_id',
         'bank_name',
         'address',
         'recipient_name',

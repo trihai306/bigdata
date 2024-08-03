@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('party_a_infos', function (Blueprint $table) {
-            $table->unsignedBigInteger('district_id')->nullable();
-            $table->unsignedBigInteger('province_id')->nullable();
+        Schema::table('party_a_info', function (Blueprint $table) {
+            $table->unsignedBigInteger('delivery_id')->nullable()->after('province_id');
         });
     }
 
@@ -23,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('party_a_info', function (Blueprint $table) {
-            $table->dropColumn(['district_id', 'province_id']);
+            //
         });
     }
 };

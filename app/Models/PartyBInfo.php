@@ -16,6 +16,7 @@ class PartyBInfo extends Model
         'bank_account_number',
         'bank_name',
         'business_name',
+        'delivery_id',
         'position',
         'address',
         'phone_number',
