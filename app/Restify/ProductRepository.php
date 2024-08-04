@@ -23,7 +23,14 @@ class ProductRepository extends Repository
         'material',
         'description',
     ];
-
+    public static array $match = [
+        'field',
+        'contract_id',
+        'name',
+        'color',
+        'quantity',
+        'price',
+    ];
 
     public function fields(RestifyRequest $request): array
     {

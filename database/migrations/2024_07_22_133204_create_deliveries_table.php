@@ -10,9 +10,9 @@ class CreateDeliveriesTable extends Migration
     {
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
-            $table->enum('scheduled_delivery_time',[
-                'full_day','morning','afternoon','night','sunday','holiday','time_work'
-            ]);
+            $table->string('name');
+            $table->string('weight');
+            $table->string('price');
             $table->string('contract_id');
             $table->text('special_nature');
             $table->string('package_image')->nullable();
