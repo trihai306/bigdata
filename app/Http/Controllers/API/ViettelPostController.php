@@ -126,7 +126,7 @@ class ViettelPostController extends Controller
                     'PRODUCT_WEIGHT' => 100,
                 ];
             }
-
+            dd($listItem);
             $orderDetails = [
                 "SENDER_FULLNAME" => $sender->receiver_name,
                 "SENDER_ADDRESS" => $sender->address,
@@ -152,7 +152,7 @@ class ViettelPostController extends Controller
                 "CHECK_UNIQUE" => true,
                 "LIST_ITEM" => $listItem
             ];
-            dd($orderDetails);
+
             $ViettelPostAPI = new ViettelPostAPI();
             $response = $ViettelPostAPI->createOrder($orderDetails);
             return response()->json($response);
