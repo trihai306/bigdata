@@ -109,7 +109,7 @@ class ViettelPostController extends Controller
             }
 
             $product = $request->input(['weight', 'price', 'length', 'width', 'height', 'product_name', 'note', 'quantity']);
-            $order = $request->input(['order_service', 'order_note']);
+            $order = $request->input(['order_service', 'order_note', 'order_service_add']);
             $contract = $request->input('contract_id');
 
             $listProduct = Product::where('contract_id', $contract)->get();
@@ -145,7 +145,7 @@ class ViettelPostController extends Controller
                 "ORDER_PAYMENT" => 3,
                 "ORDER_SERVICE" => $order['order_service'],
                 "PRODUCT_TYPE" => "HH",
-                "ORDER_SERVICE_ADD" => null,
+                "ORDER_SERVICE_ADD" => $order['order_service_add'],
                 "ORDER_NOTE" => $order['order_note'],
                 "MONEY_COLLECTION" => 56827,
                 "EXTRA_MONEY" => 0,
