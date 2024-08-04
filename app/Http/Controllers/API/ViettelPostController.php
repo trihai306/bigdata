@@ -116,7 +116,7 @@ class ViettelPostController extends Controller
             if ($listProduct->isEmpty()) {
                 throw new \Exception("Không tìm thấy sản phẩm nào cho mã hợp đồng đã cung cấp.");
             }
-
+            dd($listProduct);
             $listItem = [];
             foreach ($listProduct as $product) {
                 $listItem[] = [
