@@ -185,7 +185,7 @@ class ViettelPostController extends Controller
                 'list_products' => json_encode($listItems),
                 'status' => 'awaiting_processing',
             ]);
-            return response()->json($response);
+          return response()->json($delivery);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
