@@ -11,21 +11,21 @@ class CreateDeliveriesTable extends Migration
         Schema::create('deliveries', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('weight');
-            $table->string('price');
+            $table->string('code');
             $table->string('contract_id');
-            $table->text('special_nature');
             $table->string('package_image')->nullable();
-            $table->decimal('length', 8, 2);
-            $table->decimal('width', 8, 2)->nullable();
-            $table->decimal('height', 8, 2)->nullable();
-            $table->enum('delivery_service', [
-                'economical_delivery',   // Chuyển phát tiết kiệm
-                'fast_ecommerce_package',    // Gói TMĐT Nhanh
-                'express_ecommerce_package',  // Gói TMĐT Hỏa tốc, hẹn giờ
-            ]);
-            $table->json('additional_services')->nullable();
+            $table->decimal('product_length', 8, 2);
+            $table->decimal('product_width', 8, 2)->nullable();
+            $table->decimal('product_height', 8, 2)->nullable();
+            $table->decimal('product_weight', 8, 2);
+            $table->string('product_note')->nullable();
+            $table->json('delivery_user_a_info');
+            $table->json('delivery_user_b_info');
+            $table->json('list_products');
+            $table->bigInteger('money_total_ship');
             $table->text('order_note')->nullable();
+            $table->string('order_service');
+            $table->string('order_service_add');
             $table->enum('status', [
                 'picking_up',            // Đang lấy hàng
                 'picked_up',             // Đã lấy hàng
@@ -41,9 +41,7 @@ class CreateDeliveriesTable extends Migration
                 'continue_delivery',     // Phát tiếp
                 'shop_cancelled_pickup', // Shop huỷ lấy
                 'vtp_cancelled_pickup'   // VTP huỷ lấy
-            ]);
-
-            $table->unsignedBigInteger('user_delivery_info_id');
+            ])->default('awaiting_processing');
             $table->timestamps();
         });
     }

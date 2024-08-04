@@ -9,36 +9,57 @@ class Delivery extends Model
 {
     use HasFactory;
 
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array<int, string>
+     */
     protected $fillable = [
-        'scheduled_delivery_time', // Thời gian giao hẹn
-        'special_nature', // Tính chất hàng hóa đặc biệt
-        'package_image', // Ảnh gói hàng
-        'length', // Chiều dài
-        'width', // Chiều rộng
-        'height', // Chiều cao
-        'delivery_service', // Dịch vụ chuyển phát
-        'additional_services', // Dịch vụ cộng thêm
-        'order_note', // Ghi chú đơn hàng
-        'status', // Trạng thái đơn
-        'user_delivery_info_id', // Khóa ngoại
-        'shipping_code', // Mã vận chuyển
-        'contract_id' // Mã hợp đồng
+        'name',
+        'code',
+        'contract_id',
+        'package_image',
+        'product_length',
+        'product_width',
+        'product_height',
+        'product_weight',
+        'product_note',
+        'delivery_user_a_info',
+        'delivery_user_b_info',
+        'list_products',
+        'money_total_ship',
+        'service',
+        'order_note',
+        'order_service',
+        'order_service_add',
+        'status'
     ];
 
-    protected $casts = [
-        'additional_services' => 'array' // Cast this to array as it may hold multiple values
-    ];
-
-    public function goods()
+    /**
+     * Get the full path of the package image.
+     *
+     * @return string
+     */
+    public function getPackageImagePathAttribute()
     {
-        return $this->hasMany(Good::class); // Một đơn vị vận chuyển có thể có nhiều hàng hóa
+        return $this->package_image ? asset('storage/' . $this->package_image) : null;
     }
 
-    public function userDeliveryInfo()
+    /**
+     * Scope a query to only include active deliveries.
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder  $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
     {
-        return $this->belongsTo(UserDeliveryInfo::class); // Thông tin giao hàng liên kết với người dùng
+        return $query->where('status', '!=', 'delivery_cancelled');
     }
 
+    /**
+     * Get the contract that owns the delivery.
+     */
     public function contract()
     {
         return $this->belongsTo(Contract::class);

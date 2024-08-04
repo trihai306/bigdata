@@ -90,7 +90,6 @@ class ViettelPostController extends Controller
             // Call API to get price
             $ViettelPostAPI = new ViettelPostAPI();
             $response = $ViettelPostAPI->getPrice($data);
-
             // Return API response
             return response()->json($response);
         } catch (\Exception $e) {
@@ -169,6 +168,23 @@ class ViettelPostController extends Controller
 
             $ViettelPostAPI = new ViettelPostAPI();
             $response = $ViettelPostAPI->createOrder($orderDetails);
+            $delivery = Delivery::create([
+                'name' => $validated['product_name'],
+                'contract_id' => $request->input('contract_id'),
+                'code' => $response['data']['ORDER_CODE'],
+                'product_price' => $orderDetails['PRODUCT_PRICE'],
+                'order_service_add' => $orderDetails['ORDER_SERVICE_ADD'],
+                'order_service' => $orderDetails['ORDER_SERVICE'],
+                'delivery_user_a_info'=>json_encode($receiver),
+                'delivery_user_b_info'=>json_encode($sender),
+                'product_length' => $orderDetails['PRODUCT_LENGTH'],
+                'product_width' => $orderDetails['PRODUCT_WIDTH'],
+                'product_height' => $orderDetails['PRODUCT_HEIGHT'],
+                'product_weight' => $orderDetails['PRODUCT_WEIGHT'],
+                'money_total_ship' => $response['data']['MONEY_TOTAL'],
+                'list_products' => json_encode($listItems),
+                'status' => 'awaiting_processing',
+            ]);
             return response()->json($response);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
