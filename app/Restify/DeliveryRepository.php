@@ -18,72 +18,25 @@ class DeliveryRepository extends Repository
     {
         return [
             id(),
-
-            Field::make('scheduled_delivery_time')
-                ->rules('required', 'in:full_day,morning,afternoon,night,sunday,holiday,time_work')
-                ->messages([
-                    'required' => 'Thời gian giao hàng dự kiến là bắt buộc.',
-                    'in' => 'Thời gian giao hàng dự kiến phải là một trong những tùy chọn được định trước.',
-                ]),
-
-            Field::make('contract_id')
-                ->rules('required', 'string', 'exists:contracts,id')
-                ->messages([
-                    'required' => 'Mã hợp đồng là bắt buộc.',
-                    'exists' => 'Mã hợp đồng phải tồn tại trong hệ thống.',
-                ]),
-            Field::make('special_nature')
-                ->rules('nullable'),
-
-            Field::make('package_image')
-                ->rules('nullable', 'array'),
-
-            Field::make('length')
-                ->rules('required', 'numeric')
-                ->messages([
-                    'required' => 'Chiều dài là bắt buộc.',
-                    'numeric' => 'Chiều dài phải là một số.',
-                ]),
-
-            Field::make('width')
-                ->rules('required', 'numeric')
-                ->messages([
-                    'required' => 'Chiều rộng là bắt buộc.',
-                    'numeric' => 'Chiều rộng phải là một số.',
-                ]),
-
-            Field::make('height')
-                ->rules('required', 'numeric')
-                ->messages([
-                    'required' => 'Chiều cao là bắt buộc.',
-                    'numeric' => 'Chiều cao phải là một số.',
-                ]),
-
-            Field::make('delivery_service')
-                ->rules('required', 'string', 'in:economical_delivery,fast_ecommerce_package,express_ecommerce_package')
-                ->messages([
-                    'required' => 'Dịch vụ giao hàng là bắt buộc.',
-                    'in' => 'Dịch vụ giao hàng phải là một trong các tùy chọn hợp lệ.',
-                ]),
-
-            Field::make('additional_services')
-                ->rules('nullable'),
-
-            Field::make('order_note')
-                ->rules('nullable', 'string'),
-
-            Field::make('status')
-                ->rules('required', 'in:picking_up,picked_up,in_transit,delivering,awaiting_redelivery,successfully_delivered,awaiting_processing,return_approved,returned,delivery_cancelled,returning,continue_delivery,shop_cancelled_pickup,vtp_cancelled_pickup')
-                ->messages([
-                    'required' => 'Trạng thái đơn hàng là bắt buộc.',
-                    'in' => 'Trạng thái đơn hàng phải là một trong các tùy chọn hợp lệ.',
-                ]),
-
-            Field::make('user_delivery_info_id')
-                ->rules('required')
-                ->messages([
-                    'required' => 'Thông tin người gửi là bắt buộc.'
-                ])
+            field('name'),
+            field('code'),
+            field('contract_id'),
+            field('package_image'),
+            file('product_length'),
+            file('product_width'),
+            file('product_height'),
+            file('product_weight'),
+            field('product_note'),
+            field('delivery_user_a_info'),
+            field('delivery_user_b_info'),
+            field('list_products'),
+            field('money_total_ship'),
+            field('order_note'),
+            field('order_service'),
+            field('order_service_add'),
+            field('status'),
+            field('created_at'),
+            field('updated_at'),
         ];
     }
 

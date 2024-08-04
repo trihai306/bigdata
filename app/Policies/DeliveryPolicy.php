@@ -22,31 +22,31 @@ class DeliveryPolicy
 
     public function store(User $user): bool
     {
-        return true;
+        return false;
     }
 
     public function storeBulk(User $user): bool
     {
-        return true;
+        return false;
     }
 
     public function update(User $user, Delivery $model): bool
     {
-        return true;
+        return false;
     }
 
     public function updateBulk(User $user, Delivery $model): bool
     {
-        return true;
+        return false;
     }
 
     public function deleteBulk(User $user, Delivery $model): bool
     {
-        return true;
+        return false;
     }
 
     public function delete(User $user, Delivery $model): bool
     {
-        return true;
+        return false;
     }
 }
