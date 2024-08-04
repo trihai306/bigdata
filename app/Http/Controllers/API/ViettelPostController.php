@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Contract;
 use App\Models\Delivery;
 use App\Models\Product;
 use App\Models\User;
@@ -101,65 +102,77 @@ class ViettelPostController extends Controller
 
     public function createOrder(Request $request)
     {
-        $sender = UserDeliveryInfo::find($request->get('sender_id'));
-        $receiver = UserDeliveryInfo::find($request->get('receiver_id'));
-        if (!$sender || !$receiver) {
-            throw new \Exception("Không tìm thấy thông tin người gửi hoặc người nhận.");
-        }
-
-        $product = $request->input(['weight', 'price', 'length', 'width', 'height', 'product_name', 'note', 'quantity']);
-        $order = $request->input(['order_service', 'order_note', 'order_service_add']);
-        $contract = $request->input('contract_id');
-
-        $listProduct = Product::where('contract_id', $contract)->get();
-        if ($listProduct->isEmpty()) {
-            throw new \Exception("Không tìm thấy sản phẩm nào cho mã hợp đồng đã cung cấp.");
-        }
-
-        $listItem = [];
-        foreach ($listProduct as $product) {
-            $listItem[] = [
-                "PRODUCT_NAME" => $product->name,
-                "PRODUCT_QUANTITY" => $product->quantity,
-                "PRODUCT_PRICE" => $product->price,
-                'PRODUCT_WEIGHT' => 100,
-            ];
-        }
-        $orderDetails = [
-            "SENDER_FULLNAME" => $sender->receiver_name,
-            "SENDER_ADDRESS" => $sender->address,
-            "SENDER_PHONE" => $sender->phone,
-            "RECEIVER_FULLNAME" => $receiver->receiver_name,
-            "RECEIVER_ADDRESS" => $receiver->address,
-            "RECEIVER_PHONE" => $receiver->phone,
-            "PRODUCT_NAME" => $product['product_name'],
-            "PRODUCT_DESCRIPTION" => $product['note'],
-            "PRODUCT_QUANTITY" => $product['quantity'],
-            "PRODUCT_PRICE" => $product['price'],
-            "PRODUCT_WEIGHT" => $product['weight'],
-            "PRODUCT_LENGTH" => $product['length'],
-            "PRODUCT_WIDTH" => $product['width'],
-            "PRODUCT_HEIGHT" => $product['height'],
-            "ORDER_PAYMENT" => 3,
-            "ORDER_SERVICE" => $order['order_service'],
-            "PRODUCT_TYPE" => "HH",
-            "ORDER_SERVICE_ADD" => $order['order_service_add'],
-            "ORDER_NOTE" => $order['order_note'],
-            "MONEY_COLLECTION" => 56827,
-            "EXTRA_MONEY" => 0,
-            "CHECK_UNIQUE" => true,
-            "LIST_ITEM" => $listItem
-        ];
-        dd($orderDetails);
-        $ViettelPostAPI = new ViettelPostAPI();
-        $response = $ViettelPostAPI->createOrder($orderDetails);
-        return response()->json($response);
+        // Validate request parameters upfront
+        $validated = $request->validate([
+            'sender_id' => 'required|exists:user_delivery_infos,id',
+            'receiver_id' => 'required|exists:user_delivery_infos,id',
+            'contract_id' => 'required|exists:contracts,id',
+            'product_name' => 'required',
+            'product_description' => 'required',
+            'product_quantity' => 'required|numeric',
+            'product_price' => 'required|numeric',
+            'product_weight' => 'required|numeric',
+            'product_length' => 'required|numeric',
+            'product_width' => 'required|numeric',
+            'product_height' => 'required|numeric',
+            'service' => 'required',
+            'service_add' => 'required',
+            'note' => 'required',
+        ]);
 
         try {
+            $sender = UserDeliveryInfo::findOrFail($validated['sender_id']);
+            $receiver = UserDeliveryInfo::findOrFail($validated['receiver_id']);
+            $contract = Contract::findOrFail($validated['contract_id']);
 
+            // Fetch products associated with the contract
+            $products = Product::where('contract_id', $contract->id)->get();
+            if ($products->isEmpty()) {
+                throw new \Exception("Không tìm thấy sản phẩm nào cho mã hợp đồng đã cung cấp.");
+            }
+
+            $listItems = $products->map(function ($product) {
+                return [
+                    "PRODUCT_NAME" => $product->name,
+                    "PRODUCT_QUANTITY" => $product->quantity,
+                    "PRODUCT_PRICE" => $product->price,
+                    'PRODUCT_WEIGHT' => 100,  // Assuming default weight
+                ];
+            });
+
+            $orderDetails = [
+                "SENDER_FULLNAME" => $sender->receiver_name,
+                "SENDER_ADDRESS" => $sender->address,
+                "SENDER_PHONE" => $sender->phone,
+                "RECEIVER_FULLNAME" => $receiver->receiver_name,
+                "RECEIVER_ADDRESS" => $receiver->address,
+                "RECEIVER_PHONE" => $receiver->phone,
+                "LIST_ITEM" => $listItems->toArray(),
+                "ORDER_PAYMENT" => 3,
+                "ORDER_SERVICE" => $validated['service'],
+                "ORDER_SERVICE_ADD" => $validated['service_add'],
+                "ORDER_NOTE" => $validated['note'],
+                "MONEY_COLLECTION" => 56827,
+                "EXTRA_MONEY" => 0,
+                "CHECK_UNIQUE" => true,
+                "PRODUCT_TYPE" => "HH",
+                "PRODUCT_NAME" => $validated['product_name'],
+                "PRODUCT_DESCRIPTION" => $validated['product_description'],
+                "PRODUCT_QUANTITY" => $validated['product_quantity'],
+                "PRODUCT_PRICE" => $validated['product_price'],
+                "PRODUCT_WEIGHT" => $validated['product_weight'],
+                "PRODUCT_LENGTH" => $validated['product_length'],
+                "PRODUCT_WIDTH" => $validated['product_width'],
+                "PRODUCT_HEIGHT" => $validated['product_height'],
+            ];
+
+            $ViettelPostAPI = new ViettelPostAPI();
+            $response = $ViettelPostAPI->createOrder($orderDetails);
+            return response()->json($response);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
     }
+
 
 }
