@@ -103,24 +103,25 @@ class ViettelPostController extends Controller
     public function createOrder(Request $request)
     {
         // Validate request parameters upfront
-        $validated = $request->validate([
-            'sender_id' => 'required|exists:user_delivery_info,id',
-            'receiver_id' => 'required|exists:user_delivery_info,id',
-            'contract_id' => 'required|exists:contracts,id',
-            'product_name' => 'required',
-            'product_description' => 'required',
-            'product_quantity' => 'required|numeric',
-            'product_price' => 'required|numeric',
-            'product_weight' => 'required|numeric',
-            'product_length' => 'required|numeric',
-            'product_width' => 'required|numeric',
-            'product_height' => 'required|numeric',
-            'service' => 'required',
-            'service_add' => 'required',
-            'note' => 'required',
-        ]);
+
 
         try {
+            $validated = $request->validate([
+                'sender_id' => 'required|exists:user_delivery_info,id',
+                'receiver_id' => 'required|exists:user_delivery_info,id',
+                'contract_id' => 'required|exists:contracts,id',
+                'product_name' => 'required',
+                'product_description' => 'required',
+                'product_quantity' => 'required|numeric',
+                'product_price' => 'required|numeric',
+                'product_weight' => 'required|numeric',
+                'product_length' => 'required|numeric',
+                'product_width' => 'required|numeric',
+                'product_height' => 'required|numeric',
+                'service' => 'required',
+                'service_add' => 'required',
+                'note' => 'required',
+            ]);
             $sender = UserDeliveryInfo::findOrFail($validated['sender_id']);
             $receiver = UserDeliveryInfo::findOrFail($validated['receiver_id']);
             $contract = Contract::findOrFail($validated['contract_id']);
