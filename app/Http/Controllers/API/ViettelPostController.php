@@ -86,22 +86,6 @@ class ViettelPostController extends Controller
                 "PRODUCT_TYPE" => "HH",
                 "NATIONAL_TYPE" => 1
             ];
-//            $data = [
-//                "PRODUCT_WEIGHT" => 100,
-//                "PRODUCT_PRICE" => 96000,
-//                "MONEY_COLLECTION" => 0,
-//                "ORDER_SERVICE_ADD" => "",
-//                "ORDER_SERVICE" => "VCBO",
-//                "SENDER_DISTRICT" => 12,
-//                "SENDER_PROVINCE" => 1,
-//                "RECEIVER_DISTRICT" => 12,
-//                "RECEIVER_PROVINCE" => 1,
-//                "PRODUCT_LENGTH" => 0,
-//                "PRODUCT_WIDTH" => 0,
-//                "PRODUCT_HEIGHT" => 0,
-//                "PRODUCT_TYPE" => "HH",
-//                "NATIONAL_TYPE" => 1
-//            ];
             // Call API to get price
             $ViettelPostAPI = new ViettelPostAPI();
             $response = $ViettelPostAPI->getPrice($data);
@@ -117,8 +101,8 @@ class ViettelPostController extends Controller
 
     public function createOrder(Request $request)
     {
-        $sender = Auth::user()->deliveryInfo;
-        $receiver = User::find($request->receiver_id)->deliveryInfo;
+        $sender = UserDeliveryInfo::find($request->get('sender_id'));
+        $receiver = UserDeliveryInfo::find($request->get('receiver_id'));
         $product = $request->input(['weight', 'price', 'length', 'width', 'height', 'product_name','note','quantity']);
         $order = $request->input(['order_servie', 'order_note']);
         $contract = $request->input(['contract_id']);
@@ -133,10 +117,10 @@ class ViettelPostController extends Controller
             ];
         }
         $orderDetails = [
-            "SENDER_FULLNAME" => $sender->name,
+            "SENDER_FULLNAME" => $sender->receiver_name,
             "SENDER_ADDRESS" => $sender->address,
             "SENDER_PHONE" => $sender->phone,
-            "RECEIVER_FULLNAME" => $receiver->name,
+            "RECEIVER_FULLNAME" => $receiver->receiver_name,
             "RECEIVER_ADDRESS" => $receiver->address,
             "RECEIVER_PHONE" => $receiver->phone,
             "PRODUCT_NAME" => $product['product_name'],
