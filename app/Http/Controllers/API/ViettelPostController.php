@@ -104,8 +104,8 @@ class ViettelPostController extends Controller
     {
         // Validate request parameters upfront
         $validated = $request->validate([
-            'sender_id' => 'required|exists:user_delivery_infos,id',
-            'receiver_id' => 'required|exists:user_delivery_infos,id',
+            'sender_id' => 'required|exists:user_delivery_info,id',
+            'receiver_id' => 'required|exists:user_delivery_info,id',
             'contract_id' => 'required|exists:contracts,id',
             'product_name' => 'required',
             'product_description' => 'required',
