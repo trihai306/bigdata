@@ -19,15 +19,13 @@ trait DataInitializationTrait
         $relations = [];
         $fields = [];
         foreach ($fieldNames as $fieldName) {
-            //thêm trường hợp check có _confirmation
             if (str_contains($fieldName, '_confirmation')) {
                 $fieldName = str_replace('_confirmation', '', $fieldName);
-            }
-            elseif (str_contains($fieldName, '.')) {
+                $fields[] = $fieldName;
+            } elseif (str_contains($fieldName, '.')) {
                 $parts = explode('.', $fieldName);
                 $fieldName = str_replace('.', '_', $fieldName);
                 $relations[$parts[1]] = $fieldName;
-                $fields[] = $fieldName;
             } else {
                 $fields[] = $fieldName;
             }

@@ -21,7 +21,6 @@ class Dashboard extends Component
     public function render()
     {
         $widgets = $this->getWidgets();
-
         return view('future::future.dashboard', compact('widgets'));
     }
 
