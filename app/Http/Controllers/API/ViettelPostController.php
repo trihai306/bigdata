@@ -129,16 +129,8 @@ class ViettelPostController extends Controller
         if ($products->isEmpty()) {
             throw new \Exception("Không tìm thấy sản phẩm nào cho mã hợp đồng đã cung cấp.");
         }
-
-        $listItems = $products->map(function ($product) {
-            return [
-                "PRODUCT_NAME" => $product->name,
-                "PRODUCT_QUANTITY" => $product->quantity,
-                "PRODUCT_PRICE" => $product->price,
-                'PRODUCT_WEIGHT' => 100,  // Assuming default weight
-            ];
-        });
-
+        $listItems = $request->input('list_items');
+        dd($listItems);
         $orderDetails = [
             "SENDER_FULLNAME" => $sender->receiver_name,
             "SENDER_ADDRESS" => $sender->address,
@@ -146,7 +138,7 @@ class ViettelPostController extends Controller
             "RECEIVER_FULLNAME" => $receiver->receiver_name,
             "RECEIVER_ADDRESS" => $receiver->address,
             "RECEIVER_PHONE" => $receiver->phone,
-            "LIST_ITEM" => $listItems->toArray(),
+            "LIST_ITEM" => $listItems,
             "ORDER_PAYMENT" => 3,
             "ORDER_SERVICE" => $validated['service'],
             "ORDER_SERVICE_ADD" => $validated['service_add'],
