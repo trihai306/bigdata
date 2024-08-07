@@ -118,7 +118,7 @@ class ViettelPostController extends Controller
             'service' => 'required',
             'service_add' => 'required',
             'note' => 'required',
-            'list_items' => 'required,array',
+            'list_items' => 'required',
         ]);
         $sender = UserDeliveryInfo::findOrFail($validated['sender_id']);
         $receiver = UserDeliveryInfo::findOrFail($validated['receiver_id']);
