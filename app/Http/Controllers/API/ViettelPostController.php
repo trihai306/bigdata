@@ -118,7 +118,7 @@ class ViettelPostController extends Controller
             'service' => 'required',
             'service_add' => 'required',
             'note' => 'required',
-            
+
         ]);
         $sender = UserDeliveryInfo::findOrFail($validated['sender_id']);
         $receiver = UserDeliveryInfo::findOrFail($validated['receiver_id']);
@@ -167,7 +167,7 @@ class ViettelPostController extends Controller
 
         $ViettelPostAPI = new ViettelPostAPI();
         $response = $ViettelPostAPI->createOrder($orderDetails);
-        dd($response['data']);
+        dd($response);
         if(!$response['data']['error']){
             $delivery = Delivery::create([
                 'name' => $validated['product_name'],
