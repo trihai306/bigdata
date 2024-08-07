@@ -138,7 +138,6 @@ class ViettelPostController extends Controller
                 'PRODUCT_WEIGHT' => 100,  // Assuming default weight
             ];
         });
-        dd($listItems->toArray());
         $orderDetails = [
             "SENDER_FULLNAME" => $sender->receiver_name,
             "SENDER_ADDRESS" => $sender->address,
