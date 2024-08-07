@@ -159,10 +159,10 @@ class ViettelPostController extends Controller
                 "PRODUCT_WIDTH" => $validated['product_width'],
                 "PRODUCT_HEIGHT" => $validated['product_height'],
             ];
-
+            dd($orderDetails);
             $ViettelPostAPI = new ViettelPostAPI();
             $response = $ViettelPostAPI->createOrder($orderDetails);
-            dd($response);
+
             if(!$response['data']['error']){
                 $delivery = Delivery::create([
                     'name' => $validated['product_name'],
