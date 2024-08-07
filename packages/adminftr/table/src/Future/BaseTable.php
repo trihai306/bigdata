@@ -22,8 +22,15 @@ use Livewire\WithFileUploads;
 
 abstract class BaseTable extends Component
 {
-    use Actions, Can, Columns, ColumnVisibilityTrait, DateRangeTrait,FilterColumnsTrait, Functions,
-        PaginationTrait, SearchTrait, SelectTrait, SortTrait, WidgetsTrait, WithFileUploads;
+    use Actions,
+        Columns,
+        ColumnVisibilityTrait,
+        DateRangeTrait,
+        FilterColumnsTrait,
+        Functions,
+        can,
+        PaginationTrait,
+        SearchTrait, SelectTrait, SortTrait, WidgetsTrait, WithFileUploads;
 
     public array $forms = [];
 
@@ -133,6 +140,7 @@ abstract class BaseTable extends Component
                     'form' => $headerAction->form,
                     'name' => $headerAction->name,
                     'label' => $headerAction->label,
+                    'type' => $headerAction->type,
                 ];
             })
             ->toArray();

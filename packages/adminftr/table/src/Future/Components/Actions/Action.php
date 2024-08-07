@@ -36,7 +36,7 @@ class Action
     public ?string $size = '';
 
     public ?bool $hide = false;
-
+    public ?string $type = 'edit';
     public array $postSetDataQueue = [];
 
     public function __construct(string $name, string $label, ?string $icon = null)
@@ -91,12 +91,12 @@ class Action
         return $this;
     }
 
-    public function modal(string $form): self
+    public function modal(string $form,string $type='edit'): self
     {
         $this->form = $form;
         $this->link = null;
         $this->modal = true;
-
+        $this->type = $type;
         return $this;
     }
 
@@ -128,7 +128,7 @@ class Action
             'eventName' => 'swalConfirm',
             'title' => $resolvedTitle,
             'message' => $resolvedMessage,
-            'params' => $this->data,
+            'id' => $this->id,
             'name' => $this->name,
         ];
 

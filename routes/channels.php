@@ -23,3 +23,6 @@ Broadcast::channel('chat-room.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
 
+Broadcast::channel('private-messages.{userId}', function ($user, $userId) {
+    return (int) $user->id === (int) $userId;
+});

@@ -170,7 +170,7 @@
                                                                 <div
                                                                     class="col chat-bubble-author">{{$message->sender->name}}</div>
                                                                 <div
-                                                                    class="col-auto chat-bubble-date">{{$message->created_at->diffForHumans() }} </div>
+                                                                    class="col-auto chat-bubble-date text-white">{{$message->created_at->diffForHumans() }} </div>
                                                             </div>
                                                         </div>
                                                         <div class="chat-bubble-body">
@@ -314,7 +314,7 @@
             chatItem.className = 'chat-item';
             chatItem.innerHTML = `
         <div class="row align-items-end ${isUser ? 'justify-content-end' : ''}">
-            ${isUser ? '' : createAvatarColumn(senderAvatar, senderName)}
+            ${isUser ? '' : this.createAvatarColumn(senderAvatar, senderName)}
             <div class="col col-lg-6">
                 <div class="chat-bubble ${isUser ? 'chat-bubble-me' : ''}">
                     <div class="chat-bubble-title">
@@ -415,7 +415,6 @@
                     var messagesConversationId = message.conversation_id;
                     let params = new URLSearchParams(window.location.search);
                     let conversationId = params.get('conversationId');
-                    $wire.dispatch('message-sent');
                     if (messagesConversationId == conversationId) {
                         let chatItem = this.createChatItem(message.content, sender.name, sender.avatar,
                             false, message.created_at);

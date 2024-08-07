@@ -10,13 +10,7 @@ class ContractResource extends BaseResource
     public function __construct()
     {
         parent::__construct(
-            new Table(),
-            new Form()
+            new Table()
         );
-    }
-
-    public function show($id)
-    {
-        return view('contract.showContract');
     }
 }

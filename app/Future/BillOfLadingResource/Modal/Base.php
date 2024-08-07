@@ -5,13 +5,13 @@ namespace App\Future\BillOfLadingResource\Modal;
 use App\Models\Contract;
 use Adminftr\Form\Future\Components\Fields\TextInput;
 use Adminftr\Form\Future\Components\Layouts\Row;
-use Adminftr\Form\Future\ModalForm;
+use Adminftr\Form\Future\BaseModal;
 
-class Form extends ModalForm
+class Base extends BaseModal
 {
-    public $model = Contract::class;
+    public  $model = Contract::class;
 
-    public function form(\Adminftr\Form\Future\Components\Form $form): \Future\Form\Future\Components\Form
+    public function form(\Adminftr\Form\Future\Components\Form $form): \Adminftr\Form\Future\Components\Form
     {
         return $form->schema([
             Row::make($sm = 12, $md = 6, $lg = 6)->schema([

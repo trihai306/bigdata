@@ -114,6 +114,7 @@
     --tblr-dropdown-link-hover-bg: rgba(var(--tblr-secondary-rgb), 0.08);
 
     & > .navbar-nav {
+        position: static;
         & > .nav-item {
             @include media-breakpoint-up(lg, $grid-breakpoints) {
                 & {
@@ -147,7 +148,6 @@
                 }
             }
 
-            position: static;
 
             .nav-link {
                 align-items: center;

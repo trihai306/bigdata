@@ -2,7 +2,7 @@
 
 namespace App\Future\PostResource;
 
-use App\Future\PostResource\Modal\Form;
+use App\Future\PostResource\Modal\Base;
 use App\Models\Post;
 use Adminftr\Table\Future\BaseTable;
 use Adminftr\Table\Future\Components\Actions\Action;
@@ -62,8 +62,8 @@ class Table extends BaseTable
     {
         return $actions->create(
             [
-                Action::make('edit', __('Sửa'), 'fas fa-edit')->modal(Form::class),
-                Action::make('view', __('View'), 'fas fa-edit')->modal(Form::class),
+                Action::make('edit', __('Sửa'), 'fas fa-edit')->modal(Base::class),
+                Action::make('view', __('View'), 'fas fa-edit')->modal(Base::class),
                 Action::make('delete', __('Xoá'), 'fas fa-trash-alt')->confirm(function ($data) {
                     return [
                         'message' => __('Bạn cho chắc muốn xoá hợp đồng?'),
@@ -85,7 +85,7 @@ class Table extends BaseTable
         return [
             ResetAction::make(),
             \Future\Table\Future\Components\Headers\Actions\Action::make('create', __('Tạo mới bài viết'))
-                ->modal('create', Form::class),
+                ->modal('create', Base::class),
         ];
     }
 

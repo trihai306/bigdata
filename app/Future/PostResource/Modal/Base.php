@@ -7,9 +7,9 @@ use Adminftr\Form\Future\Components\Fields\Select;
 use Adminftr\Form\Future\Components\Fields\TextArea;
 use Adminftr\Form\Future\Components\Fields\TextInput;
 use Adminftr\Form\Future\Components\Layouts\Row;
-use Adminftr\Form\Future\ModalForm;
+use Adminftr\Form\Future\BaseModal;
 
-class Form extends ModalForm
+class Base extends BaseModal
 {
     public $model = Contract::class;
 

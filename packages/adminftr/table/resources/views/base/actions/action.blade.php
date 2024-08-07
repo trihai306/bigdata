@@ -7,7 +7,9 @@
            wire:click="$dispatch('{{$action->sweetAlert['eventName']}}', {
                     title: '{{$action->sweetAlert['title']}}',
                     message: '{{$action->sweetAlert['message']}}',
-                    params: '{{$action->sweetAlert['params']}}',
+                    params: {
+                    'id': '{{$action->sweetAlert['id']}}',
+                    },
                     nameMethod: 'callbackActions',
                     name: '{{$action->name}}'
                 })" @endif

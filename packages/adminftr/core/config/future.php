@@ -16,8 +16,8 @@ return [
             'as' => 'admin.',
             'middleware' => ['web', 'auth'],
         ],
-        'messages' => true,
-        'notifications' => true,
+        'messages' => false,
+        'notifications' => false,
         'dashboard' => [
             'widgets' => [
                 Stat::make('User')

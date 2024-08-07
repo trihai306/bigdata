@@ -27,7 +27,23 @@ class UserSeeder extends Seeder
                 'remember_token' => Str::random(10),
             ]);
         }
-      //seed 100 users
-        UserFactory::new()->count(10)->create();
+        else {
+            //cập nhật lại mật khẩu
+            User::where('email', 'admin@example.com')->update([
+                'password' => Hash::make('password')
+            ]);
+        }
+        //tạo seed acc demo
+        if (User::where('email', 'demo@demo.com')->count() === 0) {
+            DB::table('users')->insert([
+                'name' => 'Demo',
+                'email' => 'demo@demo.com',
+                'email_verified_at' => now(),
+                'phone' => '0396130622',
+                'store_name' => 'store name',
+                'password' => Hash::make('password'),
+                'remember_token' => Str::random(10),
+            ]);
+        }
     }
 }

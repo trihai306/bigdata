@@ -27,7 +27,7 @@
     </div>
     @if ($forms)
         @foreach ($forms as $form)
-            @livewire($form['form'], ['id' => null, 'title' => $form['label'], 'name' => $form['name']])
+            @livewire($form['form'], ['id' => null, 'title' => $form['label'], 'name' => $form['name']],$form['type'])
         @endforeach
     @endif
 </div>

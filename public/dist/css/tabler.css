@@ -27401,11 +27401,13 @@ Chart sparkline
     border-radius: var(--tblr-border-radius-lg);
     padding: 0.7rem;
     position: relative;
+    color: #ffffff;
 }
 
 .chat-bubble-me {
     background-color: var(--tblr-primary-lt);
     box-shadow: none;
+    color: var(--tblr-navbar-color);
 }
 
 .chat-bubble-title {

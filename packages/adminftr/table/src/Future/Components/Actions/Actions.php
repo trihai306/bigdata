@@ -35,7 +35,7 @@ class Actions
         foreach ($actions as $action) {
             $action->data($this->data);
             if ($action->form) {
-                $this->form($action->form, $action->name, $action->label);
+                $this->form($action->form, $action->name, $action->label, $action->type);
             }
         }
 
@@ -49,9 +49,9 @@ class Actions
         return $this;
     }
 
-    public function form($form, $name, $label): void
+    public function form($form, $name, $label,$type): void
     {
-        $this->forms[] = ['form' => $form, 'name' => $name, 'label' => $label];
+        $this->forms[] = ['form' => $form, 'name' => $name, 'label' => $label, 'type' => $type];
     }
 
     public function forms()
@@ -59,7 +59,7 @@ class Actions
         $action = $this->actions;
         foreach ($action as $act) {
             if ($act->form) {
-                $this->form($act->form, $act->name, $act->label);
+                $this->form($act->form, $act->name, $act->label, $act->type);
             }
         }
 

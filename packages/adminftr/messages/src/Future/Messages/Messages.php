@@ -32,12 +32,12 @@ class Messages extends Component
         $this->page = 10;
     }
 
-    public function getListeners()
-    {
-        return [
-            "echo-private:messages.{$this->conversationId},MessageSent" => 'refreshMessages',
-        ];
-    }
+//    public function getListeners()
+//    {
+//        return [
+//            "echo-private:messages.{$this->conversationId},MessageSent" => 'refreshMessages',
+//        ];
+//    }
 
     public function loadMore()
     {

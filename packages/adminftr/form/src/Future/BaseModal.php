@@ -10,12 +10,15 @@ use Adminftr\Form\Future\Traits\DataValidationTrait;
 use Adminftr\Form\Future\Traits\FieldExtractionTrait;
 use Adminftr\Form\Future\Traits\NotificationTrait;
 use Exception;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\Locked;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
-abstract class BaseForm extends Component
+abstract class BaseModal extends Component
 {
+    use NotificationTrait;
     use DataInitializationTrait,
         DataPersistenceTrait,
         DataValidationTrait,
@@ -23,59 +26,42 @@ abstract class BaseForm extends Component
         NotificationTrait;
 
     #[Locked]
-    public $id;
+    public  $id;
+
+    public  $title;
+
+    public  $name;
 
     public array $data = [];
 
-    #[Locked]
-    public $url;
+    protected  $form;
 
-    protected $form;
+    protected  $model;
+    public string $type;
 
-    protected $model;
 
-    public function mount(?string $id = null, ?string $url = null)
+
+    public function mount(?string $id = null, ?string $title = null, ?string $name = null, ?string $type = "edit")
     {
         $this->id = $id;
-        $this->url = $url;
-        UrlHelper::setUrl($this->url);
+        $this->title = $title;
+        $this->name = $name;
         $inputs = $this->getInputFields();
         $this->initializeData($inputs);
-    }
-
-    public function render()
-    {
-        return view('form::base-form');
-    }
-
-    protected function Actions()
-    {
-        return [];
-    }
-
-    public function updated($property)
-    {
-        $this->afterStateUpdated($property);
-    }
-
-    protected function afterStateUpdated($property)
-    {
-        $this->skipRender();
-        $inputs = $this->getInputFields();
-        foreach ($inputs as $input) {
-            if ($input->afterStateUpdated && 'data.'.$input->name == $property) {
-                $this->data = call_user_func($input->afterStateUpdated, $this->data);
-            }
-        }
+        $this->type = $type;
     }
 
     public function boot()
     {
-        UrlHelper::setUrl($this->url);
         $this->form = $this->form(new Form());
     }
-
-    abstract public function form(Form $form);
+    #[On('setModel')]
+    public function setData($id)
+    {
+        $this->id = $id;
+        $inputs = $this->getInputFields();
+        $this->initializeData($inputs);
+    }
 
     public function save()
     {
@@ -85,23 +71,31 @@ abstract class BaseForm extends Component
             if(!empty($this->rules())){
                 $this->validate($this->rules(),$this->messages());
             }
-
-            $url = $this->url;
-            if (str_contains($url, 'edit')) {
+            if ($this->id) {
                 $this->data = $this->beforeUpdate($this->data);
             } else {
-                $this->data = $this->beforeSave($this->data);
+               $this->data = $this->beforeSave($this->data);
+            }
+
+            if (method_exists($this, 'afterSave')) {
+                $this->afterSave($this->data);
+            }
+            if (method_exists($this, 'afterUpdate')) {
+                $this->afterUpdate($this->data);
             }
             $this->persistData();
             if (function_exists('afterSave')) {
                 return $this->afterSave($this->data);
             }
-            DB::commit();
+            DB::commit(); // Hoàn thành transaction
+
             $this->notificationOk('Save success');
         } catch (Exception $e) {
-            DB::rollBack();
+            DB::rollBack(); // Hoàn tác các thay đổi nếu có lỗi
             $this->notificationError($e->getMessage());
         }
+
+        $this->dispatch('refreshTable');
     }
 
     protected function beforeSave(array $data)
@@ -127,7 +121,6 @@ abstract class BaseForm extends Component
 
         return [];
     }
-
     public function inputActions($name)
     {
         $this->skipRender();
@@ -148,5 +141,11 @@ abstract class BaseForm extends Component
                 call_user_func($action->callback, $this);
             }
         }
+    }
+    abstract public function form(Form $form);
+
+    public function render()
+    {
+        return view('form::modal-form', ['inputs' => $this->form(new Form())->render()]);
     }
 }

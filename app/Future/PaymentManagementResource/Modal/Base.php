@@ -5,9 +5,9 @@ namespace App\Future\PaymentManagementResource\Modal;
 use App\Models\Contract;
 use Adminftr\Form\Future\Components\Fields\TextInput;
 use Adminftr\Form\Future\Components\Layouts\Row;
-use Adminftr\Form\Future\ModalForm;
+use Adminftr\Form\Future\BaseModal;
 
-class Form extends ModalForm
+class Base extends BaseModal
 {
     public $model = Contract::class;
 

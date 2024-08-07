@@ -11,15 +11,11 @@ class Action
     public string $name;
 
     public string $label;
-
+    public $type;
     private ?string $icon;
-
     private ?string $color;
-
     private ?string $url;
-
     private ?string $title = null;
-
     private ?bool $can = true;
 
     public function __construct(string $name, string $label, ?string $icon = null, ?string $color = null)
@@ -42,13 +38,13 @@ class Action
         return $this;
     }
 
-    public function modal($title, $form = null)
+    public function modal($title, $form = null, $type = "create")
     {
         $this->modal = true;
         $this->url = null;
         $this->title = $title;
         $this->form = $form;
-
+        $this->type = $type;
         return $this;
     }
 
@@ -61,16 +57,6 @@ class Action
 
     public function render()
     {
-        return view('future::table.actions.action', [
-            'name' => $this->name,
-            'label' => $this->label,
-            'icon' => $this->icon,
-            'color' => $this->color,
-            'url' => $this->url,
-            'modal' => $this->modal,
-            'form' => $this->form,
-            'can' => $this->can,
-            'title' => $this->title,
-        ]);
+        return view('future::table.actions.action', ['name' => $this->name, 'label' => $this->label, 'icon' => $this->icon, 'color' => $this->color, 'url' => $this->url, 'modal' => $this->modal, 'form' => $this->form, 'can' => $this->can, 'title' => $this->title,]);
     }
 }

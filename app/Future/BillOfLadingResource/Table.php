@@ -2,7 +2,11 @@
 
 namespace App\Future\BillOfLadingResource;
 
-use App\Future\ContractResource\Modal\Form;
+use Adminftr\Table\Future\Components\Filters\SelectFilter;
+use Adminftr\Table\Future\Components\Filters\TextFilter;
+use Adminftr\Table\Future\Components\Headers\Actions\ResetAction;
+use Adminftr\Widgets\Future\Widgets\Widget;
+use App\Future\ContractResource\Modal\ViewContract;
 use App\Models\Contract;
 use App\Models\User;
 use Adminftr\Table\Future\BaseTable;
@@ -11,10 +15,6 @@ use Adminftr\Table\Future\Components\Actions\Actions;
 use Adminftr\Table\Future\Components\Columns\TextColumn;
 use Adminftr\Table\Future\Components\FilterInput;
 use Adminftr\Table\Future\Components\Filters\DateFilter;
-use Future\Table\Future\Components\Filters\SelectFilter;
-use Future\Table\Future\Components\Filters\TextFilter;
-use Future\Table\Future\Components\Headers\Actions\ResetAction;
-use Future\Widgets\Future\Widgets\Widget;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
@@ -29,12 +29,6 @@ class Table extends BaseTable
 
     protected function columns(): array
     {
-//        TextColumn::make('roles.name', __('user_roles'))->renderHtml(function (User $user) {
-//            return $user->roles->map(function ($role) {
-//                return "<span class='badge bg-primary text-white'>{$role->name}</span>";
-//            })->implode(' ');
-//        }),
-
         return [
             TextColumn::make('id', __('ID'))->searchable()->sortable(),
             TextColumn::make('code', __('Mã HĐ'))->searchable()->sortable(),
@@ -86,16 +80,10 @@ class Table extends BaseTable
     {
         return $actions->create(
             [
-                Action::make('edit', __('Sửa'), 'fas fa-edit')->modal(Form::class),
+                Action::make('edit', __('Sửa'), 'fas fa-edit')->modal(ViewContract::class,'edit'),
                 Action::make('view', __('View'), 'fas fa-edit')->link(function ($data) {
                     return route('admin.contracts.edit', $data->id);
                 })->size('font-size:20px;'),
-                Action::make('delete', __('Xoá'), 'fas fa-trash-alt')->confirm(function ($data) {
-                    return [
-                        'message' => __('Bạn cho chắc muốn xoá hợp đồng?'),
-                        'params' => $data, 'nameMethod' => 'delete',
-                    ];
-                }),
             ]
         );
     }
@@ -104,66 +92,64 @@ class Table extends BaseTable
     {
         return [
             ResetAction::make(),
-            \Future\Table\Future\Components\Headers\Actions\Action::make('create', __('Tạo mới hợp đồng'))
-                ->modal('create', Form::class),
         ];
     }
 
-    protected function widgets(): array
-    {
-        $count = $this->model::query()->count();
-
-        $widgetCountPermission = Widget::make($count.' Hợp đồng', '', 'fa fa-key');
-        $widgetCountPermission->setColor('green');
-        $widgetCountPermission->setCol(['md' => 5, 'xl' => 4]);
-
-        $countContract = Widget::make('Tổng số hợp đồng: 0', '')
-            ->callback(function ($widget) {
-                $count = $this->model::query()
-                    ->count();
-                $widget->title = "Tổng số hợp đồng: " . $count;
-                $widget->setIcon('fa fa-contract');
-                $widget->setCol(['md' => 6, 'xl' => 4]);
-            });
-
-        $countAccepted = Widget::make('Hơp đồng đã hoàn thành: 0', '')
-            ->callback(function ($widget) {
-                $count = $this->model::query()
-                    ->where('status', 'accepted')
-                    ->count();
-                $widget->title = "Hơp đồng đã hoàn thành: " . $count;
-                $widget->setIcon('fa fa-user-xmark');
-                $widget->setCol(['md' => 6, 'xl' => 4]);
-                $widget->setColor('red');
-            });
-
-        $countCancel = Widget::make('Hơp đồng bị huỷ: 0', '')
-            ->callback(function ($widget) {
-                $count = $this->model::query()
-                    ->where('status', 'cancel')
-                    ->count();
-                $widget->title = "Hơp đồng bị huỷ: " . $count;
-                //$widget->setIcon('fa fa-user-xmark');
-                $widget->setCol(['md' => 6, 'xl' => 4]);
-                $widget->setColor('red');
-            });
-
-        $sumMoneyNotPay = Widget::make('Tổng tiền không thanh toán: 0', '')
-            ->callback(function ($widget) {
-                $count = $this->model::query()
-                    ->where('status', 'cancel')
-                    ->count();
-                $widget->title = "Tổng tiền không thanh toán: " . $count;
-                //$widget->setIcon('fa fa-user-xmark');
-                $widget->setCol(['md' => 6, 'xl' => 4]);
-                $widget->setColor('red');
-            });
-
-        return [
-            $countContract,
-            $countCancel,
-            $countAccepted,
-            $sumMoneyNotPay
-        ];
-    }
+//    protected function widgets(): array
+//    {
+////        $count = $this->model::query()->count();
+////
+////        $widgetCountPermission = Widget::make($count.' Hợp đồng', '', 'fa fa-key');
+////        $widgetCountPermission->setColor('green');
+////        $widgetCountPermission->setCol(['md' => 5, 'xl' => 4]);
+////
+////        $countContract = Widget::make('Tổng số hợp đồng: 0', '')
+////            ->callback(function ($widget) {
+////                $count = $this->model::query()
+////                    ->count();
+////                $widget->title = "Tổng số hợp đồng: " . $count;
+////                $widget->setIcon('fa fa-contract');
+////                $widget->setCol(['md' => 6, 'xl' => 4]);
+////            });
+////
+////        $countAccepted = Widget::make('Hơp đồng đã hoàn thành: 0', '')
+////            ->callback(function ($widget) {
+////                $count = $this->model::query()
+////                    ->where('status', 'accepted')
+////                    ->count();
+////                $widget->title = "Hơp đồng đã hoàn thành: " . $count;
+////                $widget->setIcon('fa fa-user-xmark');
+////                $widget->setCol(['md' => 6, 'xl' => 4]);
+////                $widget->setColor('red');
+////            });
+////
+////        $countCancel = Widget::make('Hơp đồng bị huỷ: 0', '')
+////            ->callback(function ($widget) {
+////                $count = $this->model::query()
+////                    ->where('status', 'cancel')
+////                    ->count();
+////                $widget->title = "Hơp đồng bị huỷ: " . $count;
+////                //$widget->setIcon('fa fa-user-xmark');
+////                $widget->setCol(['md' => 6, 'xl' => 4]);
+////                $widget->setColor('red');
+////            });
+////
+////        $sumMoneyNotPay = Widget::make('Tổng tiền không thanh toán: 0', '')
+////            ->callback(function ($widget) {
+////                $count = $this->model::query()
+////                    ->where('status', 'cancel')
+////                    ->count();
+////                $widget->title = "Tổng tiền không thanh toán: " . $count;
+////                //$widget->setIcon('fa fa-user-xmark');
+////                $widget->setCol(['md' => 6, 'xl' => 4]);
+////                $widget->setColor('red');
+////            });
+////
+////        return [
+////            $countContract,
+////            $countCancel,
+////            $countAccepted,
+////            $sumMoneyNotPay
+////        ];
+//    }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Future\PermissionResource;
 
-use App\Future\PermissionResource\Modal\Form;
+use App\Future\PermissionResource\Modal\Base;
 use Adminftr\Table\Future\BaseTable;
 use Adminftr\Table\Future\Components\Actions\Action;
 use Adminftr\Table\Future\Components\Actions\Actions;
@@ -11,7 +11,7 @@ use Adminftr\Table\Future\Components\FilterInput;
 use Adminftr\Table\Future\Components\Headers\Actions\ResetAction;
 use Adminftr\Widgets\Future\Widgets\Widget;
 use Spatie\Permission\Models\Permission;
-
+use Adminftr\Table\Future\Components\Headers\Actions\Action as ActionHeader;
 class Table extends BaseTable
 {
     protected string $model = Permission::class;
@@ -32,12 +32,15 @@ class Table extends BaseTable
         return [FilterInput::make('name')];
     }
 
-    protected function actions(Actions $actions)
+    protected function actions(Actions $actions): Actions
     {
         return $actions->create(
             [
-                Action::make('edit', __('edit'), 'fas fa-edit')->modal(Form::class),
-                Action::make('delete', __('delete'), 'fas fa-trash-alt')->confirm(function ($data) {
+                Action::make('edit', __('edit'), 'fas fa-edit')->modal(Base::class),
+                Action::make('delete', __('delete'), 'fas fa-trash-alt')->confirm('
+                bạn có chắc chắn muốn xóa quyền này không?',function ($data){
+                    return 'Xóa quyền '.$data->name;
+                },function ($data) {
                     return [
                         'message' => __('Are you sure you want to delete this permission?'),
                         'params' => $data, 'nameMethod' => 'delete',
@@ -51,21 +54,8 @@ class Table extends BaseTable
     {
         return [
             ResetAction::make(),
-            \Future\Table\Future\Components\Headers\Actions\Action::make('create', __('Create Permission'))
-                ->modal('create', Form::class),
-        ];
-    }
-
-    protected function widgets()
-    {
-        $count = $this->model::query()->count();
-
-        $widgetCountPermission = Widget::make($count.' Permissions', '', 'fa fa-key');
-        $widgetCountPermission->setColor('green');
-        $widgetCountPermission->setCol(['md' => 5, 'xl' => 4]);
-
-        return [
-            $widgetCountPermission,
+          ActionHeader::make('create', __('Create Permission'))
+                ->modal('create', Base::class),
         ];
     }
 }

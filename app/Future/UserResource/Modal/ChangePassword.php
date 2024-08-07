@@ -5,9 +5,9 @@ namespace App\Future\UserResource\Modal;
 use App\Models\User;
 use Adminftr\Form\Future\Components\Fields\TextInput;
 use Adminftr\Form\Future\Components\Layouts\Row;
-use Adminftr\Form\Future\ModalForm;
+use Adminftr\Form\Future\BaseModal;
 
-class ChangePassword extends ModalForm
+class ChangePassword extends BaseModal
 {
     protected $model = User::class;
 

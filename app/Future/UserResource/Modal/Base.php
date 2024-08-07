@@ -7,10 +7,10 @@ use Adminftr\Form\Future\Components\Fields\DateInput;
 use Adminftr\Form\Future\Components\Fields\TextArea;
 use Adminftr\Form\Future\Components\Fields\TextInput;
 use Adminftr\Form\Future\Components\Layouts\Row;
-use Adminftr\Form\Future\ModalForm;
+use Adminftr\Form\Future\BaseModal;
 use Adminftr\Form\Future\Components\Fields\Select;
 
-class Form extends ModalForm
+class Base extends BaseModal
 {
     protected $model = User::class;
 

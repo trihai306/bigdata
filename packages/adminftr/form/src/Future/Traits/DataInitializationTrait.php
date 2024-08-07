@@ -4,6 +4,7 @@ namespace Adminftr\Form\Future\Traits;
 
 trait DataInitializationTrait
 {
+    protected array $selectColumns = [];
     private function initializeData($inputs)
     {
         if ($this->id && $this->model) {
@@ -25,13 +26,13 @@ trait DataInitializationTrait
             } elseif (str_contains($fieldName, '.')) {
                 $parts = explode('.', $fieldName);
                 $fieldName = str_replace('.', '_', $fieldName);
-                $relations[$parts[1]] = $fieldName;
+                $relations[$parts[0]] = $fieldName;
             } else {
                 $fields[] = $fieldName;
             }
         }
+        $fields = array_merge($fields, $this->selectColumns);
         $this->model = $this->model::with(array_keys($relations))->select($fields)->find($this->id);
-
         if ($this->model) {
             $this->data = $this->model->toArray();
             // Reassign the relationship data to the original field names
