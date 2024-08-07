@@ -130,7 +130,6 @@ class ViettelPostController extends Controller
             throw new \Exception("Không tìm thấy sản phẩm nào cho mã hợp đồng đã cung cấp.");
         }
         $listItems = $request->input('list_items');
-        dd($listItems);
         $orderDetails = [
             "SENDER_FULLNAME" => $sender->receiver_name,
             "SENDER_ADDRESS" => $sender->address,
