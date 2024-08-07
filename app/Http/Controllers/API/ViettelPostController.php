@@ -163,7 +163,7 @@ class ViettelPostController extends Controller
             ];
             $ViettelPostAPI = new ViettelPostAPI();
             $response = $ViettelPostAPI->createOrder($orderDetails);
-
+            dd($response);
             if(!$response['error']){
                 $delivery = Delivery::create([
                     'name' => $validated['product_name'],
