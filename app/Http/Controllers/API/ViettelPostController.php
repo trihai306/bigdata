@@ -103,93 +103,86 @@ class ViettelPostController extends Controller
     {
         // Validate request parameters upfront
 
-        $validated = $request->validate([
-            'sender_id' => 'required|exists:user_delivery_info,id',
-            'receiver_id' => 'required|exists:user_delivery_info,id',
-            'contract_id' => 'required|exists:contracts,id',
-            'product_name' => 'required',
-            'product_description' => 'required',
-            'product_quantity' => 'required|numeric',
-            'product_price' => 'required|numeric',
-            'product_weight' => 'required|numeric',
-            'product_length' => 'required|numeric',
-            'product_width' => 'required|numeric',
-            'product_height' => 'required|numeric',
-            'service' => 'required',
-            'service_add' => 'required',
-            'note' => 'required',
 
-        ]);
-        $sender = UserDeliveryInfo::findOrFail($validated['sender_id']);
-        $receiver = UserDeliveryInfo::findOrFail($validated['receiver_id']);
-        $contract = Contract::findOrFail($validated['contract_id']);
-
-        // Fetch products associated with the contract
-        $products = Product::where('contract_id', $contract->id)->get();
-        if ($products->isEmpty()) {
-            throw new \Exception("Không tìm thấy sản phẩm nào cho mã hợp đồng đã cung cấp.");
-        }
-
-        $listItems = $products->map(function ($product) {
-            return [
-                "PRODUCT_NAME" => $product->name,
-                "PRODUCT_QUANTITY" => $product->quantity,
-                "PRODUCT_PRICE" => $product->price,
-                'PRODUCT_WEIGHT' => 100,  // Assuming default weight
-            ];
-        });
-
-        $orderDetails = [
-            "SENDER_FULLNAME" => $sender->receiver_name,
-            "SENDER_ADDRESS" => $sender->address,
-            "SENDER_PHONE" => $sender->phone,
-            "RECEIVER_FULLNAME" => $receiver->receiver_name,
-            "RECEIVER_ADDRESS" => $receiver->address,
-            "RECEIVER_PHONE" => $receiver->phone,
-            "LIST_ITEM" => $listItems->toArray(),
-            "ORDER_PAYMENT" => 3,
-            "ORDER_SERVICE" => $validated['service'],
-            "ORDER_SERVICE_ADD" => $validated['service_add'],
-            "ORDER_NOTE" => $validated['note'],
-            "MONEY_COLLECTION" => 56827,
-            "EXTRA_MONEY" => 0,
-            "CHECK_UNIQUE" => true,
-            "PRODUCT_TYPE" => "HH",
-            "PRODUCT_NAME" => $validated['product_name'],
-            "PRODUCT_DESCRIPTION" => $validated['product_description'],
-            "PRODUCT_QUANTITY" => $validated['product_quantity'],
-            "PRODUCT_PRICE" => $validated['product_price'],
-            "PRODUCT_WEIGHT" => $validated['product_weight'],
-            "PRODUCT_LENGTH" => $validated['product_length'],
-            "PRODUCT_WIDTH" => $validated['product_width'],
-            "PRODUCT_HEIGHT" => $validated['product_height'],
-        ];
-
-        $ViettelPostAPI = new ViettelPostAPI();
-        $response = $ViettelPostAPI->createOrder($orderDetails);
-        dd($response);
-        if(!$response['data']['error']){
-            $delivery = Delivery::create([
-                'name' => $validated['product_name'],
-                'contract_id' => $request->input('contract_id'),
-                'code' => $response['data']['ORDER_CODE'],
-                'product_price' => $orderDetails['PRODUCT_PRICE'],
-                'order_service_add' => $orderDetails['ORDER_SERVICE_ADD'],
-                'order_service' => $orderDetails['ORDER_SERVICE'],
-                'delivery_user_a_info'=>json_encode($receiver),
-                'delivery_user_b_info'=>json_encode($sender),
-                'product_length' => $orderDetails['PRODUCT_LENGTH'],
-                'product_width' => $orderDetails['PRODUCT_WIDTH'],
-                'product_height' => $orderDetails['PRODUCT_HEIGHT'],
-                'product_weight' => $orderDetails['PRODUCT_WEIGHT'],
-                'money_total_ship' => $response['data']['MONEY_TOTAL'],
-                'list_products' => json_encode($listItems),
-                'status' => 'awaiting_processing',
-            ]);
-        }
-        return response()->json($delivery);
         try {
+            $validated = $request->validate([
+                'sender_id' => 'required|exists:user_delivery_info,id',
+                'receiver_id' => 'required|exists:user_delivery_info,id',
+                'contract_id' => 'required|exists:contracts,id',
+                'product_name' => 'required',
+                'product_description' => 'required',
+                'product_quantity' => 'required|numeric',
+                'product_price' => 'required|numeric',
+                'product_weight' => 'required|numeric',
+                'product_length' => 'required|numeric',
+                'product_width' => 'required|numeric',
+                'product_height' => 'required|numeric',
+                'service' => 'required',
+                'service_add' => 'required',
+                'note' => 'required',
+                'list_items'=>'required'
+            ]);
+            $sender = UserDeliveryInfo::findOrFail($validated['sender_id']);
+            $receiver = UserDeliveryInfo::findOrFail($validated['receiver_id']);
+            $contract = Contract::findOrFail($validated['contract_id']);
 
+            // Fetch products associated with the contract
+            $products = Product::where('contract_id', $contract->id)->get();
+            if ($products->isEmpty()) {
+                throw new \Exception("Không tìm thấy sản phẩm nào cho mã hợp đồng đã cung cấp.");
+            }
+
+            $listItems = $request->input('list_items');
+
+            $orderDetails = [
+                "SENDER_FULLNAME" => $sender->receiver_name,
+                "SENDER_ADDRESS" => $sender->address,
+                "SENDER_PHONE" => $sender->phone,
+                "RECEIVER_FULLNAME" => $receiver->receiver_name,
+                "RECEIVER_ADDRESS" => $receiver->address,
+                "RECEIVER_PHONE" => $receiver->phone,
+                "LIST_ITEM" => $listItems,
+                "ORDER_PAYMENT" => 3,
+                "ORDER_SERVICE" => $validated['service'],
+                "ORDER_SERVICE_ADD" => $validated['service_add'],
+                "ORDER_NOTE" => $validated['note'],
+                "MONEY_COLLECTION" => 56827,
+                "EXTRA_MONEY" => 0,
+                "CHECK_UNIQUE" => true,
+                "PRODUCT_TYPE" => "HH",
+                "PRODUCT_NAME" => $validated['product_name'],
+                "PRODUCT_DESCRIPTION" => $validated['product_description'],
+                "PRODUCT_QUANTITY" => $validated['product_quantity'],
+                "PRODUCT_PRICE" => $validated['product_price'],
+                "PRODUCT_WEIGHT" => $validated['product_weight'],
+                "PRODUCT_LENGTH" => $validated['product_length'],
+                "PRODUCT_WIDTH" => $validated['product_width'],
+                "PRODUCT_HEIGHT" => $validated['product_height'],
+            ];
+
+            $ViettelPostAPI = new ViettelPostAPI();
+            $response = $ViettelPostAPI->createOrder($orderDetails);
+            dd($response);
+            if(!$response['data']['error']){
+                $delivery = Delivery::create([
+                    'name' => $validated['product_name'],
+                    'contract_id' => $request->input('contract_id'),
+                    'code' => $response['data']['ORDER_CODE'],
+                    'product_price' => $orderDetails['PRODUCT_PRICE'],
+                    'order_service_add' => $orderDetails['ORDER_SERVICE_ADD'],
+                    'order_service' => $orderDetails['ORDER_SERVICE'],
+                    'delivery_user_a_info'=>json_encode($receiver),
+                    'delivery_user_b_info'=>json_encode($sender),
+                    'product_length' => $orderDetails['PRODUCT_LENGTH'],
+                    'product_width' => $orderDetails['PRODUCT_WIDTH'],
+                    'product_height' => $orderDetails['PRODUCT_HEIGHT'],
+                    'product_weight' => $orderDetails['PRODUCT_WEIGHT'],
+                    'money_total_ship' => $response['data']['MONEY_TOTAL'],
+                    'list_products' => json_encode($listItems),
+                    'status' => 'awaiting_processing',
+                ]);
+            }
+          return response()->json($delivery);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
         }
