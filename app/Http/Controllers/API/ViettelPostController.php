@@ -133,7 +133,9 @@ class ViettelPostController extends Controller
             }
 
             $listItems = $request->input('list_items');
-
+            // đổi - thành ,
+            $sender->address = str_replace(' -', ',', $sender->address);
+            $receiver->address = str_replace(' -', ',', $receiver->address);
             $orderDetails = [
                 "SENDER_FULLNAME" => $sender->receiver_name,
                 "SENDER_ADDRESS" => $sender->address,
