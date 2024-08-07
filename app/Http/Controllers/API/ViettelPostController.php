@@ -118,7 +118,7 @@ class ViettelPostController extends Controller
             'service' => 'required',
             'service_add' => 'required',
             'note' => 'required',
-            'list_items' => 'required',
+            
         ]);
         $sender = UserDeliveryInfo::findOrFail($validated['sender_id']);
         $receiver = UserDeliveryInfo::findOrFail($validated['receiver_id']);
@@ -129,8 +129,16 @@ class ViettelPostController extends Controller
         if ($products->isEmpty()) {
             throw new \Exception("Không tìm thấy sản phẩm nào cho mã hợp đồng đã cung cấp.");
         }
-        $listItems = $request->input('list_items');
-        dd($listItems);
+
+        $listItems = $products->map(function ($product) {
+            return [
+                "PRODUCT_NAME" => $product->name,
+                "PRODUCT_QUANTITY" => $product->quantity,
+                "PRODUCT_PRICE" => $product->price,
+                'PRODUCT_WEIGHT' => 100,  // Assuming default weight
+            ];
+        });
+
         $orderDetails = [
             "SENDER_FULLNAME" => $sender->receiver_name,
             "SENDER_ADDRESS" => $sender->address,
@@ -138,7 +146,7 @@ class ViettelPostController extends Controller
             "RECEIVER_FULLNAME" => $receiver->receiver_name,
             "RECEIVER_ADDRESS" => $receiver->address,
             "RECEIVER_PHONE" => $receiver->phone,
-            "LIST_ITEM" => $listItems,
+            "LIST_ITEM" => $listItems->toArray(),
             "ORDER_PAYMENT" => 3,
             "ORDER_SERVICE" => $validated['service'],
             "ORDER_SERVICE_ADD" => $validated['service_add'],
@@ -159,7 +167,7 @@ class ViettelPostController extends Controller
 
         $ViettelPostAPI = new ViettelPostAPI();
         $response = $ViettelPostAPI->createOrder($orderDetails);
-        dd($response);
+        dd($response['data']);
         if(!$response['data']['error']){
             $delivery = Delivery::create([
                 'name' => $validated['product_name'],
