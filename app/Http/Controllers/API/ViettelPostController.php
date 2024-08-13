@@ -115,7 +115,6 @@ class ViettelPostController extends Controller
             'product_width' => 'required|numeric',
             'product_height' => 'required|numeric',
             'service' => 'required',
-            'service_add' => 'required',
             'note' => 'required',
             'list_items'=>'required'
         ]);
