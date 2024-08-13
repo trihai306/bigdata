@@ -40,20 +40,6 @@ class DeliveryRepository extends Repository
         ];
     }
 
-    public static function stored($resource, RestifyRequest $request){
-        if($request->hasFile('package_image')){
-            $package_images = [];
-            // Lưu nhiều ảnh vào thư mục 'delivery/id' cho mỗi đơn hàng
-            foreach($request->file('package_image') as $file){
-                $path = $file->store('delivery/'.$resource->id);
-                $package_images[] = $path;
-            }
-            // Encode thành JSON để lưu vào cơ sở dữ liệu
-            $resource->package_image = json_encode($package_images);
-            $resource->save();
-        }
-    }
-
 
     public static function indexQuery(RestifyRequest $request, Relation|Builder $query)
     {
@@ -72,7 +58,6 @@ class DeliveryRepository extends Repository
     public static function related(): array
     {
         return [
-            'goods' => GoodRepository::class,
             'userDeliveryInfo' => UserDeliveryInfoRepository::class,
         ];
     }
