@@ -24,13 +24,12 @@ class ProductRepository extends Repository
         'description',
     ];
     public static array $match = [
-        'field',
-        'contract_id',
-        'name',
-        'color',
-        'quantity',
-        'price',
+       'id'=>'int',
+        'name'=>'string',
+        'contract_id'=>'int',
     ];
+
+
 
     public function fields(RestifyRequest $request): array
     {
