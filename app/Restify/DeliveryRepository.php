@@ -14,6 +14,29 @@ class DeliveryRepository extends Repository
     public static string $model = Delivery::class;
     public static int $globalSearchResults = 10;
 
+    public static array $search = [
+        'id',
+        'name',
+        'code',
+        'contract_id',
+        'product_note',
+        'order_note',
+        'order_service',
+        'order_service_add',
+        'status',
+    ];
+
+    public static array $match = [
+        'id' => 'int',
+        'name' => 'string',
+        'code' => 'string',
+        'contract_id' => 'int',
+        'product_note' => 'string',
+        'order_note' => 'string',
+        'order_service' => 'string',
+        'order_service_add' => 'string',
+        'status' => 'string',
+    ];
     public function fields(RestifyRequest $request): array
     {
         return [
@@ -43,7 +66,6 @@ class DeliveryRepository extends Repository
 
     public static function indexQuery(RestifyRequest $request, Relation|Builder $query)
     {
-        // so sánh user id trong contract với user dăng nhập theo inforparty a va b truy câập vào info party a và b so sánh theo user_id
         $query->whereHas('contract', function($q) use ($request){
           $q->whereHas('partyAInfo', function($q) use ($request){
               $q->where('user_id', $request->user()->id);
