@@ -1,13 +1,5 @@
 <div x-data="tableData" @data="updateData()" @reset-select.window="selectAll = false; selectedRows = [];">
-    @if ($this->defineWidgets())
-        <div class="container-fuild">
-            <div class="row row-cards">
-                @foreach ($this->defineWidgets() as $widget)
-                    {!! $widget->render() !!}
-                @endforeach
-            </div>
-        </div>
-    @endif
+   @include('future::table-widgets')
     @include('future::base.header')
     @include('future::base.filter')
     <div class="card rounded rounded-2" style="font-size: 12px">

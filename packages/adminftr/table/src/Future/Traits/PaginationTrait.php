@@ -23,7 +23,7 @@ trait PaginationTrait
     /**
      * The available options for items per page.
      */
-    public array $pages = [10, 25, 50, 100, 1000, 10000];
+    public array $pages = [10, 25, 50, 100, 1000];
 
     public function updatingPerPage()
     {

@@ -188,5 +188,27 @@ class ViettelPostController extends Controller
         }
     }
 
-
+    public function updateDeleteOrder(Request $request)
+    {
+        try {
+            $validated = $request->validate([
+                'code' => 'required|exists:deliveries,code',
+            ]);
+            $delivery = Delivery::where('code', $validated['code'])->first();
+            $ViettelPostAPI = new ViettelPostAPI();
+            $data = [
+                'ORDER_NUMBER' => $delivery->code,
+                'TYPE' => 4,
+                'NOTE'=>'Huỷ đơn hàng'
+            ];
+            $response = $ViettelPostAPI->updateOrder($data);
+            if(!$response['error']){
+                $delivery->status = 'delivery_cancelled';
+                $delivery->save();
+            }
+            return response()->json($response);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 400);
+        }
+    }
 }

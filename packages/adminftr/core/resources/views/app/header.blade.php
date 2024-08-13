@@ -65,7 +65,6 @@
                 <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                     <a href="{{ route('admin.profile') }}" class="dropdown-item">Profile</a>
                     <div class="dropdown-divider"></div>
-                    <a href="./settings.html" class="dropdown-item">Settings</a>
                     <a href="{{ route('logout') }}" class="dropdown-item">Logout</a>
                 </div>
             </div>

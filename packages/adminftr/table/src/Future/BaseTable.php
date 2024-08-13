@@ -30,7 +30,11 @@ abstract class BaseTable extends Component
         Functions,
         can,
         PaginationTrait,
-        SearchTrait, SelectTrait, SortTrait, WidgetsTrait, WithFileUploads;
+        SearchTrait,
+        SelectTrait,
+        SortTrait,
+        WidgetsTrait,
+        WithFileUploads;
 
     public array $forms = [];
 

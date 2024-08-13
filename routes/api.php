@@ -41,6 +41,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
    Route::post('v1/getService',[\App\Http\Controllers\API\ViettelPostController::class,'getService']);
     Route::post('v1/getPrice',[\App\Http\Controllers\API\ViettelPostController::class,'getPrice']);
     Route::post('v1/createOrder',[\App\Http\Controllers\API\ViettelPostController::class,'createOrder']);
+    Route::post('v1/updateDeleteOrder',[\App\Http\Controllers\API\ViettelPostController::class,'updateDeleteOrder']);
 });
 
 Route::post('/pusher/auth', function (Illuminate\Http\Request $request) {

@@ -6,10 +6,7 @@ trait Functions
 {
     public function getListeners()
     {
-        return array_merge($this->setListeners(), [
-            'bulk' => 'bulk',
-            'callbackActions' => 'callbackActions',
-        ]);
+        return array_merge($this->setListeners(), ['bulk' => 'bulk', 'callbackActions' => 'callbackActions',]);
     }
 
     /**
@@ -35,9 +32,8 @@ trait Functions
     {
         $model = $this->model;
         $data = $model::find($data['id']);
-        if (! $data) {
+        if (!$data) {
             $this->dispatch('swalError', ['message' => 'Không tìm thấy dữ liệu']);
-
             return;
         }
         $actions = $this->defineActions($data);

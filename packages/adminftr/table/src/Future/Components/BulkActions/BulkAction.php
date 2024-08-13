@@ -8,11 +8,11 @@ class BulkAction
 
     public string $title;
 
-    public ?string $icon;
+    public  $icon;
 
     public $callback;
 
-    public string $question;
+    public $question;
 
     public ?string $labelYes = 'Yes';
 
@@ -20,17 +20,15 @@ class BulkAction
 
     public ?string $type = 'primary';
 
-    public function __construct(string $name, string $title, ?string $icon, string $question)
+    public function __construct(string $name, string $title)
     {
         $this->name = $name;
         $this->title = $title;
-        $this->icon = $icon;
-        $this->question = $question;
     }
 
-    public static function make(string $name, string $title, ?string $icon, string $question): self
+    public static function make(string $name, string $title): self
     {
-        return new self($name, $title, $icon, $question);
+        return new self($name, $title);
     }
 
     public function callback($callback): self

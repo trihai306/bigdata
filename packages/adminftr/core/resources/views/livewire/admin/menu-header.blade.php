@@ -15,7 +15,10 @@
                     <a class="nav-link {{ $menuClass }}{{ $menu->children->isEmpty() ? '' : ' dropdown-toggle' }}"
                        href="{{ route($menu->permission) }}"
                        @if (!$menu->children->isEmpty()) data-bs-toggle="dropdown" data-bs-auto-close="false"
-                       aria-expanded="true" @endif>
+                       aria-expanded="true" @else
+                           wire:navigate
+                       @endif
+                    >
                         <span class="nav-link-icon d-md-none d-lg-inline-block {{ $isActive ? ' text-white' : '' }}">
                             <i class="{{ $menu->icon }}"></i>
                         </span>
@@ -26,7 +29,7 @@
                             aria-labelledby="navbarDropdown{{ $loop->index }}">
                             <li>
                                 <a class="dropdown-item nav-link {{ $isActive && request()->is($menu->url) ? 'bg-primary text-white' : '' }}"
-                                   href="{{ route($menu->permission) }}">{{ $menu->title }}</a>
+                                   href="{{ route($menu->permission) }}" wire:navigate>{{ $menu->title }}</a>
                             </li>
                             @foreach ($menu->children as $child)
                                 @if (Auth::user()->can($child->permission) && $child->id != $menu->id)

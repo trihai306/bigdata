@@ -6,18 +6,18 @@
                     <option value="{{ $page }}" {{ $page == $perPage ? 'selected' : '' }}>{{ $page }}</option>
                 @endforeach
             </select>
+            @if($this->bulkActions())
             <div class="dropdown" x-show="selectedRows.length > 0">
                 <button class='btn align-text-top dropdown-toggle' type='button'
                         data-bs-auto-close="outside"
                         data-bs-toggle='dropdown'>{{ __('table::table.bulk_actions') }}</button>
-                @if($this->bulkActions())
                     <ul class='dropdown-menu'>
                         @foreach($this->bulkActions() as $bulkAction)
                             <li>{{ $bulkAction->render() }}</li>
                         @endforeach
                     </ul>
-                @endif
             </div>
+            @endif
         </div>
     </div>
 

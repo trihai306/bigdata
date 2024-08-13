@@ -340,4 +340,14 @@ class ViettelPostAPI
         ])->post($url, $data);
         return $response->json();
     }
+
+    public function updateOrder($data)
+    {
+        $url = self::ROOT_URL . '/v2/order/updateOrder';
+        $response = Http::withHeaders([
+            'Content-Type' => 'application/json',
+            'Token' => CarrierToken::where('carrier_name', 'viettelpost')->first()->token
+        ])->post($url, $data);
+        return $response->json();
+    }
 }
